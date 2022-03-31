@@ -1,0 +1,8 @@
+.App {
+  color: white;
+  padding: 20px;
+}
+
+.input > label {
+  margin-right: 20px;
+}
