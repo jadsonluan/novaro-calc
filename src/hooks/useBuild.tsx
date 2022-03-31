@@ -81,10 +81,6 @@ export const BuildProvider: React.FC<BuildProviderProps> = (props) => {
     [setCharacter]
   );
 
-  useEffect(() => {
-    console.log("Character changed: ", { character });
-  }, [character]);
-
   return (
     <BuildContext.Provider value={{ character, updateCharacter }}>
       {children}

@@ -1,27 +1,8 @@
-import React from "react";
+import "./index.css";
 import { character as initialCharacter, monster } from "../../data/input";
 import { BuildProvider, useBuild } from "../../hooks/useBuild";
 import { getFinalDamage } from "../../services/atk";
-
-interface BuildInputProps {
-  prop: string;
-  label: string;
-  value: number;
-  // getValue: (character: Character) => number;
-  onChange: (event: React.ChangeEvent<HTMLInputElement>) => void;
-}
-
-const BuildInput = (props: BuildInputProps) => {
-  const { prop, label, value, onChange } = props;
-  // const { character, updateCharacter } = useBuild();
-
-  return (
-    <div className="input">
-      <label>{label}</label>
-      <input type="text" value={value} onChange={onChange}></input>
-    </div>
-  );
-};
+import { BuildInput } from "../BuildInput";
 
 const InternalBuild = () => {
   const { character, updateCharacter } = useBuild();
@@ -30,10 +11,9 @@ const InternalBuild = () => {
   const maxDamage = getFinalDamage("max", character, monster);
 
   return (
-    <div>
+    <div className="build">
       <div>
         <BuildInput
-          prop="baseLevel"
           label="Base Level"
           value={character.baseLevel}
           onChange={(event) =>
@@ -41,27 +21,55 @@ const InternalBuild = () => {
           }
         />
         <BuildInput
-          prop="equipATK"
-          label="Equip ATK"
-          value={character.equipATK}
+          label="STR"
+          value={character.stats.str}
           onChange={(event) =>
-            updateCharacter("equipATK", Number(event.target.value))
+            updateCharacter("str", Number(event.target.value))
           }
         />
         <BuildInput
-          prop="baseLevel"
-          label="Base Level"
-          value={character.baseLevel}
+          label="AGI"
+          value={character.stats.agi}
           onChange={(event) =>
-            updateCharacter("baseLevel", Number(event.target.value))
+            updateCharacter("agi", Number(event.target.value))
+          }
+        />
+        <BuildInput
+          label="VIT"
+          value={character.stats.vit}
+          onChange={(event) =>
+            updateCharacter("vit", Number(event.target.value))
+          }
+        />
+        <BuildInput
+          label="INT"
+          value={character.stats.int}
+          onChange={(event) =>
+            updateCharacter("int", Number(event.target.value))
+          }
+        />
+        <BuildInput
+          label="DEX"
+          value={character.stats.agi}
+          onChange={(event) =>
+            updateCharacter("dex", Number(event.target.value))
+          }
+        />
+        <BuildInput
+          label="LUK"
+          value={character.stats.luk}
+          onChange={(event) =>
+            updateCharacter("luk", Number(event.target.value))
           }
         />
       </div>
-      <div>
-        <b>Minimum Damage:</b> {minDamage.toLocaleString()}
-      </div>
-      <div>
-        <b>Maximum Damage:</b> {maxDamage.toLocaleString()}
+      <div className="damages">
+        <div>
+          <b>Minimum Damage:</b> {minDamage.toLocaleString()}
+        </div>
+        <div>
+          <b>Maximum Damage:</b> {maxDamage.toLocaleString()}
+        </div>
       </div>
     </div>
   );

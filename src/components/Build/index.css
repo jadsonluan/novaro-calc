@@ -1,0 +1,10 @@
+.build {
+  background-color: #eee;
+  color: #252830;
+  width: min-content;
+  padding: 25px;
+}
+
+.damages {
+  margin-top: 20px;
+}
