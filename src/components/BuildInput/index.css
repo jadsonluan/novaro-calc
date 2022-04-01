@@ -1,15 +1,21 @@
-.input {
+.build-input {
   display: grid;
-  grid-template-columns: 150px 100px;
-  margin-bottom: 3px;
+  grid-template-columns: 200px 100px 100px;
+  margin-bottom: 2px;
 }
 
-.input > label {
-  margin-right: 20px;
-  font-weight: bold;
+.build-input > * {
+  margin-right: 5px;
 }
 
-.input > input {
-  max-width: 100px;
+.build-input input {
   text-align: center;
+  border: none;
+  border-radius: 2px;
+  background-color: #EEE;
+}
+
+.build-input input:focus {
+  outline: 1px solid #5bc0de;
+  color: #5bc0de;
 }

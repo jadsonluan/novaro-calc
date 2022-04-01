@@ -1,15 +1,17 @@
 import "./App.css";
-import Build from "./components/Build";
+import MainPage from "./components/MainPage";
+import { character } from "./data/input";
+import { BuildProvider } from "./hooks/useBuild";
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
+    <div className="app">
+      <header className="header">
         <h1>NovaRO Calc: ATK</h1>
       </header>
-      <div>
-        <Build />
-      </div>
+      <BuildProvider initialValue1={character} initialValue2={character}>
+        <MainPage />
+      </BuildProvider>
     </div>
   );
 }

@@ -1,0 +1,17 @@
+.build {
+  background-color: #2c2f33;
+  color: white;
+}
+
+.build > .build-content {
+  padding: 15px 25px;
+}
+
+.build > .build-header {
+  display: grid;
+  grid-template-columns: 200px 100px 100px;
+  text-align: center;
+  padding: 5px 25px;
+  margin-bottom: 10px;
+  background-color: #7289da;
+}
