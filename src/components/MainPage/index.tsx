@@ -1,4 +1,3 @@
-import { monster } from "../../data/input";
 import { useBuild } from "../../hooks/useBuild";
 import { getFinalDamage } from "../../services/atk";
 import BuildATK from "../BuildATK";
@@ -13,14 +12,13 @@ const getDiffClass = (value: number) => {
 };
 
 const MainPage = () => {
-  const { character: character1 } = useBuild(1);
-  const { character: character2 } = useBuild(2);
+  const { build1, build2 } = useBuild();
 
-  const minDamage1 = getFinalDamage("MIN", character1, monster);
-  const maxDamage1 = getFinalDamage("MAX", character1, monster);
+  const minDamage1 = getFinalDamage("MIN", build1.character, build1.monster);
+  const maxDamage1 = getFinalDamage("MAX", build1.character, build1.monster);
 
-  const minDamage2 = getFinalDamage("MIN", character2, monster);
-  const maxDamage2 = getFinalDamage("MAX", character2, monster);
+  const minDamage2 = getFinalDamage("MIN", build2.character, build2.monster);
+  const maxDamage2 = getFinalDamage("MAX", build2.character, build2.monster);
 
   const minDiff = ((minDamage2 - minDamage1) / minDamage1) * 100;
   const maxDiff = ((maxDamage2 - maxDamage1) / maxDamage1) * 100;

@@ -15,8 +15,7 @@ interface SelectProps {
 }
 
 const Select = (props: SelectProps) => {
-  const build1 = useBuild(1);
-  const build2 = useBuild(2);
+  const { build1, build2 } = useBuild();
 
   const { options, label, getValue, updateValue } = props;
 
@@ -57,6 +56,6 @@ const Select = (props: SelectProps) => {
       </select>
     </div>
   );
-};
+};;
 
 export default Select;

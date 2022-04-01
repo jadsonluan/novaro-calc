@@ -1,5 +1,5 @@
 import { Character } from "../../data/input";
-import { useBuild } from "../../hooks/useBuild";
+import { Build, useBuild } from "../../hooks/useBuild";
 import "./index.css";
 
 interface BuildInputProps {
@@ -8,30 +8,35 @@ interface BuildInputProps {
   updateValue: (value: number) => (prevState: Character) => Character;
 }
 
+interface InputProps {
+  getValue: (character: Character) => number;
+  updateValue: (value: number) => (prevState: Character) => Character;
+  build: Build;
+}
+
+const Input = (props: InputProps) => {
+  const { getValue, updateValue, build } = props;
+  return (
+    <input
+      type="text"
+      defaultValue={getValue(build.character)}
+      onBlur={(event) => {
+        let value = Number(event.target.value);
+        if (!Number.isNaN(value)) build.setCharacter(updateValue(value));
+      }}
+    />
+  );
+};
+
 const BuildInput = (props: BuildInputProps) => {
   const { label, getValue, updateValue } = props;
-  const { character: character1, setCharacter: setCharacter1 } = useBuild(1);
-  const { character: character2, setCharacter: setCharacter2 } = useBuild(2);
+  const { build1, build2 } = useBuild();
 
   return (
     <div className="build-input">
       <b>{label}</b>
-      <input
-        type="text"
-        defaultValue={getValue(character1)}
-        onBlur={(event) => {
-          let value = Number(event.target.value);
-          if (!Number.isNaN(value)) setCharacter1(updateValue(value));
-        }}
-      />
-      <input
-        type="text"
-        defaultValue={getValue(character2)}
-        onBlur={(event) => {
-          const value = Number(event.target.value);
-          if (!Number.isNaN(value)) setCharacter2(updateValue(value));
-        }}
-      />
+      <Input build={build1} getValue={getValue} updateValue={updateValue} />
+      <Input build={build2} getValue={getValue} updateValue={updateValue} />
     </div>
   );
 };

@@ -6,7 +6,7 @@ import {
   Monster,
 } from "../data/input";
 
-interface Build {
+export interface Build {
   character: Character;
   setCharacter: (
     character: Character | ((prevState: Character) => Character)
@@ -69,12 +69,11 @@ export const BuildProvider: React.FC<BuildProviderProps> = (props) => {
   );
 };
 
-export const useBuild = (id: 1 | 2) => {
+export const useBuild = () => {
   const value = useContext(BuildContext);
 
   if (value === null)
     throw new Error("useBuild can only be used within BuildProvider");
 
-  if (id === 1) return value.build1;
-  return value.build2;
+  return value;
 };
