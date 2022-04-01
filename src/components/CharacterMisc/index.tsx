@@ -90,9 +90,6 @@ const CharacterMisc = () => {
             };
           }}
         />
-        {/* <Select label="Weapon" options={weaponOptions} />
-        <Select label="Element" options={weaponOptions} />
-        <Select label="Skill" options={weaponOptions} /> */}
       </div>
     </div>
   );
