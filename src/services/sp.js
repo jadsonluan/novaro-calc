@@ -1,9 +1,9 @@
-import { getJobInfo } from "./jobs.js";
+import { getBaseStat } from "../data/job";
 
 export function getSP(character) {
   const { sp: spInfo, stats } = character;
   const { int } = stats;
-  const { baseSP } = getJobInfo(character.job);
+  const { baseSP } = getBaseStat(character.job);
 
   let finalSP = baseSP * ((1 + int / 100) * 1.25) + spInfo.flat;
   finalSP = finalSP * (1 + spInfo.percent / 100);

@@ -1,3 +1,6 @@
+import { Job } from "./job";
+import WeaponType from "./weapon";
+
 type Element =
   | "neutral"
   | "water"
@@ -10,7 +13,7 @@ type Element =
   | "ghost"
   | "undead";
 
-interface Stats {
+export interface Stats {
   str: number;
   agi: number;
   vit: number;
@@ -19,27 +22,27 @@ interface Stats {
   luk: number;
 }
 
-interface HPInfo {
+export interface HPInfo {
   base: number;
   flat: number;
   percent: number;
 }
 
-interface SPInfo {
+export interface SPInfo {
   base: number;
   flat: number;
   percent: number;
 }
 
-interface Weapon {
-  type: string;
+export interface Weapon {
+  type: WeaponType;
   level: number;
   atk: number;
   refine: number;
   element: Element;
 }
 
-interface Modifiers {
+export interface Modifiers {
   skill: number;
   melee: number;
   ranged: number;
@@ -55,44 +58,57 @@ interface Modifiers {
 
 export interface Character {
   baseLevel: number;
-  job: string;
+  job: Job;
   skill: string;
   stats: Stats;
   hp: HPInfo;
   sp: SPInfo;
   weapon: Weapon;
-  modifiers: Modifiers
+  modifiers: Modifiers;
   shadowWeaponRefine: number;
-  equipATK: number
+  equipATK: number;
   // nao funciona no nova para consumiveis
-  consumableATK: number
+  consumableATK: number;
   // parecido com consumableATK mas o nova usa esse invés do consumableATK para alguns iten
-  bonusStatusATK: number
-  ammoATK: number
-  pseudoBuffATK: number
-  masteryATK: number
-  buffATK: number
-  bypass: number
+  bonusStatusATK: number;
+  ammoATK: number;
+  pseudoBuffATK: number;
+  masteryATK: number;
+  buffATK: number;
+  bypass: number;
 }
 
-type Race = 'formless' | 'demihuman' | 'undead' | 'fish' | 'plant' | 'insect' | 'demon' | 'angel' | 'undead' | 'brute' | 'dragon' | 'player'
-type Size = 'small' | 'medium' | 'large'
+export type Race =
+  | "formless"
+  | "demihuman"
+  | "undead"
+  | "fish"
+  | "plant"
+  | "insect"
+  | "demon"
+  | "angel"
+  | "undead"
+  | "brute"
+  | "dragon"
+  | "player";
 
-interface Monster {
+export type Size = "small" | "medium" | "large";
+
+export interface Monster {
   baseLevel: number;
   VIT: number;
   hardDEF: number;
   hardDEFDebuff: number;
   element: Element;
   elementLevel: number;
-  race: Race
-  size: Size
-  boss: boolean
+  race: Race;
+  size: Size;
+  boss: boolean;
 }
 
 export const character: Character = {
   baseLevel: 200,
-  job: "SURA",
+  job: "Sura",
   skill: "TIGER_CANNON_COMBO",
   stats: {
     dex: 100 + 19,
@@ -114,7 +130,7 @@ export const character: Character = {
   },
   weapon: {
     level: 4,
-    type: "knuckle",
+    type: "Knuckle",
     refine: 15,
     atk: 250,
     element: "shadow",
@@ -160,7 +176,7 @@ export const monster: Monster = {
 
 export const emptyCharacter: Character = {
   baseLevel: 0,
-  job: "",
+  job: "Sura",
   skill: "basic_attack",
   stats: {
     str: 0,
@@ -185,7 +201,7 @@ export const emptyCharacter: Character = {
     element: "neutral",
     level: 1,
     refine: 0,
-    type: "without",
+    type: "Bare Hand",
   },
   modifiers: {
     advancedKatarMastery: 0,

@@ -1,9 +1,9 @@
-import { getJobInfo } from "./jobs.js";
+import { getBaseStat } from "../data/job";
 
 export function getHP(character) {
   const { hp: hpInfo, stats } = character;
   const { vit } = stats;
-  const { baseHP } = getJobInfo(character.job);
+  const { baseHP } = getBaseStat(character.job);
 
   let finalHP = baseHP * ((1 + vit / 100) * 1.25) + hpInfo.flat;
   finalHP = finalHP * (1 + hpInfo.percent / 100);

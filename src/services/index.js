@@ -1,7 +1,3 @@
-import { getFinalDamage } from "./atk.js";
-import { getHP } from "./hp.js";
-import { getSP } from "./sp.js";
-
 const character = {
   baseLevel: 200,
   job: "SURA",
@@ -67,12 +63,3 @@ const monster = {
   size: "small",
   boss: false,
 };
-
-const minFinalDmg = getFinalDamage("min", character, monster);
-const maxFinalDmg = getFinalDamage("max", character, monster);
-
-console.log({ minFinalDmg, maxFinalDmg });
-
-console.log({ HP: getHP(character) });
-
-console.log({ SP: getSP(character) });

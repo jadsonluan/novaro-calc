@@ -10,6 +10,9 @@
   margin-right: 25px;
 }
 
+.builds>.second-col>* {
+  margin-bottom: 10px;
+}
 .damages {
   display: grid;
   grid-template-columns: 1fr 1fr 1fr 0.5fr;

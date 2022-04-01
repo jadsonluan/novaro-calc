@@ -1,26 +1,17 @@
+import { Character, Monster, Size, Stats, Weapon } from "../data/input";
+import WeaponType, { WEAPON_PENALTIES } from "../data/weapon";
 import { getPropertyModifier } from "./elements.js";
 import { getSkillFormula, isMeleeSkill } from "./skills.js";
 
-const DEX_WEAPONS = ["whip", "violin", "bow", "gun"];
+type DmgRange = "MIN" | "MAX";
 
-const WEAPON_PENALTIES = {
-  knuckle: {
-    small: 1,
-    medium: 1,
-    large: 0.75,
-  },
-  mace: {
-    small: 0.75,
-    medium: 1,
-    large: 1,
-  },
-};
+const DEX_WEAPONS: WeaponType[] = ["Whip", "Instrument", "Bow", "Gun"];
 
-function isDexWeapon(weaponType) {
+function isDexWeapon(weaponType: WeaponType) {
   return DEX_WEAPONS.includes(weaponType);
 }
 
-function getStatusATK(character) {
+function getStatusATK(character: Character) {
   const { stats, baseLevel, weapon, bonusStatusATK } = character;
   const { str, dex, luk } = stats;
 
@@ -37,7 +28,7 @@ function getStatusATK(character) {
   );
 }
 
-function getRefineBonus(weapon) {
+function getRefineBonus(weapon: Weapon) {
   const { refine, level } = weapon;
   const atkPerRefine = [2, 3, 5, 7];
 
@@ -48,7 +39,7 @@ function getRefineBonus(weapon) {
   return refine * atkPerRefine[level - 1] + highUpgradeBonus;
 }
 
-function getMaxOverUpgradeBonus(weapon) {
+function getMaxOverUpgradeBonus(weapon: Weapon) {
   const { level, refine } = weapon;
   const safetyLimit = [7, 6, 5, 4];
   // ATK per refine > safetyLimit
@@ -57,13 +48,18 @@ function getMaxOverUpgradeBonus(weapon) {
   return overRefine * maxAtkPerOverUpgrade[level - 1];
 }
 
-function getStatBonus(weapon, stats) {
+function getStatBonus(weapon: Weapon, stats: Stats) {
   const { atk, type } = weapon;
   const { dex, str } = stats;
   return atk * (isDexWeapon(type) ? dex / 200 : str / 200);
 }
 
-function getWeaponATK(range, character, sizePenalty, monster) {
+function getWeaponATK(
+  range: DmgRange,
+  character: Character,
+  sizePenalty: number,
+  monster: Monster
+) {
   const { weapon, stats, shadowWeaponRefine } = character;
 
   const statBonus = getStatBonus(weapon, stats);
@@ -72,7 +68,7 @@ function getWeaponATK(range, character, sizePenalty, monster) {
   let variance = 0.05 * weapon.level * weapon.atk;
   let overUpgradeATK;
 
-  if (range === "min") {
+  if (range === "MIN") {
     overUpgradeATK = 1;
     variance *= -1;
   } else {
@@ -89,7 +85,7 @@ function getWeaponATK(range, character, sizePenalty, monster) {
   );
 }
 
-function getExtraATK(character, monster) {
+function getExtraATK(character: Character, monster: Monster) {
   const { equipATK, consumableATK, ammoATK, pseudoBuffATK } = character;
   return applyCardModifiers(
     equipATK + consumableATK + ammoATK + pseudoBuffATK,
@@ -98,7 +94,7 @@ function getExtraATK(character, monster) {
   );
 }
 
-function getSizePenalty(weaponType, monsterSize) {
+function getSizePenalty(weaponType: WeaponType, monsterSize: Size) {
   const penalties = WEAPON_PENALTIES[weaponType] ?? {
     small: 1,
     medium: 1,
@@ -107,7 +103,11 @@ function getSizePenalty(weaponType, monsterSize) {
   return penalties[monsterSize];
 }
 
-function applyCardModifiers(atk, character, monster) {
+function applyCardModifiers(
+  atk: number,
+  character: Character,
+  monster: Monster
+) {
   const {
     race,
     size,
@@ -137,7 +137,7 @@ function applyCardModifiers(atk, character, monster) {
   return Math.floor(atk * finalModifiers);
 }
 
-function getATK(range, character, monster) {
+function getATK(range: DmgRange, character: Character, monster: Monster) {
   const { masteryATK, buffATK } = character;
 
   const sizePenalty = getSizePenalty(character.weapon.type, monster.size);
@@ -149,17 +149,21 @@ function getATK(range, character, monster) {
   return statusATK * 2 + wATK + extraATK + masteryATK + buffATK;
 }
 
-function getSoftDEF(monster) {
+function getSoftDEF(monster: Monster) {
   return Math.floor((monster.baseLevel + monster.VIT) / 2);
 }
 
-function getHardDEF(monster, bypass) {
+function getHardDEF(monster: Monster, bypass: number) {
   const { hardDEF, hardDEFDebuff } = monster;
   const finalHardDef = (hardDEF - hardDEFDebuff) * (1 - bypass / 100);
   return (finalHardDef + 4000) / (4000 + finalHardDef * 10);
 }
 
-export function getFinalDamage(range, character, monster) {
+export function getFinalDamage(
+  range: DmgRange,
+  character: Character,
+  monster: Monster
+) {
   const { modifiers: mods } = character;
   const [skillFormulaPercent, skillBonusDmg] = getSkillFormula(
     character,

@@ -1,0 +1,26 @@
+.character-misc {
+  background-color: #2c2f33;
+  color: white;
+  height: fit-content;
+  /* border: 2px solid #7289da; */
+}
+
+.character-misc .build-content {
+  padding: 15px 25px;
+}
+
+.character-misc .build-header {
+  display: grid;
+  grid-template-columns: 100px 150px 150px;
+  padding: 5px 25px;
+  margin-bottom: 10px;
+  background-color: #7289da;
+}
+
+.character-misc .build-header> :not(:first-child) {
+  text-align: center;
+}
+
+.character-misc .build-input {
+  grid-template-columns: 100px 100px 100px !important;
+}

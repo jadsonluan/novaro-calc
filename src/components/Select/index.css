@@ -1,0 +1,17 @@
+.select {
+  display: grid;
+  grid-template-columns: 100px 150px 150px;
+  margin-bottom: 2px;
+}
+
+.select > * {
+  margin-right: 5px;
+}
+
+.select > :first-child {
+  vertical-align: center;
+}
+
+.select > select {
+  text-align: center;
+}
