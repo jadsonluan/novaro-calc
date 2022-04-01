@@ -1,6 +1,6 @@
 import "./App.css";
 import MainPage from "./components/MainPage";
-import { character } from "./data/input";
+import { character, emptyMonster } from "./data/input";
 import { BuildProvider } from "./hooks/useBuild";
 
 function App() {
@@ -9,7 +9,10 @@ function App() {
       <header className="header">
         <h1>NovaRO Calc: ATK</h1>
       </header>
-      <BuildProvider initialValue1={character} initialValue2={character}>
+      <BuildProvider
+        initialBuild1={{ character, monster: emptyMonster }}
+        initialBuild2={{ character, monster: emptyMonster }}
+      >
         <MainPage />
       </BuildProvider>
     </div>

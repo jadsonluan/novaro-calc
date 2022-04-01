@@ -163,6 +163,18 @@ export const monster: Monster = {
   boss: false,
 };
 
+export const emptyMonster: Monster = {
+  baseLevel: 1,
+  VIT: 1,
+  hardDEF: 0,
+  hardDEFDebuff: 0,
+  element: "Neutral",
+  elementLevel: 1,
+  race: "formless",
+  size: "small",
+  boss: false,
+};
+
 export const emptyCharacter: Character = {
   baseLevel: 0,
   job: "Sura",
