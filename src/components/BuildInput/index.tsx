@@ -1,3 +1,4 @@
+import { evaluate } from "mathjs";
 import { Character } from "../../data/input";
 import { Build, useBuild } from "../../hooks/useBuild";
 import "./index.css";
@@ -16,13 +17,25 @@ interface InputProps {
 
 const Input = (props: InputProps) => {
   const { getValue, updateValue, build } = props;
+
   return (
     <input
       type="text"
       defaultValue={getValue(build.character)}
       onBlur={(event) => {
-        let value = Number(event.target.value);
-        if (!Number.isNaN(value)) build.setCharacter(updateValue(value));
+        let parsedValue;
+        try {
+          parsedValue = evaluate(event.target.value);
+          parsedValue = Number(parsedValue);
+          if (!Number.isNaN(parsedValue)) {
+            build.setCharacter(updateValue(parsedValue));
+            event.currentTarget.value = parsedValue + "";
+          } else {
+            event.currentTarget.value = getValue(build.character) + "";
+          }
+        } catch (error) {
+          event.currentTarget.value = getValue(build.character) + "";
+        }
       }}
     />
   );
