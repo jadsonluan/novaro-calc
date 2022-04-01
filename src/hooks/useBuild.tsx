@@ -1,98 +1,64 @@
-import {
-  createContext,
-  useCallback,
-  useContext,
-  useEffect,
-  useState,
-} from "react";
+import { createContext, useContext, useState } from "react";
 import { character as initial, Character } from "../data/input";
 
-const initialValue: Character = {
-  baseLevel: 0,
-  job: "",
-  skill: "basic_attack",
-  stats: {
-    str: 0,
-    agi: 0,
-    vit: 0,
-    int: 0,
-    dex: 0,
-    luk: 0,
-  },
-  hp: {
-    base: 1,
-    flat: 0,
-    percent: 0,
-  },
-  sp: {
-    base: 1,
-    flat: 0,
-    percent: 0,
-  },
-  weapon: {
-    atk: 0,
-    element: "neutral",
-    level: 1,
-    refine: 0,
-    type: "without",
-  },
-  modifiers: {
-    advancedKatarMastery: 0,
-    class: 0,
-    dmg: 0,
-    finalDmg: 0,
-    melee: 0,
-    monster: 0,
-    race: 0,
-    size: 0,
-    skill: 0,
-    targetProperty: 0,
-  },
-  shadowWeaponRefine: 0,
-  equipATK: 0,
-  consumableATK: 0,
-  bonusStatusATK: 0,
-  ammoATK: 0,
-  pseudoBuffATK: 0,
-  masteryATK: 0,
-  buffATK: 0,
-  bypass: 0,
-};
+interface ContextProps {
+  build1: {
+    character: Character;
+    setCharacter: (
+      character: Character | ((prevState: Character) => Character)
+    ) => void;
+  };
+  build2: {
+    character: Character;
+    setCharacter: (
+      character: Character | ((prevState: Character) => Character)
+    ) => void;
+  };
+}
 
-const BuildContext = createContext({
-  character: initial,
-  updateCharacter: (_key: string, _value: number) => {},
+const BuildContext = createContext<ContextProps>({
+  build1: {
+    character: initial,
+    setCharacter: (
+      _character: Character | ((prevState: Character) => Character)
+    ) => {},
+  },
+  build2: {
+    character: initial,
+    setCharacter: (
+      _character: Character | ((prevState: Character) => Character)
+    ) => {},
+  },
 });
 
 interface BuildProviderProps {
-  initialValue: Character;
+  initialValue1: Character;
+  initialValue2: Character;
 }
 
 export const BuildProvider: React.FC<BuildProviderProps> = (props) => {
-  const { children, initialValue } = props;
-  const [character, setCharacter] = useState(initialValue);
-
-  const updateCharacter = useCallback(
-    (key: string, value: number) => {
-      if (!Number.isNaN(value)) {
-        setCharacter((prevState) => ({ ...prevState, [key]: value }));
-      }
-    },
-    [setCharacter]
-  );
+  const { children, initialValue1, initialValue2 } = props;
+  const [character1, setCharacter1] = useState(initialValue1);
+  const [character2, setCharacter2] = useState(initialValue2);
 
   return (
-    <BuildContext.Provider value={{ character, updateCharacter }}>
+    <BuildContext.Provider
+      value={{
+        build1: { character: character1, setCharacter: setCharacter1 },
+        build2: { character: character2, setCharacter: setCharacter2 },
+      }}
+    >
       {children}
     </BuildContext.Provider>
   );
 };
 
-export const useBuild = () => {
+export const useBuild = (id: 1 | 2) => {
   const value = useContext(BuildContext);
 
   if (value === null)
     throw new Error("useBuild can only be used within BuildProvider");
 
-  return value;
+  if (id === 1) return value.build1;
+  return value.build2;
 };
