@@ -42,6 +42,7 @@ interface Weapon {
 interface Modifiers {
   skill: number;
   melee: number;
+  ranged: number;
   dmg: number;
   finalDmg: number;
   race: number;
@@ -104,7 +105,7 @@ export const character: Character = {
   hp: {
     base: 22810,
     flat: 2070,
-    percent: 97 + 20,
+    percent: 107,
   },
   sp: {
     base: 985,
@@ -130,17 +131,18 @@ export const character: Character = {
   buffATK: 0,
   bypass: 0,
   modifiers: {
-    skill: 1 + 2.25,
-    melee: 1 + 0.8,
-    dmg: 1,
-    finalDmg: 1,
+    skill: 225,
+    melee: 80,
+    ranged: 0,
+    dmg: 0,
+    finalDmg: 0,
     //
-    race: 1 + 0.14,
-    size: 1 + 0.3,
-    class: 1 + 0.33,
-    monster: 1,
-    targetProperty: 1,
-    advancedKatarMastery: 1,
+    race: 14,
+    size: 30,
+    class: 33,
+    monster: 0,
+    targetProperty: 0,
+    advancedKatarMastery: 0,
   },
 };
 
@@ -154,4 +156,57 @@ export const monster: Monster = {
   race: "formless",
   size: "small",
   boss: false,
+};
+
+export const emptyCharacter: Character = {
+  baseLevel: 0,
+  job: "",
+  skill: "basic_attack",
+  stats: {
+    str: 0,
+    agi: 0,
+    vit: 0,
+    int: 0,
+    dex: 0,
+    luk: 0,
+  },
+  hp: {
+    base: 1,
+    flat: 0,
+    percent: 0,
+  },
+  sp: {
+    base: 1,
+    flat: 0,
+    percent: 0,
+  },
+  weapon: {
+    atk: 0,
+    element: "neutral",
+    level: 1,
+    refine: 0,
+    type: "without",
+  },
+  modifiers: {
+    advancedKatarMastery: 0,
+    class: 0,
+    dmg: 0,
+    finalDmg: 0,
+    melee: 0,
+    ranged: 0,
+    monster: 0,
+    race: 0,
+    size: 0,
+    skill: 0,
+    targetProperty: 0,
+  },
+  shadowWeaponRefine: 0,
+  equipATK: 0,
+  consumableATK: 0,
+  bonusStatusATK: 0,
+  ammoATK: 0,
+  pseudoBuffATK: 0,
+  masteryATK: 0,
+  buffATK: 0,
+  bypass: 0,
 };
