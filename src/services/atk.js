@@ -125,12 +125,12 @@ function applyCardModifiers(atk, character, monster) {
   );
 
   let finalModifiers = 1000;
-  finalModifiers *= race;
-  finalModifiers *= size;
-  finalModifiers *= targetProperty;
-  finalModifiers *= monsterType;
-  finalModifiers *= targetClass;
-  finalModifiers *= advancedKatarMastery;
+  finalModifiers *= 1 + race / 100;
+  finalModifiers *= 1 + size / 100;
+  finalModifiers *= 1 + targetProperty / 100;
+  finalModifiers *= 1 + monsterType / 100;
+  finalModifiers *= 1 + targetClass / 100;
+  finalModifiers *= 1 + advancedKatarMastery / 100;
   finalModifiers *= property;
   finalModifiers /= 1000;
 
@@ -176,11 +176,15 @@ export function getFinalDamage(range, character, monster) {
         Math.floor(
           Math.floor(
             Math.floor(
-              (atk * skillFormulaPercent + skillBonusDmg) * mods.skill
-            ) * rangeMod
-          ) * mods.dmg
+              (atk * skillFormulaPercent + skillBonusDmg) *
+                (1 + mods.skill / 100)
+            ) *
+              (1 + rangeMod / 100)
+          ) *
+            (1 + mods.dmg / 100)
         ) * hardDEF
       ) - softDEF
-    ) * mods.finalDmg
+    ) *
+      (1 + mods.finalDmg / 100)
   );
 }
