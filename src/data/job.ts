@@ -1,10 +1,13 @@
 export type Job =
   | "Archbishop"
+  | "Genetic"
   | "Guillotine Cross"
   | "Kagerou"
+  | "Mechanic"
   | "Ministrel"
   | "Oboro"
   | "Ranger"
+  | "Rebellion"
   | "Royal Guard"
   | "Rune Knight"
   | "Shadow Chaser"
@@ -22,54 +25,67 @@ export interface BaseStat {
   baseSP: number;
 }
 
+// TODO: Adicionar baseHP/SP de: Doram, SA, Oboro/Kagerou, Shadow Chaser
 export const JOBS: Record<Job, BaseStat> = {
   Archbishop: {
     baseHP: 16855,
-    baseSP: 1832,
+    baseSP: 1985,
+  },
+  Genetic: {
+    baseHP: 21325,
+    baseSP: 1985,
   },
   "Guillotine Cross": {
-    baseHP: 22810,
-    baseSP: 985,
+    baseHP: 25175,
+    baseSP: 1140,
   },
   Kagerou: {
     baseHP: 22810,
     baseSP: 985,
   },
+  Mechanic: {
+    baseHP: 21130,
+    baseSP: 1203,
+  },
   Ministrel: {
-    baseHP: 22810,
-    baseSP: 985,
+    baseHP: 21130,
+    baseSP: 1203,
   },
   Oboro: {
     baseHP: 22810,
     baseSP: 985,
   },
   Ranger: {
-    baseHP: 22810,
-    baseSP: 985,
+    baseHP: 22135,
+    baseSP: 1120,
+  },
+  Rebellion: {
+    baseHP: 24329,
+    baseSP: 1379,
   },
   "Royal Guard": {
-    baseHP: 22810,
-    baseSP: 985,
+    baseHP: 26205,
+    baseSP: 1526,
   },
   "Rune Knight": {
-    baseHP: 22810,
-    baseSP: 985,
+    baseHP: 27325,
+    baseSP: 1185,
   },
   "Shadow Chaser": {
     baseHP: 22810,
     baseSP: 985,
   },
   Sorcerer: {
-    baseHP: 22810,
-    baseSP: 985,
+    baseHP: 19660,
+    baseSP: 1985,
   },
   "Soul Reaper": {
-    baseHP: 22810,
-    baseSP: 985,
+    baseHP: 15183,
+    baseSP: 811,
   },
   "Star Emperor": {
-    baseHP: 22810,
-    baseSP: 985,
+    baseHP: 26355,
+    baseSP: 1422,
   },
   Summoner: {
     baseHP: 22810,
@@ -84,12 +100,12 @@ export const JOBS: Record<Job, BaseStat> = {
     baseSP: 985,
   },
   Wanderer: {
-    baseHP: 22810,
-    baseSP: 985,
+    baseHP: 21130,
+    baseSP: 1203,
   },
   Warlock: {
-    baseHP: 22810,
-    baseSP: 985,
+    baseHP: 20166,
+    baseSP: 1985,
   },
 };
 

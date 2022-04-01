@@ -5,7 +5,7 @@ import { Character } from "../../data/input";
 const BuildATK = () => (
   <div className="build">
     <div className="build-header">
-      <div></div>
+      <div>ATK and Modifiers</div>
       <b>Build 1</b>
       <b>Build 2</b>
     </div>

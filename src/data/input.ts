@@ -1,17 +1,6 @@
 import { Job } from "./job";
 import WeaponType from "./weapon";
-
-type Element =
-  | "neutral"
-  | "water"
-  | "earth"
-  | "fire"
-  | "wind"
-  | "poison"
-  | "holy"
-  | "shadow"
-  | "ghost"
-  | "undead";
+import { Element } from "./element";
 
 export interface Stats {
   str: number;
@@ -133,7 +122,7 @@ export const character: Character = {
     type: "Knuckle",
     refine: 15,
     atk: 250,
-    element: "shadow",
+    element: "Shadow",
   },
   shadowWeaponRefine: 5,
   equipATK: 651,
@@ -167,7 +156,7 @@ export const monster: Monster = {
   VIT: 1,
   hardDEF: 0,
   hardDEFDebuff: 0,
-  element: "holy",
+  element: "Holy",
   elementLevel: 1,
   race: "formless",
   size: "small",
@@ -198,7 +187,7 @@ export const emptyCharacter: Character = {
   },
   weapon: {
     atk: 0,
-    element: "neutral",
+    element: "Neutral",
     level: 1,
     refine: 0,
     type: "Bare Hand",

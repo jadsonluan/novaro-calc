@@ -1,9 +1,9 @@
 import { Character, Monster, Size, Stats, Weapon } from "../data/input";
 import WeaponType, { WEAPON_PENALTIES } from "../data/weapon";
-import { getPropertyModifier } from "./elements.js";
-import { getSkillFormula, isMeleeSkill } from "./skills.js";
+import { getPropertyModifier } from "../data/element";
+import { getSkill } from "../data/skills";
 
-type DmgRange = "MIN" | "MAX";
+export type DmgRange = "MIN" | "MAX";
 
 const DEX_WEAPONS: WeaponType[] = ["Whip", "Instrument", "Bow", "Gun"];
 
@@ -165,11 +165,11 @@ export function getFinalDamage(
   monster: Monster
 ) {
   const { modifiers: mods } = character;
-  const [skillFormulaPercent, skillBonusDmg] = getSkillFormula(
-    character,
-    monster
-  );
-  const rangeMod = isMeleeSkill(character.skill) ? mods.melee : mods.ranged;
+  let skill = getSkill(character.skill);
+
+  const formula = skill.formula(character, monster);
+
+  const rangeMod = skill.isMelee ? mods.melee : mods.ranged;
   const atk = getATK(range, character, monster);
   const hardDEF = getHardDEF(monster, character.bypass);
   const softDEF = getSoftDEF(monster);
@@ -180,8 +180,7 @@ export function getFinalDamage(
         Math.floor(
           Math.floor(
             Math.floor(
-              (atk * skillFormulaPercent + skillBonusDmg) *
-                (1 + mods.skill / 100)
+              (atk * formula.percent + formula.bonus) * (1 + mods.skill / 100)
             ) *
               (1 + rangeMod / 100)
           ) *

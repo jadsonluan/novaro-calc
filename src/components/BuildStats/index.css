@@ -11,13 +11,16 @@
 
 .build-stats .build-header {
   display: grid;
-  grid-template-columns: 100px 100px 100px;
-  text-align: center;
+  grid-template-columns: 1fr 1fr 1fr;
   padding: 5px 25px;
   margin-bottom: 10px;
   background-color: #7289da;
 }
 
+.build-stats .build-header> :not(:first-child) {
+  text-align: center;
+}
+
 .build-stats .build-input {
-  grid-template-columns: 100px 100px 100px !important;
+  grid-template-columns: 1fr 1fr 1fr !important;
 }

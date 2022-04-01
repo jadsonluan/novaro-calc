@@ -1,23 +1,35 @@
 
-.builds {
-  padding: 0 20px;
-  width: fit-content;
-  display: flex;
-  flex-direction: row;
+.main {
+  display: grid;
+  grid-template-columns: min-content min-content min-content;
+  padding: 25px;
 }
 
 .builds > * {
   margin-right: 25px;
 }
 
-.builds>.second-col>* {
-  margin-bottom: 10px;
+.second-col {
+  display: flex;
+  flex-direction: column;
+  margin: 0 20px;
 }
+
+.second-col > :not(:last-child) {
+  margin-bottom: 25px;
+}
+
+.second-col .third-row {
+  padding: 0 20px;
+  display: flex;
+  flex-direction: row;
+  /* justify-content: space-between; */
+}
+
 .damages {
   display: grid;
   grid-template-columns: 1fr 1fr 1fr 0.5fr;
-  width: 650px;
-  margin: 20px;
+  width: 550px;
   text-align: center;
 }
 
@@ -34,11 +46,6 @@
 .damages > div > * {
   background-color: #2c2f33;
   padding: 4px
-}
-
-.build1 > h1, .build2 > h1 {
-  text-align: center;
-  background-color: #7289da;
 }
 
 .positive-diff { background-color: #5cb85c !important;}
