@@ -12,7 +12,14 @@
   vertical-align: center;
 }
 
+.select > select {
+  border: none;
+  border-radius: 2px;
+  background-color: white;
+}
+
 .select > select, .select > select option > * {
   text-align: center;
   text-transform: capitalize;
 }
+

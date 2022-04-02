@@ -1,57 +1,86 @@
 import { evaluate } from "mathjs";
-import { Character } from "../../data/input";
+import { Character, Monster } from "../../data/input";
 import { Build, useBuild } from "../../hooks/useBuild";
 import "./index.css";
 
-interface BuildInputProps {
+export interface BuildInputProps<T extends Character | Monster> {
   label: string;
-  getValue: (character: Character) => number;
-  updateValue: (value: number) => (prevState: Character) => Character;
+  getValue: (target: T) => number;
+  updateValue: (value: number) => (prevState: T) => T;
+  target: (build: Build) => T;
+  setTarget: (build: Build) => (target: T | ((prevState: T) => T)) => void;
 }
-
-interface InputProps {
-  getValue: (character: Character) => number;
-  updateValue: (value: number) => (prevState: Character) => Character;
+interface InputProps<T extends Character | Monster>
+  extends Omit<BuildInputProps<T>, "label"> {
   build: Build;
 }
 
-const Input = (props: InputProps) => {
-  const { getValue, updateValue, build } = props;
+interface BuildMonsterInputProps<T extends Monster>
+  extends Omit<BuildInputProps<T>, "target" | "setTarget"> {}
+interface BuildCharacterInputProps<T extends Character>
+  extends Omit<BuildInputProps<T>, "target" | "setTarget"> {}
+
+function Input<T extends Character | Monster>(props: InputProps<T>) {
+  const { getValue, updateValue, target, setTarget, build } = props;
+
+  const obj = target(build);
+  const update = setTarget(build);
 
   return (
     <input
       type="text"
-      defaultValue={getValue(build.character)}
+      defaultValue={getValue(obj)}
       onBlur={(event) => {
         let parsedValue;
         try {
           parsedValue = evaluate(event.target.value);
           parsedValue = Number(parsedValue);
           if (!Number.isNaN(parsedValue)) {
-            build.setCharacter(updateValue(parsedValue));
+            update(updateValue(parsedValue));
             event.currentTarget.value = parsedValue + "";
           } else {
-            event.currentTarget.value = getValue(build.character) + "";
+            if (event.target.value === "") event.currentTarget.value = "0";
+            event.currentTarget.value = getValue(obj) + "";
           }
         } catch (error) {
-          event.currentTarget.value = getValue(build.character) + "";
+          event.currentTarget.value = getValue(obj) + "";
         }
       }}
     />
   );
-};
+}
 
-const BuildInput = (props: BuildInputProps) => {
-  const { label, getValue, updateValue } = props;
+function BuildInput<T extends Character | Monster>(props: BuildInputProps<T>) {
+  const { label } = props;
   const { build1, build2 } = useBuild();
 
   return (
     <div className="build-input">
-      <b>{label}</b>
-      <Input build={build1} getValue={getValue} updateValue={updateValue} />
-      <Input build={build2} getValue={getValue} updateValue={updateValue} />
+      <span>{label}</span>
+      <Input build={build1} {...props} />
+      <Input build={build2} {...props} />
     </div>
+  );
+}
+
+export const BuildCharacterInput = (
+  props: BuildCharacterInputProps<Character>
+) => {
+  return (
+    <BuildInput
+      {...props}
+      target={(build: Build) => build.character}
+      setTarget={(build: Build) => build.setCharacter}
+    />
   );
 };
 
-export default BuildInput;
+export const BuildMonsterInput = (props: BuildMonsterInputProps<Monster>) => {
+  return (
+    <BuildInput
+      {...props}
+      target={(build: Build) => build.monster}
+      setTarget={(build: Build) => build.setMonster}
+    />
+  );
+};

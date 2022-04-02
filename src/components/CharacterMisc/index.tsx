@@ -29,7 +29,7 @@ const CharacterMisc = () => {
   return (
     <div className="character-misc">
       <div className="build-header">
-        <div>Misc</div>
+        <b>Misc</b>
         <b>Build 1</b>
         <b>Build 2</b>
       </div>

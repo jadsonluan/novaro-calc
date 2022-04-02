@@ -9,6 +9,7 @@ import {
 } from "../../data/input";
 import { BuildMonsterSelect, Option } from "../Select";
 import { ELEMENTS, Element } from "../../data/element";
+import { BuildMonsterInput } from "../BuildInput";
 
 const MonsterInfo = () => {
   const sizeOptions: Option[] = SIZES.map((item: string) => ({
@@ -36,13 +37,42 @@ const MonsterInfo = () => {
   return (
     <div className="monster-info">
       <div className="build-header">
-        <div>Monster</div>
+        <b>Monster</b>
         <b>Build 1</b>
         <b>Build 2</b>
       </div>
       <div className="build-content">
+        <div>
+          <BuildMonsterInput
+            label="DEF"
+            getValue={(monster: Monster) => monster.hardDEF}
+            updateValue={(value: number) => (prev: Monster) => ({
+              ...prev,
+              hardDEF: value,
+            })}
+          />
+
+          <BuildMonsterInput
+            label="LVL"
+            getValue={(monster: Monster) => monster.baseLevel}
+            updateValue={(value: number) => (prev: Monster) => ({
+              ...prev,
+              baseLevel: value,
+            })}
+          />
+
+          <BuildMonsterInput
+            label="VIT"
+            getValue={(monster: Monster) => monster.VIT}
+            updateValue={(value: number) => (prev: Monster) => ({
+              ...prev,
+              VIT: value,
+            })}
+          />
+        </div>
+
         <BuildMonsterSelect
-          label="Size"
+          label="Type"
           options={monsterTypeOptions}
           getValue={(monster: Monster) => monster.type as string}
           updateValue={(value: string) => (prevState: Monster) => {

@@ -1,16 +1,16 @@
 import "./index.css";
-import BuildInput from "../BuildInput";
+import { BuildCharacterInput } from "../BuildInput";
 import { Character } from "../../data/input";
 
 const BuildStats = () => (
   <div className="build-stats">
     <div className="build-header">
-      <div>Stats</div>
+      <b>Stats</b>
       <b>Build 1</b>
       <b>Build 2</b>
     </div>
     <div className="build-content">
-      <BuildInput
+      <BuildCharacterInput
         label="Base Level"
         getValue={(character: Character) => character.baseLevel}
         updateValue={(value: number) => (prev: Character) => ({
@@ -18,7 +18,7 @@ const BuildStats = () => (
           baseLevel: value,
         })}
       />
-      <BuildInput
+      <BuildCharacterInput
         label="STR"
         getValue={(character: Character) => character.stats.str}
         updateValue={(value: number) => (prev: Character) => {
@@ -26,7 +26,7 @@ const BuildStats = () => (
           return { ...prev, stats: { ...stats, str: value } };
         }}
       />
-      <BuildInput
+      <BuildCharacterInput
         label="AGI"
         getValue={(character: Character) => character.stats.agi}
         updateValue={(value: number) => (prev: Character) => {
@@ -34,7 +34,7 @@ const BuildStats = () => (
           return { ...prev, stats: { ...stats, agi: value } };
         }}
       />
-      <BuildInput
+      <BuildCharacterInput
         label="VIT"
         getValue={(character: Character) => character.stats.vit}
         updateValue={(value: number) => (prev: Character) => {
@@ -42,7 +42,7 @@ const BuildStats = () => (
           return { ...prev, stats: { ...stats, vit: value } };
         }}
       />
-      <BuildInput
+      <BuildCharacterInput
         label="INT"
         getValue={(character: Character) => character.stats.int}
         updateValue={(value: number) => (prev: Character) => {
@@ -50,7 +50,7 @@ const BuildStats = () => (
           return { ...prev, stats: { ...stats, int: value } };
         }}
       />
-      <BuildInput
+      <BuildCharacterInput
         label="DEX"
         getValue={(character: Character) => character.stats.dex}
         updateValue={(value: number) => (prev: Character) => {
@@ -58,7 +58,7 @@ const BuildStats = () => (
           return { ...prev, stats: { ...stats, dex: value } };
         }}
       />
-      <BuildInput
+      <BuildCharacterInput
         label="LUK"
         getValue={(character: Character) => character.stats.luk}
         updateValue={(value: number) => (prev: Character) => {
@@ -66,7 +66,7 @@ const BuildStats = () => (
           return { ...prev, stats: { ...stats, luk: value } };
         }}
       />
-      <BuildInput
+      <BuildCharacterInput
         label="HP %"
         getValue={(character: Character) => character.hp.percent}
         updateValue={(value: number) => (prev: Character) => {
@@ -74,7 +74,7 @@ const BuildStats = () => (
           return { ...prev, hp: { ...hp, percent: value } };
         }}
       />
-      <BuildInput
+      <BuildCharacterInput
         label="HP Flat"
         getValue={(character: Character) => character.hp.flat}
         updateValue={(value: number) => (prev: Character) => {
@@ -82,7 +82,7 @@ const BuildStats = () => (
           return { ...prev, hp: { ...hp, flat: value } };
         }}
       />
-      <BuildInput
+      <BuildCharacterInput
         label="SP %"
         getValue={(character: Character) => character.sp.percent}
         updateValue={(value: number) => (prev: Character) => {
@@ -90,7 +90,7 @@ const BuildStats = () => (
           return { ...prev, sp: { ...sp, percent: value } };
         }}
       />
-      <BuildInput
+      <BuildCharacterInput
         label="SP Flat"
         getValue={(character: Character) => character.sp.flat}
         updateValue={(value: number) => (prev: Character) => {

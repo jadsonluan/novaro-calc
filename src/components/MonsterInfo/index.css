@@ -8,6 +8,10 @@
   padding: 15px 25px;
 }
 
+.monster-info .build-content > :first-child {
+  margin-bottom: 10px;
+}
+
 .monster-info .build-header {
   display: grid;
   grid-template-columns: 100px 150px 150px;
@@ -19,6 +23,6 @@
   text-align: center;
 }
 
-.monster-info .select {
+.monster-info .select, .monster-info .build-input {
   grid-template-columns: 100px 150px 150px !important;
 }
