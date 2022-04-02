@@ -23,6 +23,8 @@ export const ELEMENTS: Element[] = [
   "Undead",
 ];
 
+// ROW: Attacker Property
+// COL: Target Property
 const ELEMENTS_LV1 = [
   [100, 100, 100, 100, 100, 100, 100, 100, 70, 100],
   [100, 25, 100, 90, 175, 100, 100, 100, 70, 100],

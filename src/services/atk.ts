@@ -121,7 +121,7 @@ function applyCardModifiers(
   const property = getPropertyModifier(
     character.weapon.element,
     monster.element,
-    monster.elementLevel
+    Number(monster.elementLevel)
   );
 
   let finalModifiers = 1000;

@@ -12,6 +12,7 @@
   vertical-align: center;
 }
 
-.select > select {
+.select > select, .select > select option > * {
   text-align: center;
+  text-transform: capitalize;
 }

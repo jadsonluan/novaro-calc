@@ -3,6 +3,7 @@ import { getFinalDamage } from "../../services/atk";
 import BuildATK from "../BuildATK";
 import BuildStats from "../BuildStats";
 import CharacterMisc from "../CharacterMisc";
+import MonsterInfo from "../MonsterInfo";
 import "./index.css";
 
 const getDiffClass = (value: number) => {
@@ -30,9 +31,9 @@ const MainPage = () => {
       <div className="second-col">
         <div className="damages">
           <div>
-            <b>X</b>
-            <b>Minimum Damage</b>
-            <b>Maximum Damage</b>
+            <b>Range</b>
+            <span>Minimum Damage</span>
+            <span>Maximum Damage</span>
           </div>
           <div>
             <b>Build 1</b>
@@ -55,7 +56,7 @@ const MainPage = () => {
         <CharacterMisc />
       </div>
       <div className="third-row">
-        <CharacterMisc />
+        <MonsterInfo />
       </div>
     </div>
   );

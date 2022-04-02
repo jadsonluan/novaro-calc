@@ -1,11 +1,10 @@
 import "./index.css";
 import { Character } from "../../data/input";
-import Select, { Option } from "../Select";
+import { BuildCharacterSelect, Option } from "../Select";
 import WeaponType, { WEAPONS } from "../../data/weapon";
 import { Job, JOBS } from "../../data/job";
 import { ELEMENTS, Element } from "../../data/element";
 import { Skill, SKILLS } from "../../data/skills";
-
 const CharacterMisc = () => {
   const weaponOptions: Option[] = WEAPONS.map((weapon) => ({
     label: weapon,
@@ -35,7 +34,7 @@ const CharacterMisc = () => {
         <b>Build 2</b>
       </div>
       <div className="build-content">
-        <Select
+        <BuildCharacterSelect
           label="Weapon"
           options={weaponOptions}
           getValue={(character: Character) => character.weapon.type as string}
@@ -47,7 +46,7 @@ const CharacterMisc = () => {
             };
           }}
         />
-        <Select
+        <BuildCharacterSelect
           label="Element"
           options={elementOptions}
           getValue={(character: Character) =>
@@ -64,7 +63,7 @@ const CharacterMisc = () => {
             };
           }}
         />
-        <Select
+        <BuildCharacterSelect
           label="Class"
           options={jobOptions}
           getValue={(character: Character) => character.job}
@@ -79,7 +78,7 @@ const CharacterMisc = () => {
             };
           }}
         />
-        <Select
+        <BuildCharacterSelect
           label="Skill"
           options={skillOptions}
           getValue={(character: Character) => character.skill}
