@@ -3,15 +3,14 @@ import ReactDOM from 'react-dom';
 import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
-import { character, emptyMonster } from "./data/input";
+import { emptyCharacter, emptyMonster } from "./data/input";
 import { BuildProvider } from "./hooks/useBuild";
-
 
 ReactDOM.render(
   <React.StrictMode>
     <BuildProvider
-      initialBuild1={{ character, monster: emptyMonster }}
-      initialBuild2={{ character, monster: emptyMonster }}
+      initialBuild1={{ character: emptyCharacter, monster: emptyMonster }}
+      initialBuild2={{ character: emptyCharacter, monster: emptyMonster }}
     >
       <App />
     </BuildProvider>
