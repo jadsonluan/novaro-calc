@@ -181,7 +181,7 @@ export type Race =
   };
 
 export const emptyCharacter: Character = {
-  baseLevel: 0,
+  baseLevel: 1,
   job: "Sura",
   skill: "basic_attack",
   stats: {
