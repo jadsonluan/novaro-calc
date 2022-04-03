@@ -22,7 +22,7 @@ const BuildDiff = (props: BuildDiffProps) => {
 
   return (
     <div className="build-diff">
-      <div className="build-diff-header">
+      <div className="header">
         <span>{label}</span>
         <span>Build 1</span>
         <span>Build 2</span>

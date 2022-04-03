@@ -9,17 +9,16 @@
 }
 
 .monster-info .build-content > :first-child {
-  margin-bottom: 10px;
+  margin-bottom: 15px;
 }
 
-.monster-info .build-header {
+.monster-info .header {
   display: grid;
   grid-template-columns: 100px 150px 150px;
   padding: 5px 25px;
-  background-color: #7289da;
 }
 
-.monster-info .build-header> :not(:first-child) {
+.monster-info .header> :not(:first-child) {
   text-align: center;
 }
 

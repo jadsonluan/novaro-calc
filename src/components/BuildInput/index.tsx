@@ -27,27 +27,29 @@ function Input<T extends Character | Monster>(props: InputProps<T>) {
   const update = setTarget(build);
 
   return (
-    <input
-      type="text"
-      key={getValue(obj)}
-      defaultValue={getValue(obj)}
-      onBlur={(event) => {
-        let parsedValue;
-        try {
-          parsedValue = evaluate(event.target.value);
-          parsedValue = Number(parsedValue);
-          if (!Number.isNaN(parsedValue)) {
-            update(updateValue(parsedValue));
-            event.currentTarget.value = parsedValue + "";
-          } else {
-            if (event.target.value === "") event.currentTarget.value = "0";
+    <div className="input">
+      <input
+        type="text"
+        key={getValue(obj)}
+        defaultValue={getValue(obj)}
+        onBlur={(event) => {
+          let parsedValue;
+          try {
+            parsedValue = evaluate(event.target.value);
+            parsedValue = Number(parsedValue);
+            if (!Number.isNaN(parsedValue)) {
+              update(updateValue(parsedValue));
+              event.currentTarget.value = parsedValue + "";
+            } else {
+              if (event.target.value === "") event.currentTarget.value = "0";
+              event.currentTarget.value = getValue(obj) + "";
+            }
+          } catch (error) {
             event.currentTarget.value = getValue(obj) + "";
           }
-        } catch (error) {
-          event.currentTarget.value = getValue(obj) + "";
-        }
-      }}
-    />
+        }}
+      />
+    </div>
   );
 }
 

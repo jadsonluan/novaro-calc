@@ -8,17 +8,16 @@
   padding: 15px 25px;
 }
 
-.character-misc .build-header {
+.character-misc .header {
   display: grid;
-  grid-template-columns: 1fr 1fr 1fr;
+  grid-template-columns: 100px 1fr 1fr;
   padding: 5px 25px;
-  background-color: #7289da;
 }
 
-.character-misc .build-header> :not(:first-child) {
+.character-misc .header> :not(:first-child) {
   text-align: center;
 }
 
 .character-misc .select {
-  grid-template-columns: 1fr 1fr 1fr !important;
+  grid-template-columns: 100px 1fr 1fr !important;
 }

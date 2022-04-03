@@ -7,23 +7,27 @@ h1 {
 }
 
 .header {
+  /* background-color: hsl(214, 7%, 19%); */
+  background-color: #40444b;
+}
+
+.app .header {
   margin: auto;
-  background-color: #7289da;
   display: flex;
   font-size: 16px;
   vertical-align: center;
+  border-bottom: 1px solid #40444b;
 }
 
-.header h1 {
+.app .header h1 {
   padding: 10px 25px;
-  background-color: #5976db;
+  /* background-color: #40444b; */
 }
 
 .actions {
   display: flex;
   justify-content: center;
   align-items: center;
-  /* border: 1px solid red; */
   margin-left: 20px;
 }
 
@@ -33,13 +37,16 @@ h1 {
   padding: 7px;
   margin: 2px;
   border-radius: 25px;
-  background-color: #5976db;
-  box-shadow: 1px 1px 4px #4257a2;
-  cursor: pointer;
+  background-color: hsl(214, 7%, 19%);
+  border: 2px solid hsl(214, 7%, 19%);
   color: white;
+  cursor: pointer;
   font-weight: bold;
 }
 
 .actions button:hover {
-  background-color: #99aab5;
+  background-color: white;
+  border: 2px solid white;
+  color: hsl(214, 7%, 19%);
+  transition: 0.25s;
 }

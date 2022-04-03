@@ -4,22 +4,23 @@
   height: fit-content;
 }
 
+.build-stats .header {
+  display: grid;
+  grid-template-columns: 150px 1fr 1fr;
+}
+
+.build-stats .header > * {
+  padding: 5px 25px;
+}
+
+.build-stats .build-input {
+  grid-template-columns: 100px 1fr 1fr !important;
+}
+
 .build-stats .build-content {
   padding: 15px 25px;
 }
 
-.build-stats .build-header {
-  display: grid;
-  grid-template-columns: 1fr 1fr 1fr;
-  padding: 5px 25px;
-  margin-bottom: 10px;
-  background-color: #7289da;
-}
-
-.build-stats .build-header> :not(:first-child) {
-  text-align: center;
-}
-
-.build-stats .build-input {
-  grid-template-columns: 1fr 1fr 1fr !important;
+.build-stats .build-content .build-hp-sp {
+  margin-top: 15px;
 }

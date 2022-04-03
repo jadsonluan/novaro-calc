@@ -18,8 +18,8 @@ const MainPage = () => {
   const maxDamage2 = getFinalDamage("MAX", build2.character, build2.monster);
 
   const dmgItems: BuildDiffItem[] = [
-    { label: "Minimum Damage", value1: minDamage1, value2: minDamage2 },
-    { label: "Maximum Damage", value1: maxDamage1, value2: maxDamage2 },
+    { label: "Min.", value1: minDamage1, value2: minDamage2 },
+    { label: "Max.", value1: maxDamage1, value2: maxDamage2 },
   ];
 
   const maxHP1 = getHP(build1.character);
@@ -36,12 +36,12 @@ const MainPage = () => {
   return (
     <div className="main">
       <div className="first-col">
-        <BuildDiff label="Stat" items={statItems} />
+        <BuildDiff label="Damage" items={dmgItems} />
         <BuildATK />
       </div>
 
       <div className="second-col">
-        <BuildDiff label="Range" items={dmgItems} />
+        <BuildDiff label="Stat" items={statItems} />
         <BuildStats />
         <CharacterMisc />
       </div>

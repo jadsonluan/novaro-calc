@@ -1,27 +1,26 @@
 .build-diff {
-  width: 550px;
   text-align: center;
+  background-color: #2c2f33;
 }
 
-.build-diff-header {
-  background-color: #7289da;
+.build-diff .header {
   color: white;
   font-weight: bold;
   padding: 4px
 }
 
-.build-diff-body > div > div {
-  padding: 4px;
-}
-
-.build-diff-header, .build-diff-body > div {
+.build-diff .header, .build-diff-body > div {
   display: grid;
-  grid-template-columns: 1fr 1fr 1fr 0.5fr;
+  grid-template-columns: 100px 1fr 1fr 0.5fr;
 }
 
-.build-diff > :not(:first-child) {
-  background-color: #2c2f33;
+.build-diff-body > :first-child > * {
+  padding-top: 5px
 }
 
-.positive-diff { background-color: #5cb85c !important;}
-.negative-diff { background-color: #d9534f !important;}
+.build-diff-body > :last-child > * {
+  padding-bottom: 5px
+}
+
+.positive-diff { background-color: #3ba55d !important;}
+.negative-diff { background-color: #ed4245 !important;}

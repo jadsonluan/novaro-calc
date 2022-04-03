@@ -1,22 +1,18 @@
 
 .main {
   display: grid;
-  grid-template-columns: min-content min-content min-content;
-  padding: 25px;
-}
-
-.builds > * {
-  margin-right: 25px;
+  grid-template-columns: min-content 1fr 1fr;
+  padding: 15px;
 }
 
 .second-col {
   display: flex;
   flex-direction: column;
-  margin: 0 25px;
+  margin: 0 15px;
 }
 
 .first-col > :not(:last-child), .second-col > :not(:last-child) {
-  margin-bottom: 25px;
+  margin-bottom: 15px;
 }
 
 .second-col .third-row {
@@ -25,3 +21,11 @@
   flex-direction: row;
 }
 
+.main > div > * {
+  border-radius: 10px;
+}
+
+.main > div .header {
+  border-top-right-radius: 10px;
+  border-top-left-radius: 10px;
+}

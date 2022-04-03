@@ -36,7 +36,7 @@ const MonsterInfo = () => {
 
   return (
     <div className="monster-info">
-      <div className="build-header">
+      <div className="header">
         <b>Monster</b>
         <b>Build 1</b>
         <b>Build 2</b>

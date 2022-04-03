@@ -28,7 +28,7 @@ const CharacterMisc = () => {
 
   return (
     <div className="character-misc">
-      <div className="build-header">
+      <div className="header">
         <b>Misc</b>
         <b>Build 1</b>
         <b>Build 2</b>
