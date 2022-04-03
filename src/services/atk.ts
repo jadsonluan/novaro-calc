@@ -72,7 +72,7 @@ function getWeaponATK(
     overUpgradeATK = 1;
     variance *= -1;
   } else {
-    overUpgradeATK = getMaxOverUpgradeBonus(weapon);
+    overUpgradeATK = Math.max(1, getMaxOverUpgradeBonus(weapon));
   }
 
   const totalWeaponATK =
