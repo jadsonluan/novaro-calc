@@ -7,7 +7,6 @@ h1 {
 }
 
 .header {
-  /* background-color: hsl(214, 7%, 19%); */
   background-color: #40444b;
 }
 
@@ -21,7 +20,6 @@ h1 {
 
 .app .header h1 {
   padding: 10px 25px;
-  /* background-color: #40444b; */
 }
 
 .actions {
