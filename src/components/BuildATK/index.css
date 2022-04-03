@@ -7,14 +7,18 @@
   padding: 15px 25px;
 }
 
+.build > .build-content .build-input {
+  grid-template-columns: 200px 1fr 1fr;
+}
+
 .build > .build-header {
   display: grid;
-  grid-template-columns: 200px 100px 100px;
+  grid-template-columns: 200px 1fr 1fr;
   padding: 5px 25px;
   margin-bottom: 10px;
   background-color: #7289da;
 }
 
-.build-stats .build-header> :not(:first-child) {
+.build .build-header> :not(:first-child) {
   text-align: center;
 }

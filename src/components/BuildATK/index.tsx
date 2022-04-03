@@ -103,7 +103,7 @@ const BuildATK = () => (
         getValue={(character: Character) => character.modifiers.race}
         updateValue={(value: number) => (prev: Character) => {
           const { modifiers } = prev;
-          return { ...prev, modifiers: { ...modifiers, level: value } };
+          return { ...prev, modifiers: { ...modifiers, race: value } };
         }}
       />
       <BuildCharacterInput
@@ -127,7 +127,7 @@ const BuildATK = () => (
         getValue={(character: Character) => character.modifiers.skill}
         updateValue={(value: number) => (prev: Character) => {
           const { modifiers } = prev;
-          return { ...prev, modifiers: { ...modifiers, skil: value } };
+          return { ...prev, modifiers: { ...modifiers, skill: value } };
         }}
       />
       <BuildCharacterInput

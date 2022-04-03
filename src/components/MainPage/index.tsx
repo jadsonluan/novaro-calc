@@ -1,16 +1,12 @@
+import { getHP, getSP } from "../../data/stats";
 import { useBuild } from "../../hooks/useBuild";
 import { getFinalDamage } from "../../services/atk";
 import BuildATK from "../BuildATK";
+import BuildDiff, { BuildDiffItem } from "../BuildDiff";
 import BuildStats from "../BuildStats";
 import CharacterMisc from "../CharacterMisc";
 import MonsterInfo from "../MonsterInfo";
 import "./index.css";
-
-const getDiffClass = (value: number) => {
-  if (value > 0) return "positive-diff";
-  else if (value < 0) return "negative-diff";
-  else return "";
-};
 
 const MainPage = () => {
   const { build1, build2 } = useBuild();
@@ -21,37 +17,31 @@ const MainPage = () => {
   const minDamage2 = getFinalDamage("MIN", build2.character, build2.monster);
   const maxDamage2 = getFinalDamage("MAX", build2.character, build2.monster);
 
-  const minDiff = ((minDamage2 - minDamage1) / minDamage1) * 100;
-  const maxDiff = ((maxDamage2 - maxDamage1) / maxDamage1) * 100;
+  const dmgItems: BuildDiffItem[] = [
+    { label: "Minimum Damage", value1: minDamage1, value2: minDamage2 },
+    { label: "Maximum Damage", value1: maxDamage1, value2: maxDamage2 },
+  ];
+
+  const maxHP1 = getHP(build1.character);
+  const maxHP2 = getHP(build2.character);
+
+  const maxSP1 = getSP(build1.character);
+  const maxSP2 = getSP(build2.character);
+
+  const statItems: BuildDiffItem[] = [
+    { label: "Max. HP", value1: maxHP1, value2: maxHP2 },
+    { label: "Max. SP", value1: maxSP1, value2: maxSP2 },
+  ];
 
   return (
     <div className="main">
-      <BuildATK />
+      <div className="first-col">
+        <BuildDiff label="Stat" items={statItems} />
+        <BuildATK />
+      </div>
 
       <div className="second-col">
-        <div className="damages">
-          <div>
-            <b>Range</b>
-            <span>Minimum Damage</span>
-            <span>Maximum Damage</span>
-          </div>
-          <div>
-            <b>Build 1</b>
-            <div>{minDamage1.toLocaleString()}</div>
-            <div>{maxDamage1.toLocaleString()}</div>
-          </div>
-          <div>
-            <b>Build 2</b>
-            <div>{minDamage2.toLocaleString()}</div>
-            <div>{maxDamage2.toLocaleString()}</div>
-          </div>
-          <div>
-            <b>Diff</b>
-            <div className={getDiffClass(minDiff)}>{minDiff.toFixed(2)}%</div>
-
-            <div className={getDiffClass(maxDiff)}>{maxDiff.toFixed(2)}%</div>
-          </div>
-        </div>
+        <BuildDiff label="Range" items={dmgItems} />
         <BuildStats />
         <CharacterMisc />
       </div>
