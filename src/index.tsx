@@ -3,12 +3,20 @@ import ReactDOM from 'react-dom';
 import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
+import { character, emptyMonster } from "./data/input";
+import { BuildProvider } from "./hooks/useBuild";
+
 
 ReactDOM.render(
   <React.StrictMode>
-    <App />
+    <BuildProvider
+      initialBuild1={{ character, monster: emptyMonster }}
+      initialBuild2={{ character, monster: emptyMonster }}
+    >
+      <App />
+    </BuildProvider>
   </React.StrictMode>,
-  document.getElementById('root')
+  document.getElementById("root")
 );
 
 // If you want to start measuring performance in your app, pass a function

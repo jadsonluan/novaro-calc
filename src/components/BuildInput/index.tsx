@@ -29,6 +29,7 @@ function Input<T extends Character | Monster>(props: InputProps<T>) {
   return (
     <input
       type="text"
+      key={getValue(obj)}
       defaultValue={getValue(obj)}
       onBlur={(event) => {
         let parsedValue;

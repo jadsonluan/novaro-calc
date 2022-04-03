@@ -1,20 +1,48 @@
 import "./App.css";
 import MainPage from "./components/MainPage";
-import { character, emptyMonster } from "./data/input";
-import { BuildProvider } from "./hooks/useBuild";
+import { Character, emptyCharacter, emptyMonster, Monster } from "./data/input";
+import { Build, useBuild } from "./hooks/useBuild";
+
+interface BuildInfo {
+  character: Character;
+  monster: Monster;
+}
+
+const INITIAL_BUILD: BuildInfo = {
+  character: emptyCharacter,
+  monster: emptyMonster,
+};
+
+const copy = (from: Omit<Build, "setCharacter" | "setMonster">, to: Build) => {
+  to.setCharacter({ ...from.character });
+  to.setMonster({ ...from.monster });
+};
 
 function App() {
+  const { build1, build2 } = useBuild();
+
   return (
     <div className="app">
       <header className="header">
         <h1>NovaRO Calc: ATK</h1>
+        <div className="actions">
+          <button onClick={() => copy(build1, build2)}>
+            Build 1 {">"} Build 2
+          </button>
+          <button onClick={() => copy(build2, build1)}>
+            Build 1 {"<"} Build 2
+          </button>
+          <button
+            onClick={() => {
+              copy(INITIAL_BUILD, build1);
+              copy(INITIAL_BUILD, build2);
+            }}
+          >
+            Clear
+          </button>
+        </div>
       </header>
-      <BuildProvider
-        initialBuild1={{ character, monster: emptyMonster }}
-        initialBuild2={{ character, monster: emptyMonster }}
-      >
-        <MainPage />
-      </BuildProvider>
+      <MainPage />
     </div>
   );
 }
