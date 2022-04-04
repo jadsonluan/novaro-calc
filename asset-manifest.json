@@ -1,15 +1,15 @@
 {
   "files": {
     "main.css": "/novaro-calc/static/css/main.4c764d6c.css",
-    "main.js": "/novaro-calc/static/js/main.0bf91b16.js",
+    "main.js": "/novaro-calc/static/js/main.26181e0b.js",
     "static/js/787.34d30e15.chunk.js": "/novaro-calc/static/js/787.34d30e15.chunk.js",
     "index.html": "/novaro-calc/index.html",
     "main.4c764d6c.css.map": "/novaro-calc/static/css/main.4c764d6c.css.map",
-    "main.0bf91b16.js.map": "/novaro-calc/static/js/main.0bf91b16.js.map",
+    "main.26181e0b.js.map": "/novaro-calc/static/js/main.26181e0b.js.map",
     "787.34d30e15.chunk.js.map": "/novaro-calc/static/js/787.34d30e15.chunk.js.map"
   },
   "entrypoints": [
     "static/css/main.4c764d6c.css",
-    "static/js/main.0bf91b16.js"
+    "static/js/main.26181e0b.js"
   ]
 }
