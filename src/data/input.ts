@@ -68,18 +68,31 @@ export interface Character {
 }
 
 export type Race =
-  | "formless"
-  | "demihuman"
-  | "undead"
-  | "fish"
-  | "plant"
-  | "insect"
-  | "demon"
   | "angel"
-  | "undead"
   | "brute"
+  | "demihuman"
+  | "demon"
   | "dragon"
-  | "player";
+  | "fish"
+  | "formless"
+  | "insect"
+  | "plant"
+  | "player"
+  | "undead";
+
+export const RACES: Race[] = [
+  "angel",
+  "brute",
+  "demihuman",
+  "demon",
+  "dragon",
+  "fish",
+  "formless",
+  "insect",
+  "plant",
+  "player",
+  "undead",
+];
 
   export type Size = "small" | "medium" | "large";
   export const SIZES: Size[] = ["small", "medium", "large"];

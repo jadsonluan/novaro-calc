@@ -1,4 +1,5 @@
 import "./App.css";
+import ImportBS from "./components/ImportBS";
 import MainPage from "./components/MainPage";
 import { Character, emptyCharacter, emptyMonster, Monster } from "./data/input";
 import { Build, useBuild } from "./hooks/useBuild";
@@ -26,6 +27,7 @@ function App() {
       <header className="header">
         <h1>NovaRO Calc: ATK</h1>
         <div className="actions">
+          <ImportBS />
           <button onClick={() => copy(build1, build2)}>
             Build 1 {">"} Build 2
           </button>

@@ -1,5 +1,6 @@
 import { Character, Monster } from "../../data/input";
 import { Build, useBuild } from "../../hooks/useBuild";
+import { capitalize } from "../../utils/format";
 import "./index.css";
 
 export interface Option {
@@ -25,8 +26,6 @@ interface SelectProps<T extends Character | Monster>
   extends Omit<BuildSelectProps<T>, "label"> {
   build: Build;
 }
-
-const capitalize = (str: string) => str[0].toUpperCase() + str.slice(1);
 
 function Select<T extends Character | Monster>(props: SelectProps<T>) {
   const { getValue, updateValue, target, setTarget, options, build } = props;

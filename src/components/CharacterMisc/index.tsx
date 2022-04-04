@@ -22,7 +22,7 @@ const CharacterMisc = () => {
   }));
 
   const skillOptions: Option[] = Object.values(SKILLS).map((skill: Skill) => ({
-    label: skill.name,
+    label: skill.label,
     value: skill.key,
   }));
 

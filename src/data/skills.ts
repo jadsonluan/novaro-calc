@@ -8,6 +8,7 @@ export interface FormulaReturn {
 
 export interface Skill {
   name: string;
+  label: string;
   key: string;
   isMelee: boolean;
   formula: (character: Character, monster: Monster) => FormulaReturn;
@@ -17,6 +18,7 @@ export const SKILLS: Record<string, Skill> = {
   AUTO_ATTACK: {
     key: "AUTO_ATTACK",
     name: "Auto Attack",
+    label: "Auto Attack",
     isMelee: true,
     formula: (_character: Character, _monster: Monster) => ({
       percent: 1,
@@ -25,7 +27,8 @@ export const SKILLS: Record<string, Skill> = {
   },
   TIGER_CANNON_COMBO: {
     key: "TIGER_CANNON_COMBO",
-    name: "Tiger Cannon (Combo)",
+    label: "Tiger Cannon (Combo)",
+    name: "Tiger Cannon",
     isMelee: true,
     formula: (character: Character, monster: Monster) => {
       const baseDamage = (0.3 * getHP(character) + 0.15 * getSP(character)) / 2;
