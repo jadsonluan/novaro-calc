@@ -72,7 +72,7 @@ function getWeaponATK(
     overUpgradeATK = 1;
     variance *= -1;
   } else {
-    overUpgradeATK = Math.max(1, getMaxOverUpgradeBonus(weapon));
+    overUpgradeATK = getMaxOverUpgradeBonus(weapon);
   }
 
   const totalWeaponATK =
@@ -141,7 +141,10 @@ function getATK(range: DmgRange, character: Character, monster: Monster) {
   const { masteryATK, buffATK } = character;
 
   const sizePenalty = getSizePenalty(character.weapon.type, monster.size);
-  const wATK = getWeaponATK(range, character, sizePenalty, monster);
+  const wATK = Math.max(
+    0,
+    getWeaponATK(range, character, sizePenalty, monster)
+  );
   const statusATK = getStatusATK(character);
 
   const extraATK = getExtraATK(character, monster);
@@ -174,20 +177,23 @@ export function getFinalDamage(
   const hardDEF = getHardDEF(monster, character.bypass);
   const softDEF = getSoftDEF(monster);
 
-  return Math.floor(
+  return Math.max(
+    0,
     Math.floor(
       Math.floor(
         Math.floor(
           Math.floor(
             Math.floor(
-              (atk * formula.percent + formula.bonus) * (1 + mods.skill / 100)
+              Math.floor(
+                (atk * formula.percent + formula.bonus) * (1 + mods.skill / 100)
+              ) *
+                (1 + rangeMod / 100)
             ) *
-              (1 + rangeMod / 100)
-          ) *
-            (1 + mods.dmg / 100)
-        ) * hardDEF
-      ) - softDEF
-    ) *
-      (1 + mods.finalDmg / 100)
+              (1 + mods.dmg / 100)
+          ) * hardDEF
+        ) - softDEF
+      ) *
+        (1 + mods.finalDmg / 100)
+    )
   );
 }
