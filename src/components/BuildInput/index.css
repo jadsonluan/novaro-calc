@@ -6,6 +6,9 @@
 
 .build-input .input {
   margin: 0 5px;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
 }
 
 .build-input input {
@@ -15,6 +18,7 @@
   border-radius: 50px;
   color: white;
   background-color: #40444b;
+  width: 140px;
 }
 
 .build-input input:focus {
