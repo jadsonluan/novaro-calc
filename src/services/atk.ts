@@ -137,6 +137,10 @@ function applyCardModifiers(
   return Math.floor(atk * finalModifiers);
 }
 
+function applyModifier(damage: number, mod: number) {
+  return Math.floor(damage * (1 + mod / 100));
+}
+
 function getATK(range: DmgRange, character: Character, monster: Monster) {
   const { masteryATK, buffATK } = character;
 
@@ -177,23 +181,13 @@ export function getFinalDamage(
   const hardDEF = getHardDEF(monster, character.bypass);
   const softDEF = getSoftDEF(monster);
 
-  return Math.max(
-    0,
-    Math.floor(
-      Math.floor(
-        Math.floor(
-          Math.floor(
-            Math.floor(
-              Math.floor(
-                (atk * formula.percent + formula.bonus) * (1 + mods.skill / 100)
-              ) *
-                (1 + rangeMod / 100)
-            ) *
-              (1 + mods.dmg / 100)
-          ) * hardDEF
-        ) - softDEF
-      ) *
-        (1 + mods.finalDmg / 100)
-    )
-  );
+  let finalDmg = atk * formula.percent + formula.bonus;
+  finalDmg = applyModifier(finalDmg, mods.skill);
+  finalDmg = applyModifier(finalDmg, mods.custom);
+  finalDmg = applyModifier(finalDmg, rangeMod);
+  finalDmg = applyModifier(finalDmg, mods.dmg);
+  finalDmg = Math.floor(finalDmg * hardDEF) - softDEF;
+  finalDmg = applyModifier(finalDmg, mods.finalDmg);
+
+  return Math.max(0, finalDmg);
 }

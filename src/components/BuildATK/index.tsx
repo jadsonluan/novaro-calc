@@ -175,6 +175,22 @@ const BuildATK = () => (
           return { ...prev, modifiers: { ...modifiers, dmg: value } };
         }}
       />
+      <BuildCharacterInput
+        label="Final Damage % Bonus"
+        getValue={(character: Character) => character.modifiers.finalDmg}
+        updateValue={(value: number) => (prev: Character) => {
+          const { modifiers } = prev;
+          return { ...prev, modifiers: { ...modifiers, finalDmg: value } };
+        }}
+      />
+      <BuildCharacterInput
+        label="Custom Damage % Bonus"
+        getValue={(character: Character) => character.modifiers.custom}
+        updateValue={(value: number) => (prev: Character) => {
+          const { modifiers } = prev;
+          return { ...prev, modifiers: { ...modifiers, custom: value } };
+        }}
+      />
     </div>
   </div>
 );
