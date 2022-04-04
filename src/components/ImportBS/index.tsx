@@ -107,6 +107,9 @@ const ImportBS = () => {
       >
         <h2>Importing @BS</h2>
         <ol>
+          <li>
+            <b>Make sure the chat is using all horizontal space available</b>
+          </li>
           <li>Type @bs and /savechat ingame</li>
           <li>
             Look for the .txt file that will be located in: NovaRO\Chat. The
