@@ -68,7 +68,7 @@ const ImportBS = () => {
         race: response.raceBonus,
         size: response.sizeBonus,
         class: response.monsterTypeBonus,
-        property: response.propertyBonus,
+        targetProperty: response.propertyBonus,
         skill: response.skillBonus,
       },
     });

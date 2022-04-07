@@ -22,10 +22,11 @@ function getStatusATK(character: Character) {
     ? dex + str / 5
     : str + dex / 5;
 
-  return Math.floor(
+  const baseStatusATK = Math.floor(
     (baseLevel / 4 + mainStatBonus + luk / 3 + bonusStatusATK) *
       propertyModifier
   );
+  return baseStatusATK;
 }
 
 function getRefineBonus(weapon: Weapon) {
@@ -72,8 +73,10 @@ function getWeaponATK(
     overUpgradeATK = 1;
     variance *= -1;
   } else {
-    overUpgradeATK = getMaxOverUpgradeBonus(weapon);
+    overUpgradeATK = Math.max(1, getMaxOverUpgradeBonus(weapon));
   }
+
+  overUpgradeATK = weapon.type === "Bare Hand" ? 0 : overUpgradeATK;
 
   const totalWeaponATK =
     weapon.atk + variance + statBonus + refineATK + overUpgradeATK;
@@ -181,13 +184,17 @@ export function getFinalDamage(
   const hardDEF = getHardDEF(monster, character.bypass);
   const softDEF = getSoftDEF(monster);
 
-  let finalDmg = atk * formula.percent + formula.bonus;
+  console.log(hardDEF);
+
+  let finalDmg = Math.floor(atk * (formula.percent / 100));
   finalDmg = applyModifier(finalDmg, mods.skill);
   finalDmg = applyModifier(finalDmg, mods.custom);
   finalDmg = applyModifier(finalDmg, rangeMod);
   finalDmg = applyModifier(finalDmg, mods.dmg);
   finalDmg = Math.floor(finalDmg * hardDEF) - softDEF;
   finalDmg = applyModifier(finalDmg, mods.finalDmg);
-
-  return Math.max(0, finalDmg);
+  return (
+    Math.max(0, finalDmg) +
+    Math.max(0, applyModifier(formula.bonus, mods.finalDmg))
+  );
 }

@@ -99,6 +99,17 @@ const BuildATK = () => (
         })}
       />
       <BuildCharacterInput
+        label="Element % Bonus"
+        getValue={(character: Character) => character.modifiers.targetProperty}
+        updateValue={(value: number) => (prev: Character) => {
+          const { modifiers } = prev;
+          return {
+            ...prev,
+            modifiers: { ...modifiers, targetProperty: value },
+          };
+        }}
+      />
+      <BuildCharacterInput
         label="Race % Bonus"
         getValue={(character: Character) => character.modifiers.race}
         updateValue={(value: number) => (prev: Character) => {

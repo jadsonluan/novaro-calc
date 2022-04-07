@@ -21,7 +21,17 @@ export const SKILLS: Record<string, Skill> = {
     label: "Auto Attack",
     isMelee: true,
     formula: (_character: Character, _monster: Monster) => ({
-      percent: 1,
+      percent: 100,
+      bonus: 0,
+    }),
+  },
+  TRIPLE_ATTACK: {
+    key: "TRIPLE_ATTACK",
+    name: "Triple Attack",
+    label: "Triple Attack",
+    isMelee: true,
+    formula: (_character: Character, _monster: Monster) => ({
+      percent: 200,
       bonus: 0,
     }),
   },
@@ -33,11 +43,24 @@ export const SKILLS: Record<string, Skill> = {
     formula: (character: Character, monster: Monster) => {
       const baseDamage = (0.3 * getHP(character) + 0.15 * getSP(character)) / 2;
       return {
-        percent: (baseDamage * (character.baseLevel / 100)) / 100,
-        bonus: 5000 + monster.baseLevel * 40,
+        percent: baseDamage * (character.baseLevel / 100),
+        bonus: 5000 + monster.baseLevel * 10,
       };
     },
   },
+  // THIRD_FLAME_BOMB: {
+  //   key: "THIRD_FLAME_BOMB",
+  //   label: "Third Flame Bomb",
+  //   name: "Third Flame Bomb",
+  //   isMelee: true,
+  //   formula: (character: Character, monster: Monster) => {
+  //     const baseDamage = 3250 + 0.2 * getHP(character);
+  //     return {
+  //       percent: baseDamage * (character.baseLevel / 100),
+  //       bonus: 0,
+  //     };
+  //   },
+  // },
 };
 
 export function getSkill(name: string) {

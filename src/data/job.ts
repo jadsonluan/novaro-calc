@@ -2,6 +2,7 @@ export type Job =
   | "Archbishop"
   | "Genetic"
   | "Guillotine Cross"
+  | "Inquisitor"
   | "Kagerou"
   | "Mechanic"
   | "Ministrel"
@@ -25,6 +26,8 @@ export interface BaseStat {
   baseSP: number;
 }
 
+const FOURTH_JOBS: Job[] = ["Inquisitor"];
+
 // TODO: Adicionar baseHP/SP de: Doram, SA, Oboro/Kagerou, Shadow Chaser
 export const JOBS: Record<Job, BaseStat> = {
   Archbishop: {
@@ -38,6 +41,10 @@ export const JOBS: Record<Job, BaseStat> = {
   "Guillotine Cross": {
     baseHP: 25175,
     baseSP: 1140,
+  },
+  Inquisitor: {
+    baseHP: 41335,
+    baseSP: 1340,
   },
   Kagerou: {
     baseHP: 22810,
@@ -111,4 +118,8 @@ export const JOBS: Record<Job, BaseStat> = {
 
 export function getBaseStat(job: Job) {
   return JOBS[job] ?? { baseHP: 1, baseSP: 1 };
+}
+
+export function is4thJob(job: Job) {
+  return FOURTH_JOBS.includes(job);
 }

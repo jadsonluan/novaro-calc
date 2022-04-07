@@ -1,4 +1,4 @@
-import { getBaseStat } from "../data/job";
+import { getBaseStat, is4thJob } from "../data/job";
 import { Character } from "./input";
 
 export function getHP(character: Character) {
@@ -6,10 +6,12 @@ export function getHP(character: Character) {
   const { vit } = stats;
   const { baseHP } = getBaseStat(character.job);
 
-  let finalHP = baseHP * ((1 + vit / 100) * 1.25) + hpInfo.flat;
+  const transBonus = is4thJob(character.job) ? 1 : 1.25;
+
+  let finalHP = baseHP * ((1 + vit / 100) * transBonus) + hpInfo.flat;
   finalHP = finalHP * (1 + hpInfo.percent / 100);
 
-  return Math.floor(finalHP) - 1;
+  return Math.floor(finalHP);
 }
 
 export function getSP(character: Character) {
@@ -17,8 +19,10 @@ export function getSP(character: Character) {
   const { int } = stats;
   const { baseSP } = getBaseStat(character.job);
 
-  let finalSP = baseSP * ((1 + int / 100) * 1.25) + spInfo.flat;
+  const transBonus = is4thJob(character.job) ? 1 : 1.25;
+
+  let finalSP = baseSP * ((1 + int / 100) * transBonus) + spInfo.flat;
   finalSP = finalSP * (1 + spInfo.percent / 100);
 
-  return Math.floor(finalSP) - 1;
+  return Math.floor(finalSP);
 }
