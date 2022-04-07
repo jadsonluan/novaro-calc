@@ -169,6 +169,17 @@ function getHardDEF(monster: Monster, bypass: number) {
   return (finalHardDef + 4000) / (4000 + finalHardDef * 10);
 }
 
+function getDEF(monster: Monster, bypass: number, skill: string) {
+  const hardDEF = getHardDEF(monster, bypass);
+  const softDEF = getSoftDEF(monster);
+
+  if (skill === "CART_CANNON") {
+    return { hardDEF: 1, softDEF: softDEF + hardDEF };
+  }
+
+  return { hardDEF, softDEF };
+}
+
 export function getFinalDamage(
   range: DmgRange,
   character: Character,
@@ -181,10 +192,11 @@ export function getFinalDamage(
 
   const rangeMod = skill.isMelee ? mods.melee : mods.ranged;
   const atk = getATK(range, character, monster);
-  const hardDEF = getHardDEF(monster, character.bypass);
-  const softDEF = getSoftDEF(monster);
-
-  console.log(hardDEF);
+  const { hardDEF, softDEF } = getDEF(
+    monster,
+    character.bypass,
+    character.skill
+  );
 
   let finalDmg = Math.floor(atk * (formula.percent / 100));
   finalDmg = applyModifier(finalDmg, mods.skill);

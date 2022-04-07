@@ -48,6 +48,21 @@ export const SKILLS: Record<string, Skill> = {
       };
     },
   },
+  CART_CANNON: {
+    key: "CART_CANNON",
+    label: "Cart Cannon",
+    name: "Cart Cannon",
+    isMelee: false,
+    formula: (character: Character, monster: Monster) => {
+      // (250 * skillLevel) + (100 * Cart Remodeling skill level)
+      const baseDamage = 1250 + 500;
+      return {
+        percent:
+          (baseDamage + 2 * character.stats.int) * (character.baseLevel / 100),
+        bonus: 0,
+      };
+    },
+  },
   // THIRD_FLAME_BOMB: {
   //   key: "THIRD_FLAME_BOMB",
   //   label: "Third Flame Bomb",
