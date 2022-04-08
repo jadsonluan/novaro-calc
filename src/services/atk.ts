@@ -70,7 +70,7 @@ function getWeaponATK(
   let overUpgradeATK;
 
   if (range === "MIN") {
-    overUpgradeATK = 1;
+    overUpgradeATK = 0;
     variance *= -1;
   } else {
     overUpgradeATK = Math.max(1, getMaxOverUpgradeBonus(weapon));
@@ -90,8 +90,14 @@ function getWeaponATK(
 
 function getExtraATK(character: Character, monster: Monster) {
   const { equipATK, consumableATK, ammoATK, pseudoBuffATK } = character;
+
+  const finalEquipATK = applyModifier(
+    equipATK,
+    character.job === "Star Emperor" ? 0 : 85
+  );
+
   return applyCardModifiers(
-    equipATK + consumableATK + ammoATK + pseudoBuffATK,
+    finalEquipATK + consumableATK + ammoATK + pseudoBuffATK,
     character,
     monster
   );
@@ -152,11 +158,20 @@ function getATK(range: DmgRange, character: Character, monster: Monster) {
     0,
     getWeaponATK(range, character, sizePenalty, monster)
   );
-  const statusATK = getStatusATK(character);
+  const statusATK = applyModifier(
+    getStatusATK(character),
+    character.job === "Star Emperor" ? 0 : 85
+  );
 
   const extraATK = getExtraATK(character, monster);
 
-  return statusATK * 2 + wATK + extraATK + masteryATK + buffATK;
+  return (
+    statusATK * 2 +
+    applyModifier(wATK, character.job === "Star Emperor" ? 0 : 85) +
+    extraATK +
+    applyModifier(masteryATK, character.job === "Star Emperor" ? 0 : 85) +
+    buffATK
+  );
 }
 
 function getSoftDEF(monster: Monster) {

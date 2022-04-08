@@ -63,6 +63,19 @@ export const SKILLS: Record<string, Skill> = {
       };
     },
   },
+  SOLAR_BURST: {
+    key: "SOLAR_BURST",
+    label: "Solar Burst",
+    name: "Solar Burst",
+    isMelee: true,
+    formula: (character: Character, monster: Monster) => {
+      const baseDamage = 3200;
+      return {
+        percent: baseDamage * (character.baseLevel / 100),
+        bonus: 0,
+      };
+    },
+  },
   // THIRD_FLAME_BOMB: {
   //   key: "THIRD_FLAME_BOMB",
   //   label: "Third Flame Bomb",
