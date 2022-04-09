@@ -44,12 +44,14 @@ export interface Modifiers {
   targetProperty: number;
   advancedKatarMastery: number;
   custom: number;
+  critical: number;
 }
 
 export interface Character {
   baseLevel: number;
   job: Job;
   skill: string;
+  crit: boolean;
   stats: Stats;
   hp: HPInfo;
   sp: SPInfo;
@@ -118,6 +120,7 @@ export const character: Character = {
   baseLevel: 200,
   job: "Sura",
   skill: "TIGER_CANNON_COMBO",
+  crit: false,
   stats: {
     dex: 100 + 19,
     str: 120 + 39,
@@ -168,6 +171,7 @@ export const character: Character = {
     targetProperty: 0,
     advancedKatarMastery: 0,
     custom: 0,
+    critical: 0,
   },
 };
 
@@ -199,6 +203,7 @@ export const emptyCharacter: Character = {
   baseLevel: 1,
   job: "Sura",
   skill: "basic_attack",
+  crit: false,
   stats: {
     str: 0,
     agi: 0,
@@ -237,6 +242,7 @@ export const emptyCharacter: Character = {
     skill: 0,
     targetProperty: 0,
     custom: 0,
+    critical: 0,
   },
   shadowWeaponRefine: 0,
   equipATK: 0,

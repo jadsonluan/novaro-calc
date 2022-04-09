@@ -195,6 +195,14 @@ const BuildATK = () => (
         }}
       />
       <BuildCharacterInput
+        label="Critical Damage % Bonus"
+        getValue={(character: Character) => character.modifiers.critical}
+        updateValue={(value: number) => (prev: Character) => {
+          const { modifiers } = prev;
+          return { ...prev, modifiers: { ...modifiers, critical: value } };
+        }}
+      />
+      <BuildCharacterInput
         label="Custom Damage % Bonus"
         getValue={(character: Character) => character.modifiers.custom}
         updateValue={(value: number) => (prev: Character) => {

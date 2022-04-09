@@ -7,6 +7,8 @@ export type DmgRange = "MIN" | "MAX";
 
 const DEX_WEAPONS: WeaponType[] = ["Whip", "Instrument", "Bow", "Gun"];
 
+const BASE_CRITICAL_DAMAGE = 40;
+
 function isDexWeapon(weaponType: WeaponType) {
   return DEX_WEAPONS.includes(weaponType);
 }
@@ -158,8 +160,11 @@ function getATK(range: DmgRange, character: Character, monster: Monster) {
     0,
     getWeaponATK(range, character, sizePenalty, monster)
   );
+
+  const _statusATK = getStatusATK(character);
+
   const statusATK = applyModifier(
-    getStatusATK(character),
+    _statusATK,
     character.job === "Star Emperor" ? 85 : 0
   );
 
@@ -195,6 +200,12 @@ function getDEF(monster: Monster, bypass: number, skill: string) {
   return { hardDEF, softDEF };
 }
 
+function applyCritical(damage: number, character: Character) {
+  let finalDamage = applyModifier(damage, BASE_CRITICAL_DAMAGE);
+  finalDamage = applyModifier(finalDamage, character.modifiers.critical / 2);
+  return finalDamage;
+}
+
 export function getFinalDamage(
   range: DmgRange,
   character: Character,
@@ -220,6 +231,7 @@ export function getFinalDamage(
   finalDmg = applyModifier(finalDmg, mods.dmg);
   finalDmg = Math.floor(finalDmg * hardDEF) - softDEF;
   finalDmg = applyModifier(finalDmg, mods.finalDmg);
+  finalDmg = character.crit ? applyCritical(finalDmg, character) : finalDmg;
   return (
     Math.max(0, finalDmg) +
     Math.max(0, applyModifier(formula.bonus, mods.finalDmg))

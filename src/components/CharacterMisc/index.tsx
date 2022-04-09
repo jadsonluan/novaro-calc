@@ -5,6 +5,8 @@ import WeaponType, { WEAPONS } from "../../data/weapon";
 import { Job, JOBS } from "../../data/job";
 import { ELEMENTS, Element } from "../../data/element";
 import { Skill, SKILLS } from "../../data/skills";
+import { BuildCharacterCheckBox } from "../BuildCheckBox";
+
 const CharacterMisc = () => {
   const weaponOptions: Option[] = WEAPONS.map((weapon) => ({
     label: weapon,
@@ -88,6 +90,14 @@ const CharacterMisc = () => {
               skill: value,
             };
           }}
+        />
+        <BuildCharacterCheckBox
+          label="Critical?"
+          getValue={(character: Character) => character.crit}
+          updateValue={(value: boolean) => (prevState: Character) => ({
+            ...prevState,
+            crit: value,
+          })}
         />
       </div>
     </div>
