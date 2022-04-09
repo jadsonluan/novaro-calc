@@ -1,0 +1,117 @@
+.modal {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  right: auto;
+  bottom: auto;
+  margin-right: -50%;
+  transform: translate(-50%, -50%);
+  background-color: hsl(214, 7%, 19%);
+  color: white;
+  padding: 10px 25px;
+  border-radius: 25px;
+  min-width: 500px;
+}
+
+.modal-overlay {
+  background-color: rgba(0, 0, 0, 0.75);
+  position: fixed;
+  left: 0;
+  top: 0;
+  right: 0;
+  bottom: 0;
+}
+
+.modal .save-area {
+  display: flex;
+  flex-direction: column;
+  margin: 15px 0;
+}
+
+.modal .save-area .build-name-input {
+  display: flex;
+  flex-direction: row;
+  margin-top: 5px;
+}
+
+.modal .save-area .build-name-input input {
+  text-align: center;
+  border: none;
+  padding: 0;
+  color: white;
+  background-color: #40444b;
+  outline: 1px solid #40444b;
+  width: 350px;
+  font-weight: bold;
+}
+
+.modal .save-area .build-name-input button {
+  text-align: center;
+  border: none;
+  padding: 5px 10px;
+  border-top-right-radius: 50px;
+  border-bottom-right-radius: 50px;
+  color: white;
+  background-color: deepskyblue;
+  outline: 1px solid deepskyblue;
+  cursor: pointer;
+  font-weight: bold;
+}
+
+.modal .save-area .build-name-input input:focus {
+  outline: 1px solid deepskyblue;
+  color: deepskyblue;
+}
+
+.modal .save-area .build-name-input button:hover {
+  background-color: white;
+  outline-color: white;
+  color: deepskyblue;
+}
+
+.modal .stored-builds {
+  margin: 10px 0;
+}
+
+.modal .stored-builds .builds {
+  margin-top: 5px;
+  display: flex;
+  flex-direction: column;
+}
+
+.stored-build {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  margin: 2px 0;
+}
+
+.stored-build > div {
+  display: flex;
+  flex-direction: row;
+}
+
+.modal .stored-builds .builds button {
+  text-align: center;
+  border: none;
+  border-radius: 25px;
+  padding: 0 10px;
+  color: white;
+  cursor: pointer;
+  font-weight: bold;
+  margin-right: 10px;
+  display: flex;
+  align-items: center;
+}
+
+.modal .stored-builds .builds .load-button { background-color: deepskyblue; }
+
+.modal .stored-builds .builds .load-button:hover {
+  background-color: white;
+  color: deepskyblue;
+}
+
+.modal .stored-builds .delete-button {
+  background-color: crimson;
+  justify-self: flex-end;
+}

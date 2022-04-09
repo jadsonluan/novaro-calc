@@ -1,13 +1,9 @@
 import "./App.css";
+import BuildStorage from "./components/BuildStorage";
 import ImportBS from "./components/ImportBS";
 import MainPage from "./components/MainPage";
-import { Character, emptyCharacter, emptyMonster, Monster } from "./data/input";
+import { BuildInfo, emptyCharacter, emptyMonster } from "./data/input";
 import { Build, useBuild } from "./hooks/useBuild";
-
-interface BuildInfo {
-  character: Character;
-  monster: Monster;
-}
 
 const INITIAL_BUILD: BuildInfo = {
   character: emptyCharacter,
@@ -34,6 +30,7 @@ function App() {
           <button onClick={() => copy(build2, build1)}>
             Build 1 {"<"} Build 2
           </button>
+          <BuildStorage />
           <button
             onClick={() => {
               copy(INITIAL_BUILD, build1);

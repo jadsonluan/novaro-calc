@@ -248,3 +248,8 @@ export const emptyCharacter: Character = {
   buffATK: 0,
   bypass: 0,
 };
+
+export interface BuildInfo {
+  character: Character;
+  monster: Monster;
+}
