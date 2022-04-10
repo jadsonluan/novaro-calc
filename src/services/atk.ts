@@ -217,7 +217,7 @@ export function getFinalDamage(
   const formula = skill.formula(character, monster);
 
   const rangeMod = skill.isMelee ? mods.melee : mods.ranged;
-  const atk = getATK(range, character, monster);
+  const atk = getATK(character.crit ? "MAX" : range, character, monster);
   const { hardDEF, softDEF } = getDEF(
     monster,
     character.bypass,
