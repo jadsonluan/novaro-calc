@@ -30,7 +30,7 @@ function CheckBox<T extends Character | Monster>(props: CheckBoxProps<T>) {
     <div className="checkbox">
       <input
         type="checkbox"
-        defaultChecked={getValue(obj)}
+        checked={getValue(obj)}
         onChange={(event) => {
           update(updateValue(event.target.checked));
         }}
