@@ -48,6 +48,7 @@ const BuildStorage = () => {
           <div className="builds">
             {builds.map((build, i) => (
               <div key={i} className="stored-build">
+                <span>{build}</span>
                 <div>
                   <button
                     className="load-button"
@@ -58,21 +59,20 @@ const BuildStorage = () => {
                   >
                     Load
                   </button>
-                  <span>{build}</span>
-                </div>
-                <button
-                  className="delete-button"
-                  onClick={() => {
-                    // eslint-disable-next-line no-restricted-globals
-                    const response = confirm(
-                      "Are you sure? After deleting a build, you can't recover it."
-                    );
+                  <button
+                    className="delete-button"
+                    onClick={() => {
+                      // eslint-disable-next-line no-restricted-globals
+                      const response = confirm(
+                        "Are you sure? After deleting a build, you can't recover it."
+                      );
 
-                    if (response) remove(build);
-                  }}
-                >
-                  Delete
-                </button>
+                      if (response) remove(build);
+                    }}
+                  >
+                    Delete
+                  </button>
+                </div>
               </div>
             ))}
           </div>
