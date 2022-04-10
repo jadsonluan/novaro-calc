@@ -1,7 +1,7 @@
 
 .main {
   display: grid;
-  grid-template-columns: min-content 1fr 1fr;
+  grid-template-columns: min-content min-content min-content;
   padding: 15px;
 }
 
