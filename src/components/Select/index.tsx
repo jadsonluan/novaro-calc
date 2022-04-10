@@ -52,7 +52,7 @@ function Select<T extends Character | Monster>(props: SelectProps<T>) {
         update(updateValue(event.currentTarget.value));
       }}
     >
-      {groups && groups.length
+      {groups && groups.length > 0
         ? groups.map((group, i) => {
             const groupOptions = options.filter(
               (option) => option.group === group
