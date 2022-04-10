@@ -70,6 +70,14 @@ export interface Character {
   bypass: number;
 }
 
+export interface Buffs {
+  allSpheres: boolean;
+}
+
+export const emptyBuffs: Buffs = {
+  allSpheres: false,
+};
+
 export type Race =
   | "angel"
   | "brute"
@@ -258,4 +266,11 @@ export const emptyCharacter: Character = {
 export interface BuildInfo {
   character: Character;
   monster: Monster;
+  buffs: Buffs;
 }
+
+export const INITIAL_BUILD: BuildInfo = {
+  character: emptyCharacter,
+  monster: emptyMonster,
+  buffs: emptyBuffs,
+};

@@ -2,17 +2,16 @@ import "./App.css";
 import BuildStorage from "./components/BuildStorage";
 import ImportBS from "./components/ImportBS";
 import MainPage from "./components/MainPage";
-import { BuildInfo, emptyCharacter, emptyMonster } from "./data/input";
+import { INITIAL_BUILD } from "./data/input";
 import { Build, useBuild } from "./hooks/useBuild";
 
-const INITIAL_BUILD: BuildInfo = {
-  character: emptyCharacter,
-  monster: emptyMonster,
-};
-
-const copy = (from: Omit<Build, "setCharacter" | "setMonster">, to: Build) => {
+const copy = (
+  from: Omit<Build, "setCharacter" | "setMonster" | "setBuffs">,
+  to: Build
+) => {
   to.setCharacter({ ...from.character });
   to.setMonster({ ...from.monster });
+  to.setBuffs({ ...from.buffs });
 };
 
 function App() {

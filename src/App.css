@@ -1,5 +1,7 @@
 .app {
   color: white;
+  width: max-content;
+  height: max-content;
 }
 
 h1 {

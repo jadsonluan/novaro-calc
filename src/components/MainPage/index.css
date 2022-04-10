@@ -11,11 +11,11 @@
   margin: 0 15px;
 }
 
-.first-col > :not(:last-child), .second-col > :not(:last-child) {
+.first-col > :not(:last-child), .second-col > :not(:last-child), .third-col > :not(:last-child) {
   margin-bottom: 15px;
 }
 
-.second-col .third-row {
+.second-col .third-col {
   padding: 0 20px;
   display: flex;
   flex-direction: row;

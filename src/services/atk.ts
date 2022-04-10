@@ -1,8 +1,15 @@
-import { Character, Monster, Size, Stats, Weapon } from "../data/input";
+import {
+  BuildInfo,
+  Character,
+  Monster,
+  Size,
+  Stats,
+  Weapon,
+} from "../data/input";
 import WeaponType, { WEAPON_PENALTIES } from "../data/weapon";
 import { getPropertyModifier } from "../data/element";
 import { getSkill } from "../data/skills";
-
+import { applyBuffs } from "../data/buffs";
 export type DmgRange = "MIN" | "MAX";
 
 const DEX_WEAPONS: WeaponType[] = ["Whip", "Instrument", "Bow", "Gun"];
@@ -206,14 +213,11 @@ function applyCritical(damage: number, character: Character) {
   return finalDamage;
 }
 
-export function getFinalDamage(
-  range: DmgRange,
-  character: Character,
-  monster: Monster
-) {
+export function getFinalDamage(range: DmgRange, build: BuildInfo) {
+  const { character: rawCharacter, monster, buffs } = build;
+  const character = applyBuffs(rawCharacter, buffs);
+  const skill = getSkill(character.skill);
   const { modifiers: mods } = character;
-  let skill = getSkill(character.skill);
-
   const formula = skill.formula(character, monster);
 
   const rangeMod = skill.isMelee ? mods.melee : mods.ranged;

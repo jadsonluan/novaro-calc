@@ -1,21 +1,32 @@
+import { BuildInfo } from "../../data/input";
 import { getHP, getSP } from "../../data/stats";
-import { useBuild } from "../../hooks/useBuild";
+import { Build, useBuild } from "../../hooks/useBuild";
 import { getFinalDamage } from "../../services/atk";
 import BuildATK from "../BuildATK";
+import BuildBuffs from "../BuildBuffs";
 import BuildDiff, { BuildDiffItem } from "../BuildDiff";
 import BuildStats from "../BuildStats";
 import CharacterMisc from "../CharacterMisc";
 import MonsterInfo from "../MonsterInfo";
 import "./index.css";
 
+const getBuildInfo = ({ character, monster, buffs }: Build) => ({
+  character,
+  monster,
+  buffs,
+});
+
 const MainPage = () => {
   const { build1, build2 } = useBuild();
 
-  const minDamage1 = getFinalDamage("MIN", build1.character, build1.monster);
-  const maxDamage1 = getFinalDamage("MAX", build1.character, build1.monster);
+  const buildInfo1: BuildInfo = getBuildInfo(build1);
+  const buildInfo2: BuildInfo = getBuildInfo(build2);
 
-  const minDamage2 = getFinalDamage("MIN", build2.character, build2.monster);
-  const maxDamage2 = getFinalDamage("MAX", build2.character, build2.monster);
+  const minDamage1 = getFinalDamage("MIN", buildInfo1);
+  const maxDamage1 = getFinalDamage("MAX", buildInfo1);
+
+  const minDamage2 = getFinalDamage("MIN", buildInfo2);
+  const maxDamage2 = getFinalDamage("MAX", buildInfo2);
 
   const dmgItems: BuildDiffItem[] = [
     { label: "Min.", value1: minDamage1, value2: minDamage2 },
@@ -45,8 +56,9 @@ const MainPage = () => {
         <BuildStats />
         <CharacterMisc />
       </div>
-      <div className="third-row">
+      <div className="third-col">
         <MonsterInfo />
+        <BuildBuffs />
       </div>
     </div>
   );

@@ -1,8 +1,8 @@
-import { Character, Monster } from "../../data/input";
+import { Buffs, Character, Monster } from "../../data/input";
 import { Build, useBuild } from "../../hooks/useBuild";
 import "./index.css";
 
-export interface BuildCheckBoxProps<T extends Character | Monster> {
+export interface BuildCheckBoxProps<T extends Character | Monster | Buffs> {
   label: string;
   getValue: (target: T) => boolean;
   updateValue: (value: boolean) => (prevState: T) => T;
@@ -10,7 +10,7 @@ export interface BuildCheckBoxProps<T extends Character | Monster> {
   setTarget: (build: Build) => (target: T | ((prevState: T) => T)) => void;
 }
 
-interface CheckBoxProps<T extends Character | Monster>
+interface CheckBoxProps<T extends Character | Monster | Buffs>
   extends Omit<BuildCheckBoxProps<T>, "label"> {
   build: Build;
 }
@@ -20,7 +20,12 @@ interface BuildCharacterCheckBoxProps<T extends Character>
 interface BuildMonsterCheckBoxProps<T extends Monster>
   extends Omit<BuildCheckBoxProps<T>, "target" | "setTarget"> {}
 
-function CheckBox<T extends Character | Monster>(props: CheckBoxProps<T>) {
+interface BuildBuffCheckBoxProps<T extends Buffs>
+  extends Omit<BuildCheckBoxProps<T>, "target" | "setTarget"> {}
+
+function CheckBox<T extends Character | Monster | Buffs>(
+  props: CheckBoxProps<T>
+) {
   const { getValue, updateValue, target, setTarget, build } = props;
 
   const obj: T = target(build);
@@ -39,7 +44,7 @@ function CheckBox<T extends Character | Monster>(props: CheckBoxProps<T>) {
   );
 }
 
-function BuildCheckBox<T extends Character | Monster>(
+function BuildCheckBox<T extends Character | Monster | Buffs>(
   props: BuildCheckBoxProps<T>
 ) {
   const { label } = props;
@@ -75,6 +80,16 @@ export const BuildMonsterCheckBox = (
       {...props}
       target={(build: Build) => build.monster}
       setTarget={(build: Build) => build.setMonster}
+    />
+  );
+};
+
+export const BuildBuffCheckBox = (props: BuildBuffCheckBoxProps<Buffs>) => {
+  return (
+    <BuildCheckBox<Buffs>
+      {...props}
+      target={(build: Build) => build.buffs}
+      setTarget={(build: Build) => build.setBuffs}
     />
   );
 };
