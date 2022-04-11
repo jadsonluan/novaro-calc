@@ -10,10 +10,11 @@
   background-color: #40444b;
   color: white;
   margin: 2.5px 5px;
+  text-align-last: center;
+  text-transform: capitalize;
 }
 
-.select select, .select select option > * {
-  text-align: center;
-  text-transform: capitalize;
+.select select optgroup option {
+  text-align-last: left;
 }
 

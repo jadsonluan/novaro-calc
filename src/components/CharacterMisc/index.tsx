@@ -2,7 +2,7 @@ import "./index.css";
 import { Character } from "../../data/input";
 import { BuildCharacterSelect, Option } from "../Select";
 import WeaponType, { WEAPONS } from "../../data/weapon";
-import { Job, JOBS } from "../../data/job";
+import { getJobsName, Job, JOBS } from "../../data/job";
 import { ELEMENTS, Element } from "../../data/element";
 import { Skill, SKILLS } from "../../data/skills";
 import { BuildCharacterCheckBox } from "../BuildCheckBox";
@@ -26,6 +26,7 @@ const CharacterMisc = () => {
   const skillOptions: Option[] = Object.values(SKILLS).map((skill: Skill) => ({
     label: skill.label,
     value: skill.key,
+    group: skill.job
   }));
 
   return (
@@ -83,6 +84,7 @@ const CharacterMisc = () => {
         <BuildCharacterSelect
           label="Skill"
           options={skillOptions}
+          groups={["All", ...getJobsName()]}
           getValue={(character: Character) => character.skill}
           updateValue={(value: string) => (prevState: Character) => {
             return {

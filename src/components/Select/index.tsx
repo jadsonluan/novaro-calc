@@ -6,6 +6,8 @@ import "./index.css";
 export interface Option {
   value: string;
   label: string;
+  group?: string;
+  disabled?: boolean;
 }
 
 interface BuildMonsterSelectProps<T extends Monster>
@@ -15,6 +17,7 @@ interface BuildSelectCharacterProps<T extends Character>
 
 export interface BuildSelectProps<T extends Character | Monster> {
   options: Option[];
+  groups?: string[];
   label: string;
   getValue: (target: T) => string | number;
   updateValue: (value: string) => (prevState: T) => T;
@@ -28,10 +31,19 @@ interface SelectProps<T extends Character | Monster>
 }
 
 function Select<T extends Character | Monster>(props: SelectProps<T>) {
-  const { getValue, updateValue, target, setTarget, options, build } = props;
+  const { getValue, updateValue, target, setTarget, options, groups, build } = props;
 
   const obj: T = target(build);
   const update = setTarget(build);
+
+  const SelectOptions = (opts: Option[]) =>
+    opts.map((option: Option, i: number) => {
+      return (
+        <option key={i} value={option.value} disabled={option.disabled}>
+          {capitalize(option.label)}
+        </option>
+      );
+    });
 
   return (
     <select
@@ -40,17 +52,19 @@ function Select<T extends Character | Monster>(props: SelectProps<T>) {
         update(updateValue(event.currentTarget.value));
       }}
     >
-      {options.map((option, i) => {
-        return (
-          <option
-            key={i}
-            value={option.value}
-            selected={option.value === getValue(obj)}
-          >
-            {capitalize(option.label)}
-          </option>
-        );
-      })}
+      {groups && groups.length > 0
+        ? groups.map((group, i) => {
+            const groupOptions = options.filter(
+              (option) => option.group === group
+            );
+
+            return groupOptions.length > 0 && (
+              <optgroup key={i} label={capitalize(group)}>
+                {SelectOptions(groupOptions)}
+              </optgroup>
+            );
+          })
+        : SelectOptions(options)}
     </select>
   );
 }

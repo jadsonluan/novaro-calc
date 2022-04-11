@@ -116,6 +116,10 @@ export const JOBS: Record<Job, BaseStat> = {
   },
 };
 
+export function getJobsName() {
+  return Object.getOwnPropertyNames(JOBS)
+}
+
 export function getBaseStat(job: Job) {
   return JOBS[job] ?? { baseHP: 1, baseSP: 1 };
 }
