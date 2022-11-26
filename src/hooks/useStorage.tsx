@@ -7,6 +7,8 @@ interface BuildData {
   build2: BuildInfo;
 }
 
+const NOVARO_CALC_PREFIX = "novaro-calc-";
+
 const useStorage = () => {
   const { build1, build2 } = useBuild();
   const [builds, setBuilds] = useState<string[]>([]);
@@ -17,8 +19,8 @@ const useStorage = () => {
 
     for (let i = 0; i < localStorage.length; i++) {
       key = localStorage.key(i);
-      if (!key) continue;
-      result.push(key);
+      if (!key || !key.includes(NOVARO_CALC_PREFIX)) continue;
+      result.push(key.split(NOVARO_CALC_PREFIX)[1]);
     }
 
     setBuilds(result.sort());
@@ -30,7 +32,7 @@ const useStorage = () => {
 
   const load = useCallback(
     (key: string) => {
-      const rawData = localStorage.getItem(key);
+      const rawData = localStorage.getItem(`${NOVARO_CALC_PREFIX}${key}`);
 
       if (!rawData) return;
 
@@ -48,7 +50,7 @@ const useStorage = () => {
     (key: string) => {
       const data = { build1, build2 };
       const parsedData = JSON.stringify(data);
-      localStorage.setItem(key, parsedData);
+      localStorage.setItem(`${NOVARO_CALC_PREFIX}${key}`, parsedData);
       updateBuilds();
     },
     [updateBuilds, build1, build2]
@@ -56,7 +58,7 @@ const useStorage = () => {
 
   const remove = useCallback(
     (key: string) => {
-      localStorage.removeItem(key);
+      localStorage.removeItem(`${NOVARO_CALC_PREFIX}${key}`);
       updateBuilds();
     },
     [updateBuilds]

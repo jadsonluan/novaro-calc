@@ -35,7 +35,7 @@ const BuildDiff = (props: BuildDiffProps) => {
           diff = Number.isNaN(diff) ? 0 : diff;
 
           return (
-            <div>
+            <div key={label + '-' + i}>
               <div>{description}</div>
               <div>{value1.toLocaleString()}</div>
               <div>{value2.toLocaleString()}</div>
