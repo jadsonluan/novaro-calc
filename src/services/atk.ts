@@ -7,7 +7,7 @@ import {
   Weapon,
 } from "../data/input";
 import WeaponType, { WEAPON_PENALTIES } from "../data/weapon";
-import { getPropertyModifier } from "../data/element";
+import { ELEMENTS, getPropertyModifier } from "../data/element";
 import { getSkill } from "../data/skills";
 import { applyBuffs } from "../data/buffs";
 export type DmgRange = "MIN" | "MAX";
@@ -87,8 +87,10 @@ function getWeaponATK(
 
   overUpgradeATK = weapon.type === "Bare Hand" ? 0 : overUpgradeATK;
 
-  const totalWeaponATK =
+  let totalWeaponATK =
     weapon.atk + variance + statBonus + refineATK + overUpgradeATK;
+
+  totalWeaponATK = character.buffs.includes('earthCharm') ? totalWeaponATK * 2.5 : totalWeaponATK;
 
   return applyCardModifiers(
     Math.floor(totalWeaponATK * sizePenalty),
@@ -126,7 +128,7 @@ function applyCardModifiers(
   character: Character,
   monster: Monster
 ) {
-  const {
+  let {
     race,
     size,
     targetProperty,
@@ -141,6 +143,8 @@ function applyCardModifiers(
     monster.element,
     Number(monster.elementLevel)
   );
+
+  targetProperty = character.buffs.includes('earthCharm') && monster.element === ELEMENTS[4] ? targetProperty + 30 : targetProperty
 
   let finalModifiers = 1000;
   finalModifiers *= 1 + race / 100;
@@ -162,7 +166,7 @@ function applyModifier(damage: number, mod: number) {
 function getATK(range: DmgRange, character: Character, monster: Monster) {
   const { masteryATK, buffATK } = character;
 
-  const sizePenalty = getSizePenalty(character.weapon.type, monster.size);
+  const sizePenalty = !character.ignorePenalty ? getSizePenalty(character.weapon.type, monster.size) : 1;
   const wATK = Math.max(
     0,
     getWeaponATK(range, character, sizePenalty, monster)
@@ -218,7 +222,7 @@ export function getFinalDamage(range: DmgRange, build: BuildInfo) {
   const character = applyBuffs(rawCharacter, buffs);
   const skill = getSkill(character.skill);
   const { modifiers: mods } = character;
-  const formula = skill.formula(character, monster);
+  const formula = skill.formula(character, monster, build.buffs);
 
   const rangeMod = skill.isMelee ? mods.melee : mods.ranged;
   const atk = getATK(character.crit ? "MAX" : range, character, monster);

@@ -7,7 +7,13 @@ const BUFF_EFFECTS: Record<keyof Buffs, BuffEffect> = {
   allSpheres: (character: Character) => {
     const { masteryATK } = character;
     const ATK_PER_SPHERE = 3;
-    return { ...character, masteryATK: masteryATK + 15 * ATK_PER_SPHERE };
+    return { ...character, masteryATK: masteryATK + 15 * ATK_PER_SPHERE , buffs: [...character.buffs, "allSpheres"]};
+  },
+  shadowWarrior: (character: Character) => {
+    return { ...character, buffs: [...character.buffs, "shadowWarrior"] };
+  },
+  earthCharm: (character: Character) => {
+    return { ...character, buffs: [...character.buffs, "earthCharm"] };
   },
 };
 

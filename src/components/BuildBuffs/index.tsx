@@ -19,6 +19,22 @@ const BuildBuffs = () => {
             allSpheres: value,
           })}
         />
+        <BuildBuffCheckBox
+          label="Shadow Warrior"
+          getValue={(buffs: Buffs) => buffs.shadowWarrior}
+          updateValue={(value: boolean) => (prevState: Buffs) => ({
+            ...prevState,
+            shadowWarrior: value,
+          })}
+        />
+        <BuildBuffCheckBox
+          label="Earth Charm"
+          getValue={(buffs: Buffs) => buffs.earthCharm}
+          updateValue={(value: boolean) => (prevState: Buffs) => ({
+            ...prevState,
+            earthCharm: value,
+          })}
+        />
       </div>
     </div>
   );

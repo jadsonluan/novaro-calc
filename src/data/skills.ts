@@ -1,4 +1,4 @@
-import { Character, Monster } from "./input";
+import { Buffs, Character, Monster } from "./input";
 import { Job } from "./job";
 import { getHP, getSP } from "./stats";
 
@@ -13,10 +13,10 @@ export interface Skill {
   key: string;
   job: Job | "All";
   isMelee: boolean;
-  formula: (character: Character, monster: Monster) => FormulaReturn;
+  formula: (character: Character, monster: Monster, buffs: Buffs) => FormulaReturn;
 }
 
-export const SKILLS: Record<string, Skill> = {
+const allSkills: Record<string, Skill> = {
   AUTO_ATTACK: {
     key: "AUTO_ATTACK",
     name: "Auto Attack",
@@ -28,6 +28,9 @@ export const SKILLS: Record<string, Skill> = {
       bonus: 0,
     }),
   },
+}
+
+const suraSkills: Record<string, Skill> = {
   TRIPLE_ATTACK: {
     key: "TRIPLE_ATTACK",
     name: "Triple Attack",
@@ -67,6 +70,9 @@ export const SKILLS: Record<string, Skill> = {
   //     };
   //   },
   // },
+}
+
+const geneticSkills: Record<string, Skill> = {
   CART_CANNON: {
     key: "CART_CANNON",
     label: "Cart Cannon",
@@ -83,6 +89,9 @@ export const SKILLS: Record<string, Skill> = {
       };
     },
   },
+}
+
+const starEmperorSkills: Record<string, Skill> = {
   SOLAR_BURST: {
     key: "SOLAR_BURST",
     label: "Solar Burst",
@@ -97,6 +106,31 @@ export const SKILLS: Record<string, Skill> = {
       };
     },
   },
+}
+
+const kagerouOboroSkills: Record<string, Skill> = {
+  CROSS_SLASH: {
+    key: "CROSS_SLASH",
+    label: "Cross Slash",
+    name: "Cross Slash",
+    isMelee: false,
+    job: "Kagerou",
+    formula: (character: Character, monster: Monster, buffs: Buffs) => {
+      const baseDamage = 2000;
+      return {
+        percent: baseDamage * (character.baseLevel / 120) * (buffs.shadowWarrior ? 1.2 : 1),
+        bonus: 0,
+      };
+    }
+  },
+}
+
+export const SKILLS: Record<string, Skill> = {
+  ...allSkills,
+  ...suraSkills,
+  ...geneticSkills,
+  ...starEmperorSkills,
+  ...kagerouOboroSkills,
 };
 
 export function getSkill(name: string) {

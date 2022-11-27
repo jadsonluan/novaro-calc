@@ -101,6 +101,14 @@ const CharacterMisc = () => {
             crit: value,
           })}
         />
+        <BuildCharacterCheckBox
+          label="No Penalty?"
+          getValue={(character: Character) => character.ignorePenalty}
+          updateValue={(value: boolean) => (prevState: Character) => ({
+            ...prevState,
+            ignorePenalty: value,
+          })}
+        />
       </div>
     </div>
   );

@@ -1,6 +1,6 @@
 import { createContext, useContext, useState } from "react";
 import {
-  character as initialCharacter,
+  emptyCharacter as initialCharacter,
   emptyMonster as initialMonster,
   emptyBuffs as initialBuffs,
   Character,

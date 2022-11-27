@@ -1,5 +1,5 @@
 import { useCallback, useEffect, useState } from "react";
-import { BuildInfo } from "../data/input";
+import { BuildInfo, INITIAL_BUILD } from "../data/input";
 import { useBuild } from "./useBuild";
 
 interface BuildData {
@@ -38,10 +38,10 @@ const useStorage = () => {
 
       const data: BuildData = JSON.parse(rawData);
 
-      build1.setCharacter(data.build1.character);
-      build1.setMonster(data.build1.monster);
-      build2.setCharacter(data.build2.character);
-      build2.setMonster(data.build2.monster);
+      build1.setCharacter({...INITIAL_BUILD.character, ...data.build1.character});
+      build1.setMonster({...INITIAL_BUILD.monster, ...data.build1.monster});
+      build2.setCharacter({...INITIAL_BUILD.character, ...data.build2.character});
+      build2.setMonster({...INITIAL_BUILD.monster, ...data.build2.monster});
     },
     [build1, build2]
   );
