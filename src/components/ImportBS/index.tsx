@@ -105,6 +105,7 @@ const ImportBS = () => {
         contentLabel="Example Modal"
         className="modal"
         overlayClassName="modal-overlay"
+        ariaHideApp={false}
       >
         <h2>Importing @BS</h2>
         <ol>

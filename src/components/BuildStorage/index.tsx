@@ -27,6 +27,7 @@ const BuildStorage = () => {
         contentLabel="Example Modal"
         className="modal"
         overlayClassName="modal-overlay"
+        ariaHideApp={false}
       >
         <h1>Build Storage</h1>
 
