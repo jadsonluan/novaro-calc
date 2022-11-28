@@ -44,6 +44,9 @@ const BUFF_EFFECTS: Record<keyof Buffs, BuffEffect> = {
       luk: stats.luk + 5,
     }, buffs: [...character.buffs, "trueSight"] };
   },
+  fearBreeze: (character: Character) => {
+    return { ...character, buffs: [...character.buffs, "fearBreeze"] };
+  },
   unlimit: (character: Character) => {
     const { modifiers } = character;
     const UNLIMIT_INCREASE = 250;

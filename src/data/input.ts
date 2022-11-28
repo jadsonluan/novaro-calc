@@ -78,6 +78,7 @@ export interface Buffs {
   earthCharm: boolean;
   trueSight: boolean;
   unlimit: boolean;
+  fearBreeze: boolean;
 }
 
 export const emptyBuffs: Buffs = {
@@ -86,6 +87,7 @@ export const emptyBuffs: Buffs = {
   earthCharm: false,
   trueSight: false,
   unlimit: false,
+  fearBreeze: false,
 };
 
 export type Race =

@@ -28,6 +28,14 @@ const BuildBuffs = () => {
           })}
         />
         <BuildBuffCheckBox
+          label="Fear Breeze"
+          getValue={(buffs: Buffs) => buffs.fearBreeze}
+          updateValue={(value: boolean) => (prevState: Buffs) => ({
+            ...prevState,
+            fearBreeze: value,
+          })}
+        />
+        <BuildBuffCheckBox
           label="Unlimit"
           getValue={(buffs: Buffs) => buffs.unlimit}
           updateValue={(value: boolean) => (prevState: Buffs) => ({
