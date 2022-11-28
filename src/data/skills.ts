@@ -91,6 +91,23 @@ const geneticSkills: Record<string, Skill> = {
   },
 }
 
+const rangerSkills: Record<string, Skill> = {
+  FOCUSED_ARROW_STRIKE: {
+    key: "FOCUSED_ARROW_STRIKE",
+    label: "Focused Arrow Strike",
+    name: "Focused Arrow Strike",
+    isMelee: false,
+    job: "Ranger",
+    formula: (character: Character, monster: Monster, buffs: Buffs) => {
+      const baseDamage = 1800;
+      return {
+        percent: baseDamage * (character.baseLevel / 100),
+        bonus: 0,
+      };
+    }
+  },
+}
+
 const starEmperorSkills: Record<string, Skill> = {
   SOLAR_BURST: {
     key: "SOLAR_BURST",
@@ -129,6 +146,7 @@ export const SKILLS: Record<string, Skill> = {
   ...allSkills,
   ...suraSkills,
   ...geneticSkills,
+  ...rangerSkills,
   ...starEmperorSkills,
   ...kagerouOboroSkills,
 };
