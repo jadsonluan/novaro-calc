@@ -70,6 +70,7 @@ const ImportBS = () => {
         class: response.monsterTypeBonus,
         targetProperty: response.propertyBonus,
         skill: response.skillBonus,
+        critical: response.critical,
       },
     });
 

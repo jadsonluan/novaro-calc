@@ -56,7 +56,7 @@ function getBonusFromSection(
   const bonuses: Record<string, number> = {};
   section.forEach((line) => {
     const [key, value] = line.trim().split(delim);
-    bonuses[key.toLowerCase()] = Number(value.slice(0, -1));
+    bonuses[key.toLowerCase()] = value ? Number(value.slice(0, -1)) : 0;
   });
 
   return bonuses[search] ?? 0;
@@ -142,6 +142,13 @@ function getRangeBonuses(sections: Record<string, string[]>) {
   return { melee: melee ?? 0, ranged: ranged ?? 0 };
 }
 
+function getCriticalDamageBonuses(sections: Record<string, string[]>) {
+  const section = sections["Critical Stats"];
+  if (!section) return 0;
+
+  return getBonusFromSection(section, "Critical Damage 40%", " + ");
+}
+
 function getHPSP(sections: Record<string, string[]>) {
   const section = sections["HP and SP bonuses"];
 
@@ -195,6 +202,7 @@ export function formatBattleStats(
   const bypass = getBypass(sections, monsterInfo.race, monsterInfo.monsterType);
   const skillBonus = getSkillBonus(sections, skill);
   const { melee, ranged } = getRangeBonuses(sections);
+  const critical = getCriticalDamageBonuses(sections);
   const { hp, sp } = getHPSP(sections);
 
   return {
@@ -209,6 +217,7 @@ export function formatBattleStats(
     skillBonus,
     melee,
     ranged,
+    critical,
     hp,
     sp,
   };
