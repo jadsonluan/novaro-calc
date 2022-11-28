@@ -79,6 +79,8 @@ export interface Buffs {
   trueSight: boolean;
   unlimit: boolean;
   fearBreeze: boolean;
+  enchantDeadlyPoison: boolean;
+  pyrexia: boolean;
 }
 
 export const emptyBuffs: Buffs = {
@@ -88,6 +90,8 @@ export const emptyBuffs: Buffs = {
   trueSight: false,
   unlimit: false,
   fearBreeze: false,
+  enchantDeadlyPoison: false,
+  pyrexia: false,
 };
 
 export type Race =

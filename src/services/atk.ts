@@ -90,7 +90,8 @@ function getWeaponATK(
   let totalWeaponATK =
     weapon.atk + variance + statBonus + refineATK + overUpgradeATK;
 
-  totalWeaponATK = character.buffs.includes('earthCharm') ? totalWeaponATK * 2.5 : totalWeaponATK;
+  totalWeaponATK = applyModifier(totalWeaponATK, character.buffs.includes('enchantDeadlyPoison') ? 400 : 0);
+  totalWeaponATK = applyModifier(totalWeaponATK, character.buffs.includes('earthCharm') ? 150 : 0);
 
   return applyCardModifiers(
     Math.floor(totalWeaponATK * sizePenalty),
@@ -100,18 +101,22 @@ function getWeaponATK(
 }
 
 function getExtraATK(character: Character, monster: Monster) {
-  const { equipATK, consumableATK, ammoATK, pseudoBuffATK } = character;
+  let { equipATK, consumableATK, ammoATK, pseudoBuffATK } = character;
 
-  const finalEquipATK = applyModifier(
+  equipATK = applyModifier(
     equipATK,
     character.job === "Star Emperor" ? 85 : 0
   );
 
-  return applyCardModifiers(
-    finalEquipATK + consumableATK + ammoATK + pseudoBuffATK,
+  let extraATK = applyCardModifiers(
+    equipATK + consumableATK + ammoATK + pseudoBuffATK,
     character,
     monster
   );
+
+  extraATK = applyModifier(extraATK, character.buffs.includes('enchantDeadlyPoison') ? 300 : 0);
+
+  return extraATK;
 }
 
 function getSizePenalty(weaponType: WeaponType, monsterSize: Size) {

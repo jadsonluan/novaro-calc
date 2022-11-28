@@ -5,6 +5,55 @@ import { Buffs, Character, Monster } from "./input";
 type BuffEffect = (character: Character, monster: Monster) => Character;
 
 const BUFF_EFFECTS: Record<keyof Buffs, BuffEffect> = {
+  // Thief
+  enchantDeadlyPoison: (character: Character) => {
+    return { ...character, buffs: [...character.buffs, "enchantDeadlyPoison"] };
+  },
+  pyrexia: (character: Character) => {
+    const { modifiers } = character;
+    const PYREXIA_MELEE_MODIFIER = 5;
+    const PYREXIA_CRITICAL_MODIFIER = 15;
+    return {
+      ...character,
+      modifiers: {
+        ...modifiers,
+        melee: modifiers.melee + PYREXIA_MELEE_MODIFIER,
+        critical: modifiers.critical + PYREXIA_CRITICAL_MODIFIER,
+      },
+      buffs: [...character.buffs, "pyrexia"],
+    };
+  },
+  // Archer
+  trueSight: (character: Character) => {
+    const { stats } = character;
+    return {
+      ...character,
+      stats: {
+        str: stats.str + 5,
+        agi: stats.agi + 5,
+        vit: stats.vit + 5,
+        int: stats.int + 5,
+        dex: stats.dex + 5,
+        luk: stats.luk + 5,
+      },
+      buffs: [...character.buffs, "trueSight"],
+    };
+  },
+  fearBreeze: (character: Character) => {
+    return { ...character, buffs: [...character.buffs, "fearBreeze"] };
+  },
+  unlimit: (character: Character) => {
+    const { modifiers } = character;
+    const UNLIMIT_INCREASE = 250;
+    return {
+      ...character,
+      modifiers: {
+        ...modifiers,
+        finalDmg: modifiers.finalDmg + UNLIMIT_INCREASE,
+      },
+      buffs: [...character.buffs, "unlimit"],
+    };
+  },
   allSpheres: (character: Character) => {
     const { masteryATK } = character;
     const ATK_PER_SPHERE = 3;
@@ -33,33 +82,6 @@ const BUFF_EFFECTS: Record<keyof Buffs, BuffEffect> = {
       buffs: [...character.buffs, "earthCharm"],
     };
   },
-  trueSight: (character: Character) => {
-    const { stats } = character;
-    return { ...character, stats: {
-      str: stats.str + 5,
-      agi: stats.agi + 5,
-      vit: stats.vit + 5,
-      int: stats.int + 5,
-      dex: stats.dex + 5,
-      luk: stats.luk + 5,
-    }, buffs: [...character.buffs, "trueSight"] };
-  },
-  fearBreeze: (character: Character) => {
-    return { ...character, buffs: [...character.buffs, "fearBreeze"] };
-  },
-  unlimit: (character: Character) => {
-    const { modifiers } = character;
-    const UNLIMIT_INCREASE = 250;
-    return {
-      ...character,
-      modifiers: {
-        ...modifiers,
-        finalDmg: modifiers.finalDmg + UNLIMIT_INCREASE,
-      },
-      buffs: [...character.buffs, "unlimit"],
-    };
-  },
-
 };
 
 export function applyBuffs(
