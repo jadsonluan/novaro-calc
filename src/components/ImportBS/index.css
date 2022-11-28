@@ -42,6 +42,9 @@
   margin-top: 5px;
   min-height: 150px;
   resize: none;
+  background-color: #40444b;
+  color: white;
+  border-radius: 10px;
 }
 
 .modal .buttons {
