@@ -130,21 +130,9 @@ export interface Monster {
   type: MonsterType;
 }
 
-export const monster: Monster = {
-  baseLevel: 10,
-  VIT: 1,
-  hardDEF: 0,
-  hardDEFDebuff: 0,
-  element: "Holy",
-  elementLevel: "1",
-  race: "formless",
-  size: "small",
-  type: "boss",
-};
-
 export const emptyMonster: Monster = {
   baseLevel: 1,
-  VIT: 1,
+  VIT: 0,
   hardDEF: 0,
   hardDEFDebuff: 0,
   element: "Neutral",
@@ -156,7 +144,7 @@ export const emptyMonster: Monster = {
 
 export const emptyCharacter: Character = {
   baseLevel: 1,
-  job: "Sura",
+  job: "Archbishop",
   skill: "basic_attack",
   crit: false,
   ignorePenalty: false,

@@ -59,6 +59,7 @@ const MonsterInfo = () => {
               ...prev,
               baseLevel: value,
             })}
+            min={1}
           />
 
           <BuildMonsterInput

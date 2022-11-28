@@ -17,6 +17,8 @@ const BuildStats = () => (
           ...prev,
           baseLevel: value,
         })}
+        min={1}
+        max={200}
       />
       <BuildCharacterInput
         label="STR"

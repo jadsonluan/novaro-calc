@@ -9,6 +9,8 @@ export interface BuildInputProps<T extends Character | Monster> {
   updateValue: (value: number) => (prevState: T) => T;
   target: (build: Build) => T;
   setTarget: (build: Build) => (target: T | ((prevState: T) => T)) => void;
+  min?: number;
+  max?: number;
 }
 interface InputProps<T extends Character | Monster>
   extends Omit<BuildInputProps<T>, "label"> {
@@ -20,9 +22,7 @@ interface BuildMonsterInputProps<T extends Monster>
 interface BuildCharacterInputProps<T extends Character>
   extends Omit<BuildInputProps<T>, "target" | "setTarget"> {}
 
-function Input<T extends Character | Monster>(props: InputProps<T>) {
-  const { getValue, updateValue, target, setTarget, build } = props;
-
+function Input<T extends Character | Monster>({ getValue, updateValue, target, setTarget, build, min = 0, max }: InputProps<T>) {
   const obj = target(build);
   const update = setTarget(build);
 
@@ -37,15 +37,23 @@ function Input<T extends Character | Monster>(props: InputProps<T>) {
           try {
             parsedValue = evaluate(event.target.value);
             parsedValue = Number(parsedValue);
+
+            if (min !== undefined) {
+              parsedValue = Math.max(parsedValue, min);
+            }
+
+            if (max !== undefined) {
+              parsedValue = Math.min(parsedValue, max);
+            }
+
             if (!Number.isNaN(parsedValue)) {
               update(updateValue(parsedValue));
-              event.currentTarget.value = parsedValue + "";
+              event.currentTarget.value = `${parsedValue}`;
             } else {
-              if (event.target.value === "") event.currentTarget.value = "0";
-              event.currentTarget.value = getValue(obj) + "";
+              if (event.target.value === "") event.currentTarget.value = `${min}`;
             }
           } catch (error) {
-            event.currentTarget.value = getValue(obj) + "";
+            event.currentTarget.value = `${getValue(obj)}`;
           }
         }}
       />

@@ -17,6 +17,8 @@ const BuildATK = () => (
           const { weapon } = prev;
           return { ...prev, weapon: { ...weapon, level: value } };
         }}
+        min={1}
+        max={4}
       />
       <BuildCharacterInput
         label="Weapon Base ATK"
@@ -33,6 +35,7 @@ const BuildATK = () => (
           const { weapon } = prev;
           return { ...prev, weapon: { ...weapon, refine: value } };
         }}
+        max={20}
       />
       <BuildCharacterInput
         label="Shadow Weapon Refine"
@@ -41,6 +44,7 @@ const BuildATK = () => (
           ...prev,
           shadowWeaponRefine: value,
         })}
+        max={10}
       />
       <BuildCharacterInput
         label="Ammo ATK"
@@ -97,6 +101,7 @@ const BuildATK = () => (
           ...prev,
           bypass: value,
         })}
+        max={100}
       />
       <BuildCharacterInput
         label="Element % Bonus"
