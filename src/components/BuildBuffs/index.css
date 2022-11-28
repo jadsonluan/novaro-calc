@@ -10,7 +10,7 @@
 
 .build-buffs .header {
   display: grid;
-  grid-template-columns: 150px 1fr 1fr;
+  grid-template-columns: 200px 1fr 1fr;
   padding: 5px 25px;
 }
 
@@ -19,5 +19,12 @@
 }
 
 .build-buffs .checkbox-container {
-  grid-template-columns: 150px 1fr 1fr !important;
+  grid-template-columns: 200px 1fr 1fr !important;
+  border: 2px solid #40444b;
+  border-radius: 10px;
+  padding: 0px 4px 0px 4px;
+}
+
+.build-buffs .checkbox-container label {
+  margin-bottom: 4px;
 }
