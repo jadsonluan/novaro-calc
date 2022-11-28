@@ -50,7 +50,10 @@ function Input<T extends Character | Monster>({ getValue, updateValue, target, s
               update(updateValue(parsedValue));
               event.currentTarget.value = `${parsedValue}`;
             } else {
-              if (event.target.value === "") event.currentTarget.value = `${min}`;
+              if (event.target.value === "") {
+                update(updateValue(min));
+                event.currentTarget.value = `${min}`;
+              } 
             }
           } catch (error) {
             event.currentTarget.value = `${getValue(obj)}`;
