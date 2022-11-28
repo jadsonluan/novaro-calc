@@ -106,6 +106,34 @@ const rangerSkills: Record<string, Skill> = {
       };
     }
   },
+  AIMED_BOLT: {
+    key: "AIMED_BOLT",
+    label: "Aimed Bolt",
+    name: "Aimed Bolt",
+    isMelee: false,
+    job: "Ranger",
+    formula: (character: Character, monster: Monster, buffs: Buffs) => {
+      let baseDamage = ((buffs.fearBreeze ? 1150 : 700) + (buffs.trueSight ? 20 : 0)) * 5;
+      return {
+        percent: baseDamage * (character.baseLevel / 100),
+        bonus: 0,
+      };
+    }
+  },
+  ARROW_STORM: {
+    key: "ARROW_STORM",
+    label: "Arrow Storm",
+    name: "Arrow Storm",
+    isMelee: false,
+    job: "Ranger",
+    formula: (character: Character, monster: Monster, buffs: Buffs) => {
+      let baseDamage = (buffs.fearBreeze ? 2700 : 2000) + (buffs.trueSight ? 20 : 0);
+      return {
+        percent: baseDamage * (character.baseLevel / 100),
+        bonus: 0,
+      };
+    }
+  },
 }
 
 const starEmperorSkills: Record<string, Skill> = {
