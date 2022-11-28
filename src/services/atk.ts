@@ -7,7 +7,7 @@ import {
   Weapon,
 } from "../data/input";
 import WeaponType, { WEAPON_PENALTIES } from "../data/weapon";
-import { ELEMENTS, getPropertyModifier } from "../data/element";
+import { getPropertyModifier } from "../data/element";
 import { getSkill } from "../data/skills";
 import { applyBuffs } from "../data/buffs";
 export type DmgRange = "MIN" | "MAX";
@@ -144,8 +144,6 @@ function applyCardModifiers(
     Number(monster.elementLevel)
   );
 
-  targetProperty = character.buffs.includes('earthCharm') && monster.element === ELEMENTS[4] ? targetProperty + 30 : targetProperty
-
   let finalModifiers = 1000;
   finalModifiers *= 1 + race / 100;
   finalModifiers *= 1 + size / 100;
@@ -219,7 +217,7 @@ function applyCritical(damage: number, character: Character) {
 
 export function getFinalDamage(range: DmgRange, build: BuildInfo) {
   const { character: rawCharacter, monster, buffs } = build;
-  const character = applyBuffs(rawCharacter, buffs);
+  const character = applyBuffs(rawCharacter, monster, buffs);
   const skill = getSkill(character.skill);
   const { modifiers: mods } = character;
   const formula = skill.formula(character, monster, build.buffs);
