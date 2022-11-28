@@ -144,7 +144,7 @@ export const emptyMonster: Monster = {
 
 export const emptyCharacter: Character = {
   baseLevel: 1,
-  job: "Archbishop",
+  job: "Rune Knight",
   skill: "basic_attack",
   crit: false,
   ignorePenalty: false,

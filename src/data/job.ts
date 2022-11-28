@@ -1,3 +1,17 @@
+export const INITIAL_JOBS: string[] = [
+  'Swordsman',
+  'Merchant',
+  'Thief',
+  'Mage',
+  'Priest',
+  'Archer',
+  'Ninja',
+  'Gunslinger',
+  'Taekwon',
+  'Novice',
+  'Doram',
+];
+
 export type Job =
   | "Archbishop"
   | "Genetic"
@@ -16,7 +30,7 @@ export type Job =
   | "Soul Reaper"
   | "Star Emperor"
   | "Summoner"
-  | "Super Novice"
+  | "Super Novice EX"
   | "Sura"
   | "Wanderer"
   | "Warlock";
@@ -29,90 +43,111 @@ export interface BaseStat {
 const FOURTH_JOBS: Job[] = ["Inquisitor"];
 
 // TODO: Adicionar baseHP/SP de: Doram, SA, Oboro/Kagerou, Shadow Chaser
-export const JOBS: Record<Job, BaseStat> = {
-  Archbishop: {
-    baseHP: 16855,
-    baseSP: 1985,
-  },
-  Genetic: {
-    baseHP: 21325,
-    baseSP: 1985,
-  },
-  "Guillotine Cross": {
-    baseHP: 25175,
-    baseSP: 1140,
-  },
-  Inquisitor: {
-    baseHP: 41335,
-    baseSP: 1340,
-  },
-  Kagerou: {
-    baseHP: 22810,
-    baseSP: 985,
-  },
-  Mechanic: {
-    baseHP: 21130,
-    baseSP: 1203,
-  },
-  Ministrel: {
-    baseHP: 21130,
-    baseSP: 1203,
-  },
-  Oboro: {
-    baseHP: 22810,
-    baseSP: 985,
-  },
-  Ranger: {
-    baseHP: 22135,
-    baseSP: 1120,
-  },
-  Rebellion: {
-    baseHP: 24329,
-    baseSP: 1379,
+export const JOBS: Record<Job, BaseStat & { initialJob: string }> = {
+  "Rune Knight": {
+    baseHP: 27325,
+    baseSP: 1185,
+    initialJob: "Swordsman",
   },
   "Royal Guard": {
     baseHP: 26205,
     baseSP: 1526,
+    initialJob: "Swordsman",
   },
-  "Rune Knight": {
-    baseHP: 27325,
-    baseSP: 1185,
+  Mechanic: {
+    baseHP: 21130,
+    baseSP: 1203,
+    initialJob: "Merchant",
+  },
+  Genetic: {
+    baseHP: 21325,
+    baseSP: 1985,
+    initialJob: "Merchant",
+  },
+  "Guillotine Cross": {
+    baseHP: 25175,
+    baseSP: 1140,
+    initialJob: "Thief",
   },
   "Shadow Chaser": {
     baseHP: 22810,
     baseSP: 985,
-  },
-  Sorcerer: {
-    baseHP: 19660,
-    baseSP: 1985,
-  },
-  "Soul Reaper": {
-    baseHP: 15183,
-    baseSP: 811,
-  },
-  "Star Emperor": {
-    baseHP: 26355,
-    baseSP: 1422,
-  },
-  Summoner: {
-    baseHP: 22810,
-    baseSP: 985,
-  },
-  "Super Novice": {
-    baseHP: 22810,
-    baseSP: 985,
-  },
-  Sura: {
-    baseHP: 22810,
-    baseSP: 985,
-  },
-  Wanderer: {
-    baseHP: 21130,
-    baseSP: 1203,
+    initialJob: "Thief",
   },
   Warlock: {
     baseHP: 20166,
     baseSP: 1985,
+    initialJob: "Mage",
+  },
+  Sorcerer: {
+    baseHP: 19660,
+    baseSP: 1985,
+    initialJob: "Mage",
+  },
+  Ranger: {
+    baseHP: 22135,
+    baseSP: 1120,
+    initialJob: "Archer",
+  },
+  Ministrel: {
+    baseHP: 21130,
+    baseSP: 1203,
+    initialJob: "Archer",
+  },
+  Wanderer: {
+    baseHP: 21130,
+    baseSP: 1203,
+    initialJob: "Archer",
+  },
+  Archbishop: {
+    baseHP: 16855,
+    baseSP: 1985,
+    initialJob: "Priest",
+  },
+  Sura: {
+    baseHP: 22810,
+    baseSP: 985,
+    initialJob: "Priest",
+  },
+  Inquisitor: {
+    baseHP: 41335,
+    baseSP: 1340,
+    initialJob: "Priest",
+  },
+  Rebellion: {
+    baseHP: 24329,
+    baseSP: 1379,
+    initialJob: "Gunslinger",
+  },
+  Kagerou: {
+    baseHP: 22810,
+    baseSP: 985,
+    initialJob: "Ninja",
+  },
+  Oboro: {
+    baseHP: 22810,
+    baseSP: 985,
+    initialJob: "Ninja",
+  },
+  "Soul Reaper": {
+    baseHP: 15183,
+    baseSP: 811,
+    initialJob: "Taekwon",
+  },
+  "Star Emperor": {
+    baseHP: 26355,
+    baseSP: 1422,
+    initialJob: "Taekwon",
+  },
+  "Super Novice EX": {
+    baseHP: 22810,
+    baseSP: 985,
+    initialJob: "Novice",
+  },
+  Summoner: {
+    baseHP: 22810,
+    baseSP: 985,
+    initialJob: "Doram",
   },
 };
 
