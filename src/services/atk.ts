@@ -24,7 +24,7 @@ function getStatusATK(character: Character) {
   const { stats, baseLevel, weapon, bonusStatusATK } = character;
   const { str, dex, luk } = stats;
 
-  // vantagem elemental. sempre neutro a não ser que use warm wind
+  // elemental advantage is always 1, unless using warm wind
   const propertyModifier = 1;
 
   const mainStatBonus = isDexWeapon(weapon.type)

@@ -30,48 +30,6 @@ const allSkills: Record<string, Skill> = {
   },
 }
 
-const suraSkills: Record<string, Skill> = {
-  TRIPLE_ATTACK: {
-    key: "TRIPLE_ATTACK",
-    name: "Triple Attack",
-    label: "Triple Attack",
-    isMelee: true,
-    job: "Sura",
-    formula: (_character: Character, _monster: Monster) => ({
-      percent: 200,
-      bonus: 0,
-    }),
-  },
-  TIGER_CANNON_COMBO: {
-    key: "TIGER_CANNON_COMBO",
-    label: "Tiger Cannon (Combo)",
-    name: "Tiger Cannon",
-    isMelee: true,
-    job: "Sura",
-    formula: (character: Character, monster: Monster) => {
-      const baseDamage = (0.3 * getHP(character) + 0.15 * getSP(character)) / 2;
-      return {
-        percent: baseDamage * (character.baseLevel / 100),
-        bonus: 5000 + monster.baseLevel * 10,
-      };
-    },
-  },
-  // THIRD_FLAME_BOMB: {
-  //   key: "THIRD_FLAME_BOMB",
-  //   label: "Third Flame Bomb",
-  //   name: "Third Flame Bomb",
-  //   isMelee: true,
-  //   job: "Sura",
-  //   formula: (character: Character, monster: Monster) => {
-  //     const baseDamage = 3250 + 0.2 * getHP(character);
-  //     return {
-  //       percent: baseDamage * (character.baseLevel / 100),
-  //       bonus: 0,
-  //     };
-  //   },
-  // },
-}
-
 const geneticSkills: Record<string, Skill> = {
   CART_CANNON: {
     key: "CART_CANNON",
@@ -88,6 +46,51 @@ const geneticSkills: Record<string, Skill> = {
         bonus: 0,
       };
     },
+  },
+}
+
+const assassinSkills: Record<string, Skill> = {
+  CROSS_IMPACT: {
+    key: "CROSS_IMPACT",
+    label: "Cross Impact",
+    name: "Cross Impact",
+    isMelee: true,
+    job: "Guillotine Cross",
+    formula: (character: Character, monster: Monster, buffs: Buffs) => {
+      let baseDamage = 2150;
+      return {
+        percent: baseDamage * (character.baseLevel / 100),
+        bonus: 0,
+      };
+    }
+  },
+  COUNTER_SLASH: {
+    key: "COUNTER_SLASH",
+    label: "Counter Slash",
+    name: "Counter Slash",
+    isMelee: true,
+    job: "Guillotine Cross",
+    formula: (character: Character, monster: Monster, buffs: Buffs) => {
+      let baseDamage = 1800;
+      return {
+        percent: (baseDamage * (character.baseLevel / 120)) + (character.stats.agi * 2) + (70 * 4),
+        bonus: 0,
+      };
+    }
+  },
+  SOUL_DESTROYER: {
+    key: "SOUL_DESTROYER",
+    label: "Soul Destroyer",
+    name: "Soul Destroyer",
+    isMelee: false,
+    job: "Guillotine Cross",
+    formula: (character: Character, monster: Monster, buffs: Buffs) => {
+      let baseDamage = 1500;
+      return {
+        percent: ((baseDamage + character.stats.str + character.stats.int) * (character.baseLevel / 100)),
+        bonus: 0,
+      };
+    }
   },
 }
 
@@ -136,6 +139,48 @@ const rangerSkills: Record<string, Skill> = {
   },
 }
 
+const suraSkills: Record<string, Skill> = {
+  TRIPLE_ATTACK: {
+    key: "TRIPLE_ATTACK",
+    name: "Triple Attack",
+    label: "Triple Attack",
+    isMelee: true,
+    job: "Sura",
+    formula: (_character: Character, _monster: Monster) => ({
+      percent: 200,
+      bonus: 0,
+    }),
+  },
+  TIGER_CANNON_COMBO: {
+    key: "TIGER_CANNON_COMBO",
+    label: "Tiger Cannon (Combo)",
+    name: "Tiger Cannon",
+    isMelee: true,
+    job: "Sura",
+    formula: (character: Character, monster: Monster) => {
+      const baseDamage = (0.3 * getHP(character) + 0.15 * getSP(character)) / 2;
+      return {
+        percent: baseDamage * (character.baseLevel / 100),
+        bonus: 5000 + monster.baseLevel * 10,
+      };
+    },
+  },
+  // THIRD_FLAME_BOMB: {
+  //   key: "THIRD_FLAME_BOMB",
+  //   label: "Third Flame Bomb",
+  //   name: "Third Flame Bomb",
+  //   isMelee: true,
+  //   job: "Sura",
+  //   formula: (character: Character, monster: Monster) => {
+  //     const baseDamage = 3250 + 0.2 * getHP(character);
+  //     return {
+  //       percent: baseDamage * (character.baseLevel / 100),
+  //       bonus: 0,
+  //     };
+  //   },
+  // },
+}
+
 const starEmperorSkills: Record<string, Skill> = {
   SOLAR_BURST: {
     key: "SOLAR_BURST",
@@ -172,9 +217,10 @@ const kagerouOboroSkills: Record<string, Skill> = {
 
 export const SKILLS: Record<string, Skill> = {
   ...allSkills,
-  ...suraSkills,
+  ...assassinSkills,
   ...geneticSkills,
   ...rangerSkills,
+  ...suraSkills,
   ...starEmperorSkills,
   ...kagerouOboroSkills,
 };
