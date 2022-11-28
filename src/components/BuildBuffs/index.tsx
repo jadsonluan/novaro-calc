@@ -20,6 +20,22 @@ const BuildBuffs = () => {
           })}
         />
         <BuildBuffCheckBox
+          label="True Sight"
+          getValue={(buffs: Buffs) => buffs.trueSight}
+          updateValue={(value: boolean) => (prevState: Buffs) => ({
+            ...prevState,
+            trueSight: value,
+          })}
+        />
+        <BuildBuffCheckBox
+          label="Unlimit"
+          getValue={(buffs: Buffs) => buffs.unlimit}
+          updateValue={(value: boolean) => (prevState: Buffs) => ({
+            ...prevState,
+            unlimit: value,
+          })}
+        />
+        <BuildBuffCheckBox
           label="Shadow Warrior"
           getValue={(buffs: Buffs) => buffs.shadowWarrior}
           updateValue={(value: boolean) => (prevState: Buffs) => ({

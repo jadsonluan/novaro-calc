@@ -76,12 +76,16 @@ export interface Buffs {
   allSpheres: boolean;
   shadowWarrior: boolean;
   earthCharm: boolean;
+  trueSight: boolean;
+  unlimit: boolean;
 }
 
 export const emptyBuffs: Buffs = {
   allSpheres: false,
   shadowWarrior: false,
   earthCharm: false,
+  trueSight: false,
+  unlimit: false,
 };
 
 export type Race =

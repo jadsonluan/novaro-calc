@@ -99,7 +99,7 @@ const rangerSkills: Record<string, Skill> = {
     isMelee: false,
     job: "Ranger",
     formula: (character: Character, monster: Monster, buffs: Buffs) => {
-      const baseDamage = 1800;
+      let baseDamage = 1800 + (buffs.trueSight ? 20 : 0);
       return {
         percent: baseDamage * (character.baseLevel / 100),
         bonus: 0,

@@ -33,6 +33,30 @@ const BUFF_EFFECTS: Record<keyof Buffs, BuffEffect> = {
       buffs: [...character.buffs, "earthCharm"],
     };
   },
+  trueSight: (character: Character) => {
+    const { stats } = character;
+    return { ...character, stats: {
+      str: stats.str + 5,
+      agi: stats.agi + 5,
+      vit: stats.vit + 5,
+      int: stats.int + 5,
+      dex: stats.dex + 5,
+      luk: stats.luk + 5,
+    }, buffs: [...character.buffs, "trueSight"] };
+  },
+  unlimit: (character: Character) => {
+    const { modifiers } = character;
+    const UNLIMIT_INCREASE = 250;
+    return {
+      ...character,
+      modifiers: {
+        ...modifiers,
+        finalDmg: modifiers.finalDmg + UNLIMIT_INCREASE,
+      },
+      buffs: [...character.buffs, "unlimit"],
+    };
+  },
+
 };
 
 export function applyBuffs(
