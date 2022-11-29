@@ -74,6 +74,7 @@ export interface Character {
 
 export interface Buffs {
   allSpheres: boolean;
+  magnumBreak: boolean;
   shieldSpell: boolean;
   inspiration: boolean;
   shadowWarrior: boolean;
@@ -87,6 +88,7 @@ export interface Buffs {
 
 export const emptyBuffs: Buffs = {
   allSpheres: false,
+  magnumBreak: false,
   shieldSpell: false,
   inspiration: false,
   shadowWarrior: false,

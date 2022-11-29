@@ -29,15 +29,15 @@ const MainPage = () => {
   const maxDamage2 = getFinalDamage("MAX", buildInfo2);
 
   const dmgItems: BuildDiffItem[] = [
-    { label: "Min.", value1: minDamage1, value2: minDamage2 },
-    { label: "Max.", value1: maxDamage1, value2: maxDamage2 },
+    { label: "Min.", value1: minDamage1.damage, value2: minDamage2.damage },
+    { label: "Max.", value1: maxDamage1.damage, value2: maxDamage2.damage },
   ];
 
-  const maxHP1 = getHP(build1.character);
-  const maxHP2 = getHP(build2.character);
+  const maxHP1 = getHP(maxDamage1.modifiedCharacter);
+  const maxHP2 = getHP(maxDamage2.modifiedCharacter);
 
-  const maxSP1 = getSP(build1.character);
-  const maxSP2 = getSP(build2.character);
+  const maxSP1 = getSP(maxDamage1.modifiedCharacter);
+  const maxSP2 = getSP(maxDamage2.modifiedCharacter);
 
   const statItems: BuildDiffItem[] = [
     { label: "Max. HP", value1: maxHP1, value2: maxHP2 },

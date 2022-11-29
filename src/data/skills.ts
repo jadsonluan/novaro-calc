@@ -97,7 +97,7 @@ const crusaderSkills: Record<string, Skill> = {
     isMelee: false,
     job: "Royal Guard",
     formula: (character: Character, monster: Monster) => {
-      const baseDamage = 1300;
+      const baseDamage = 1700;
       return {
         percent: baseDamage * (character.baseLevel / 100),
         bonus: 0,

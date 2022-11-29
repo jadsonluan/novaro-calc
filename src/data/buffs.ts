@@ -6,6 +6,9 @@ type BuffEffect = (character: Character, monster: Monster) => Character;
 
 const BUFF_EFFECTS: Record<keyof Buffs, BuffEffect> = {
   // Swordsman
+  magnumBreak: (character: Character) => {
+    return { ...character, buffs: [...character.buffs, "magnumBreak"] };
+  },
   shieldSpell: (character: Character) => {
     const { pseudoBuffATK } = character;
     const ATK_INCREASE = 150;
@@ -16,11 +19,16 @@ const BUFF_EFFECTS: Record<keyof Buffs, BuffEffect> = {
     };
   },
   inspiration: (character: Character) => {
-    const { stats, pseudoBuffATK } = character;
+    const { stats, hp, pseudoBuffATK } = character;
     const ATK_INCREASE = 200;
     const STAT_INCREASE = 30;
+    const HP_PERCENT_INCREASE = 20;
     return {
       ...character,
+      hp: {
+        ...hp,
+        percent: hp.percent + HP_PERCENT_INCREASE,
+      },
       pseudoBuffATK: pseudoBuffATK + ATK_INCREASE,
       stats: {
         str: stats.str + STAT_INCREASE,

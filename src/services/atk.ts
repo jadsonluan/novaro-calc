@@ -7,7 +7,7 @@ import {
   Weapon,
 } from "../data/input";
 import WeaponType, { WEAPON_PENALTIES } from "../data/weapon";
-import { getPropertyModifier } from "../data/element";
+import { ELEMENTS, getPropertyModifier } from "../data/element";
 import { getSkill } from "../data/skills";
 import { applyBuffs } from "../data/buffs";
 export type DmgRange = "MIN" | "MAX";
@@ -170,10 +170,17 @@ function getATK(range: DmgRange, character: Character, monster: Monster) {
   const { masteryATK, buffATK } = character;
 
   const sizePenalty = !character.ignorePenalty ? getSizePenalty(character.weapon.type, monster.size) : 1;
-  const wATK = Math.max(
+  let wATK = Math.max(
     0,
     getWeaponATK(range, character, sizePenalty, monster)
   );
+
+  let extraElementalATK = 0;
+  if (character.buffs.includes('magnumBreak')) {
+    // Fire property extra dmg
+    extraElementalATK = Math.floor(wATK * 0.2) * getPropertyModifier(ELEMENTS[3], monster.element, Number(monster.elementLevel));
+  }
+  wATK += extraElementalATK;
 
   const _statusATK = getStatusATK(character);
 
@@ -243,8 +250,11 @@ export function getFinalDamage(range: DmgRange, build: BuildInfo) {
   finalDmg = Math.floor(finalDmg * hardDEF) - softDEF;
   finalDmg = applyModifier(finalDmg, mods.finalDmg);
   finalDmg = character.crit ? applyCritical(finalDmg, character) : finalDmg;
-  return (
-    Math.max(0, finalDmg) +
-    Math.max(0, applyModifier(formula.bonus, mods.finalDmg))
-  );
+  return {
+    damage: (
+      Math.max(0, finalDmg) +
+      Math.max(0, applyModifier(formula.bonus, mods.finalDmg))
+    ),
+    modifiedCharacter: character,
+  };
 }
