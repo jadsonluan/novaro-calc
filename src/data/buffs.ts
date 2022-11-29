@@ -5,6 +5,34 @@ import { Buffs, Character, Monster } from "./input";
 type BuffEffect = (character: Character, monster: Monster) => Character;
 
 const BUFF_EFFECTS: Record<keyof Buffs, BuffEffect> = {
+  // Swordsman
+  shieldSpell: (character: Character) => {
+    const { pseudoBuffATK } = character;
+    const ATK_INCREASE = 150;
+    return {
+      ...character,
+      pseudoBuffATK: pseudoBuffATK + ATK_INCREASE,
+      buffs: [...character.buffs, "shieldSpell"],
+    };
+  },
+  inspiration: (character: Character) => {
+    const { stats, pseudoBuffATK } = character;
+    const ATK_INCREASE = 200;
+    const STAT_INCREASE = 30;
+    return {
+      ...character,
+      pseudoBuffATK: pseudoBuffATK + ATK_INCREASE,
+      stats: {
+        str: stats.str + STAT_INCREASE,
+        agi: stats.agi + STAT_INCREASE,
+        vit: stats.vit + STAT_INCREASE,
+        int: stats.int + STAT_INCREASE,
+        dex: stats.dex + STAT_INCREASE,
+        luk: stats.luk + STAT_INCREASE,
+      },
+      buffs: [...character.buffs, "inspiration"],
+    };
+  },
   // Thief
   enchantDeadlyPoison: (character: Character) => {
     return { ...character, buffs: [...character.buffs, "enchantDeadlyPoison"] };
@@ -26,15 +54,16 @@ const BUFF_EFFECTS: Record<keyof Buffs, BuffEffect> = {
   // Archer
   trueSight: (character: Character) => {
     const { stats } = character;
+    const STAT_INCREASE = 5;
     return {
       ...character,
       stats: {
-        str: stats.str + 5,
-        agi: stats.agi + 5,
-        vit: stats.vit + 5,
-        int: stats.int + 5,
-        dex: stats.dex + 5,
-        luk: stats.luk + 5,
+        str: stats.str + STAT_INCREASE,
+        agi: stats.agi + STAT_INCREASE,
+        vit: stats.vit + STAT_INCREASE,
+        int: stats.int + STAT_INCREASE,
+        dex: stats.dex + STAT_INCREASE,
+        luk: stats.luk + STAT_INCREASE,
       },
       buffs: [...character.buffs, "trueSight"],
     };

@@ -74,6 +74,8 @@ export interface Character {
 
 export interface Buffs {
   allSpheres: boolean;
+  shieldSpell: boolean;
+  inspiration: boolean;
   shadowWarrior: boolean;
   earthCharm: boolean;
   trueSight: boolean;
@@ -85,6 +87,8 @@ export interface Buffs {
 
 export const emptyBuffs: Buffs = {
   allSpheres: false,
+  shieldSpell: false,
+  inspiration: false,
   shadowWarrior: false,
   earthCharm: false,
   trueSight: false,

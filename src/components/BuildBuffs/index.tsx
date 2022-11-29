@@ -12,6 +12,22 @@ const BuildBuffs = () => {
       </div>
       <div className="build-content">
         <BuildBuffCheckBox
+          label="Shield Spell"
+          getValue={(buffs: Buffs) => buffs.shieldSpell}
+          updateValue={(value: boolean) => (prevState: Buffs) => ({
+            ...prevState,
+            shieldSpell: value,
+          })}
+        />
+        <BuildBuffCheckBox
+          label="Inspiration"
+          getValue={(buffs: Buffs) => buffs.inspiration}
+          updateValue={(value: boolean) => (prevState: Buffs) => ({
+            ...prevState,
+            inspiration: value,
+          })}
+        />
+        <BuildBuffCheckBox
           label="Enchant Deadly Poison"
           getValue={(buffs: Buffs) => buffs.enchantDeadlyPoison}
           updateValue={(value: boolean) => (prevState: Buffs) => ({
