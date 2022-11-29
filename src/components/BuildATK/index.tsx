@@ -17,6 +17,7 @@ const BuildATK = () => (
           const { weapon } = prev;
           return { ...prev, weapon: { ...weapon, level: value } };
         }}
+        defaultValue={1}
         min={1}
         max={4}
       />

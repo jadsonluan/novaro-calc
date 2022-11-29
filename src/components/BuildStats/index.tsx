@@ -76,6 +76,7 @@ const BuildStats = () => (
             const { hp } = prev;
             return { ...prev, hp: { ...hp, percent: value } };
           }}
+          min={Number.MIN_SAFE_INTEGER}
         />
         <BuildCharacterInput
           label="HP Flat"
@@ -84,6 +85,7 @@ const BuildStats = () => (
             const { hp } = prev;
             return { ...prev, hp: { ...hp, flat: value } };
           }}
+          min={Number.MIN_SAFE_INTEGER}
         />
         <BuildCharacterInput
           label="SP %"
@@ -92,6 +94,7 @@ const BuildStats = () => (
             const { sp } = prev;
             return { ...prev, sp: { ...sp, percent: value } };
           }}
+          min={Number.MIN_SAFE_INTEGER}
         />
         <BuildCharacterInput
           label="SP Flat"
@@ -100,6 +103,7 @@ const BuildStats = () => (
             const { sp } = prev;
             return { ...prev, sp: { ...sp, flat: value } };
           }}
+          min={Number.MIN_SAFE_INTEGER}
         />
       </div>
     </div>

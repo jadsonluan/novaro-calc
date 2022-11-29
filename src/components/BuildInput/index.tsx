@@ -11,6 +11,7 @@ export interface BuildInputProps<T extends Character | Monster> {
   setTarget: (build: Build) => (target: T | ((prevState: T) => T)) => void;
   min?: number;
   max?: number;
+  defaultValue?: number;
 }
 interface InputProps<T extends Character | Monster>
   extends Omit<BuildInputProps<T>, "label"> {
@@ -22,7 +23,16 @@ interface BuildMonsterInputProps<T extends Monster>
 interface BuildCharacterInputProps<T extends Character>
   extends Omit<BuildInputProps<T>, "target" | "setTarget"> {}
 
-function Input<T extends Character | Monster>({ getValue, updateValue, target, setTarget, build, min = 0, max }: InputProps<T>) {
+function Input<T extends Character | Monster>({
+  getValue,
+  updateValue,
+  target,
+  setTarget,
+  build,
+  min = 0,
+  max,
+  defaultValue = 0,
+}: InputProps<T>) {
   const obj = target(build);
   const update = setTarget(build);
 
@@ -51,9 +61,9 @@ function Input<T extends Character | Monster>({ getValue, updateValue, target, s
               event.currentTarget.value = `${parsedValue}`;
             } else {
               if (event.target.value === "") {
-                update(updateValue(min));
-                event.currentTarget.value = `${min}`;
-              } 
+                update(updateValue(defaultValue));
+                event.currentTarget.value = `${defaultValue}`;
+              }
             }
           } catch (error) {
             event.currentTarget.value = `${getValue(obj)}`;
