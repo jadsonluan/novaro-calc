@@ -30,7 +30,83 @@ const allSkills: Record<string, Skill> = {
   },
 }
 
-const geneticSkills: Record<string, Skill> = {
+const knightSkills: Record<string, Skill> = {
+  IGNITION_BREAK: {
+    key: "IGNITION_BREAK",
+    label: "Ignition Break",
+    name: "Ignition Break",
+    isMelee: true,
+    job: "Rune Knight",
+    formula: (character: Character, monster: Monster) => {
+      const baseDamage = 2250;
+      return {
+        percent: baseDamage * (character.baseLevel / 100),
+        bonus: 0,
+      };
+    },
+  },
+  SONIC_WAVE: {
+    key: "SONIC_WAVE",
+    label: "Sonic Wave",
+    name: "Sonic Wave",
+    isMelee: false,
+    job: "Rune Knight",
+    formula: (character: Character, monster: Monster) => {
+      const baseDamage = 2550;
+      return {
+        percent: baseDamage * (character.baseLevel / 100),
+        bonus: 0,
+      };
+    },
+  },
+}
+
+const crusaderSkills: Record<string, Skill> = {
+  OVERBRAND: {
+    key: "OVERBRAND",
+    label: "Overbrand",
+    name: "Overbrand",
+    isMelee: true,
+    job: "Royal Guard",
+    formula: (character: Character, monster: Monster) => {
+      const baseDamage = 1500;
+      return {
+        percent: (baseDamage * (character.baseLevel / 100)) * 3,
+        bonus: 0,
+      };
+    },
+  },
+  CANNON_SPEAR: {
+    key: "CANNON_SPEAR",
+    label: "Cannon Spear",
+    name: "Cannon Spear",
+    isMelee: false,
+    job: "Royal Guard",
+    formula: (character: Character, monster: Monster) => {
+      const baseDamage = 600;
+      return {
+        percent: (baseDamage + character.stats.str * 5) * (character.baseLevel / 100),
+        bonus: 0,
+      };
+    },
+  },
+  VANISHING_POINT: {
+    key: "VANISHING_POINT",
+    label: "Vaninshing Point",
+    name: "Vaninshing Point",
+    isMelee: false,
+    job: "Royal Guard",
+    formula: (character: Character, monster: Monster) => {
+      const baseDamage = 1300;
+      return {
+        percent: baseDamage * (character.baseLevel / 100),
+        bonus: 0,
+      };
+    },
+  },
+}
+
+const alchemistSkills: Record<string, Skill> = {
   CART_CANNON: {
     key: "CART_CANNON",
     label: "Cart Cannon",
@@ -94,7 +170,7 @@ const assassinSkills: Record<string, Skill> = {
   },
 }
 
-const rangerSkills: Record<string, Skill> = {
+const hunterSkills: Record<string, Skill> = {
   FOCUSED_ARROW_STRIKE: {
     key: "FOCUSED_ARROW_STRIKE",
     label: "Focused Arrow Strike",
@@ -139,7 +215,7 @@ const rangerSkills: Record<string, Skill> = {
   },
 }
 
-const suraSkills: Record<string, Skill> = {
+const monkSkills: Record<string, Skill> = {
   TRIPLE_ATTACK: {
     key: "TRIPLE_ATTACK",
     name: "Triple Attack",
@@ -181,7 +257,7 @@ const suraSkills: Record<string, Skill> = {
   // },
 }
 
-const starEmperorSkills: Record<string, Skill> = {
+const starGladiatorSkills: Record<string, Skill> = {
   SOLAR_BURST: {
     key: "SOLAR_BURST",
     label: "Solar Burst",
@@ -198,7 +274,7 @@ const starEmperorSkills: Record<string, Skill> = {
   },
 }
 
-const kagerouOboroSkills: Record<string, Skill> = {
+const ninjaSkills: Record<string, Skill> = {
   CROSS_SLASH: {
     key: "CROSS_SLASH",
     label: "Cross Slash",
@@ -217,12 +293,14 @@ const kagerouOboroSkills: Record<string, Skill> = {
 
 export const SKILLS: Record<string, Skill> = {
   ...allSkills,
+  ...knightSkills,
+  ...crusaderSkills,
   ...assassinSkills,
-  ...geneticSkills,
-  ...rangerSkills,
-  ...suraSkills,
-  ...starEmperorSkills,
-  ...kagerouOboroSkills,
+  ...alchemistSkills,
+  ...hunterSkills,
+  ...monkSkills,
+  ...starGladiatorSkills,
+  ...ninjaSkills,
 };
 
 export function getSkill(name: string) {
