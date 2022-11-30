@@ -234,11 +234,12 @@ function getHardDEF(monster: Monster, bypass: number) {
   return (finalHardDef + 4000) / (4000 + finalHardDef * 10);
 }
 
-function getDEF(monster: Monster, bypass: number, skill: string) {
+function getDEF(monster: Monster, bypass: number, skillName: string) {
   const hardDEF = getHardDEF(monster, bypass);
   const softDEF = getSoftDEF(monster);
+  const skill = getSkill(skillName);
 
-  if (skill === "CART_CANNON") {
+  if (skill.hardAsSoftDef) {
     return { hardDEF: 1, softDEF: softDEF + hardDEF };
   }
 

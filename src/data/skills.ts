@@ -13,6 +13,7 @@ export interface Skill {
   key: string;
   job: Job | "All";
   isMelee: boolean;
+  hardAsSoftDef?: boolean;
   formula: (character: Character, monster: Monster, buffs: Buffs) => FormulaReturn;
 }
 
@@ -106,6 +107,25 @@ const crusaderSkills: Record<string, Skill> = {
   },
 }
 
+const whiteSmithSkills: Record<string, Skill> = {
+  ARM_CANNON: {
+    key: "ARM_CANNON",
+    label: "Arm Cannon",
+    name: "Arm Cannon",
+    isMelee: false,
+    job: "Mechanic",
+    hardAsSoftDef: true,
+    formula: (character: Character, monster: Monster) => {
+      const baseDamage = 2150;
+      return {
+        percent:
+          (baseDamage) * (character.baseLevel / 100),
+        bonus: 0,
+      };
+    },
+  },
+}
+
 const alchemistSkills: Record<string, Skill> = {
   CART_CANNON: {
     key: "CART_CANNON",
@@ -113,8 +133,8 @@ const alchemistSkills: Record<string, Skill> = {
     name: "Cart Cannon",
     isMelee: false,
     job: "Genetic",
+    hardAsSoftDef: true,
     formula: (character: Character, monster: Monster) => {
-      // (250 * skillLevel) + (100 * Cart Remodeling skill level)
       const baseDamage = 1250 + 500;
       return {
         percent:
@@ -296,6 +316,7 @@ export const SKILLS: Record<string, Skill> = {
   ...knightSkills,
   ...crusaderSkills,
   ...assassinSkills,
+  ...whiteSmithSkills,
   ...alchemistSkills,
   ...hunterSkills,
   ...monkSkills,
