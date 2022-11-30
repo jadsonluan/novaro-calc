@@ -9,6 +9,46 @@ const BUFF_EFFECTS: Record<keyof Buffs, BuffEffect> = {
   magnumBreak: (character: Character) => {
     return { ...character, buffs: [...character.buffs, "magnumBreak"] };
   },
+  concentration: (character: Character) => {
+    return { ...character, buffs: [...character.buffs, "concentration"] };
+  },
+  asirRune: (character: Character) => {
+    const { pseudoBuffATK } = character;
+    const ATK_INCREASE = 70;
+    return {
+      ...character,
+      pseudoBuffATK: pseudoBuffATK + ATK_INCREASE,
+      buffs: [...character.buffs, "asirRune"],
+    };
+  },
+  turisusRune: (character: Character) => {
+    const { stats, modifiers } = character;
+    const MELEE_INCREASE = 15;
+    const STAT_INCREASE = 30;
+    return {
+      ...character,
+      stats: { ...stats, str: stats.str + STAT_INCREASE },
+      modifiers: { ...modifiers, melee: modifiers.melee + MELEE_INCREASE },
+      buffs: [...character.buffs, "turisusRune"],
+    };
+  },
+  luxAnimaRune: (character: Character) => {
+    const { hp, sp, modifiers } = character;
+    const PERCENT_INCREASE = 30;
+    return {
+      ...character,
+      hp: { ...hp, percent: hp.percent + PERCENT_INCREASE },
+      sp: { ...sp, percent: sp.percent + PERCENT_INCREASE },
+      modifiers: { 
+        ...modifiers, 
+        size: modifiers.size + PERCENT_INCREASE,
+        melee: modifiers.melee + PERCENT_INCREASE,
+        ranged: modifiers.ranged + PERCENT_INCREASE,
+        critical: modifiers.critical + PERCENT_INCREASE,
+       },
+      buffs: [...character.buffs, "luxAnima"],
+    };
+  },
   shieldSpell: (character: Character) => {
     const { pseudoBuffATK } = character;
     const ATK_INCREASE = 150;
@@ -59,6 +99,49 @@ const BUFF_EFFECTS: Record<keyof Buffs, BuffEffect> = {
       buffs: [...character.buffs, "pyrexia"],
     };
   },
+  // Merchant
+  loudExclamation: (character: Character) => {
+    const { pseudoBuffATK, stats } = character;
+    const ATK_INCREASE = 30;
+    const STAT_INCREASE = 4;
+    return {
+      ...character,
+      stats: {
+        ...stats,
+        str: stats.str + STAT_INCREASE,
+      },
+      pseudoBuffATK: pseudoBuffATK + ATK_INCREASE,
+      buffs: [...character.buffs, "loudExclamation"],
+    };
+  },
+  cartBoost: (character: Character) => {
+    const { masteryATK } = character;
+    const ATK_INCREASE = 50;
+    return {
+      ...character,
+      masteryATK: masteryATK + ATK_INCREASE,
+      buffs: [...character.buffs, "cartBoost"],
+    };
+  },
+  pyroclastic: (character: Character) => {
+    const { pseudoBuffATK } = character;
+    const ATK_INCREASE = 400;
+    return {
+      ...character,
+      pseudoBuffATK: pseudoBuffATK + ATK_INCREASE,
+      buffs: [...character.buffs, "pyroclastic"],
+    };
+  },
+  // Mage
+  striking: (character: Character) => {
+    const { pseudoBuffATK } = character;
+    const ATK_INCREASE = 100;
+    return {
+      ...character,
+      pseudoBuffATK: pseudoBuffATK + ATK_INCREASE,
+      buffs: [...character.buffs, "striking"],
+    };
+  },
   // Archer
   trueSight: (character: Character) => {
     const { stats } = character;
@@ -91,6 +174,16 @@ const BUFF_EFFECTS: Record<keyof Buffs, BuffEffect> = {
       buffs: [...character.buffs, "unlimit"],
     };
   },
+  // Acolyte
+  odinsBlessing: (character: Character) => {
+    const { pseudoBuffATK } = character;
+    const ATK_INCREASE = 100;
+    return {
+      ...character,
+      pseudoBuffATK: pseudoBuffATK + ATK_INCREASE,
+      buffs: [...character.buffs, "odinsBlessing"],
+    };
+  },
   allSpheres: (character: Character) => {
     const { masteryATK } = character;
     const ATK_PER_SPHERE = 3;
@@ -100,6 +193,7 @@ const BUFF_EFFECTS: Record<keyof Buffs, BuffEffect> = {
       buffs: [...character.buffs, "allSpheres"],
     };
   },
+  // Ninja
   shadowWarrior: (character: Character) => {
     return { ...character, buffs: [...character.buffs, "shadowWarrior"] };
   },
@@ -117,6 +211,16 @@ const BUFF_EFFECTS: Record<keyof Buffs, BuffEffect> = {
             : modifiers.targetProperty,
       },
       buffs: [...character.buffs, "earthCharm"],
+    };
+  },
+  // Taekwon
+  falconSoul: (character: Character) => {
+    const { pseudoBuffATK } = character;
+    const ATK_INCREASE = 50;
+    return {
+      ...character,
+      pseudoBuffATK: pseudoBuffATK + ATK_INCREASE,
+      buffs: [...character.buffs, "falconSoul"],
     };
   },
 };

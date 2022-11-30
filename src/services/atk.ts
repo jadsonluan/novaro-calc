@@ -90,8 +90,21 @@ function getWeaponATK(
   let totalWeaponATK =
     weapon.atk + variance + statBonus + refineATK + overUpgradeATK;
 
-  totalWeaponATK = applyModifier(totalWeaponATK, character.buffs.includes('enchantDeadlyPoison') ? 400 : 0);
-  totalWeaponATK = applyModifier(totalWeaponATK, character.buffs.includes('earthCharm') ? 150 : 0);
+  let increasedTotalWeaponATK = 0;
+
+  if (character.buffs.includes('enchantDeadlyPoison')) {
+    increasedTotalWeaponATK += getModifierIncrease(totalWeaponATK, 400);
+  }
+
+  if (character.buffs.includes('earthCharm')) {
+    increasedTotalWeaponATK += getModifierIncrease(totalWeaponATK, 150);
+  }
+
+  if (character.buffs.includes('concentration')) {
+    increasedTotalWeaponATK += getModifierIncrease(totalWeaponATK, 15);
+  }
+
+  totalWeaponATK += increasedTotalWeaponATK;
 
   return applyCardModifiers(
     Math.floor(totalWeaponATK * sizePenalty),
@@ -103,13 +116,20 @@ function getWeaponATK(
 function getExtraATK(character: Character, monster: Monster) {
   let { equipATK, consumableATK, ammoATK, pseudoBuffATK } = character;
 
-  equipATK = applyModifier(
-    equipATK,
-    character.job === "Star Emperor" ? 85 : 0
-  );
+  let increasedEquipATK = 0;
+
+  if (character.job === "Star Emperor") {
+    increasedEquipATK += getModifierIncrease(equipATK, 85);
+  }
+
+  if (character.buffs.includes('concentration')) {
+    increasedEquipATK += getModifierIncrease(equipATK, 15);
+  }
+
+  equipATK += increasedEquipATK
 
   let extraATK = applyCardModifiers(
-    equipATK + consumableATK + ammoATK + pseudoBuffATK,
+    Math.floor(equipATK + consumableATK + ammoATK + pseudoBuffATK),
     character,
     monster
   );
@@ -166,6 +186,10 @@ function applyModifier(damage: number, mod: number) {
   return Math.floor(damage * (1 + mod / 100));
 }
 
+function getModifierIncrease(damage: number, mod: number) {
+  return Math.floor(Math.floor(damage * (1 + mod / 100)) - damage);
+}
+
 function getATK(range: DmgRange, character: Character, monster: Monster) {
   const { masteryATK, buffATK } = character;
 
@@ -178,7 +202,7 @@ function getATK(range: DmgRange, character: Character, monster: Monster) {
   let extraElementalATK = 0;
   if (character.buffs.includes('magnumBreak')) {
     // Fire property extra dmg
-    extraElementalATK = Math.floor(wATK * 0.2) * getPropertyModifier(ELEMENTS[3], monster.element, Number(monster.elementLevel));
+    extraElementalATK = getModifierIncrease(wATK, 20) * getPropertyModifier(ELEMENTS[3], monster.element, Number(monster.elementLevel));
   }
   wATK += extraElementalATK;
 

@@ -73,31 +73,67 @@ export interface Character {
 }
 
 export interface Buffs {
-  allSpheres: boolean;
+  // Swordsman
   magnumBreak: boolean;
+  concentration: boolean;
+  asirRune: boolean;
+  turisusRune: boolean;
+  luxAnimaRune: boolean;
   shieldSpell: boolean;
   inspiration: boolean;
-  shadowWarrior: boolean;
-  earthCharm: boolean;
+  // Thief
+  enchantDeadlyPoison: boolean;
+  pyrexia: boolean;
+  // Merchant
+  loudExclamation: boolean;
+  cartBoost: boolean;
+  pyroclastic: boolean;
+  // Mage
+  striking: boolean;
+  // Archer
   trueSight: boolean;
   unlimit: boolean;
   fearBreeze: boolean;
-  enchantDeadlyPoison: boolean;
-  pyrexia: boolean;
+  // Acolyte
+  allSpheres: boolean;
+  odinsBlessing: boolean;
+  // Ninja
+  shadowWarrior: boolean;
+  earthCharm: boolean;
+  // Taekwon
+  falconSoul: boolean;
 }
 
 export const emptyBuffs: Buffs = {
-  allSpheres: false,
+  // Swordsman
   magnumBreak: false,
+  concentration: false,
+  asirRune: false,
+  turisusRune: false,
+  luxAnimaRune: false,
   shieldSpell: false,
   inspiration: false,
-  shadowWarrior: false,
-  earthCharm: false,
+  // Thief
+  enchantDeadlyPoison: false,
+  pyrexia: false,
+  // Merchant
+  loudExclamation: false,
+  cartBoost: false,
+  pyroclastic: false,
+  // Mage
+  striking: false,
+  // Archer
   trueSight: false,
   unlimit: false,
   fearBreeze: false,
-  enchantDeadlyPoison: false,
-  pyrexia: false,
+  // Acolyte
+  allSpheres: false,
+  odinsBlessing: false,
+  // Ninja
+  shadowWarrior: false,
+  earthCharm: false,
+  // Taekwon
+  falconSoul: false,
 };
 
 export type Race =
