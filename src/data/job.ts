@@ -19,7 +19,7 @@ export type Job =
   | "Inquisitor"
   | "Kagerou"
   | "Mechanic"
-  | "Ministrel"
+  | "Minstrel"
   | "Oboro"
   | "Ranger"
   | "Rebellion"
@@ -89,7 +89,7 @@ export const JOBS: Record<Job, BaseStat & { initialJob: string }> = {
     baseSP: 1120,
     initialJob: "Archer",
   },
-  Ministrel: {
+  Minstrel: {
     baseHP: 21130,
     baseSP: 1203,
     initialJob: "Archer",

@@ -190,6 +190,37 @@ const assassinSkills: Record<string, Skill> = {
   },
 }
 
+const rogueSkills: Record<string, Skill> = {
+  FATAL_MENACE: {
+    key: "FATAL_MENACE",
+    label: "Fatal Menace",
+    name: "Fatal Menace",
+    isMelee: true,
+    job: "Shadow Chaser",
+    formula: (character: Character, monster: Monster, buffs: Buffs) => {
+      let baseDamage = (1200 + character.stats.agi) * (character.weapon.type === "Dagger" ? 2 : 1);
+      return {
+        percent: baseDamage * (character.baseLevel / 100),
+        bonus: 0,
+      };
+    }
+  },
+  TRIANGLE_SHOT: {
+    key: "TRIANGLE_SHOT",
+    label: "Triangle Shot",
+    name: "Triangle Shot",
+    isMelee: false,
+    job: "Shadow Chaser",
+    formula: (character: Character, monster: Monster, buffs: Buffs) => {
+      let baseDamage = 2300 + character.stats.agi * 3;
+      return {
+        percent: baseDamage * (character.baseLevel / 100),
+        bonus: 0,
+      };
+    }
+  },
+}
+
 const hunterSkills: Record<string, Skill> = {
   FOCUSED_ARROW_STRIKE: {
     key: "FOCUSED_ARROW_STRIKE",
@@ -229,6 +260,23 @@ const hunterSkills: Record<string, Skill> = {
       let baseDamage = (buffs.fearBreeze ? 2700 : 2000) + (buffs.trueSight ? 20 : 0);
       return {
         percent: baseDamage * (character.baseLevel / 100),
+        bonus: 0,
+      };
+    }
+  },
+}
+
+const bardSkills: Record<string, Skill> = {
+  SEVERE_RAINSTORM: {
+    key: "SEVERE_RAINSTORM",
+    label: "Severe Rainstorm 1-tick",
+    name: "Severe Rainstorm 1-tick",
+    isMelee: false,
+    job: "Minstrel",
+    formula: (character: Character, monster: Monster, buffs: Buffs) => {
+      let baseDamage = 500 + ((character.stats.dex + character.stats.agi) / 2);
+      return {
+        percent: (baseDamage + (character.weapon.type === "Instrument" ? 100 : 0)) * (character.baseLevel / 100),
         bonus: 0,
       };
     }
@@ -316,9 +364,11 @@ export const SKILLS: Record<string, Skill> = {
   ...knightSkills,
   ...crusaderSkills,
   ...assassinSkills,
+  ...rogueSkills,
   ...whiteSmithSkills,
   ...alchemistSkills,
   ...hunterSkills,
+  ...bardSkills,
   ...monkSkills,
   ...starGladiatorSkills,
   ...ninjaSkills,
