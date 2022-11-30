@@ -8,6 +8,7 @@ export interface BuildCheckBoxProps<T extends Character | Monster | Buffs> {
   updateValue: (value: boolean) => (prevState: T) => T;
   target: (build: Build) => T;
   setTarget: (build: Build) => (target: T | ((prevState: T) => T)) => void;
+  tooltip?: string;
 }
 
 interface CheckBoxProps<T extends Character | Monster | Buffs>
@@ -53,7 +54,7 @@ function BuildCheckBox<T extends Character | Monster | Buffs>(
 
   return (
     <div className="checkbox-container">
-      <label>{label}</label>
+      <label title={props.tooltip}>{label}</label>
       <CheckBox {...props} build={build1} />
       <CheckBox {...props} build={build2} />
     </div>

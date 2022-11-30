@@ -233,7 +233,7 @@ export function applyBuffs(
   let buffedCharacter = deepCopy(character) as Character;
 
   Object.keys(BUFF_EFFECTS).forEach((key) => {
-    if (!buffs[key as keyof Buffs]) return;
+    if (!buffs[key as keyof Buffs].active) return;
     const effect = BUFF_EFFECTS[key as keyof Buffs];
     buffedCharacter = effect(buffedCharacter, monster);
   });

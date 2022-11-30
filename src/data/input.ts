@@ -72,68 +72,136 @@ export interface Character {
   buffs: string[];
 }
 
+export interface Buff {
+  active: boolean;
+  tooltip: string;
+}
+
 export interface Buffs {
   // Swordsman
-  magnumBreak: boolean;
-  concentration: boolean;
-  asirRune: boolean;
-  turisusRune: boolean;
-  luxAnimaRune: boolean;
-  shieldSpell: boolean;
-  inspiration: boolean;
+  magnumBreak: Buff;
+  concentration: Buff;
+  asirRune: Buff;
+  turisusRune: Buff;
+  luxAnimaRune: Buff;
+  shieldSpell: Buff;
+  inspiration: Buff;
   // Thief
-  enchantDeadlyPoison: boolean;
-  pyrexia: boolean;
+  enchantDeadlyPoison: Buff;
+  pyrexia: Buff;
   // Merchant
-  loudExclamation: boolean;
-  cartBoost: boolean;
-  pyroclastic: boolean;
+  loudExclamation: Buff;
+  cartBoost: Buff;
+  pyroclastic: Buff;
   // Mage
-  striking: boolean;
+  striking: Buff;
   // Archer
-  trueSight: boolean;
-  unlimit: boolean;
-  fearBreeze: boolean;
+  trueSight: Buff;
+  unlimit: Buff;
+  fearBreeze: Buff;
   // Acolyte
-  allSpheres: boolean;
-  odinsBlessing: boolean;
+  allSpheres: Buff;
+  odinsBlessing: Buff;
   // Ninja
-  shadowWarrior: boolean;
-  earthCharm: boolean;
+  shadowWarrior: Buff;
+  earthCharm: Buff;
   // Taekwon
-  falconSoul: boolean;
+  falconSoul: Buff;
 }
 
 export const emptyBuffs: Buffs = {
   // Swordsman
-  magnumBreak: false,
-  concentration: false,
-  asirRune: false,
-  turisusRune: false,
-  luxAnimaRune: false,
-  shieldSpell: false,
-  inspiration: false,
+  magnumBreak: {
+    active: false,
+    tooltip: "+20% fire property weaponATK"
+  },
+  concentration: {
+    active: false,
+    tooltip: "+15% weaponATK and equipATK"
+  },
+  asirRune: {
+    active: false,
+    tooltip: "Pseudo Buff ATK +70"
+  },
+  turisusRune: {
+    active: false,
+    tooltip: "STR +30 and +15% Melee % Bonus"
+  },
+  luxAnimaRune: {
+    active: false,
+    tooltip: "+30% for the following modifiers: HP & SP, Melee, Ranged, Critical and Size"
+  },
+  shieldSpell: {
+    active: false,
+    tooltip: "Pseudo Buff ATK +150"
+  },
+  inspiration: {
+    active: false,
+    tooltip: "Pseudo Buff ATK +200, all stats +30 and +20% HP"
+  },
   // Thief
-  enchantDeadlyPoison: false,
-  pyrexia: false,
+  enchantDeadlyPoison: {
+    active: false,
+    tooltip: "WeaponATK x5 and extraATK x4"
+  },
+  pyrexia: {
+    active: false,
+    tooltip: "+5% Melee % Bonus and +15% Critical % Bonus"
+  },
   // Merchant
-  loudExclamation: false,
-  cartBoost: false,
-  pyroclastic: false,
+  loudExclamation: {
+    active: false,
+    tooltip: "STR +4 and Pseudo Buff ATK +30"
+  },
+  cartBoost: {
+    active: false,
+    tooltip: "Mastery ATK +50"
+  },
+  pyroclastic: {
+    active: false,
+    tooltip: "Pseudo Buff ATK +400"
+  },
   // Mage
-  striking: false,
+  striking: {
+    active: false,
+    tooltip: "Pseudo Buff ATK +100"
+  },
   // Archer
-  trueSight: false,
-  unlimit: false,
-  fearBreeze: false,
+  trueSight: {
+    active: false,
+    tooltip: "All stats +5 and 20% added to the skill base damage"
+  },
+  unlimit: {
+    active: false,
+    tooltip: "Final Damage +250%"
+  },
+  fearBreeze: {
+    active: false,
+    tooltip: "Increases Aimed Bolt and Arrow Storm damage"
+  },
   // Acolyte
-  allSpheres: false,
-  odinsBlessing: false,
+  allSpheres: {
+    active: false,
+    tooltip: "Mastery ATK +3 * spheres = +45"
+  },
+  odinsBlessing: {
+    active: false,
+    tooltip: "Pseudo Buff ATK +100"
+  },
   // Ninja
-  shadowWarrior: false,
-  earthCharm: false,
+  shadowWarrior: {
+    active: false,
+    tooltip: "Increases Cross Slash damage"
+  },
+  earthCharm: {
+    active: false,
+    tooltip: "WeaponATK +15% per charm = +150% and increases Elemental % Bonus +30% against Wind monsters "
+  },
   // Taekwon
-  falconSoul: false,
+  falconSoul: {
+    active: false,
+    tooltip: "Pseudo Buff ATK +50"
+  },
 };
 
 export type Race =

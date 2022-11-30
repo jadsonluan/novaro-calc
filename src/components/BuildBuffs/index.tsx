@@ -24,11 +24,15 @@ const BuildBuffs = () => {
           <BuildBuffCheckBox 
             key={buff}
             label={capitalize(buff)}
-            getValue={(buffs: Buffs) => buffs[buff as keyof Buffs]}
+            getValue={(buffs: Buffs) => buffs[buff as keyof Buffs].active}
             updateValue={(value: boolean) => (prevState: Buffs) => ({
               ...prevState,
-              [buff]: value,
+              [buff]: {
+                ...prevState[buff as keyof Buffs],
+                active: value,
+              },
             })}
+            tooltip={emptyBuffs[buff as keyof Buffs].tooltip}
           />
         ))}
       </div>
