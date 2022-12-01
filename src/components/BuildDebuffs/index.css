@@ -1,4 +1,4 @@
-.build-buffs {
+.build-debuffs {
   background-color: #2c2f33;
   color: white;
   height: fit-content;
@@ -6,27 +6,27 @@
   border-bottom-right-radius: 10px;
 }
 
-.build-buffs .build-content {
+.build-debuffs .build-content {
   padding: 15px 25px;
 }
 
-.build-buffs .inside-header {
+.build-debuffs .inside-header {
   display: grid;
   grid-template-columns: 200px 1fr 1fr;
   padding: 10px 25px 0px 25px;
 }
 
-.build-buffs .inside-header> :not(:first-child) {
+.build-debuffs .inside-header> :not(:first-child) {
   text-align: center;
 }
 
-.build-buffs .checkbox-container {
+.build-debuffs .checkbox-container {
   grid-template-columns: 200px 1fr 1fr !important;
   border: 2px solid #40444b;
   border-radius: 10px;
   padding: 0px 4px 0px 4px;
 }
 
-.build-buffs .checkbox-container label {
+.build-debuffs .checkbox-container label {
   margin-bottom: 4px;
 }

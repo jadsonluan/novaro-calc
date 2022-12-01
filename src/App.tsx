@@ -6,12 +6,13 @@ import { INITIAL_BUILD } from "./data/input";
 import { Build, useBuild } from "./hooks/useBuild";
 
 const copy = (
-  from: Omit<Build, "setCharacter" | "setMonster" | "setBuffs">,
+  from: Omit<Build, "setCharacter" | "setMonster" | "setBuffs" | "setDebuffs">,
   to: Build
 ) => {
   to.setCharacter({ ...from.character });
   to.setMonster({ ...from.monster });
   to.setBuffs({ ...from.buffs });
+  to.setDebuffs({ ...from.debuffs });
 };
 
 function App() {

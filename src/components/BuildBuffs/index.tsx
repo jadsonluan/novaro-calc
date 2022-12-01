@@ -1,21 +1,13 @@
 import "./index.css";
 import { Buffs, emptyBuffs } from "../../data/input";
 import { BuildBuffCheckBox } from "../BuildCheckBox";
-
-const capitalize = (str: string) => {
-  return str
-    .replace(/([A-Z])/g, " $1")
-    .replace(/^./, function (str) {
-      return str.toUpperCase();
-    })
-    .trim();
-};
+import { capitalize } from "../BuildBuffsAndDebuffs";
 
 const BuildBuffs = () => {
   return (
     <div className="build-buffs">
-      <div className="header">
-        <b>Buffs</b>
+      <div className="inside-header">
+        <b>Name</b>
         <b>Build 1</b>
         <b>Build 2</b>
       </div>

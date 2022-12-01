@@ -3,17 +3,18 @@ import { getHP, getSP } from "../../data/stats";
 import { Build, useBuild } from "../../hooks/useBuild";
 import { getFinalDamage } from "../../services/atk";
 import BuildATK from "../BuildATK";
-import BuildBuffs from "../BuildBuffs";
+import BuildBuffsAndDebuffs from "../BuildBuffsAndDebuffs";
 import BuildDiff, { BuildDiffItem } from "../BuildDiff";
 import BuildStats from "../BuildStats";
 import CharacterMisc from "../CharacterMisc";
 import MonsterInfo from "../MonsterInfo";
 import "./index.css";
 
-const getBuildInfo = ({ character, monster, buffs }: Build) => ({
+const getBuildInfo = ({ character, monster, buffs, debuffs, }: Build) => ({
   character,
   monster,
   buffs,
+  debuffs,
 });
 
 const MainPage = () => {
@@ -58,7 +59,7 @@ const MainPage = () => {
       </div>
       <div className="third-col">
         <MonsterInfo />
-        <BuildBuffs />
+        <BuildBuffsAndDebuffs />
       </div>
     </div>
   );

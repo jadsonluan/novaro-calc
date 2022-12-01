@@ -3,9 +3,11 @@ import {
   emptyCharacter as initialCharacter,
   emptyMonster as initialMonster,
   emptyBuffs as initialBuffs,
+  emptyDebuffs as initialDebuffs,
   Character,
   Monster,
   Buffs,
+  Debuffs,
 } from "../data/input";
 
 export interface Build {
@@ -17,6 +19,8 @@ export interface Build {
   setMonster: (monster: Monster | ((prevState: Monster) => Monster)) => void;
   buffs: Buffs;
   setBuffs: (buffs: Buffs | ((prevState: Buffs) => Buffs)) => void;
+  debuffs: Debuffs;
+  setDebuffs: (debuffs: Debuffs | ((prevState: Debuffs) => Debuffs)) => void;
 }
 interface ContextProps {
   build1: Build;
@@ -32,6 +36,8 @@ const initialBuild = {
   setMonster: (_monster: Monster | ((prevState: Monster) => Monster)) => {},
   buffs: initialBuffs,
   setBuffs: (_buffs: Buffs | ((prevState: Buffs) => Buffs)) => {},
+  debuffs: initialDebuffs,
+  setDebuffs: (_debuffs: Debuffs | ((prevState: Debuffs) => Debuffs)) => {},
 };
 
 const BuildContext = createContext<ContextProps>({
@@ -40,8 +46,8 @@ const BuildContext = createContext<ContextProps>({
 });
 
 interface BuildProviderProps {
-  initialBuild1: { character: Character; monster: Monster, buffs: Buffs };
-  initialBuild2: { character: Character; monster: Monster, buffs: Buffs };
+  initialBuild1: { character: Character; monster: Monster, buffs: Buffs, debuffs: Debuffs };
+  initialBuild2: { character: Character; monster: Monster, buffs: Buffs, debuffs: Debuffs };
 }
 
 export const BuildProvider: React.FC<BuildProviderProps> = (props) => {
@@ -56,6 +62,9 @@ export const BuildProvider: React.FC<BuildProviderProps> = (props) => {
   const [buffs1, setBuffs1] = useState<Buffs>(initialBuild1.buffs);
   const [buffs2, setBuffs2] = useState<Buffs>(initialBuild2.buffs);
 
+  const [debuffs1, setDebuffs1] = useState<Debuffs>(initialBuild1.debuffs);
+  const [debuffs2, setDebuffs2] = useState<Debuffs>(initialBuild2.debuffs);
+
   return (
     <BuildContext.Provider
       value={{
@@ -66,6 +75,8 @@ export const BuildProvider: React.FC<BuildProviderProps> = (props) => {
           setMonster: setMonster1,
           buffs: buffs1,
           setBuffs: setBuffs1,
+          debuffs: debuffs1,
+          setDebuffs: setDebuffs1,
         },
         build2: {
           character: character2,
@@ -74,6 +85,8 @@ export const BuildProvider: React.FC<BuildProviderProps> = (props) => {
           setMonster: setMonster2,
           buffs: buffs2,
           setBuffs: setBuffs2,
+          debuffs: debuffs2,
+          setDebuffs: setDebuffs2,
         },
       }}
     >

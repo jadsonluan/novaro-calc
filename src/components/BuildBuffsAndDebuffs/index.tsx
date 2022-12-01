@@ -1,0 +1,32 @@
+import "./index.css";
+import { useState } from "react";
+import BuildBuffs from "../BuildBuffs";
+import BuildDebuffs from "../BuildDebuffs";
+
+export const capitalize = (str: string) => {
+  return str
+    .replace(/([A-Z])/g, " $1")
+    .replace(/^./, function (str) {
+      return str.toUpperCase();
+    })
+    .trim();
+};
+
+type BuffOrDebuff = | "buff" | "debuff";
+
+const BuildBuffsAndDebuffs = () => {
+  const [selectedTab, setSelectedTab] = useState<BuffOrDebuff>("buff");
+  return (
+    <div className="build-buffs-and-debuffs">
+      <div className="header">
+        <div className={`tab ${selectedTab === "buff" ? "active" : "inactive"}`} onClick={() => setSelectedTab("buff")} >Buffs</div>
+        <div className={`tab ${selectedTab === "debuff" ? "active" : "inactive"}`} onClick={() => setSelectedTab("debuff")}>Debuffs</div>
+      </div>
+      <div className="build-content">
+        {selectedTab === "buff" ? <BuildBuffs /> : <BuildDebuffs />}
+        </div>
+    </div>
+  );
+};
+
+export default BuildBuffsAndDebuffs;

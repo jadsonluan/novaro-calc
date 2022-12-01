@@ -82,12 +82,18 @@ const ELEMENT_TABLES = [ELEMENTS_LV1, ELEMENTS_LV2, ELEMENTS_LV3, ELEMENTS_LV4];
 export function getPropertyModifier(
   weaponElement: Element,
   monsterElement: Element,
-  monsterElementLevel: number
+  monsterElementLevel: number,
+  monsterDebuffs: string[]
 ) {
   const table = ELEMENT_TABLES[monsterElementLevel - 1];
   const weaponElementIndex = ELEMENTS.indexOf(weaponElement);
   const monsterElementIndex = ELEMENTS.indexOf(monsterElement);
 
-  const mod = table[monsterElementIndex][weaponElementIndex];
+  let mod = table[monsterElementIndex][weaponElementIndex];
+
+  if (monsterDebuffs.includes("oratio") && weaponElement === "Holy") {
+    mod += 20;
+  }
+
   return mod / 100;
 }

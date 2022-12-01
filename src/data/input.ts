@@ -70,6 +70,7 @@ export interface Character {
   buffATK: number;
   bypass: number;
   buffs: string[];
+  debuffs: string[];
 }
 
 export interface Buff {
@@ -204,6 +205,27 @@ export const emptyBuffs: Buffs = {
   },
 };
 
+export interface Debuffs {
+  oratio: Buff;
+  darkClaw: Buff;
+  magicIntoxication: Buff;
+}
+
+export const emptyDebuffs: Debuffs = {
+  darkClaw: {
+    active: false,
+    tooltip: "+150%(75% for boss) melee damage inflicted"
+  },
+  magicIntoxication: {
+    active: false,
+    tooltip: "Takes 50% more damage from all properties"
+  },
+  oratio: {
+    active: false,
+    tooltip: "Decreases holy property resistance"
+  },
+};
+
 export type Race =
   | "angel"
   | "brute"
@@ -248,6 +270,10 @@ export interface Monster {
   race: Race;
   size: Size;
   type: MonsterType;
+  finalModifier: number;
+  meleeModifier: number;
+  rangedModifier: number;
+  debuffs: string[];
 }
 
 export const emptyMonster: Monster = {
@@ -260,6 +286,10 @@ export const emptyMonster: Monster = {
   race: "formless",
   size: "small",
   type: "normal",
+  finalModifier: 0,
+  meleeModifier: 0,
+  rangedModifier: 0,
+  debuffs: [],
 };
 
 export const emptyCharacter: Character = {
@@ -318,16 +348,19 @@ export const emptyCharacter: Character = {
   buffATK: 0,
   bypass: 0,
   buffs: [],
+  debuffs: [],
 };
 
 export interface BuildInfo {
   character: Character;
   monster: Monster;
   buffs: Buffs;
+  debuffs: Debuffs;
 }
 
 export const INITIAL_BUILD: BuildInfo = {
   character: emptyCharacter,
   monster: emptyMonster,
   buffs: emptyBuffs,
+  debuffs: emptyDebuffs,
 };

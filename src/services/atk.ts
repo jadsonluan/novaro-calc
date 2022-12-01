@@ -10,6 +10,7 @@ import WeaponType, { WEAPON_PENALTIES } from "../data/weapon";
 import { ELEMENTS, getPropertyModifier } from "../data/element";
 import { getSkill } from "../data/skills";
 import { applyBuffs } from "../data/buffs";
+import { applyDebuff } from "../data/debuff";
 export type DmgRange = "MIN" | "MAX";
 
 const DEX_WEAPONS: WeaponType[] = ["Whip", "Instrument", "Bow", "Gun"];
@@ -166,7 +167,8 @@ function applyCardModifiers(
   const property = getPropertyModifier(
     character.weapon.element,
     monster.element,
-    Number(monster.elementLevel)
+    Number(monster.elementLevel),
+    monster.debuffs
   );
 
   let finalModifiers = 1000;
@@ -202,7 +204,7 @@ function getATK(range: DmgRange, character: Character, monster: Monster) {
   let extraElementalATK = 0;
   if (character.buffs.includes('magnumBreak')) {
     // Fire property extra dmg
-    extraElementalATK = getModifierIncrease(wATK, 20) * getPropertyModifier(ELEMENTS[3], monster.element, Number(monster.elementLevel));
+    extraElementalATK = getModifierIncrease(wATK, 20) * getPropertyModifier(ELEMENTS[3], monster.element, Number(monster.elementLevel), monster.debuffs);
   }
   wATK += extraElementalATK;
 
@@ -253,8 +255,9 @@ function applyCritical(damage: number, character: Character) {
 }
 
 export function getFinalDamage(range: DmgRange, build: BuildInfo) {
-  const { character: rawCharacter, monster, buffs } = build;
-  const character = applyBuffs(rawCharacter, monster, buffs);
+  const { character: rawCharacter, monster: rawMonster, buffs, debuffs } = build;
+  const buffedCharacter = applyBuffs(rawCharacter, rawMonster, buffs);
+  const { character, monster } = applyDebuff(buffedCharacter, rawMonster, debuffs);
   const skill = getSkill(character.skill);
   const { modifiers: mods } = character;
   const formula = skill.formula(character, monster, build.buffs);
@@ -275,11 +278,14 @@ export function getFinalDamage(range: DmgRange, build: BuildInfo) {
   finalDmg = Math.floor(finalDmg * hardDEF) - softDEF;
   finalDmg = applyModifier(finalDmg, mods.finalDmg);
   finalDmg = character.crit ? applyCritical(finalDmg, character) : finalDmg;
+  finalDmg = Math.max(0, finalDmg) + Math.max(0, applyModifier(formula.bonus, mods.finalDmg))
+  finalDmg = applyModifier(
+    finalDmg,
+    skill.isMelee ? monster.meleeModifier : monster.rangedModifier
+  );
+  finalDmg = applyModifier(finalDmg, monster.finalModifier);
   return {
-    damage: (
-      Math.max(0, finalDmg) +
-      Math.max(0, applyModifier(formula.bonus, mods.finalDmg))
-    ),
+    damage: finalDmg,
     modifiedCharacter: character,
   };
 }
