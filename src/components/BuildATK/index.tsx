@@ -49,50 +49,68 @@ const BuildATK = () => (
       />
       <BuildCharacterInput
         label="Ammo ATK"
-        getValue={(character: Character) => character.ammoATK}
+        getValue={(character: Character) => character.ATK.ammoATK}
         updateValue={(value: number) => (prev: Character) => ({
           ...prev,
-          ammoATK: value,
+          ATK: {
+            ...prev.ATK,
+            ammoATK: value,
+          }
         })}
       />
       <BuildCharacterInput
         label="Pseudo Buff ATK"
-        getValue={(character: Character) => character.pseudoBuffATK}
+        getValue={(character: Character) => character.ATK.pseudoBuffATK}
         updateValue={(value: number) => (prev: Character) => ({
           ...prev,
-          pseudoBuffATK: value,
+          ATK: {
+            ...prev.ATK,
+            pseudoBuffATK: value,
+          }
         })}
       />
       <BuildCharacterInput
         label="Bonus Status ATK"
-        getValue={(character: Character) => character.bonusStatusATK}
+        getValue={(character: Character) => character.ATK.bonusStatusATK}
         updateValue={(value: number) => (prev: Character) => ({
           ...prev,
-          bonusStatusATK: value,
+          ATK: {
+            ...prev.ATK,
+            bonusStatusATK: value,
+          }
         })}
       />
       <BuildCharacterInput
         label="Mastery ATK"
-        getValue={(character: Character) => character.masteryATK}
+        getValue={(character: Character) => character.ATK.masteryATK}
         updateValue={(value: number) => (prev: Character) => ({
           ...prev,
-          masteryATK: value,
+          ATK: {
+            ...prev.ATK,
+            masteryATK: value,
+          }
         })}
       />
       <BuildCharacterInput
         label="Buff ATK"
-        getValue={(character: Character) => character.buffATK}
+        getValue={(character: Character) => character.ATK.buffATK}
         updateValue={(value: number) => (prev: Character) => ({
           ...prev,
-          buffATK: value,
+          ATK: {
+            ...prev.ATK,
+            buffATK: value,
+          }
         })}
       />
       <BuildCharacterInput
         label="Equip ATK"
-        getValue={(character: Character) => character.equipATK}
+        getValue={(character: Character) => character.ATK.equipATK}
         updateValue={(value: number) => (prev: Character) => ({
           ...prev,
-          equipATK: value,
+          ATK: {
+            ...prev.ATK,
+            equipATK: value,
+          }
         })}
       />
       <BuildCharacterInput

@@ -22,7 +22,7 @@ function isDexWeapon(weaponType: WeaponType) {
 }
 
 function getStatusATK(character: Character) {
-  const { stats, baseLevel, weapon, bonusStatusATK } = character;
+  const { stats, baseLevel, weapon, ATK: { bonusStatusATK } } = character;
   const { str, dex, luk } = stats;
 
   // elemental advantage is always 1, unless using warm wind
@@ -115,7 +115,7 @@ function getWeaponATK(
 }
 
 function getExtraATK(character: Character, monster: Monster) {
-  let { equipATK, consumableATK, ammoATK, pseudoBuffATK } = character;
+  let { ATK: { equipATK, consumableATK, ammoATK, pseudoBuffATK } } = character;
 
   let increasedEquipATK = 0;
 
@@ -193,7 +193,7 @@ function getModifierIncrease(damage: number, mod: number) {
 }
 
 function getATK(range: DmgRange, character: Character, monster: Monster) {
-  const { masteryATK, buffATK } = character;
+  const { ATK: { masteryATK, buffATK } } = character;
 
   const sizePenalty = !character.ignorePenalty ? getSizePenalty(character.weapon.type, monster.size) : 1;
   let wATK = Math.max(

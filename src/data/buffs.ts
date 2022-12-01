@@ -13,11 +13,14 @@ const BUFF_EFFECTS: Record<keyof Buffs, BuffEffect> = {
     return { ...character, buffs: [...character.buffs, "concentration"] };
   },
   asirRune: (character: Character) => {
-    const { pseudoBuffATK } = character;
+    const { ATK: { pseudoBuffATK } } = character;
     const ATK_INCREASE = 70;
     return {
       ...character,
-      pseudoBuffATK: pseudoBuffATK + ATK_INCREASE,
+      ATK: {
+        ...character.ATK,
+        pseudoBuffATK: pseudoBuffATK + ATK_INCREASE,
+      },
       buffs: [...character.buffs, "asirRune"],
     };
   },
@@ -50,16 +53,19 @@ const BUFF_EFFECTS: Record<keyof Buffs, BuffEffect> = {
     };
   },
   shieldSpell: (character: Character) => {
-    const { pseudoBuffATK } = character;
+    const { ATK: { pseudoBuffATK } } = character;
     const ATK_INCREASE = 150;
     return {
       ...character,
-      pseudoBuffATK: pseudoBuffATK + ATK_INCREASE,
+      ATK: {
+        ...character.ATK,
+        pseudoBuffATK: pseudoBuffATK + ATK_INCREASE,
+      },
       buffs: [...character.buffs, "shieldSpell"],
     };
   },
   inspiration: (character: Character) => {
-    const { stats, hp, pseudoBuffATK } = character;
+    const { stats, hp, ATK: { pseudoBuffATK } } = character;
     const ATK_INCREASE = 200;
     const STAT_INCREASE = 30;
     const HP_PERCENT_INCREASE = 20;
@@ -69,7 +75,10 @@ const BUFF_EFFECTS: Record<keyof Buffs, BuffEffect> = {
         ...hp,
         percent: hp.percent + HP_PERCENT_INCREASE,
       },
-      pseudoBuffATK: pseudoBuffATK + ATK_INCREASE,
+      ATK: {
+        ...character.ATK,
+        pseudoBuffATK: pseudoBuffATK + ATK_INCREASE,
+      },
       stats: {
         str: stats.str + STAT_INCREASE,
         agi: stats.agi + STAT_INCREASE,
@@ -101,7 +110,7 @@ const BUFF_EFFECTS: Record<keyof Buffs, BuffEffect> = {
   },
   // Merchant
   loudExclamation: (character: Character) => {
-    const { pseudoBuffATK, stats } = character;
+    const { ATK: { pseudoBuffATK }, stats } = character;
     const ATK_INCREASE = 30;
     const STAT_INCREASE = 4;
     return {
@@ -110,35 +119,47 @@ const BUFF_EFFECTS: Record<keyof Buffs, BuffEffect> = {
         ...stats,
         str: stats.str + STAT_INCREASE,
       },
-      pseudoBuffATK: pseudoBuffATK + ATK_INCREASE,
+      ATK: {
+        ...character.ATK,
+        pseudoBuffATK: pseudoBuffATK + ATK_INCREASE,
+      },
       buffs: [...character.buffs, "loudExclamation"],
     };
   },
   cartBoost: (character: Character) => {
-    const { masteryATK } = character;
+    const { ATK: { masteryATK } } = character;
     const ATK_INCREASE = 50;
     return {
       ...character,
-      masteryATK: masteryATK + ATK_INCREASE,
+      ATK: {
+        ...character.ATK,
+        masteryATK: masteryATK + ATK_INCREASE,
+      },
       buffs: [...character.buffs, "cartBoost"],
     };
   },
   pyroclastic: (character: Character) => {
-    const { pseudoBuffATK } = character;
+    const { ATK: { pseudoBuffATK } } = character;
     const ATK_INCREASE = 400;
     return {
       ...character,
-      pseudoBuffATK: pseudoBuffATK + ATK_INCREASE,
+      ATK: {
+        ...character.ATK,
+        pseudoBuffATK: pseudoBuffATK + ATK_INCREASE,
+      },
       buffs: [...character.buffs, "pyroclastic"],
     };
   },
   // Mage
   striking: (character: Character) => {
-    const { pseudoBuffATK } = character;
+    const { ATK: { pseudoBuffATK } } = character;
     const ATK_INCREASE = 100;
     return {
       ...character,
-      pseudoBuffATK: pseudoBuffATK + ATK_INCREASE,
+      ATK: {
+        ...character.ATK,
+        pseudoBuffATK: pseudoBuffATK + ATK_INCREASE,
+      },
       buffs: [...character.buffs, "striking"],
     };
   },
@@ -176,20 +197,26 @@ const BUFF_EFFECTS: Record<keyof Buffs, BuffEffect> = {
   },
   // Acolyte
   odinsBlessing: (character: Character) => {
-    const { pseudoBuffATK } = character;
+    const { ATK: { pseudoBuffATK } } = character;
     const ATK_INCREASE = 100;
     return {
       ...character,
-      pseudoBuffATK: pseudoBuffATK + ATK_INCREASE,
+      ATK: {
+        ...character.ATK,
+        pseudoBuffATK: pseudoBuffATK + ATK_INCREASE,
+      },
       buffs: [...character.buffs, "odinsBlessing"],
     };
   },
   allSpheres: (character: Character) => {
-    const { masteryATK } = character;
+    const { ATK: { masteryATK } } = character;
     const ATK_PER_SPHERE = 3;
     return {
       ...character,
-      masteryATK: masteryATK + 15 * ATK_PER_SPHERE,
+      ATK: {
+        ...character.ATK,
+        masteryATK: masteryATK + ATK_PER_SPHERE * 15,
+      },
       buffs: [...character.buffs, "allSpheres"],
     };
   },
@@ -215,11 +242,14 @@ const BUFF_EFFECTS: Record<keyof Buffs, BuffEffect> = {
   },
   // Taekwon
   falconSoul: (character: Character) => {
-    const { pseudoBuffATK } = character;
+    const { ATK: { pseudoBuffATK } } = character;
     const ATK_INCREASE = 50;
     return {
       ...character,
-      pseudoBuffATK: pseudoBuffATK + ATK_INCREASE,
+      ATK: {
+        ...character.ATK,
+        pseudoBuffATK: pseudoBuffATK + ATK_INCREASE,
+      },
       buffs: [...character.buffs, "falconSoul"],
     };
   },

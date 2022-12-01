@@ -31,6 +31,18 @@ export interface Weapon {
   element: Element;
 }
 
+export interface ATKModifiers {
+  equipATK: number;
+  // nao funciona no nova para consumiveis
+  consumableATK: number;
+  // parecido com consumableATK mas o nova usa esse invés do consumableATK para alguns iten
+  bonusStatusATK: number;
+  ammoATK: number;
+  pseudoBuffATK: number;
+  masteryATK: number;
+  buffATK: number;
+}
+
 export interface Modifiers {
   skill: number;
   melee: number;
@@ -59,15 +71,7 @@ export interface Character {
   weapon: Weapon;
   modifiers: Modifiers;
   shadowWeaponRefine: number;
-  equipATK: number;
-  // nao funciona no nova para consumiveis
-  consumableATK: number;
-  // parecido com consumableATK mas o nova usa esse invés do consumableATK para alguns iten
-  bonusStatusATK: number;
-  ammoATK: number;
-  pseudoBuffATK: number;
-  masteryATK: number;
-  buffATK: number;
+  ATK: ATKModifiers;
   bypass: number;
   buffs: string[];
   debuffs: string[];
@@ -339,13 +343,15 @@ export const emptyCharacter: Character = {
     critical: 0,
   },
   shadowWeaponRefine: 0,
-  equipATK: 0,
-  consumableATK: 0,
-  bonusStatusATK: 0,
-  ammoATK: 0,
-  pseudoBuffATK: 0,
-  masteryATK: 0,
-  buffATK: 0,
+  ATK: {
+    equipATK: 0,
+    consumableATK: 0,
+    bonusStatusATK: 0,
+    ammoATK: 0,
+    pseudoBuffATK: 0,
+    masteryATK: 0,
+    buffATK: 0,
+  },
   bypass: 0,
   buffs: [],
   debuffs: [],

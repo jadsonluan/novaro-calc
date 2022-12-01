@@ -44,7 +44,10 @@ const ImportBS = () => {
     ) => ({
       ...prevState,
       skill,
-      equipATK: response.equipATK,
+      ATK: {
+        ...prevState.ATK,
+        equipATK: response.equipATK,
+      },
       bypass: response.bypass,
       hp: {
         ...prevState.hp,
