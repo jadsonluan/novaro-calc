@@ -88,7 +88,6 @@ function applyCardModifiers(
     size,
     targetProperty,
     monster: monsterType,
-    class: targetClass,
     skillProperty,
   } = character.modifiers;
 
@@ -103,7 +102,7 @@ function applyCardModifiers(
   finalModifiers *= 1 + race / 100;
   finalModifiers *= 1 + size / 100;
   finalModifiers *= 1 + targetProperty / 100;
-  finalModifiers *= 1 + (targetClass - 100) / 100;
+  finalModifiers *= 1 + (character.MATK.matkPercent - 100) / 100;
   finalModifiers *= 1 + skillProperty / 100;
   finalModifiers *= 1 + monsterType / 100;
   finalModifiers *= property;

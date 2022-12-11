@@ -45,6 +45,7 @@ export interface ATKModifiers {
 }
 
 export interface MATKModifiers {
+  matkPercent: number;
   equipMATK: number;
   consumableMATK: number;
   pseudoBuffMATK: number;
@@ -232,7 +233,7 @@ export const emptyMATKBuffs: Buffs = {
   },
   recognizedSpell: {
     active: false,
-    tooltip: ""
+    tooltip: "Removes weapon MATK variance (overupgrade MATK variance still applies)"
   },
   // Archer
   // Acolyte
@@ -404,6 +405,7 @@ export const emptyCharacter: Character = {
     buffATK: 0,
   },
   MATK: {
+    matkPercent: 100,
     equipMATK: 0,
     consumableMATK: 0,
     pseudoBuffMATK: 0,

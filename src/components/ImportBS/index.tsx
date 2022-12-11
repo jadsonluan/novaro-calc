@@ -50,6 +50,10 @@ const ImportBS = ({ isMATK }: { isMATK: boolean }) => {
         ...prevState.ATK,
         equipATK: response.equipATK,
       },
+      MATK: {
+        ...prevState.MATK,
+        matkPercent: response.MATKpercent,
+      },
       bypass: response.bypass,
       hp: {
         ...prevState.hp,
@@ -72,7 +76,7 @@ const ImportBS = ({ isMATK }: { isMATK: boolean }) => {
         ranged: response.ranged,
         race: response.raceBonus,
         size: response.sizeBonus,
-        class: !isMATK ? response.monsterTypeBonus : response.MATKpercent,
+        class: response.monsterTypeBonus,
         monster: isMATK ? response.monsterTypeBonus : 0,
         targetProperty: response.propertyBonus,
         skill: response.skillBonus,

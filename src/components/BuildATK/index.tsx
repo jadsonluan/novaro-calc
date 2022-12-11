@@ -3,10 +3,10 @@ import "./index.css";
 import { BuildCharacterInput } from "../BuildInput";
 import { Character } from "../../data/input";
 
-const BuildContainer = ({ children }: { children: React.ReactChild[] }) => (
+const BuildContainer = ({ isMatk, children }: { isMatk: boolean, children: React.ReactChild[] }) => (
   <div className="build">
     <div className="header">
-      <b>ATK and Modifiers</b>
+      <b>{isMatk ? 'MATK' : 'ATK'} and Modifiers</b>
       <b>Build 1</b>
       <b>Build 2</b>
     </div>
@@ -16,7 +16,7 @@ const BuildContainer = ({ children }: { children: React.ReactChild[] }) => (
 
 export const BuildATK = () => {
   return (
-    <BuildContainer>
+    <BuildContainer isMatk={false}>
       <BuildCharacterInput
         label="Weapon LVL"
         getValue={(character: Character) => character.weapon.level}
@@ -247,7 +247,7 @@ export const BuildATK = () => {
 
 export const BuildMATK = () => {
   return (
-    <BuildContainer>
+    <BuildContainer isMatk>
       <BuildCharacterInput
         label="Weapon LVL"
         getValue={(character: Character) => character.weapon.level}
@@ -287,11 +287,12 @@ export const BuildMATK = () => {
       />
       <BuildCharacterInput
         label="MATK %"
-        getValue={(character: Character) => character.modifiers.class}
+        getValue={(character: Character) => character.MATK.matkPercent}
         updateValue={(value: number) => (prev: Character) => {
-          const { modifiers } = prev;
-          return { ...prev, modifiers: { ...modifiers, class: value } };
+          const { MATK } = prev;
+          return { ...prev, MATK: { ...MATK, matkPercent: value } };
         }}
+        defaultValue={100}
         min={100}
       />
       <BuildCharacterInput
