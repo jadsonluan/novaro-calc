@@ -46,7 +46,7 @@ export function applyDebuff(
   let changedMonster = deepCopy(monster) as Monster;
 
   Object.keys(DEBUFF_EFFECTS).forEach((key) => {
-    if (!debuffs[key as keyof Debuffs].active) return;
+    if (!debuffs[key as keyof Debuffs]?.active) return;
     const effect = DEBUFF_EFFECTS[key as keyof Debuffs];
     const { character, monster } = effect(changedCharacter, changedMonster);
     changedCharacter = character;

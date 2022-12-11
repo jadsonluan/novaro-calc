@@ -2,7 +2,7 @@ import "./App.css";
 import BuildStorage from "./components/BuildStorage";
 import ImportBS from "./components/ImportBS";
 import MainPage from "./components/MainPage";
-import { INITIAL_BUILD } from "./data/input";
+import { INITIAL_ATK_BUILD, INITIAL_MATK_BUILD } from "./data/input";
 import { Build, useBuild } from "./hooks/useBuild";
 
 const copy = (
@@ -17,31 +17,39 @@ const copy = (
 
 function App() {
   const { build1, build2 } = useBuild();
+  const location = window.location.href;
+  const isMATK = location.includes("matk");
+  const INITIAL_BUILD = !isMATK ? INITIAL_ATK_BUILD : INITIAL_MATK_BUILD;
 
   return (
     <div className="app">
       <header className="header">
-        <h1>NovaRO Calc: ATK</h1>
-        <div className="actions">
-          <ImportBS />
-          <button onClick={() => copy(build1, build2)}>
-            Build 1 {">"} Build 2
-          </button>
-          <button onClick={() => copy(build2, build1)}>
-            Build 1 {"<"} Build 2
-          </button>
-          <BuildStorage />
-          <button
-            onClick={() => {
-              copy(INITIAL_BUILD, build1);
-              copy(INITIAL_BUILD, build2);
-            }}
-          >
-            Clear
-          </button>
+        <div className="left-action">
+          <h1>NovaRO Calc: {isMATK ? 'MATK' : 'ATK'}</h1>
+          <div className="actions">
+            <ImportBS isMATK={isMATK} />
+            <button onClick={() => copy(build1, build2)}>
+              Build 1 {">"} Build 2
+            </button>
+            <button onClick={() => copy(build2, build1)}>
+              Build 1 {"<"} Build 2
+            </button>
+            <BuildStorage isMATK={isMATK} />
+            <button
+              onClick={() => {
+                copy(INITIAL_BUILD, build1);
+                copy(INITIAL_BUILD, build2);
+              }}
+            >
+              Clear
+            </button>
+          </div>
+        </div>
+        <div className="links">
+          <a href={!isMATK ? '/novaro-calc/matk' : '/novaro-calc'}>{!isMATK ? 'MATK' : 'ATK'} calc</a>
         </div>
       </header>
-      <MainPage />
+      <MainPage isMATK={isMATK} />
     </div>
   );
 }

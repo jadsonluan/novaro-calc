@@ -18,8 +18,8 @@ export interface Skill {
 }
 
 const allSkills: Record<string, Skill> = {
-  AUTO_ATTACK: {
-    key: "AUTO_ATTACK",
+  BASIC_ATTACK: {
+    key: "BASIC_ATTACK",
     name: "Auto Attack",
     label: "Auto Attack",
     isMelee: true,
@@ -375,5 +375,5 @@ export const SKILLS: Record<string, Skill> = {
 };
 
 export function getSkill(name: string) {
-  return SKILLS[name] ?? SKILLS["AUTO_ATTACK"];
+  return SKILLS[name] ?? SKILLS["BASIC_ATTACK"];
 }

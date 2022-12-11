@@ -1,5 +1,6 @@
 import { Element } from "../data/element";
 import { MonsterType, Race, Size } from "../data/input";
+import { MATK_SKILLS } from "../data/matkSkills";
 import { SKILLS } from "../data/skills";
 
 export const capitalize = (str: string) => str[0].toUpperCase() + str.slice(1);
@@ -28,6 +29,13 @@ function getEquipATK(sections: Record<string, string[]>) {
   const line = section[ATK_VALUES_LINE_INDEX];
 
   return getValueFromLine(EQUIP_ATK_INDEX, line);
+}
+
+function getMATKpercent(sections: Record<string, string[]>) {
+  const section = sections["Battle Stats"];
+  const line = section[1];
+
+  return Number(getLineDigits(line));
 }
 
 function getWeaponInfo(sections: Record<string, string[]>) {
@@ -62,11 +70,11 @@ function getBonusFromSection(
   return bonuses[search] ?? 0;
 }
 
-function getPropertyBonus(
+function getElementBonuses(
   sections: Record<string, string[]>,
   element: Element
 ) {
-  const section = sections["Elemental Bonuses"];
+  const section = sections["Magic Elemental Bonuses"];
   if (!section) return 0;
 
   let searchedElement = element === "Shadow" ? "Dark" : element;
@@ -74,15 +82,28 @@ function getPropertyBonus(
   return getBonusFromSection(section, searchedElement);
 }
 
-function getRaceBonus(sections: Record<string, string[]>, race: Race) {
-  const section = sections["Race Bonuses"];
+function getPropertyBonus(
+  sections: Record<string, string[]>,
+  element: Element,
+  isMATK: boolean
+) {
+  const section = !isMATK ? sections["Elemental Bonuses"] : sections["Magic Bonuses Against Monster Element"];
+  if (!section) return 0;
+
+  let searchedElement = element === "Shadow" ? "Dark" : element;
+
+  return getBonusFromSection(section, searchedElement);
+}
+
+function getRaceBonus(sections: Record<string, string[]>, race: Race, isMatk: boolean) {
+  const section = !isMatk ? sections["Race Bonuses"] : sections["Magic Race Bonuses"];
   if (!section) return 0;
 
   return getBonusFromSection(section, race as string);
 }
 
-function getSizeBonus(sections: Record<string, string[]>, size: Size) {
-  const section = sections["Size Bonuses"];
+function getSizeBonus(sections: Record<string, string[]>, size: Size, isMatk: boolean) {
+  const section = !isMatk ? sections["Size Bonuses"] : sections["Magic Size Bonuses"];
   if (!section) return 0;
 
   let searchedSize = size.toLowerCase();
@@ -93,33 +114,36 @@ function getSizeBonus(sections: Record<string, string[]>, size: Size) {
 
 function getMonsterTypeBonus(
   sections: Record<string, string[]>,
-  target: MonsterType
+  target: MonsterType,
+  isMatk: boolean
 ) {
-  const section = sections["Class Bonuses"];
+  const section = !isMatk ? sections["Class Bonuses"] : sections["Magic Class Bonuses"];
   return getBonusFromSection(section, target as string);
 }
 
 function getBypass(
   sections: Record<string, string[]>,
   race: Race,
-  monsterType: MonsterType
+  monsterType: MonsterType,
+  isMATK: boolean
 ) {
   const raceBypass = getBonusFromSection(
-    sections["Ignored Race Defense"],
+    !isMATK ? sections["Ignored Race Defense"] : sections["Ignored Race Magic Defense"],
     race as string
   );
 
   const classBypass = getBonusFromSection(
-    sections["Ignored Class Defense"],
+    !isMATK ? sections["Ignored Class Defense"] : sections["Ignored Class Magic Defense"],
     monsterType as string
   );
 
   return classBypass + raceBypass;
 }
 
-function getSkillBonus(sections: Record<string, string[]>, skillKey: string) {
+function getSkillBonus(sections: Record<string, string[]>, skillKey: string, isMATK: boolean) {
+  const skills = !isMATK ? SKILLS : MATK_SKILLS;
   const section = sections["Skill bonuses"];
-  const skill = SKILLS[skillKey].name;
+  const skill = skills[skillKey].name;
   return getBonusFromSection(section, skill, " : +");
 }
 
@@ -173,7 +197,8 @@ function getHPSP(sections: Record<string, string[]>) {
 export function formatBattleStats(
   battleStats: string,
   skill: string,
-  monsterInfo: MonsterInput
+  monsterInfo: MonsterInput,
+  isMATK: boolean
 ) {
   let response = battleStats.replaceAll(/\[.+]: /g, "");
   const sections: Record<string, string[]> = {};
@@ -191,24 +216,29 @@ export function formatBattleStats(
   });
 
   const equipATK = getEquipATK(sections);
+  const MATKpercent = getMATKpercent(sections);
   const { baseATK, weaponLVL } = getWeaponInfo(sections);
-  const propertyBonus = getPropertyBonus(sections, monsterInfo.element);
-  const raceBonus = getRaceBonus(sections, monsterInfo.race);
+  const elementBonuses = getElementBonuses(sections, monsterInfo.element);
+  const propertyBonus = getPropertyBonus(sections, monsterInfo.element, isMATK);
+  const raceBonus = getRaceBonus(sections, monsterInfo.race, isMATK);
   const monsterTypeBonus = getMonsterTypeBonus(
     sections,
-    monsterInfo.monsterType
+    monsterInfo.monsterType,
+    isMATK
   );
-  const sizeBonus = getSizeBonus(sections, monsterInfo.size);
-  const bypass = getBypass(sections, monsterInfo.race, monsterInfo.monsterType);
-  const skillBonus = getSkillBonus(sections, skill);
+  const sizeBonus = getSizeBonus(sections, monsterInfo.size, isMATK);
+  const bypass = getBypass(sections, monsterInfo.race, monsterInfo.monsterType, isMATK);
+  const skillBonus = getSkillBonus(sections, skill, isMATK);
   const { melee, ranged } = getRangeBonuses(sections);
   const critical = getCriticalDamageBonuses(sections);
   const { hp, sp } = getHPSP(sections);
 
   return {
     equipATK,
+    MATKpercent,
     baseATK,
     weaponLVL,
+    elementBonuses,
     propertyBonus,
     raceBonus,
     sizeBonus,

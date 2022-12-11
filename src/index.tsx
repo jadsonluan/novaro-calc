@@ -3,13 +3,12 @@ import { createRoot } from 'react-dom/client';
 import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
-import { INITIAL_BUILD } from "./data/input";
 import { BuildProvider } from "./hooks/useBuild";
 
 const root = createRoot(document.getElementById('root')!);
 root.render(
   <React.StrictMode>
-    <BuildProvider initialBuild1={INITIAL_BUILD} initialBuild2={INITIAL_BUILD}>
+    <BuildProvider>
       <App />
     </BuildProvider>
   </React.StrictMode>

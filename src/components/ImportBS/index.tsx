@@ -2,6 +2,7 @@ import "./index.css";
 import { useState } from "react";
 import Modal from "react-modal";
 import { SKILLS } from "../../data/skills";
+import { MATK_SKILLS } from "../../data/matkSkills";
 import {
   Character,
   Monster,
@@ -16,10 +17,11 @@ import { capitalize, formatBattleStats } from "../../utils/format";
 import { ELEMENTS, Element } from "../../data/element";
 import { useBuild } from "../../hooks/useBuild";
 
-const ImportBS = () => {
+const ImportBS = ({ isMATK }: { isMATK: boolean }) => {
+  const skills = isMATK ? MATK_SKILLS : SKILLS;
   const [modalIsOpen, setIsOpen] = useState(false);
   const [build, setBuild] = useState("1");
-  const [skill, setSkill] = useState(SKILLS["AUTO_ATTACK"].key);
+  const [skill, setSkill] = useState(skills["BASIC_ATTACK"].key);
   const [race, setRace] = useState(RACES[0]);
   const [element, setElement] = useState(ELEMENTS[0]);
   const [size, setSize] = useState(SIZES[0]);
@@ -37,7 +39,7 @@ const ImportBS = () => {
       element,
       size,
       monsterType,
-    });
+    }, isMATK);
 
     const characterCallback: (prevState: Character) => Character = (
       prevState: Character
@@ -70,10 +72,12 @@ const ImportBS = () => {
         ranged: response.ranged,
         race: response.raceBonus,
         size: response.sizeBonus,
-        class: response.monsterTypeBonus,
+        class: !isMATK ? response.monsterTypeBonus : response.MATKpercent,
+        monster: isMATK ? response.monsterTypeBonus : 0,
         targetProperty: response.propertyBonus,
         skill: response.skillBonus,
         critical: response.critical,
+        skillProperty: response.elementBonuses,
       },
     });
 
@@ -142,9 +146,9 @@ const ImportBS = () => {
               <b>Skill</b>
               <select
                 value={skill}
-                onChange={(event) => setSkill(SKILLS[event.target.value].key)}
+                onChange={(event) => setSkill(skills[event.target.value].key)}
               >
-                {Object.values(SKILLS).map((skill) => (
+                {Object.values(skills).map((skill) => (
                   <option key={skill.key} value={skill.key}>
                     {skill.label}
                   </option>

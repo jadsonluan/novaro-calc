@@ -2,12 +2,14 @@ import { createContext, useContext, useState } from "react";
 import {
   emptyCharacter as initialCharacter,
   emptyMonster as initialMonster,
-  emptyBuffs as initialBuffs,
-  emptyDebuffs as initialDebuffs,
+  emptyATKBuffs as initialBuffs,
+  emptyATKDebuffs as initialDebuffs,
   Character,
   Monster,
   Buffs,
   Debuffs,
+  INITIAL_ATK_BUILD,
+  INITIAL_MATK_BUILD,
 } from "../data/input";
 
 export interface Build {
@@ -45,13 +47,14 @@ const BuildContext = createContext<ContextProps>({
   build2: initialBuild,
 });
 
-interface BuildProviderProps {
-  initialBuild1: { character: Character; monster: Monster, buffs: Buffs, debuffs: Debuffs };
-  initialBuild2: { character: Character; monster: Monster, buffs: Buffs, debuffs: Debuffs };
-}
+export const BuildProvider: React.FC = (props) => {
+  const location = window.location.href;
+  const isMATK = location.includes("matk");
+  const INITIAL_BUILD = !isMATK ? INITIAL_ATK_BUILD : INITIAL_MATK_BUILD;
+  const initialBuild1 = INITIAL_BUILD;
+  const initialBuild2 = INITIAL_BUILD;
 
-export const BuildProvider: React.FC<BuildProviderProps> = (props) => {
-  const { children, initialBuild1, initialBuild2 } = props;
+  const { children } = props;
 
   const [character1, setCharacter1] = useState(initialBuild1.character);
   const [character2, setCharacter2] = useState(initialBuild2.character);

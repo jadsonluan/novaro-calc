@@ -254,7 +254,7 @@ function applyCritical(damage: number, character: Character) {
   return finalDamage;
 }
 
-export function getFinalDamage(range: DmgRange, build: BuildInfo) {
+export function getFinalATKDamage(range: DmgRange, build: BuildInfo) {
   const { character: rawCharacter, monster: rawMonster, buffs, debuffs } = build;
   const buffedCharacter = applyBuffs(rawCharacter, rawMonster, buffs);
   const { character, monster } = applyDebuff(buffedCharacter, rawMonster, debuffs);

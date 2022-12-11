@@ -11,7 +11,81 @@ import { BuildMonsterSelect, Option } from "../Select";
 import { ELEMENTS, Element } from "../../data/element";
 import { BuildMonsterInput } from "../BuildInput";
 
-const MonsterInfo = () => {
+const MonsterInfoATK = () => {
+  return (
+    <>
+      <BuildMonsterInput
+        label="DEF"
+        getValue={(monster: Monster) => monster.hardDEF}
+        updateValue={(value: number) => (prev: Monster) => ({
+          ...prev,
+          hardDEF: value,
+        })}
+      />
+
+      <BuildMonsterInput
+        label="LVL"
+        getValue={(monster: Monster) => monster.baseLevel}
+        updateValue={(value: number) => (prev: Monster) => ({
+          ...prev,
+          baseLevel: value,
+        })}
+        min={1}
+      />
+
+      <BuildMonsterInput
+        label="VIT"
+        getValue={(monster: Monster) => monster.VIT}
+        updateValue={(value: number) => (prev: Monster) => ({
+          ...prev,
+          VIT: value,
+        })}
+      />
+    </>
+  );
+};
+
+const MonsterInfoMATK = () => {
+  return (
+    <>
+      <BuildMonsterInput
+        label="MDEF"
+        getValue={(monster: Monster) => monster.hardMDEF}
+        updateValue={(value: number) => (prev: Monster) => ({
+          ...prev,
+          hardMDEF: value,
+        })}
+      />
+      <BuildMonsterInput
+        label="LVL"
+        getValue={(monster: Monster) => monster.baseLevel}
+        updateValue={(value: number) => (prev: Monster) => ({
+          ...prev,
+          baseLevel: value,
+        })}
+        min={1}
+      />
+      <BuildMonsterInput
+        label="VIT"
+        getValue={(monster: Monster) => monster.VIT}
+        updateValue={(value: number) => (prev: Monster) => ({
+          ...prev,
+          VIT: value,
+        })}
+      />
+      <BuildMonsterInput
+        label="INT"
+        getValue={(monster: Monster) => monster.INT}
+        updateValue={(value: number) => (prev: Monster) => ({
+          ...prev,
+          INT: value,
+        })}
+      />
+    </>
+  );
+};
+
+const MonsterInfo = ({ isMATK }: { isMATK: boolean }) => {
   const sizeOptions: Option[] = SIZES.map((item: string) => ({
     label: item,
     value: item,
@@ -42,35 +116,7 @@ const MonsterInfo = () => {
         <b>Build 2</b>
       </div>
       <div className="build-content">
-        <div>
-          <BuildMonsterInput
-            label="DEF"
-            getValue={(monster: Monster) => monster.hardDEF}
-            updateValue={(value: number) => (prev: Monster) => ({
-              ...prev,
-              hardDEF: value,
-            })}
-          />
-
-          <BuildMonsterInput
-            label="LVL"
-            getValue={(monster: Monster) => monster.baseLevel}
-            updateValue={(value: number) => (prev: Monster) => ({
-              ...prev,
-              baseLevel: value,
-            })}
-            min={1}
-          />
-
-          <BuildMonsterInput
-            label="VIT"
-            getValue={(monster: Monster) => monster.VIT}
-            updateValue={(value: number) => (prev: Monster) => ({
-              ...prev,
-              VIT: value,
-            })}
-          />
-        </div>
+        <div>{!isMATK ? <MonsterInfoATK /> : <MonsterInfoMATK />}</div>
 
         <BuildMonsterSelect
           label="Type"

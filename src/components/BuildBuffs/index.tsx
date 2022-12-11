@@ -1,9 +1,9 @@
 import "./index.css";
-import { Buffs, emptyBuffs } from "../../data/input";
+import { Buffs } from "../../data/input";
 import { BuildBuffCheckBox } from "../BuildCheckBox";
 import { capitalize } from "../BuildBuffsAndDebuffs";
 
-const BuildBuffs = () => {
+const BuildBuffs = ({ emptyBuffs }: { emptyBuffs: Buffs }) => {
   return (
     <div className="build-buffs">
       <div className="inside-header">
@@ -16,7 +16,7 @@ const BuildBuffs = () => {
           <BuildBuffCheckBox 
             key={buff}
             label={capitalize(buff)}
-            getValue={(buffs: Buffs) => buffs[buff as keyof Buffs].active}
+            getValue={(buffs: Buffs) => buffs[buff as keyof Buffs]?.active || false}
             updateValue={(value: boolean) => (prevState: Buffs) => ({
               ...prevState,
               [buff]: {
@@ -24,7 +24,7 @@ const BuildBuffs = () => {
                 active: value,
               },
             })}
-            tooltip={emptyBuffs[buff as keyof Buffs].tooltip}
+            tooltip={emptyBuffs[buff as keyof Buffs]?.tooltip}
           />
         ))}
       </div>

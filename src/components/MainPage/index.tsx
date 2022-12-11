@@ -1,12 +1,13 @@
 import { BuildInfo } from "../../data/input";
 import { getHP, getSP } from "../../data/stats";
 import { Build, useBuild } from "../../hooks/useBuild";
-import { getFinalDamage } from "../../services/atk";
-import BuildATK from "../BuildATK";
+import { getFinalATKDamage } from "../../services/atk";
+import { getFinalMATKDamage } from "../../services/matk";
+import { BuildATK, BuildMATK } from "../BuildATK";
 import BuildBuffsAndDebuffs from "../BuildBuffsAndDebuffs";
 import BuildDiff, { BuildDiffItem } from "../BuildDiff";
 import BuildStats from "../BuildStats";
-import CharacterMisc from "../CharacterMisc";
+import { CharacterMiscATK, CharacterMiscMATK } from "../CharacterMisc";
 import MonsterInfo from "../MonsterInfo";
 import "./index.css";
 
@@ -17,8 +18,9 @@ const getBuildInfo = ({ character, monster, buffs, debuffs, }: Build) => ({
   debuffs,
 });
 
-const MainPage = () => {
+const MainPage = ({ isMATK }: { isMATK: boolean }) => {
   const { build1, build2 } = useBuild();
+  const getFinalDamage = !isMATK ? getFinalATKDamage : getFinalMATKDamage;
 
   const buildInfo1: BuildInfo = getBuildInfo(build1);
   const buildInfo2: BuildInfo = getBuildInfo(build2);
@@ -49,17 +51,17 @@ const MainPage = () => {
     <div className="main">
       <div className="first-col">
         <BuildDiff label="Damage" items={dmgItems} />
-        <BuildATK />
+        {!isMATK ? <BuildATK /> : <BuildMATK />}
       </div>
 
       <div className="second-col">
         <BuildDiff label="Stat" items={statItems} />
         <BuildStats />
-        <CharacterMisc />
+        {!isMATK ? <CharacterMiscATK /> : <CharacterMiscMATK />}
       </div>
       <div className="third-col">
-        <MonsterInfo />
-        <BuildBuffsAndDebuffs />
+        <MonsterInfo isMATK={isMATK} />
+        <BuildBuffsAndDebuffs isMATK={isMATK} />
       </div>
     </div>
   );

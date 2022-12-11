@@ -27,6 +27,7 @@ export interface Weapon {
   type: WeaponType;
   level: number;
   atk: number;
+  matk: number;
   refine: number;
   element: Element;
 }
@@ -43,6 +44,13 @@ export interface ATKModifiers {
   buffATK: number;
 }
 
+export interface MATKModifiers {
+  equipMATK: number;
+  consumableMATK: number;
+  pseudoBuffMATK: number;
+  buffMATK: number;
+}
+
 export interface Modifiers {
   skill: number;
   melee: number;
@@ -54,6 +62,7 @@ export interface Modifiers {
   class: number;
   monster: number;
   targetProperty: number;
+  skillProperty: number;
   advancedKatarMastery: number;
   custom: number;
   critical: number;
@@ -72,6 +81,7 @@ export interface Character {
   modifiers: Modifiers;
   shadowWeaponRefine: number;
   ATK: ATKModifiers;
+  MATK: MATKModifiers;
   bypass: number;
   buffs: string[];
   debuffs: string[];
@@ -84,37 +94,39 @@ export interface Buff {
 
 export interface Buffs {
   // Swordsman
-  magnumBreak: Buff;
-  concentration: Buff;
-  asirRune: Buff;
-  turisusRune: Buff;
-  luxAnimaRune: Buff;
-  shieldSpell: Buff;
-  inspiration: Buff;
+  magnumBreak?: Buff;
+  concentration?: Buff;
+  asirRune?: Buff;
+  turisusRune?: Buff;
+  luxAnimaRune?: Buff;
+  shieldSpell?: Buff;
+  inspiration?: Buff;
   // Thief
-  enchantDeadlyPoison: Buff;
-  pyrexia: Buff;
+  enchantDeadlyPoison?: Buff;
+  pyrexia?: Buff;
   // Merchant
-  loudExclamation: Buff;
-  cartBoost: Buff;
-  pyroclastic: Buff;
+  loudExclamation?: Buff;
+  cartBoost?: Buff;
+  pyroclastic?: Buff;
   // Mage
-  striking: Buff;
+  magicAmplification?: Buff;
+  recognizedSpell?: Buff;
+  striking?: Buff;
   // Archer
-  trueSight: Buff;
-  unlimit: Buff;
-  fearBreeze: Buff;
+  trueSight?: Buff;
+  unlimit?: Buff;
+  fearBreeze?: Buff;
   // Acolyte
-  allSpheres: Buff;
-  odinsBlessing: Buff;
+  allSpheres?: Buff;
+  odinsBlessing?: Buff;
   // Ninja
-  shadowWarrior: Buff;
-  earthCharm: Buff;
+  shadowWarrior?: Buff;
+  earthCharm?: Buff;
   // Taekwon
-  falconSoul: Buff;
+  falconSoul?: Buff;
 }
 
-export const emptyBuffs: Buffs = {
+export const emptyATKBuffs: Buffs = {
   // Swordsman
   magnumBreak: {
     active: false,
@@ -209,17 +221,47 @@ export const emptyBuffs: Buffs = {
   },
 };
 
+export const emptyMATKBuffs: Buffs = {
+  // Swordsman
+  // Thief
+  // Merchant
+  // Mage
+  magicAmplification: {
+    active: false,
+    tooltip: "MATK +50%"
+  },
+  recognizedSpell: {
+    active: false,
+    tooltip: ""
+  },
+  // Archer
+  // Acolyte
+  // Ninja
+  // Taekwon
+};
+
 export interface Debuffs {
-  oratio: Buff;
-  darkClaw: Buff;
-  magicIntoxication: Buff;
+  oratio?: Buff;
+  darkClaw?: Buff;
+  magicIntoxication?: Buff;
 }
 
-export const emptyDebuffs: Debuffs = {
+export const emptyATKDebuffs: Debuffs = {
   darkClaw: {
     active: false,
     tooltip: "+150%(75% for boss) melee damage inflicted"
   },
+  magicIntoxication: {
+    active: false,
+    tooltip: "Takes 50% more damage from all properties"
+  },
+  oratio: {
+    active: false,
+    tooltip: "Decreases holy property resistance"
+  },
+};
+
+export const emptyMATKDebuffs: Debuffs = {
   magicIntoxication: {
     active: false,
     tooltip: "Takes 50% more damage from all properties"
@@ -264,11 +306,15 @@ export type MonsterType = "normal" | "boss";
 export const MONSTER_TYPES: MonsterType[] = ["normal", "boss"];
 
 export type ElementLevel = "1" | "2" | "3" | "4";
+
 export interface Monster {
   baseLevel: number;
   VIT: number;
+  INT: number;
   hardDEF: number;
   hardDEFDebuff: number;
+  hardMDEF: number;
+  hardMDEFDebuff: number;
   element: Element;
   elementLevel: ElementLevel;
   race: Race;
@@ -283,8 +329,11 @@ export interface Monster {
 export const emptyMonster: Monster = {
   baseLevel: 1,
   VIT: 0,
+  INT: 0,
   hardDEF: 0,
   hardDEFDebuff: 0,
+  hardMDEF: 0,
+  hardMDEFDebuff: 0,
   element: "Neutral",
   elementLevel: "1",
   race: "formless",
@@ -322,6 +371,7 @@ export const emptyCharacter: Character = {
   },
   weapon: {
     atk: 0,
+    matk: 0,
     element: "Neutral",
     level: 1,
     refine: 0,
@@ -339,6 +389,7 @@ export const emptyCharacter: Character = {
     size: 0,
     skill: 0,
     targetProperty: 0,
+    skillProperty: 0,
     custom: 0,
     critical: 0,
   },
@@ -352,6 +403,12 @@ export const emptyCharacter: Character = {
     masteryATK: 0,
     buffATK: 0,
   },
+  MATK: {
+    equipMATK: 0,
+    consumableMATK: 0,
+    pseudoBuffMATK: 0,
+    buffMATK: 0,
+  },
   bypass: 0,
   buffs: [],
   debuffs: [],
@@ -364,9 +421,16 @@ export interface BuildInfo {
   debuffs: Debuffs;
 }
 
-export const INITIAL_BUILD: BuildInfo = {
+export const INITIAL_ATK_BUILD: BuildInfo = {
   character: emptyCharacter,
   monster: emptyMonster,
-  buffs: emptyBuffs,
-  debuffs: emptyDebuffs,
+  buffs: emptyATKBuffs,
+  debuffs: emptyATKDebuffs,
+};
+
+export const INITIAL_MATK_BUILD: BuildInfo = {
+  character: emptyCharacter,
+  monster: emptyMonster,
+  buffs: emptyMATKBuffs,
+  debuffs: emptyMATKDebuffs,
 };

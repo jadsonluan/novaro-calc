@@ -1,5 +1,5 @@
 import { useCallback, useEffect, useState } from "react";
-import { BuildInfo, INITIAL_BUILD } from "../data/input";
+import { BuildInfo, INITIAL_ATK_BUILD, INITIAL_MATK_BUILD } from "../data/input";
 import { useBuild } from "./useBuild";
 
 interface BuildData {
@@ -8,8 +8,10 @@ interface BuildData {
 }
 
 const NOVARO_CALC_PREFIX = "novaro-calc-";
+const atkMatkPrefix = (isMATK: boolean) => `${NOVARO_CALC_PREFIX}${isMATK ? "matk-" : ""}`;
 
-const useStorage = () => {
+const useStorage = (isMATK: boolean) => {
+  const INITIAL_BUILD = !isMATK ? INITIAL_ATK_BUILD : INITIAL_MATK_BUILD;
   const { build1, build2 } = useBuild();
   const [builds, setBuilds] = useState<string[]>([]);
 
@@ -19,12 +21,12 @@ const useStorage = () => {
 
     for (let i = 0; i < localStorage.length; i++) {
       key = localStorage.key(i);
-      if (!key || !key.includes(NOVARO_CALC_PREFIX)) continue;
-      result.push(key.split(NOVARO_CALC_PREFIX)[1]);
+      if (!key || !key.includes(atkMatkPrefix(isMATK))) continue;
+      result.push(key.split(atkMatkPrefix(isMATK))[1]);
     }
 
     setBuilds(result.sort());
-  }, [setBuilds]);
+  }, [isMATK]);
 
   useEffect(() => {
     updateBuilds();
@@ -32,7 +34,7 @@ const useStorage = () => {
 
   const load = useCallback(
     (key: string) => {
-      const rawData = localStorage.getItem(`${NOVARO_CALC_PREFIX}${key}`);
+      const rawData = localStorage.getItem(`${atkMatkPrefix(isMATK)}${key}`);
 
       if (!rawData) return;
 
@@ -43,25 +45,25 @@ const useStorage = () => {
       build2.setCharacter({...INITIAL_BUILD.character, ...data.build2.character});
       build2.setMonster({...INITIAL_BUILD.monster, ...data.build2.monster});
     },
-    [build1, build2]
+    [INITIAL_BUILD, build1, build2, isMATK]
   );
 
   const save = useCallback(
     (key: string) => {
       const data = { build1, build2 };
       const parsedData = JSON.stringify(data);
-      localStorage.setItem(`${NOVARO_CALC_PREFIX}${key}`, parsedData);
+      localStorage.setItem(`${atkMatkPrefix(isMATK)}${key}`, parsedData);
       updateBuilds();
     },
-    [updateBuilds, build1, build2]
+    [updateBuilds, build1, build2, isMATK]
   );
 
   const remove = useCallback(
     (key: string) => {
-      localStorage.removeItem(`${NOVARO_CALC_PREFIX}${key}`);
+      localStorage.removeItem(`${atkMatkPrefix(isMATK)}${key}`);
       updateBuilds();
     },
-    [updateBuilds]
+    [updateBuilds, isMATK]
   );
 
   return { builds, load, save, remove };

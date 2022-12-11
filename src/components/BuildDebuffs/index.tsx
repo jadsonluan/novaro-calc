@@ -1,9 +1,9 @@
 import "./index.css";
-import { Debuffs, emptyDebuffs } from "../../data/input";
+import { Debuffs } from "../../data/input";
 import { BuildDebuffCheckBox } from "../BuildCheckBox";
 import { capitalize } from "../BuildBuffsAndDebuffs";
 
-const BuildDebuffs = () => {
+const BuildDebuffs = ({ emptyDebuffs }: { emptyDebuffs: Debuffs }) => {
   return (
     <div className="build-debuffs">
       <div className="inside-header">
@@ -16,7 +16,7 @@ const BuildDebuffs = () => {
           <BuildDebuffCheckBox 
             key={debuff}
             label={capitalize(debuff)}
-            getValue={(debuffs: Debuffs) => debuffs[debuff as keyof Debuffs].active}
+            getValue={(debuffs: Debuffs) => debuffs[debuff as keyof Debuffs]?.active || false}
             updateValue={(value: boolean) => (prevState: Debuffs) => ({
               ...prevState,
               [debuff]: {
@@ -24,7 +24,7 @@ const BuildDebuffs = () => {
                 active: value,
               },
             })}
-            tooltip={emptyDebuffs[debuff as keyof Debuffs].tooltip}
+            tooltip={emptyDebuffs[debuff as keyof Debuffs]?.tooltip}
           />
         ))}
       </div>

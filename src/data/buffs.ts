@@ -151,6 +151,24 @@ const BUFF_EFFECTS: Record<keyof Buffs, BuffEffect> = {
     };
   },
   // Mage
+  magicAmplification: (character: Character) => {
+    const { modifiers: { finalDmg } } = character;
+    const MOD_INCREASE = 50;
+    return {
+      ...character,
+      modifiers: {
+        ...character.modifiers,
+        finalDmg: finalDmg + MOD_INCREASE,
+      },
+      buffs: [...character.buffs, "magicAmplification"],
+    };
+  },
+  recognizedSpell: (character: Character) => {
+    return {
+      ...character,
+      buffs: [...character.buffs, "recognizedSpell"],
+    };
+  },
   striking: (character: Character) => {
     const { ATK: { pseudoBuffATK } } = character;
     const ATK_INCREASE = 100;
@@ -263,7 +281,7 @@ export function applyBuffs(
   let buffedCharacter = deepCopy(character) as Character;
 
   Object.keys(BUFF_EFFECTS).forEach((key) => {
-    if (!buffs[key as keyof Buffs].active) return;
+    if (!buffs[key as keyof Buffs]?.active) return;
     const effect = BUFF_EFFECTS[key as keyof Buffs];
     buffedCharacter = effect(buffedCharacter, monster);
   });

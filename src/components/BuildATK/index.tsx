@@ -1,15 +1,22 @@
+import React from "react";
 import "./index.css";
 import { BuildCharacterInput } from "../BuildInput";
 import { Character } from "../../data/input";
 
-const BuildATK = () => (
+const BuildContainer = ({ children }: { children: React.ReactChild[] }) => (
   <div className="build">
     <div className="header">
       <b>ATK and Modifiers</b>
       <b>Build 1</b>
       <b>Build 2</b>
     </div>
-    <div className="build-content">
+    <div className="build-content">{children}</div>
+  </div>
+);
+
+export const BuildATK = () => {
+  return (
+    <BuildContainer>
       <BuildCharacterInput
         label="Weapon LVL"
         getValue={(character: Character) => character.weapon.level}
@@ -55,7 +62,7 @@ const BuildATK = () => (
           ATK: {
             ...prev.ATK,
             ammoATK: value,
-          }
+          },
         })}
       />
       <BuildCharacterInput
@@ -66,7 +73,7 @@ const BuildATK = () => (
           ATK: {
             ...prev.ATK,
             pseudoBuffATK: value,
-          }
+          },
         })}
       />
       <BuildCharacterInput
@@ -77,7 +84,7 @@ const BuildATK = () => (
           ATK: {
             ...prev.ATK,
             bonusStatusATK: value,
-          }
+          },
         })}
       />
       <BuildCharacterInput
@@ -88,7 +95,7 @@ const BuildATK = () => (
           ATK: {
             ...prev.ATK,
             masteryATK: value,
-          }
+          },
         })}
       />
       <BuildCharacterInput
@@ -99,7 +106,7 @@ const BuildATK = () => (
           ATK: {
             ...prev.ATK,
             buffATK: value,
-          }
+          },
         })}
       />
       <BuildCharacterInput
@@ -110,7 +117,7 @@ const BuildATK = () => (
           ATK: {
             ...prev.ATK,
             equipATK: value,
-          }
+          },
         })}
       />
       <BuildCharacterInput
@@ -123,7 +130,7 @@ const BuildATK = () => (
         max={100}
       />
       <BuildCharacterInput
-        label="Element % Bonus"
+        label="Property % Bonus"
         getValue={(character: Character) => character.modifiers.targetProperty}
         updateValue={(value: number) => (prev: Character) => {
           const { modifiers } = prev;
@@ -234,8 +241,160 @@ const BuildATK = () => (
           return { ...prev, modifiers: { ...modifiers, custom: value } };
         }}
       />
-    </div>
-  </div>
-);
+    </BuildContainer>
+  );
+};
 
-export default BuildATK;
+export const BuildMATK = () => {
+  return (
+    <BuildContainer>
+      <BuildCharacterInput
+        label="Weapon LVL"
+        getValue={(character: Character) => character.weapon.level}
+        updateValue={(value: number) => (prev: Character) => {
+          const { weapon } = prev;
+          return { ...prev, weapon: { ...weapon, level: value } };
+        }}
+        defaultValue={1}
+        min={1}
+        max={4}
+      />
+      <BuildCharacterInput
+        label="Weapon Base MATK"
+        getValue={(character: Character) => character.weapon.matk}
+        updateValue={(value: number) => (prev: Character) => {
+          const { weapon } = prev;
+          return { ...prev, weapon: { ...weapon, matk: value } };
+        }}
+      />
+      <BuildCharacterInput
+        label="Weapon Refine"
+        getValue={(character: Character) => character.weapon.refine}
+        updateValue={(value: number) => (prev: Character) => {
+          const { weapon } = prev;
+          return { ...prev, weapon: { ...weapon, refine: value } };
+        }}
+        max={20}
+      />
+      <BuildCharacterInput
+        label="Shadow Weapon Refine"
+        getValue={(character: Character) => character.shadowWeaponRefine}
+        updateValue={(value: number) => (prev: Character) => ({
+          ...prev,
+          shadowWeaponRefine: value,
+        })}
+        max={10}
+      />
+      <BuildCharacterInput
+        label="MATK %"
+        getValue={(character: Character) => character.modifiers.class}
+        updateValue={(value: number) => (prev: Character) => {
+          const { modifiers } = prev;
+          return { ...prev, modifiers: { ...modifiers, class: value } };
+        }}
+        min={100}
+      />
+      <BuildCharacterInput
+        label="Equip MATK"
+        getValue={(character: Character) => character.MATK.equipMATK}
+        updateValue={(value: number) => (prev: Character) => ({
+          ...prev,
+          MATK: {
+            ...prev.MATK,
+            equipMATK: value,
+          },
+        })}
+      />
+      <BuildCharacterInput
+        label="Custom MATK"
+        getValue={(character: Character) => character.MATK.pseudoBuffMATK}
+        updateValue={(value: number) => (prev: Character) => ({
+          ...prev,
+          MATK: {
+            ...prev.MATK,
+            pseudoBuffMATK: value,
+          },
+        })}
+      />
+      <BuildCharacterInput
+        label="Bypass %"
+        getValue={(character: Character) => character.bypass}
+        updateValue={(value: number) => (prev: Character) => ({
+          ...prev,
+          bypass: value,
+        })}
+        max={100}
+      />
+      <BuildCharacterInput
+        label="Element % Bonus"
+        getValue={(character: Character) => character.modifiers.skillProperty}
+        updateValue={(value: number) => (prev: Character) => {
+          const { modifiers } = prev;
+          return {
+            ...prev,
+            modifiers: { ...modifiers, skillProperty: value },
+          };
+        }}
+      />
+      <BuildCharacterInput
+        label="Property % Bonus"
+        getValue={(character: Character) => character.modifiers.targetProperty}
+        updateValue={(value: number) => (prev: Character) => {
+          const { modifiers } = prev;
+          return {
+            ...prev,
+            modifiers: { ...modifiers, targetProperty: value },
+          };
+        }}
+      />
+      <BuildCharacterInput
+        label="Race % Bonus"
+        getValue={(character: Character) => character.modifiers.race}
+        updateValue={(value: number) => (prev: Character) => {
+          const { modifiers } = prev;
+          return { ...prev, modifiers: { ...modifiers, race: value } };
+        }}
+      />
+      <BuildCharacterInput
+        label="Size % Bonus"
+        getValue={(character: Character) => character.modifiers.size}
+        updateValue={(value: number) => (prev: Character) => {
+          const { modifiers } = prev;
+          return { ...prev, modifiers: { ...modifiers, size: value } };
+        }}
+      />
+      <BuildCharacterInput
+        label="Skill % Bonus"
+        getValue={(character: Character) => character.modifiers.skill}
+        updateValue={(value: number) => (prev: Character) => {
+          const { modifiers } = prev;
+          return { ...prev, modifiers: { ...modifiers, skill: value } };
+        }}
+      />
+      <BuildCharacterInput
+        label="Monster Type % Bonus"
+        getValue={(character: Character) => character.modifiers.monster}
+        updateValue={(value: number) => (prev: Character) => {
+          const { modifiers } = prev;
+          return { ...prev, modifiers: { ...modifiers, monster: value } };
+        }}
+      />
+      <BuildCharacterInput
+        label="Final Damage % Bonus"
+        getValue={(character: Character) => character.modifiers.finalDmg}
+        updateValue={(value: number) => (prev: Character) => {
+          const { modifiers } = prev;
+          return { ...prev, modifiers: { ...modifiers, finalDmg: value } };
+        }}
+      />
+      <BuildCharacterInput
+        label="Custom Damage % Bonus"
+        getValue={(character: Character) => character.modifiers.custom}
+        updateValue={(value: number) => (prev: Character) => {
+          const { modifiers } = prev;
+          return { ...prev, modifiers: { ...modifiers, custom: value } };
+        }}
+      />
+    </BuildContainer>
+  );
+};
