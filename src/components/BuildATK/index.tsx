@@ -121,6 +121,17 @@ export const BuildATK = () => {
         })}
       />
       <BuildCharacterInput
+        label="P.Atk"
+        getValue={(character: Character) => character.ATK.patk}
+        updateValue={(value: number) => (prev: Character) => ({
+          ...prev,
+          ATK: {
+            ...prev.ATK,
+            patk: value,
+          },
+        })}
+      />
+      <BuildCharacterInput
         label="Bypass %"
         getValue={(character: Character) => character.bypass}
         updateValue={(value: number) => (prev: Character) => ({
@@ -128,6 +139,15 @@ export const BuildATK = () => {
           bypass: value,
         })}
         max={100}
+      />
+      <BuildCharacterInput
+        label="Res Bypass %"
+        getValue={(character: Character) => character.traitBypass}
+        updateValue={(value: number) => (prev: Character) => ({
+          ...prev,
+          traitBypass: value,
+        })}
+        max={50}
       />
       <BuildCharacterInput
         label="Property % Bonus"
@@ -189,6 +209,30 @@ export const BuildATK = () => {
         }}
       />
       <BuildCharacterInput
+        label="Critical Damage % Bonus"
+        getValue={(character: Character) => character.modifiers.critical}
+        updateValue={(value: number) => (prev: Character) => {
+          const { modifiers } = prev;
+          return { ...prev, modifiers: { ...modifiers, critical: value } };
+        }}
+      />
+      <BuildCharacterInput
+        label="C.Rate"
+        getValue={(character: Character) => character.ATK.crate}
+        updateValue={(value: number) => (prev: Character) => {
+          const { ATK } = prev;
+          return { ...prev, ATK: { ...ATK, crate: value } };
+        }}
+      />
+      <BuildCharacterInput
+        label="Monster Type % Bonus"
+        getValue={(character: Character) => character.modifiers.monster}
+        updateValue={(value: number) => (prev: Character) => {
+          const { modifiers } = prev;
+          return { ...prev, modifiers: { ...modifiers, monster: value } };
+        }}
+      />
+      <BuildCharacterInput
         label="Weapon % Bonus"
         getValue={(character: Character) =>
           character.modifiers.advancedKatarMastery
@@ -199,14 +243,6 @@ export const BuildATK = () => {
             ...prev,
             modifiers: { ...modifiers, advancedKatarMastery: value },
           };
-        }}
-      />
-      <BuildCharacterInput
-        label="Monster Type % Bonus"
-        getValue={(character: Character) => character.modifiers.monster}
-        updateValue={(value: number) => (prev: Character) => {
-          const { modifiers } = prev;
-          return { ...prev, modifiers: { ...modifiers, monster: value } };
         }}
       />
       <BuildCharacterInput
@@ -223,14 +259,6 @@ export const BuildATK = () => {
         updateValue={(value: number) => (prev: Character) => {
           const { modifiers } = prev;
           return { ...prev, modifiers: { ...modifiers, finalDmg: value } };
-        }}
-      />
-      <BuildCharacterInput
-        label="Critical Damage % Bonus"
-        getValue={(character: Character) => character.modifiers.critical}
-        updateValue={(value: number) => (prev: Character) => {
-          const { modifiers } = prev;
-          return { ...prev, modifiers: { ...modifiers, critical: value } };
         }}
       />
       <BuildCharacterInput
@@ -307,6 +335,17 @@ export const BuildMATK = () => {
         })}
       />
       <BuildCharacterInput
+        label="S.Matk"
+        getValue={(character: Character) => character.MATK.smatk}
+        updateValue={(value: number) => (prev: Character) => ({
+          ...prev,
+          MATK: {
+            ...prev.MATK,
+            smatk: value,
+          },
+        })}
+      />
+      <BuildCharacterInput
         label="Custom MATK"
         getValue={(character: Character) => character.MATK.pseudoBuffMATK}
         updateValue={(value: number) => (prev: Character) => ({
@@ -325,6 +364,15 @@ export const BuildMATK = () => {
           bypass: value,
         })}
         max={100}
+      />
+      <BuildCharacterInput
+        label="Mres Bypass %"
+        getValue={(character: Character) => character.traitBypass}
+        updateValue={(value: number) => (prev: Character) => ({
+          ...prev,
+          traitBypass: value,
+        })}
+        max={50}
       />
       <BuildCharacterInput
         label="Element % Bonus"

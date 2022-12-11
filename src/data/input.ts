@@ -11,6 +11,15 @@ export interface Stats {
   luk: number;
 }
 
+export interface Traits {
+  pow: number;
+  sta: number;
+  wis: number;
+  spl: number;
+  con: number;
+  crt: number;
+}
+
 export interface HPInfo {
   base: number;
   flat: number;
@@ -42,6 +51,8 @@ export interface ATKModifiers {
   pseudoBuffATK: number;
   masteryATK: number;
   buffATK: number;
+  patk: number;
+  crate: number;
 }
 
 export interface MATKModifiers {
@@ -50,6 +61,7 @@ export interface MATKModifiers {
   consumableMATK: number;
   pseudoBuffMATK: number;
   buffMATK: number;
+  smatk: number;
 }
 
 export interface Modifiers {
@@ -76,6 +88,7 @@ export interface Character {
   crit: boolean;
   ignorePenalty: boolean;
   stats: Stats;
+  traits: Traits;
   hp: HPInfo;
   sp: SPInfo;
   weapon: Weapon;
@@ -84,6 +97,7 @@ export interface Character {
   ATK: ATKModifiers;
   MATK: MATKModifiers;
   bypass: number;
+  traitBypass: number;
   buffs: string[];
   debuffs: string[];
 }
@@ -316,6 +330,8 @@ export interface Monster {
   hardDEFDebuff: number;
   hardMDEF: number;
   hardMDEFDebuff: number;
+  res: number;
+  mres: number;
   element: Element;
   elementLevel: ElementLevel;
   race: Race;
@@ -335,6 +351,8 @@ export const emptyMonster: Monster = {
   hardDEFDebuff: 0,
   hardMDEF: 0,
   hardMDEFDebuff: 0,
+  res: 0,
+  mres: 0,
   element: "Neutral",
   elementLevel: "1",
   race: "formless",
@@ -359,6 +377,14 @@ export const emptyCharacter: Character = {
     int: 0,
     dex: 0,
     luk: 0,
+  },
+  traits: {
+    pow: 0,
+    sta: 0,
+    wis: 0,
+    spl: 0,
+    con: 0,
+    crt: 0,
   },
   hp: {
     base: 1,
@@ -403,6 +429,8 @@ export const emptyCharacter: Character = {
     pseudoBuffATK: 0,
     masteryATK: 0,
     buffATK: 0,
+    patk: 0,
+    crate: 0,
   },
   MATK: {
     matkPercent: 100,
@@ -410,8 +438,10 @@ export const emptyCharacter: Character = {
     consumableMATK: 0,
     pseudoBuffMATK: 0,
     buffMATK: 0,
+    smatk: 0,
   },
   bypass: 0,
+  traitBypass: 0,
   buffs: [],
   debuffs: [],
 };

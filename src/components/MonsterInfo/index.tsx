@@ -24,6 +24,15 @@ const MonsterInfoATK = () => {
       />
 
       <BuildMonsterInput
+        label="RES"
+        getValue={(monster: Monster) => monster.res}
+        updateValue={(value: number) => (prev: Monster) => ({
+          ...prev,
+          res: value,
+        })}
+      />
+
+      <BuildMonsterInput
         label="LVL"
         getValue={(monster: Monster) => monster.baseLevel}
         updateValue={(value: number) => (prev: Monster) => ({
@@ -54,6 +63,14 @@ const MonsterInfoMATK = () => {
         updateValue={(value: number) => (prev: Monster) => ({
           ...prev,
           hardMDEF: value,
+        })}
+      />
+      <BuildMonsterInput
+        label="MRES"
+        getValue={(monster: Monster) => monster.mres}
+        updateValue={(value: number) => (prev: Monster) => ({
+          ...prev,
+          mres: value,
         })}
       />
       <BuildMonsterInput

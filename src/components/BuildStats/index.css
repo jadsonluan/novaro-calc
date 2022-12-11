@@ -21,6 +21,10 @@
   padding: 15px 25px;
 }
 
+.build-stats .build-content .build-traits {
+  margin-top: 15px;
+}
+
 .build-stats .build-content .build-hp-sp {
   margin-top: 15px;
 }
