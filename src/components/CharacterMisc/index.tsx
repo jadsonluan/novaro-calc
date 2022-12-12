@@ -1,5 +1,4 @@
 import "./index.css";
-import { Character } from "../../data/input";
 import { BuildCharacterSelect, Option } from "../Select";
 import WeaponType, { WEAPONS } from "../../data/weapon";
 import { getJobsName, INITIAL_JOBS, Job, JOBS } from "../../data/job";
@@ -8,6 +7,7 @@ import { Skill, SKILLS } from "../../data/skills";
 import { MATK_SKILLS } from "../../data/matkSkills";
 import { BuildCharacterCheckBox } from "../BuildCheckBox";
 import React from "react";
+import { Character } from "../../data/character";
 
 const weaponOptions: Option[] = WEAPONS.map((weapon) => ({
   label: weapon,

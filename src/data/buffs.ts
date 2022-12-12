@@ -1,6 +1,160 @@
 import { deepCopy } from "../utils/helperFunctions";
+import { Character } from "./character";
 import { ELEMENTS } from "./element";
-import { Buffs, Character, Monster } from "./input";
+import { Monster } from "./monster";
+
+export interface Buff {
+  active: boolean;
+  tooltip: string;
+}
+
+export interface Buffs {
+  // Swordsman
+  magnumBreak?: Buff;
+  concentration?: Buff;
+  asirRune?: Buff;
+  turisusRune?: Buff;
+  luxAnimaRune?: Buff;
+  shieldSpell?: Buff;
+  inspiration?: Buff;
+  // Thief
+  enchantDeadlyPoison?: Buff;
+  pyrexia?: Buff;
+  // Merchant
+  loudExclamation?: Buff;
+  cartBoost?: Buff;
+  pyroclastic?: Buff;
+  // Mage
+  magicAmplification?: Buff;
+  recognizedSpell?: Buff;
+  striking?: Buff;
+  // Archer
+  trueSight?: Buff;
+  unlimit?: Buff;
+  fearBreeze?: Buff;
+  // Acolyte
+  allSpheres?: Buff;
+  odinsBlessing?: Buff;
+  // Ninja
+  shadowWarrior?: Buff;
+  earthCharm?: Buff;
+  // Taekwon
+  falconSoul?: Buff;
+}
+
+export const emptyATKBuffs: Buffs = {
+  // Swordsman
+  magnumBreak: {
+    active: false,
+    tooltip: "+20% fire property weaponATK"
+  },
+  concentration: {
+    active: false,
+    tooltip: "+15% weaponATK and equipATK"
+  },
+  asirRune: {
+    active: false,
+    tooltip: "Pseudo Buff ATK +70"
+  },
+  turisusRune: {
+    active: false,
+    tooltip: "STR +30 and +15% Melee % Bonus"
+  },
+  luxAnimaRune: {
+    active: false,
+    tooltip: "+30% for the following modifiers: HP & SP, Melee, Ranged, Critical and Size"
+  },
+  shieldSpell: {
+    active: false,
+    tooltip: "Pseudo Buff ATK +150"
+  },
+  inspiration: {
+    active: false,
+    tooltip: "Pseudo Buff ATK +200, all stats +30 and +20% HP"
+  },
+  // Thief
+  enchantDeadlyPoison: {
+    active: false,
+    tooltip: "WeaponATK x5 and extraATK x4"
+  },
+  pyrexia: {
+    active: false,
+    tooltip: "+5% Melee % Bonus and +15% Critical % Bonus"
+  },
+  // Merchant
+  loudExclamation: {
+    active: false,
+    tooltip: "STR +4 and Pseudo Buff ATK +30"
+  },
+  cartBoost: {
+    active: false,
+    tooltip: "Mastery ATK +50"
+  },
+  pyroclastic: {
+    active: false,
+    tooltip: "Pseudo Buff ATK +400"
+  },
+  // Mage
+  striking: {
+    active: false,
+    tooltip: "Pseudo Buff ATK +100"
+  },
+  // Archer
+  trueSight: {
+    active: false,
+    tooltip: "All stats +5 and 20% added to the skill base damage"
+  },
+  unlimit: {
+    active: false,
+    tooltip: "Final Damage +250%"
+  },
+  fearBreeze: {
+    active: false,
+    tooltip: "Increases Aimed Bolt and Arrow Storm damage"
+  },
+  // Acolyte
+  allSpheres: {
+    active: false,
+    tooltip: "Mastery ATK +3 * spheres = +45"
+  },
+  odinsBlessing: {
+    active: false,
+    tooltip: "Pseudo Buff ATK +100"
+  },
+  // Ninja
+  shadowWarrior: {
+    active: false,
+    tooltip: "Increases Cross Slash damage"
+  },
+  earthCharm: {
+    active: false,
+    tooltip: "WeaponATK +15% per charm = +150% and increases Elemental % Bonus +30% against Wind monsters "
+  },
+  // Taekwon
+  falconSoul: {
+    active: false,
+    tooltip: "Pseudo Buff ATK +50"
+  },
+};
+
+export const emptyMATKBuffs: Buffs = {
+  // Swordsman
+  // Thief
+  // Merchant
+  // Mage
+  magicAmplification: {
+    active: false,
+    tooltip: "MATK +50%"
+  },
+  recognizedSpell: {
+    active: false,
+    tooltip: "Removes weapon MATK variance (overupgrade MATK variance still applies)"
+  },
+  // Archer
+  // Acolyte
+  // Ninja
+  // Taekwon
+};
 
 type BuffEffect = (character: Character, monster: Monster) => Character;
 

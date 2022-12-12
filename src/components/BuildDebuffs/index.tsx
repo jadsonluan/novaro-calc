@@ -1,7 +1,7 @@
 import "./index.css";
-import { Debuffs } from "../../data/input";
 import { BuildDebuffCheckBox } from "../BuildCheckBox";
 import { capitalize } from "../BuildBuffsAndDebuffs";
+import { Debuffs } from "../../data/debuff";
 
 const BuildDebuffs = ({ emptyDebuffs }: { emptyDebuffs: Debuffs }) => {
   return (

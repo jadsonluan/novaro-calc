@@ -1,15 +1,8 @@
 import "./index.css";
-import {
-  ElementLevel,
-  Monster,
-  MonsterType,
-  MONSTER_TYPES,
-  Size,
-  SIZES,
-} from "../../data/input";
 import { BuildMonsterSelect, Option } from "../Select";
 import { ELEMENTS, Element } from "../../data/element";
 import { BuildMonsterInput } from "../BuildInput";
+import { Monster, SIZES, MONSTER_TYPES, MonsterType, Size, ElementLevel } from "../../data/monster";
 
 const MonsterInfoATK = () => {
   return (

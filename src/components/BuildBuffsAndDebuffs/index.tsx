@@ -2,12 +2,8 @@ import "./index.css";
 import { useState } from "react";
 import BuildBuffs from "../BuildBuffs";
 import BuildDebuffs from "../BuildDebuffs";
-import {
-  emptyATKBuffs,
-  emptyATKDebuffs,
-  emptyMATKBuffs,
-  emptyMATKDebuffs,
-} from "../../data/input";
+import { emptyATKBuffs, emptyMATKBuffs } from "../../data/buffs";
+import { emptyATKDebuffs, emptyMATKDebuffs } from "../../data/debuff";
 
 export const capitalize = (str: string) => {
   return str

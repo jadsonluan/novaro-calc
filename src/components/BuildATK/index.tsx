@@ -1,7 +1,7 @@
 import React from "react";
 import "./index.css";
 import { BuildCharacterInput } from "../BuildInput";
-import { Character } from "../../data/input";
+import { Character } from "../../data/character";
 
 const BuildContainer = ({ isMatk, children }: { isMatk: boolean, children: React.ReactChild[] }) => (
   <div className="build">

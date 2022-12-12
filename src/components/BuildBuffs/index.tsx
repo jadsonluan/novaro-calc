@@ -1,5 +1,5 @@
 import "./index.css";
-import { Buffs } from "../../data/input";
+import { Buffs } from "../../data/buffs";
 import { BuildBuffCheckBox } from "../BuildCheckBox";
 import { capitalize } from "../BuildBuffsAndDebuffs";
 

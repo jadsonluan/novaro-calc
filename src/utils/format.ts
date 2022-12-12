@@ -1,6 +1,6 @@
 import { Element } from "../data/element";
-import { MonsterType, Race, Size } from "../data/input";
 import { MATK_SKILLS } from "../data/matkSkills";
+import { Race, Size, MonsterType } from "../data/monster";
 import { SKILLS } from "../data/skills";
 
 export const capitalize = (str: string) => str[0].toUpperCase() + str.slice(1);

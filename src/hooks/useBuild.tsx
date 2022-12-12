@@ -1,13 +1,9 @@
 import { createContext, useContext, useState } from "react";
+import { Character, emptyCharacter as initialCharacter } from "../data/character";
+import { Monster, emptyMonster as initialMonster } from "../data/monster";
+import { Buffs, emptyATKBuffs as initialBuffs } from "../data/buffs";
+import { Debuffs, emptyATKDebuffs as initialDebuffs } from "../data/debuff";
 import {
-  emptyCharacter as initialCharacter,
-  emptyMonster as initialMonster,
-  emptyATKBuffs as initialBuffs,
-  emptyATKDebuffs as initialDebuffs,
-  Character,
-  Monster,
-  Buffs,
-  Debuffs,
   INITIAL_ATK_BUILD,
   INITIAL_MATK_BUILD,
 } from "../data/input";

@@ -1,16 +1,13 @@
 import {
   BuildInfo,
-  Character,
-  Monster,
-  Size,
-  Stats,
-  Weapon,
 } from "../data/input";
-import WeaponType, { WEAPON_PENALTIES } from "../data/weapon";
+import WeaponType, { Weapon, WEAPON_PENALTIES } from "../data/weapon";
 import { ELEMENTS, getPropertyModifier } from "../data/element";
 import { getSkill } from "../data/skills";
 import { applyBuffs } from "../data/buffs";
 import { applyDebuff } from "../data/debuff";
+import { Character, Stats } from "../data/character";
+import { Monster, Size } from "../data/monster";
 export type DmgRange = "MIN" | "MAX";
 
 const DEX_WEAPONS: WeaponType[] = ["Whip", "Instrument", "Bow", "Gun"];
@@ -298,7 +295,7 @@ export function getFinalATKDamage(range: DmgRange, build: BuildInfo) {
   );
 
   finalDmg = applyModifier(finalDmg, character.ATK.patk);
-  
+
   finalDmg = applyModifier(finalDmg, monster.finalModifier);
   return {
     damage: finalDmg,

@@ -1,13 +1,13 @@
 import {
   BuildInfo,
-  Character,
-  Monster,
-  Weapon,
 } from "../data/input";
 import { getPropertyModifier } from "../data/element";
 import { getSkill } from "../data/matkSkills";
 import { applyBuffs } from "../data/buffs";
 import { applyDebuff } from "../data/debuff";
+import { Character } from "../data/character";
+import { Monster } from "../data/monster";
+import { Weapon } from "../data/weapon";
 export type DmgRange = "MIN" | "MAX";
 
 const MRES_REDUCTION_CAP = 625;

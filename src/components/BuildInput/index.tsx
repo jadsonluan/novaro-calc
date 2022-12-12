@@ -1,5 +1,6 @@
 import { evaluate } from "mathjs";
-import { Character, Monster } from "../../data/input";
+import { Character } from "../../data/character";
+import { Monster } from "../../data/monster";
 import { Build, useBuild } from "../../hooks/useBuild";
 import "./index.css";
 

@@ -1,6 +1,6 @@
 import "./index.css";
 import { BuildCharacterInput } from "../BuildInput";
-import { Character } from "../../data/input";
+import { Character } from "../../data/character";
 
 const BuildStats = () => (
   <div className="build-stats">

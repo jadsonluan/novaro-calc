@@ -1,5 +1,7 @@
-import { Buffs, Character, Monster } from "./input";
+import { Buffs } from "./buffs";
+import { Character } from "./character";
 import { Job } from "./job";
+import { Monster } from "./monster";
 import { getHP, getSP } from "./stats";
 
 export interface FormulaReturn {

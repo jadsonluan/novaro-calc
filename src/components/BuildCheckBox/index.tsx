@@ -1,4 +1,7 @@
-import { Buffs, Character, Debuffs, Monster } from "../../data/input";
+import { Buffs } from "../../data/buffs";
+import { Character } from "../../data/character";
+import { Debuffs } from "../../data/debuff";
+import { Monster } from "../../data/monster";
 import { Build, useBuild } from "../../hooks/useBuild";
 import "./index.css";
 

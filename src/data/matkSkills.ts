@@ -1,4 +1,5 @@
-import { Buffs, Character, Monster } from "./input";
+import { Character } from "./character";
+import { Monster } from "./monster";
 import { Skill } from "./skills";
 
 const allSkills: Record<string, Skill> = {

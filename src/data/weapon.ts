@@ -1,3 +1,14 @@
+import { Element } from "./element";
+
+export interface Weapon {
+  type: WeaponType;
+  level: number;
+  atk: number;
+  matk: number;
+  refine: number;
+  element: Element;
+}
+
 type WeaponType =
   | "Axe"
   | "Bare Hand"

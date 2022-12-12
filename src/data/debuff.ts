@@ -1,5 +1,39 @@
 import { deepCopy } from "../utils/helperFunctions";
-import { Debuffs, Character, Monster } from "./input";
+import { Buff } from "./buffs";
+import { Character } from "./character";
+import { Monster } from "./monster";
+
+export interface Debuffs {
+  oratio?: Buff;
+  darkClaw?: Buff;
+  magicIntoxication?: Buff;
+}
+
+export const emptyATKDebuffs: Debuffs = {
+  darkClaw: {
+    active: false,
+    tooltip: "+150%(75% for boss) melee damage inflicted"
+  },
+  magicIntoxication: {
+    active: false,
+    tooltip: "Takes 50% more damage from all properties"
+  },
+  oratio: {
+    active: false,
+    tooltip: "Decreases holy property resistance"
+  },
+};
+
+export const emptyMATKDebuffs: Debuffs = {
+  magicIntoxication: {
+    active: false,
+    tooltip: "Takes 50% more damage from all properties"
+  },
+  oratio: {
+    active: false,
+    tooltip: "Decreases holy property resistance"
+  },
+};
 
 type BuffEffect = (
   character: Character,

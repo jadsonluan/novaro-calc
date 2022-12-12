@@ -3,19 +3,11 @@ import { useState } from "react";
 import Modal from "react-modal";
 import { SKILLS } from "../../data/skills";
 import { MATK_SKILLS } from "../../data/matkSkills";
-import {
-  Character,
-  Monster,
-  MonsterType,
-  MONSTER_TYPES,
-  Race,
-  RACES,
-  Size,
-  SIZES,
-} from "../../data/input";
 import { capitalize, formatBattleStats } from "../../utils/format";
 import { ELEMENTS, Element } from "../../data/element";
 import { useBuild } from "../../hooks/useBuild";
+import { Character } from "../../data/character";
+import { RACES, SIZES, MONSTER_TYPES, Monster, Race, Size, MonsterType } from "../../data/monster";
 
 const ImportBS = ({ isMATK }: { isMATK: boolean }) => {
   const skills = isMATK ? MATK_SKILLS : SKILLS;
