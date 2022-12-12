@@ -77,7 +77,7 @@ const ImportBS = ({ isMATK }: { isMATK: boolean }) => {
         race: response.raceBonus,
         size: response.sizeBonus,
         class: response.monsterTypeBonus,
-        monster: isMATK ? response.monsterTypeBonus : 0,
+        monster: response.monsterTypeBonus,
         targetProperty: response.propertyBonus,
         skill: response.skillBonus,
         critical: response.critical,

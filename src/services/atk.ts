@@ -16,14 +16,16 @@ export type DmgRange = "MIN" | "MAX";
 const DEX_WEAPONS: WeaponType[] = ["Whip", "Instrument", "Bow", "Gun"];
 
 const BASE_CRITICAL_DAMAGE = 40;
+const RES_REDUCTION_CAP = 625;
 
 function isDexWeapon(weaponType: WeaponType) {
   return DEX_WEAPONS.includes(weaponType);
 }
 
 function getStatusATK(character: Character) {
-  const { stats, baseLevel, weapon, ATK: { bonusStatusATK } } = character;
+  const { stats, traits, baseLevel, weapon, ATK: { bonusStatusATK } } = character;
   const { str, dex, luk } = stats;
+  const { pow } = traits;
 
   // elemental advantage is always 1, unless using warm wind
   const propertyModifier = 1;
@@ -33,7 +35,7 @@ function getStatusATK(character: Character) {
     : str + dex / 5;
 
   const baseStatusATK = Math.floor(
-    (baseLevel / 4 + mainStatBonus + luk / 3 + bonusStatusATK) *
+    (baseLevel / 4 + mainStatBonus + luk / 3 + bonusStatusATK + pow * 5) *
       propertyModifier
   );
   return baseStatusATK;
@@ -236,20 +238,27 @@ function getHardDEF(monster: Monster, bypass: number) {
   return (finalHardDef + 4000) / (4000 + finalHardDef * 10);
 }
 
-function getDEF(monster: Monster, bypass: number, skillName: string) {
+function getRES(monster: Monster, traitBypass: number) {
+  let { res } = monster;
+  res -= res * traitBypass / 100;
+  return res > RES_REDUCTION_CAP ? 0.5 : (res + 5000) / (5000 + res * 10);
+}
+
+function getDEF(monster: Monster, bypass: number, traitBypass: number, skillName: string) {
+  const RES = getRES(monster, traitBypass);
   const hardDEF = getHardDEF(monster, bypass);
   const softDEF = getSoftDEF(monster);
   const skill = getSkill(skillName);
 
   if (skill.hardAsSoftDef) {
-    return { hardDEF: 1, softDEF: softDEF + hardDEF };
+    return { RES, hardDEF: 1, softDEF: softDEF + hardDEF };
   }
 
-  return { hardDEF, softDEF };
+  return { RES, hardDEF, softDEF };
 }
 
 function applyCritical(damage: number, character: Character) {
-  let finalDamage = applyModifier(damage, BASE_CRITICAL_DAMAGE);
+  let finalDamage = applyModifier(damage, BASE_CRITICAL_DAMAGE + character.ATK.crate);
   finalDamage = applyModifier(finalDamage, character.modifiers.critical / 2);
   return finalDamage;
 }
@@ -264,9 +273,10 @@ export function getFinalATKDamage(range: DmgRange, build: BuildInfo) {
 
   const rangeMod = skill.isMelee ? mods.melee : mods.ranged;
   const atk = getATK(character.crit ? "MAX" : range, character, monster);
-  const { hardDEF, softDEF } = getDEF(
+  const { RES, hardDEF, softDEF } = getDEF(
     monster,
     character.bypass,
+    character.traitBypass,
     character.skill
   );
 
@@ -275,7 +285,10 @@ export function getFinalATKDamage(range: DmgRange, build: BuildInfo) {
   finalDmg = applyModifier(finalDmg, mods.custom);
   finalDmg = applyModifier(finalDmg, rangeMod);
   finalDmg = applyModifier(finalDmg, mods.dmg);
+
+  finalDmg = Math.floor(applyModifier(finalDmg, RES));
   finalDmg = Math.floor(finalDmg * hardDEF) - softDEF;
+  
   finalDmg = applyModifier(finalDmg, mods.finalDmg);
   finalDmg = character.crit ? applyCritical(finalDmg, character) : finalDmg;
   finalDmg = Math.max(0, finalDmg) + Math.max(0, applyModifier(formula.bonus, mods.finalDmg))
@@ -283,6 +296,9 @@ export function getFinalATKDamage(range: DmgRange, build: BuildInfo) {
     finalDmg,
     skill.isMelee ? monster.meleeModifier : monster.rangedModifier
   );
+
+  finalDmg = applyModifier(finalDmg, character.ATK.patk);
+  
   finalDmg = applyModifier(finalDmg, monster.finalModifier);
   return {
     damage: finalDmg,

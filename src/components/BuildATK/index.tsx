@@ -147,7 +147,7 @@ export const BuildATK = () => {
           ...prev,
           traitBypass: value,
         })}
-        max={50}
+        max={100}
       />
       <BuildCharacterInput
         label="Property % Bonus"
@@ -372,7 +372,7 @@ export const BuildMATK = () => {
           ...prev,
           traitBypass: value,
         })}
-        max={50}
+        max={100}
       />
       <BuildCharacterInput
         label="Element % Bonus"

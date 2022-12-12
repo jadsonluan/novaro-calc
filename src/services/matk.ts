@@ -10,12 +10,22 @@ import { applyBuffs } from "../data/buffs";
 import { applyDebuff } from "../data/debuff";
 export type DmgRange = "MIN" | "MAX";
 
+const MRES_REDUCTION_CAP = 625;
+
 function getStatusMATK(character: Character) {
-  const { stats, baseLevel } = character;
+  const { stats, traits, baseLevel } = character;
   const { int, dex, luk } = stats;
+  const { spl } = traits;
 
 
-  const baseStatusMATK = Math.floor(Math.floor(baseLevel / 4) + int + Math.floor(int / 2) + Math.floor(dex / 5) + Math.floor(luk / 3));
+  const baseStatusMATK = Math.floor(
+    Math.floor(baseLevel / 4) +
+      int +
+      Math.floor(int / 2) +
+      Math.floor(dex / 5) +
+      Math.floor(luk / 3) +
+      spl * 5
+  );
   return baseStatusMATK;
 }
 
@@ -50,7 +60,7 @@ function getWeaponMATK(
 
   if (range === "MIN") {
     overUpgradeMATK = 0;
-    variance *= character.buffs.includes('recognizedSpell') ? 0 :-1;
+    variance *= character.buffs.includes('recognizedSpell') ? 1 :-1;
   } else {
     overUpgradeMATK = Math.max(1, getMaxOverUpgradeBonus(weapon));
   }
@@ -138,11 +148,18 @@ function getHardMDEF(monster: Monster, bypass: number) {
   return (finalHardMdef + 1000) / (1000 + finalHardMdef * 10);
 }
 
-function getMDEF(monster: Monster, bypass: number) {
+function getMRES(monster: Monster, traitBypass: number) {
+  let { mres } = monster;
+  mres -= mres * traitBypass / 100;
+  return mres > MRES_REDUCTION_CAP ? 0.5 : (mres + 5000) / (5000 + mres * 10);
+}
+
+function getMDEF(monster: Monster, bypass: number, traitBypass: number,) {
+  const MRES = getMRES(monster, traitBypass);
   const hardMDEF = getHardMDEF(monster, bypass);
   const softMDEF = getSoftMDEF(monster);
 
-  return { hardMDEF, softMDEF };
+  return { MRES, hardMDEF, softMDEF };
 }
 
 export function getFinalMATKDamage(range: DmgRange, build: BuildInfo) {
@@ -157,16 +174,23 @@ export function getFinalMATKDamage(range: DmgRange, build: BuildInfo) {
   let matk = getMATK(range, character, monster);
   matk = applyCardModifiers(matk, character, monster);
 
-  const { hardMDEF, softMDEF } = getMDEF(
+  const { MRES, hardMDEF, softMDEF } = getMDEF(
     monster,
     character.bypass,
+    character.traitBypass,
   );
 
   let finalDmg = Math.floor(matk * (formula.percent / 100));
   finalDmg = applyModifier(finalDmg, mods.skill);
+
+  finalDmg = Math.floor(applyModifier(finalDmg, MRES));
   finalDmg = Math.floor(finalDmg * hardMDEF) - softMDEF;
+
   finalDmg = applyModifier(finalDmg, mods.finalDmg);
   finalDmg = applyModifier(finalDmg, mods.custom);
+
+  finalDmg = applyModifier(finalDmg, character.MATK.smatk);
+
   finalDmg = applyModifier(finalDmg, monster.finalModifier);
   return {
     damage: finalDmg,
