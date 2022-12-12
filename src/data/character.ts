@@ -130,6 +130,7 @@ export const emptyCharacter: Character = {
     element: "Neutral",
     level: 1,
     refine: 0,
+    grade: "No Grade",
     type: "Bare Hand",
   },
   modifiers: {

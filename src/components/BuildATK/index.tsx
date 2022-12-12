@@ -26,7 +26,7 @@ export const BuildATK = () => {
         }}
         defaultValue={1}
         min={1}
-        max={4}
+        max={5}
       />
       <BuildCharacterInput
         label="Weapon Base ATK"
@@ -285,7 +285,7 @@ export const BuildMATK = () => {
         }}
         defaultValue={1}
         min={1}
-        max={4}
+        max={5}
       />
       <BuildCharacterInput
         label="Weapon Base MATK"

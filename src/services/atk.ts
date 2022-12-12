@@ -1,7 +1,7 @@
 import {
   BuildInfo,
 } from "../data/input";
-import WeaponType, { Weapon, WEAPON_PENALTIES } from "../data/weapon";
+import WeaponType, { GRADES, Weapon, WEAPON_PENALTIES } from "../data/weapon";
 import { ELEMENTS, getPropertyModifier } from "../data/element";
 import { getSkill } from "../data/skills";
 import { applyBuffs } from "../data/buffs";
@@ -39,14 +39,15 @@ function getStatusATK(character: Character) {
 }
 
 function getRefineBonus(weapon: Weapon) {
-  const { refine, level } = weapon;
-  const atkPerRefine = [2, 3, 5, 7];
+  const { refine, level, grade } = weapon;
+  const atkPerGrade = [8, 8.8, 10.4, 12, 16];
+  const atkPerRefine = [2, 3, 5, 7, atkPerGrade[GRADES.indexOf(grade)]];
 
   // ATK per refine > 15
   const AtkPerHighUpgrade = [3, 6, 9, 12];
   const overRefine = Math.max(0, refine - 15);
-  const highUpgradeBonus = overRefine * AtkPerHighUpgrade[level - 1];
-  return refine * atkPerRefine[level - 1] + highUpgradeBonus;
+  const highUpgradeBonus = level <= 4 ? overRefine * AtkPerHighUpgrade[level - 1] : 0;
+  return Math.floor(refine * atkPerRefine[level - 1] + highUpgradeBonus);
 }
 
 function getMaxOverUpgradeBonus(weapon: Weapon) {

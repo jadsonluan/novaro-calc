@@ -6,8 +6,13 @@ export interface Weapon {
   atk: number;
   matk: number;
   refine: number;
+  grade: Grade;
   element: Element;
 }
+
+export type Grade = "No Grade" | "D" | "C" | "B" | "A";
+
+export const GRADES: Grade[] = ["No Grade", "D", "C", "B", "A"];
 
 type WeaponType =
   | "Axe"

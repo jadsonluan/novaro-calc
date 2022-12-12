@@ -1,6 +1,6 @@
 import "./index.css";
 import { BuildCharacterSelect, Option } from "../Select";
-import WeaponType, { WEAPONS } from "../../data/weapon";
+import WeaponType, { GRADES, Grade, WEAPONS } from "../../data/weapon";
 import { getJobsName, INITIAL_JOBS, Job, JOBS } from "../../data/job";
 import { ELEMENTS, Element } from "../../data/element";
 import { Skill, SKILLS } from "../../data/skills";
@@ -20,9 +20,14 @@ const jobOptions: Option[] = Object.keys(JOBS).map((job: string) => ({
   group: JOBS[job as Job].initialJob,
 }));
 
-const elementOptions: Option[] = ELEMENTS.map((job: string) => ({
-  label: job,
-  value: job,
+const elementOptions: Option[] = ELEMENTS.map((element: string) => ({
+  label: element,
+  value: element,
+}));
+
+const gradeOptions: Option[] = GRADES.map((grade: string) => ({
+  label: grade,
+  value: grade,
 }));
 
 const CharacterMisc = ({ children }: { children: React.ReactChild[] }) => {
@@ -74,6 +79,23 @@ export const CharacterMiscATK = () => {
               weapon: {
                 ...weapon,
                 element: value as unknown as Element,
+              },
+            };
+          }}
+        />
+        <BuildCharacterSelect
+          label="Grade"
+          options={gradeOptions}
+          getValue={(character: Character) =>
+            character.weapon.grade as string
+          }
+          updateValue={(value: string) => (prevState: Character) => {
+            const { weapon } = prevState;
+            return {
+              ...prevState,
+              weapon: {
+                ...weapon,
+                grade: value as unknown as Grade,
               },
             };
           }}
@@ -144,6 +166,23 @@ export const CharacterMiscMATK = () => {
             return {
               ...prevState,
               weapon: { ...weapon, type: value as WeaponType },
+            };
+          }}
+        />
+        <BuildCharacterSelect
+          label="Grade"
+          options={gradeOptions}
+          getValue={(character: Character) =>
+            character.weapon.grade as string
+          }
+          updateValue={(value: string) => (prevState: Character) => {
+            const { weapon } = prevState;
+            return {
+              ...prevState,
+              weapon: {
+                ...weapon,
+                grade: value as unknown as Grade,
+              },
             };
           }}
         />

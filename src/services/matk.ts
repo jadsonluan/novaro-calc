@@ -7,7 +7,7 @@ import { applyBuffs } from "../data/buffs";
 import { applyDebuff } from "../data/debuff";
 import { Character } from "../data/character";
 import { Monster } from "../data/monster";
-import { Weapon } from "../data/weapon";
+import { GRADES, Weapon } from "../data/weapon";
 export type DmgRange = "MIN" | "MAX";
 
 const MRES_REDUCTION_CAP = 625;
@@ -30,13 +30,14 @@ function getStatusMATK(character: Character) {
 }
 
 function getRefineBonus(weapon: Weapon) {
-  const { refine, level } = weapon;
-  const matkPerRefine = [2, 3, 5, 7];
+  const { refine, level, grade } = weapon;
+  const matkPerGrade = [8, 8.8, 10.4, 12, 16];
+  const matkPerRefine = [2, 3, 5, 7, matkPerGrade[GRADES.indexOf(grade)]];
 
   const AtkPerHighUpgrade = [3, 6, 9, 12];
   const overRefine = Math.max(0, refine - 15);
   const highUpgradeBonus = overRefine * AtkPerHighUpgrade[level - 1];
-  return refine * matkPerRefine[level - 1] + highUpgradeBonus;
+  return Math.floor(refine * matkPerRefine[level - 1] + highUpgradeBonus);
 }
 
 function getMaxOverUpgradeBonus(weapon: Weapon) {
