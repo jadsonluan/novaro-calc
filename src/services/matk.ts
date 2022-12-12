@@ -34,7 +34,7 @@ function getRefineBonus(weapon: Weapon) {
   const matkPerGrade = [8, 8.8, 10.4, 12, 16];
   const matkPerRefine = [2, 3, 5, 7, matkPerGrade[GRADES.indexOf(grade)]];
 
-  const AtkPerHighUpgrade = [3, 6, 9, 12];
+  const AtkPerHighUpgrade = [3, 6, 9, 12, 0];
   const overRefine = Math.max(0, refine - 15);
   const highUpgradeBonus = overRefine * AtkPerHighUpgrade[level - 1];
   return Math.floor(refine * matkPerRefine[level - 1] + highUpgradeBonus);
@@ -42,8 +42,8 @@ function getRefineBonus(weapon: Weapon) {
 
 function getMaxOverUpgradeBonus(weapon: Weapon) {
   const { level, refine } = weapon;
-  const safetyLimit = [7, 6, 5, 4];
-  const maxAtkPerOverUpgrade = [3, 5, 8, 14];
+  const safetyLimit = [7, 6, 5, 4, 3];
+  const maxAtkPerOverUpgrade = [3, 5, 8, 14, 0];
   const overRefine = Math.max(0, refine - safetyLimit[level - 1]);
   return overRefine * maxAtkPerOverUpgrade[level - 1];
 }

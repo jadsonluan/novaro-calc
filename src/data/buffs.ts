@@ -40,6 +40,9 @@ export interface Buffs {
   earthCharm?: Buff;
   // Taekwon
   falconSoul?: Buff;
+  // Novice
+  ruleBreak?: Buff;
+  breakingLimit?: Buff;
 }
 
 export const emptyATKBuffs: Buffs = {
@@ -154,6 +157,15 @@ export const emptyMATKBuffs: Buffs = {
   // Acolyte
   // Ninja
   // Taekwon
+  // Novice
+  ruleBreak: {
+    active: false,
+    tooltip: "Increase Hyper Novice magic skills damage"
+  },
+  breakingLimit: {
+    active: false,
+    tooltip: "Increase Hyper Novice physical skills damage"
+  },
 };
 
 type BuffEffect = (character: Character, monster: Monster) => Character;
@@ -424,6 +436,13 @@ const BUFF_EFFECTS: Record<keyof Buffs, BuffEffect> = {
       },
       buffs: [...character.buffs, "falconSoul"],
     };
+  },
+  // Novice
+  breakingLimit: (character: Character) => {
+    return { ...character, buffs: [...character.buffs, "breakingLimit"] };
+  },
+  ruleBreak: (character: Character) => {
+    return { ...character, buffs: [...character.buffs, "ruleBreak"] };
   },
 };
 

@@ -14,7 +14,7 @@ const allSkills: Record<string, Skill> = {
       bonus: 0,
     }),
   },
-}
+};
 
 const wizardSkills: Record<string, Skill> = {
   CRIMSON_ROCK: {
@@ -28,7 +28,7 @@ const wizardSkills: Record<string, Skill> = {
       return {
         percent: baseDamage * (character.baseLevel / 100),
         bonus: 0,
-      }
+      };
     },
   },
   CHAIN_LIGHTNING: {
@@ -42,7 +42,7 @@ const wizardSkills: Record<string, Skill> = {
       return {
         percent: baseDamage * (character.baseLevel / 100),
         bonus: 0,
-      }
+      };
     },
   },
   SOUL_EXPANSION: {
@@ -54,9 +54,10 @@ const wizardSkills: Record<string, Skill> = {
     formula: (character: Character, monster: Monster) => {
       const baseDamage = 2000;
       return {
-        percent: (baseDamage + character.stats.int) * (character.baseLevel / 100),
+        percent:
+          (baseDamage + character.stats.int) * (character.baseLevel / 100),
         bonus: 0,
-      }
+      };
     },
   },
   COMET: {
@@ -70,10 +71,10 @@ const wizardSkills: Record<string, Skill> = {
       return {
         percent: baseDamage * (character.baseLevel / 100),
         bonus: 0,
-      }
+      };
     },
   },
-}
+};
 
 const noviceSkills: Record<string, Skill> = {
   METEOR_STORM_BUSTER: {
@@ -85,9 +86,11 @@ const noviceSkills: Record<string, Skill> = {
     formula: (character: Character, monster: Monster) => {
       const baseDamage = 3800;
       return {
-        percent: (baseDamage + 5 * character.traits.spl) * (character.baseLevel / 100),
+        percent:
+          (baseDamage + 5 * character.traits.spl) * (character.baseLevel / 100) *
+          (character.buffs.includes("ruleBreak") ? 1.5 : 1),
         bonus: 0,
-      }
+      };
     },
   },
   METEOR_STORM_BUSTER_EXPLOSION: {
@@ -99,9 +102,11 @@ const noviceSkills: Record<string, Skill> = {
     formula: (character: Character, monster: Monster) => {
       const baseDamage = 2450;
       return {
-        percent: (baseDamage + character.traits.spl * 5) * (character.baseLevel / 100),
+        percent:
+          (baseDamage + character.traits.spl * 5) * (character.baseLevel / 100) *
+          (character.buffs.includes("ruleBreak") ? 1.5 : 1),
         bonus: 0,
-      }
+      };
     },
   },
   JUPITEL_THUNDERSTORM: {
@@ -113,9 +118,11 @@ const noviceSkills: Record<string, Skill> = {
     formula: (character: Character, monster: Monster) => {
       const baseDamage = 18300;
       return {
-        percent: (baseDamage + character.traits.spl * 5) * (character.baseLevel / 100),
+        percent:
+          (baseDamage + character.traits.spl * 5) * (character.baseLevel / 100) *
+          (character.buffs.includes("ruleBreak") ? 1.7 : 1),
         bonus: 0,
-      }
+      };
     },
   },
   JACK_FROST_NOVA: {
@@ -127,9 +134,14 @@ const noviceSkills: Record<string, Skill> = {
     formula: (character: Character, monster: Monster) => {
       const baseDamage = 2500;
       return {
-        percent: ((baseDamage + character.traits.spl * 5) * (character.baseLevel / 100)) * 2,
+        percent:
+          (baseDamage + character.traits.spl * 5) *
+          (character.baseLevel / 100) *
+          2 *
+          (monster.type === "boss" ? 1 : 1.15) *
+          (character.buffs.includes("ruleBreak") ? 1.7 : 1),
         bonus: 0,
-      }
+      };
     },
   },
   HELLS_DRIVE: {
@@ -141,9 +153,11 @@ const noviceSkills: Record<string, Skill> = {
     formula: (character: Character, monster: Monster) => {
       const baseDamage = 6900;
       return {
-        percent: (baseDamage + character.traits.spl * 5) * (character.baseLevel / 100),
+        percent:
+          (baseDamage + character.traits.spl * 5) * (character.baseLevel / 100) *
+          (character.buffs.includes("ruleBreak") ? 1.7 : 1),
         bonus: 0,
-      }
+      };
     },
   },
   GROUND_GRAVITATION_INITIAL: {
@@ -155,9 +169,11 @@ const noviceSkills: Record<string, Skill> = {
     formula: (character: Character, monster: Monster) => {
       const baseDamage = 18400;
       return {
-        percent: (baseDamage + character.traits.spl * 5) * (character.baseLevel / 100),
+        percent:
+          (baseDamage + character.traits.spl * 5) * (character.baseLevel / 100) *
+          (character.buffs.includes("ruleBreak") ? 1.5 : 1),
         bonus: 0,
-      }
+      };
     },
   },
   GROUND_GRAVITATION_FIELD: {
@@ -169,9 +185,14 @@ const noviceSkills: Record<string, Skill> = {
     formula: (character: Character, monster: Monster) => {
       const baseDamage = 3300;
       return {
-        percent: (baseDamage + character.traits.spl * 5) * (character.baseLevel / 100),
+        // Increase damage by 15% when inside the field (doesn't work on boss monsters)
+        percent:
+          (baseDamage + character.traits.spl * 5) *
+          (character.baseLevel / 100) *
+          (monster.type === "boss" ? 1 : 1.15) *
+          (character.buffs.includes("ruleBreak") ? 1.5 : 1),
         bonus: 0,
-      }
+      };
     },
   },
   NAPALM_VULCAN_STRIKE: {
@@ -183,12 +204,14 @@ const noviceSkills: Record<string, Skill> = {
     formula: (character: Character, monster: Monster) => {
       const baseDamage = 3150;
       return {
-        percent: (baseDamage + character.traits.spl * 5) * (character.baseLevel / 100),
+        percent:
+          (baseDamage + character.traits.spl * 5) * (character.baseLevel / 100) *
+          (character.buffs.includes("ruleBreak") ? 2 : 1),
         bonus: 0,
-      }
+      };
     },
   },
-}
+};
 
 export const MATK_SKILLS: Record<string, Skill> = {
   ...allSkills,
