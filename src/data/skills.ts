@@ -1,7 +1,7 @@
 import { Buffs } from "./buffs";
 import { Character } from "./character";
 import { Job } from "./job";
-import { Monster } from "./monster";
+import { Monster, SIZES } from "./monster";
 import { getHP, getSP } from "./stats";
 
 export interface FormulaReturn {
@@ -361,6 +361,80 @@ const ninjaSkills: Record<string, Skill> = {
   },
 }
 
+const noviceSkills: Record<string, Skill> = {
+  DOUBLE_BOWLING_BASH: {
+    key: "DOUBLE_BOWLING_BASH",
+    name: "Double Bowling Bash (Per hit)",
+    label: "Double Bowling Bash (Per hit)",
+    isMelee: false,
+    job: "Super Novice EX",
+    formula: (character: Character, monster: Monster) => {
+      const baseDamage = 2450;
+      return {
+        percent:
+          (baseDamage + 5 * character.traits.pow) * (character.baseLevel / 100) *
+          (character.buffs.includes("breakingLimit") ? 1.5 : 1),
+        bonus: 0,
+      };
+    },
+  },
+  SHIELD_CHAIN_RUSH: {
+    key: "SHIELD_CHAIN_RUSH",
+    name: "Shield Chain Rush",
+    label: "Shield Chain Rush",
+    isMelee: false,
+    job: "Super Novice EX",
+    formula: (character: Character, monster: Monster) => {
+      const baseDamage = 3700;
+      return {
+        percent:
+          (baseDamage + character.traits.pow * 5) * (character.baseLevel / 100) *
+          (character.buffs.includes("breakingLimit") ? 1.5 : 1),
+        bonus: 0,
+      };
+    },
+  },
+  SPIRAL_PIERCE_MAX: {
+    key: "SPIRAL_PIERCE_MAX",
+    name: "Spiral Pierce Max",
+    label: "Spiral Pierce Max",
+    isMelee: false,
+    job: "Super Novice EX",
+    formula: (character: Character, monster: Monster) => {
+      const baseDamage = 3300;
+      const bonusFactor = {
+        [SIZES[0]]: 1.5, // Small
+        [SIZES[1]]: 1.3, // Medium
+        [SIZES[2]]: 1.2, // Large
+      }
+      return {
+        percent:
+          (baseDamage + character.traits.pow * 5) * (character.baseLevel / 100) *
+          (bonusFactor[monster.size] || 1) *
+          (character.buffs.includes("breakingLimit") ? 1.7 : 1),
+        bonus: 0,
+      };
+    },
+  },
+  MEGA_SONIC_BLOW: {
+    key: "MEGA_SONIC_BLOW",
+    name: "Mega Sonic Blow",
+    label: "Mega Sonic Blow",
+    isMelee: false,
+    job: "Super Novice EX",
+    formula: (character: Character, monster: Monster) => {
+      const baseDamage = 2800;
+      return {
+        percent:
+          (baseDamage + character.traits.pow * 5) *
+          (character.baseLevel / 100) *
+          (character.buffs.includes("breakingLimit") ? 2 : 1),
+        bonus: 0,
+      };
+    },
+  },
+};
+
 export const SKILLS: Record<string, Skill> = {
   ...allSkills,
   ...knightSkills,
@@ -374,6 +448,7 @@ export const SKILLS: Record<string, Skill> = {
   ...monkSkills,
   ...starGladiatorSkills,
   ...ninjaSkills,
+  ...noviceSkills,
 };
 
 export function getSkill(name: string) {
