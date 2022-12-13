@@ -119,7 +119,7 @@ function getExtraATK(character: Character, monster: Monster) {
 
   let increasedEquipATK = 0;
 
-  if (character.job === "Star Emperor") {
+  if (character.job === "Sky Emperor") {
     increasedEquipATK += getModifierIncrease(equipATK, 85);
   }
 
@@ -212,16 +212,16 @@ function getATK(range: DmgRange, character: Character, monster: Monster) {
 
   const statusATK = applyModifier(
     _statusATK,
-    character.job === "Star Emperor" ? 85 : 0
+    character.job === "Sky Emperor" ? 85 : 0
   );
 
   const extraATK = getExtraATK(character, monster);
 
   return (
     statusATK * 2 +
-    applyModifier(wATK, character.job === "Star Emperor" ? 85 : 0) +
+    applyModifier(wATK, character.job === "Sky Emperor" ? 85 : 0) +
     extraATK +
-    applyModifier(masteryATK, character.job === "Star Emperor" ? 85 : 0) +
+    applyModifier(masteryATK, character.job === "Sky Emperor" ? 85 : 0) +
     buffATK
   );
 }

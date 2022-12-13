@@ -94,7 +94,7 @@ export interface Character {
 
 export const emptyCharacter: Character = {
   baseLevel: 1,
-  job: "Rune Knight",
+  job: "Dragon Knight",
   skill: "basic_attack",
   crit: false,
   ignorePenalty: false,

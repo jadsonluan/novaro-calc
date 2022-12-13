@@ -22,7 +22,7 @@ const wizardSkills: Record<string, Skill> = {
     name: "Crimson Rock",
     label: "Crimson Rock",
     isMelee: false,
-    job: "Warlock",
+    job: "Archmage",
     formula: (character: Character, monster: Monster) => {
       const baseDamage = 3700;
       return {
@@ -36,7 +36,7 @@ const wizardSkills: Record<string, Skill> = {
     name: "Chain Lightning",
     label: "Chain Lightning",
     isMelee: false,
-    job: "Warlock",
+    job: "Archmage",
     formula: (character: Character, monster: Monster) => {
       const baseDamage = 1400;
       return {
@@ -50,7 +50,7 @@ const wizardSkills: Record<string, Skill> = {
     name: "Soul Expansion",
     label: "Soul Expansion",
     isMelee: false,
-    job: "Warlock",
+    job: "Archmage",
     formula: (character: Character, monster: Monster) => {
       const baseDamage = 2000;
       return {
@@ -65,7 +65,7 @@ const wizardSkills: Record<string, Skill> = {
     name: "Comet",
     label: "Comet",
     isMelee: false,
-    job: "Warlock",
+    job: "Archmage",
     formula: (character: Character, monster: Monster) => {
       const baseDamage = 6000;
       return {
@@ -82,7 +82,7 @@ const noviceSkills: Record<string, Skill> = {
     name: "Meteor Storm Buster (fall)",
     label: "Meteor Storm Buster (fall)",
     isMelee: false,
-    job: "Super Novice EX",
+    job: "Hyper Novice",
     formula: (character: Character, monster: Monster) => {
       const baseDamage = 3800;
       return {
@@ -98,7 +98,7 @@ const noviceSkills: Record<string, Skill> = {
     name: "Meteor Storm Buster (explostion)",
     label: "Meteor Storm Buster (explostion)",
     isMelee: false,
-    job: "Super Novice EX",
+    job: "Hyper Novice",
     formula: (character: Character, monster: Monster) => {
       const baseDamage = 2450;
       return {
@@ -114,7 +114,7 @@ const noviceSkills: Record<string, Skill> = {
     name: "Jupitel Thunderstorm",
     label: "Jupitel Thunderstorm",
     isMelee: false,
-    job: "Super Novice EX",
+    job: "Hyper Novice",
     formula: (character: Character, monster: Monster) => {
       const baseDamage = 18300;
       return {
@@ -130,7 +130,7 @@ const noviceSkills: Record<string, Skill> = {
     name: "Jack Frost Nova (Explosion)",
     label: "Jack Frost Nova (Explosion)",
     isMelee: false,
-    job: "Super Novice EX",
+    job: "Hyper Novice",
     formula: (character: Character, monster: Monster) => {
       const baseDamage = 2500;
       return {
@@ -149,7 +149,7 @@ const noviceSkills: Record<string, Skill> = {
     name: "Hell's Drive",
     label: "Hell's Drive",
     isMelee: false,
-    job: "Super Novice EX",
+    job: "Hyper Novice",
     formula: (character: Character, monster: Monster) => {
       const baseDamage = 6900;
       return {
@@ -165,7 +165,7 @@ const noviceSkills: Record<string, Skill> = {
     name: "Ground Gravitation (Initial)",
     label: "Ground Gravitation (Initial)",
     isMelee: false,
-    job: "Super Novice EX",
+    job: "Hyper Novice",
     formula: (character: Character, monster: Monster) => {
       const baseDamage = 18400;
       return {
@@ -181,7 +181,7 @@ const noviceSkills: Record<string, Skill> = {
     name: "Ground Gravitation (Field)",
     label: "Ground Gravitation (Field)",
     isMelee: false,
-    job: "Super Novice EX",
+    job: "Hyper Novice",
     formula: (character: Character, monster: Monster) => {
       const baseDamage = 3300;
       return {
@@ -200,7 +200,7 @@ const noviceSkills: Record<string, Skill> = {
     name: "Napalm Vulcan Strike",
     label: "Napalm Vulcan Strike",
     isMelee: false,
-    job: "Super Novice EX",
+    job: "Hyper Novice",
     formula: (character: Character, monster: Monster) => {
       const baseDamage = 3150;
       return {

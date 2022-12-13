@@ -39,7 +39,7 @@ const knightSkills: Record<string, Skill> = {
     label: "Ignition Break",
     name: "Ignition Break",
     isMelee: true,
-    job: "Rune Knight",
+    job: "Dragon Knight",
     formula: (character: Character, monster: Monster) => {
       const baseDamage = 2250;
       return {
@@ -53,7 +53,7 @@ const knightSkills: Record<string, Skill> = {
     label: "Sonic Wave",
     name: "Sonic Wave",
     isMelee: false,
-    job: "Rune Knight",
+    job: "Dragon Knight",
     formula: (character: Character, monster: Monster) => {
       const baseDamage = 2550;
       return {
@@ -70,7 +70,7 @@ const crusaderSkills: Record<string, Skill> = {
     label: "Overbrand",
     name: "Overbrand",
     isMelee: true,
-    job: "Royal Guard",
+    job: "Imperial Guard",
     formula: (character: Character, monster: Monster) => {
       const baseDamage = 1500;
       return {
@@ -84,7 +84,7 @@ const crusaderSkills: Record<string, Skill> = {
     label: "Cannon Spear",
     name: "Cannon Spear",
     isMelee: false,
-    job: "Royal Guard",
+    job: "Imperial Guard",
     formula: (character: Character, monster: Monster) => {
       const baseDamage = 600;
       return {
@@ -98,7 +98,7 @@ const crusaderSkills: Record<string, Skill> = {
     label: "Vaninshing Point",
     name: "Vaninshing Point",
     isMelee: false,
-    job: "Royal Guard",
+    job: "Imperial Guard",
     formula: (character: Character, monster: Monster) => {
       const baseDamage = 1700;
       return {
@@ -115,7 +115,7 @@ const whiteSmithSkills: Record<string, Skill> = {
     label: "Arm Cannon",
     name: "Arm Cannon",
     isMelee: false,
-    job: "Mechanic",
+    job: "Meister",
     hardAsSoftDef: true,
     formula: (character: Character, monster: Monster) => {
       const baseDamage = 2150;
@@ -134,7 +134,7 @@ const alchemistSkills: Record<string, Skill> = {
     label: "Cart Cannon",
     name: "Cart Cannon",
     isMelee: false,
-    job: "Genetic",
+    job: "Biolo",
     hardAsSoftDef: true,
     formula: (character: Character, monster: Monster) => {
       const baseDamage = 1250 + 500;
@@ -153,7 +153,7 @@ const assassinSkills: Record<string, Skill> = {
     label: "Cross Impact",
     name: "Cross Impact",
     isMelee: true,
-    job: "Guillotine Cross",
+    job: "Shadow Cross",
     formula: (character: Character, monster: Monster, buffs: Buffs) => {
       let baseDamage = 2150;
       return {
@@ -167,7 +167,7 @@ const assassinSkills: Record<string, Skill> = {
     label: "Counter Slash",
     name: "Counter Slash",
     isMelee: true,
-    job: "Guillotine Cross",
+    job: "Shadow Cross",
     formula: (character: Character, monster: Monster, buffs: Buffs) => {
       let baseDamage = 1800;
       return {
@@ -181,7 +181,7 @@ const assassinSkills: Record<string, Skill> = {
     label: "Soul Destroyer",
     name: "Soul Destroyer",
     isMelee: false,
-    job: "Guillotine Cross",
+    job: "Shadow Cross",
     formula: (character: Character, monster: Monster, buffs: Buffs) => {
       let baseDamage = 1500;
       return {
@@ -198,7 +198,7 @@ const rogueSkills: Record<string, Skill> = {
     label: "Fatal Menace",
     name: "Fatal Menace",
     isMelee: true,
-    job: "Shadow Chaser",
+    job: "Abyss Chaser",
     formula: (character: Character, monster: Monster, buffs: Buffs) => {
       let baseDamage = (1200 + character.stats.agi) * (character.weapon.type === "Dagger" ? 2 : 1);
       return {
@@ -212,7 +212,7 @@ const rogueSkills: Record<string, Skill> = {
     label: "Triangle Shot",
     name: "Triangle Shot",
     isMelee: false,
-    job: "Shadow Chaser",
+    job: "Abyss Chaser",
     formula: (character: Character, monster: Monster, buffs: Buffs) => {
       let baseDamage = 2300 + character.stats.agi * 3;
       return {
@@ -229,7 +229,7 @@ const hunterSkills: Record<string, Skill> = {
     label: "Focused Arrow Strike",
     name: "Focused Arrow Strike",
     isMelee: false,
-    job: "Ranger",
+    job: "Wind Hawk",
     formula: (character: Character, monster: Monster, buffs: Buffs) => {
       let baseDamage = 1800 + (buffs.trueSight ? 20 : 0);
       return {
@@ -243,7 +243,7 @@ const hunterSkills: Record<string, Skill> = {
     label: "Aimed Bolt",
     name: "Aimed Bolt",
     isMelee: false,
-    job: "Ranger",
+    job: "Wind Hawk",
     formula: (character: Character, monster: Monster, buffs: Buffs) => {
       let baseDamage = ((buffs.fearBreeze ? 1150 : 700) + (buffs.trueSight ? 20 : 0)) * 5;
       return {
@@ -257,7 +257,7 @@ const hunterSkills: Record<string, Skill> = {
     label: "Arrow Storm",
     name: "Arrow Storm",
     isMelee: false,
-    job: "Ranger",
+    job: "Wind Hawk",
     formula: (character: Character, monster: Monster, buffs: Buffs) => {
       let baseDamage = (buffs.fearBreeze ? 2700 : 2000) + (buffs.trueSight ? 20 : 0);
       return {
@@ -274,7 +274,7 @@ const bardSkills: Record<string, Skill> = {
     label: "Severe Rainstorm 1-tick",
     name: "Severe Rainstorm 1-tick",
     isMelee: false,
-    job: "Minstrel",
+    job: "Troubadour / Trouvere",
     formula: (character: Character, monster: Monster, buffs: Buffs) => {
       let baseDamage = 500 + ((character.stats.dex + character.stats.agi) / 2);
       return {
@@ -291,7 +291,7 @@ const monkSkills: Record<string, Skill> = {
     name: "Triple Attack",
     label: "Triple Attack",
     isMelee: true,
-    job: "Sura",
+    job: "Inquisitor",
     formula: (_character: Character, _monster: Monster) => ({
       percent: 200,
       bonus: 0,
@@ -302,7 +302,7 @@ const monkSkills: Record<string, Skill> = {
     label: "Tiger Cannon (Combo)",
     name: "Tiger Cannon",
     isMelee: true,
-    job: "Sura",
+    job: "Inquisitor",
     formula: (character: Character, monster: Monster) => {
       const baseDamage = (0.3 * getHP(character) + 0.15 * getSP(character)) / 2;
       return {
@@ -311,20 +311,20 @@ const monkSkills: Record<string, Skill> = {
       };
     },
   },
-  // THIRD_FLAME_BOMB: {
-  //   key: "THIRD_FLAME_BOMB",
-  //   label: "Third Flame Bomb",
-  //   name: "Third Flame Bomb",
-  //   isMelee: true,
-  //   job: "Sura",
-  //   formula: (character: Character, monster: Monster) => {
-  //     const baseDamage = 3250 + 0.2 * getHP(character);
-  //     return {
-  //       percent: baseDamage * (character.baseLevel / 100),
-  //       bonus: 0,
-  //     };
-  //   },
-  // },
+  THIRD_FLAME_BOMB: {
+    key: "THIRD_FLAME_BOMB",
+    label: "Third Flame Bomb",
+    name: "Third Flame Bomb",
+    isMelee: true,
+    job: "Inquisitor",
+    formula: (character: Character, monster: Monster) => {
+      const baseDamage = 3250 + 0.2 * getHP(character);
+      return {
+        percent: baseDamage * (character.baseLevel / 100),
+        bonus: 0,
+      };
+    },
+  },
 }
 
 const starGladiatorSkills: Record<string, Skill> = {
@@ -333,7 +333,7 @@ const starGladiatorSkills: Record<string, Skill> = {
     label: "Solar Burst",
     name: "Solar Burst",
     isMelee: true,
-    job: "Star Emperor",
+    job: "Sky Emperor",
     formula: (character: Character, monster: Monster) => {
       const baseDamage = 3200;
       return {
@@ -350,7 +350,7 @@ const ninjaSkills: Record<string, Skill> = {
     label: "Cross Slash",
     name: "Cross Slash",
     isMelee: false,
-    job: "Kagerou",
+    job: "Shinkiro / Shiranui",
     formula: (character: Character, monster: Monster, buffs: Buffs) => {
       const baseDamage = 2000;
       return {
@@ -367,7 +367,7 @@ const noviceSkills: Record<string, Skill> = {
     name: "Double Bowling Bash (Per hit)",
     label: "Double Bowling Bash (Per hit)",
     isMelee: false,
-    job: "Super Novice EX",
+    job: "Hyper Novice",
     formula: (character: Character, monster: Monster) => {
       const baseDamage = 2450;
       return {
@@ -383,7 +383,7 @@ const noviceSkills: Record<string, Skill> = {
     name: "Shield Chain Rush",
     label: "Shield Chain Rush",
     isMelee: false,
-    job: "Super Novice EX",
+    job: "Hyper Novice",
     formula: (character: Character, monster: Monster) => {
       const baseDamage = 3700;
       return {
@@ -399,7 +399,7 @@ const noviceSkills: Record<string, Skill> = {
     name: "Spiral Pierce Max",
     label: "Spiral Pierce Max",
     isMelee: false,
-    job: "Super Novice EX",
+    job: "Hyper Novice",
     formula: (character: Character, monster: Monster) => {
       const baseDamage = 3300;
       const bonusFactor = {
@@ -421,7 +421,7 @@ const noviceSkills: Record<string, Skill> = {
     name: "Mega Sonic Blow",
     label: "Mega Sonic Blow",
     isMelee: false,
-    job: "Super Novice EX",
+    job: "Hyper Novice",
     formula: (character: Character, monster: Monster) => {
       const baseDamage = 2800;
       return {
