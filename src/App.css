@@ -21,12 +21,19 @@ h1 {
   border-bottom: 1px solid #40444b;
 }
 
+.navbar {
+  width: fit-content;
+  margin: initial !important;
+  border-bottom-right-radius: 10px;
+}
+
 .app .header h1 {
   padding: 10px 25px;
 }
 
 .left-action {
   display: flex;
+  margin-right: 2rem;
   justify-content: space-around;
   align-items: center;
 }

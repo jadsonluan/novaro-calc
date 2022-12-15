@@ -23,7 +23,7 @@ function App() {
 
   return (
     <div className="app">
-      <header className="header">
+      <header className="header navbar">
         <div className="left-action">
           <h1>NovaRO Calc: {isMATK ? 'MATK' : 'ATK'}</h1>
           <div className="actions">

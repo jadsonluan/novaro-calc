@@ -155,6 +155,10 @@ export const emptyMATKBuffs: Buffs = {
   },
   // Archer
   // Acolyte
+  odinsBlessing: {
+    active: false,
+    tooltip: "Buff MATK +100"
+  },
   // Ninja
   // Taekwon
   // Novice
@@ -381,13 +385,17 @@ const BUFF_EFFECTS: Record<keyof Buffs, BuffEffect> = {
   },
   // Acolyte
   odinsBlessing: (character: Character) => {
-    const { ATK: { pseudoBuffATK } } = character;
+    const { ATK: { pseudoBuffATK }, MATK: { buffMATK } } = character;
     const ATK_INCREASE = 100;
     return {
       ...character,
       ATK: {
         ...character.ATK,
         pseudoBuffATK: pseudoBuffATK + ATK_INCREASE,
+      },
+      MATK: {
+        ...character.MATK,
+        buffMATK: buffMATK + ATK_INCREASE,
       },
       buffs: [...character.buffs, "odinsBlessing"],
     };
