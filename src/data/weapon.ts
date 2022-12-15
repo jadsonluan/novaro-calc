@@ -86,7 +86,7 @@ export const WEAPON_PENALTIES: Record<WeaponType, WeaponPenalty> = {
   },
   Dagger: {
     small: 1,
-    medium: 75,
+    medium: 0.75,
     large: 0.5,
   },
   Gun: {

@@ -138,6 +138,11 @@ export const emptyATKBuffs: Buffs = {
     active: false,
     tooltip: "Pseudo Buff ATK +50"
   },
+  // Novice
+  breakingLimit: {
+    active: false,
+    tooltip: "Increase Hyper Novice physical skills damage"
+  },
 };
 
 export const emptyMATKBuffs: Buffs = {
@@ -165,10 +170,6 @@ export const emptyMATKBuffs: Buffs = {
   ruleBreak: {
     active: false,
     tooltip: "Increase Hyper Novice magic skills damage"
-  },
-  breakingLimit: {
-    active: false,
-    tooltip: "Increase Hyper Novice physical skills damage"
   },
 };
 

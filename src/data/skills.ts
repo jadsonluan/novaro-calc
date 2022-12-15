@@ -366,10 +366,10 @@ const noviceSkills: Record<string, Skill> = {
     key: "DOUBLE_BOWLING_BASH",
     name: "Double Bowling Bash (Per hit)",
     label: "Double Bowling Bash (Per hit)",
-    isMelee: false,
+    isMelee: true,
     job: "Hyper Novice",
     formula: (character: Character, monster: Monster) => {
-      const baseDamage = 2450;
+      const baseDamage = 2400;
       return {
         percent:
           (baseDamage + 5 * character.traits.pow) * (character.baseLevel / 100) *
@@ -403,15 +403,15 @@ const noviceSkills: Record<string, Skill> = {
     formula: (character: Character, monster: Monster) => {
       const baseDamage = 3300;
       const bonusFactor = {
-        [SIZES[0]]: 1.5, // Small
-        [SIZES[1]]: 1.3, // Medium
-        [SIZES[2]]: 1.2, // Large
+        [SIZES[0]]: 2.5, // Small
+        [SIZES[1]]: 2.3, // Medium
+        [SIZES[2]]: 2.2, // Large
       }
       return {
         percent:
-          (baseDamage + character.traits.pow * 5) * (character.baseLevel / 100) *
-          (bonusFactor[monster.size] || 1) *
-          (character.buffs.includes("breakingLimit") ? 1.7 : 1),
+          (baseDamage + character.traits.pow * 5) * (bonusFactor[monster.size] || 1) *
+          (character.baseLevel / 100) *
+          (character.buffs.includes("breakingLimit") ? 2 : 1),
         bonus: 0,
       };
     },
@@ -420,7 +420,7 @@ const noviceSkills: Record<string, Skill> = {
     key: "MEGA_SONIC_BLOW",
     name: "Mega Sonic Blow",
     label: "Mega Sonic Blow",
-    isMelee: false,
+    isMelee: true,
     job: "Hyper Novice",
     formula: (character: Character, monster: Monster) => {
       const baseDamage = 2800;

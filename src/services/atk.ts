@@ -52,9 +52,9 @@ function getRefineBonus(weapon: Weapon) {
 
 function getMaxOverUpgradeBonus(weapon: Weapon) {
   const { level, refine } = weapon;
-  const safetyLimit = [7, 6, 5, 4];
+  const safetyLimit = [7, 6, 5, 4, 3];
   // ATK per refine > safetyLimit
-  const maxAtkPerOverUpgrade = [3, 5, 8, 14];
+  const maxAtkPerOverUpgrade = [3, 5, 8, 14, 0];
   const overRefine = Math.max(0, refine - safetyLimit[level - 1]);
   return overRefine * maxAtkPerOverUpgrade[level - 1];
 }
