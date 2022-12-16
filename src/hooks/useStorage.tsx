@@ -7,8 +7,7 @@ interface BuildData {
   build2: BuildInfo;
 }
 
-const NOVARO_CALC_PREFIX = "novaro-calc-";
-const atkMatkPrefix = (isMATK: boolean) => `${NOVARO_CALC_PREFIX}${isMATK ? "matk-" : ""}`;
+const atkMatkPrefix = (isMATK: boolean) => `${isMATK ? "novaro-matk-calc-" : "novaro-atk-calc-"}`;
 
 const useStorage = (isMATK: boolean) => {
   const INITIAL_BUILD = !isMATK ? INITIAL_ATK_BUILD : INITIAL_MATK_BUILD;

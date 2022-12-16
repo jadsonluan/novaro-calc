@@ -1,4 +1,5 @@
 import "./App.css";
+import About from "./components/About";
 import BuildStorage from "./components/BuildStorage";
 import ImportBS from "./components/ImportBS";
 import MainPage from "./components/MainPage";
@@ -25,7 +26,10 @@ function App() {
     <div className="app">
       <header className="header navbar">
         <div className="left-action">
-          <h1>NovaRO Calc: {isMATK ? 'MATK' : 'ATK'}</h1>
+          <div className="logo">
+            <h1>NovaRO Calc: {isMATK ? 'MATK' : 'ATK'}</h1>
+            <h6>Created by: Luan and Gabriel</h6>
+          </div>
           <div className="actions">
             <ImportBS isMATK={isMATK} />
             <button onClick={() => copy(build1, build2)}>
@@ -43,6 +47,7 @@ function App() {
             >
               Clear
             </button>
+            <About />
           </div>
         </div>
         <div className="links">

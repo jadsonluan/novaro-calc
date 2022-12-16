@@ -27,8 +27,15 @@ h1 {
   border-bottom-right-radius: 10px;
 }
 
-.app .header h1 {
+.app .header .logo {
   padding: 10px 25px;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+
+.app .header .logo h6 {
+  margin: 0
 }
 
 .left-action {
