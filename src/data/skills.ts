@@ -231,7 +231,7 @@ const hunterSkills: Record<string, Skill> = {
     isMelee: false,
     job: "Wind Hawk",
     formula: (character: Character, monster: Monster, buffs: Buffs) => {
-      let baseDamage = 1800 + (buffs.trueSight ? 20 : 0);
+      let baseDamage = 1800 + (buffs.trueSight?.active ? 20 : 0);
       return {
         percent: baseDamage * (character.baseLevel / 100),
         bonus: 0,
@@ -245,7 +245,7 @@ const hunterSkills: Record<string, Skill> = {
     isMelee: false,
     job: "Wind Hawk",
     formula: (character: Character, monster: Monster, buffs: Buffs) => {
-      let baseDamage = ((buffs.fearBreeze ? 1150 : 700) + (buffs.trueSight ? 20 : 0)) * 5;
+      let baseDamage = ((buffs.fearBreeze?.active ? 1150 : 700) + (buffs.trueSight?.active ? 20 : 0)) * 5;
       return {
         percent: baseDamage * (character.baseLevel / 100),
         bonus: 0,
@@ -259,9 +259,57 @@ const hunterSkills: Record<string, Skill> = {
     isMelee: false,
     job: "Wind Hawk",
     formula: (character: Character, monster: Monster, buffs: Buffs) => {
-      let baseDamage = (buffs.fearBreeze ? 2700 : 2000) + (buffs.trueSight ? 20 : 0);
+      let baseDamage = (buffs.fearBreeze?.active ? 2700 : 2000) + (buffs.trueSight?.active ? 20 : 0);
       return {
         percent: baseDamage * (character.baseLevel / 100),
+        bonus: 0,
+      };
+    }
+  },
+  CRESCIVE_BOLT: {
+    key: "CRESCIVE_BOLT",
+    label: "Crescive Bolt",
+    name: "Crescive Bolt",
+    isMelee: false,
+    job: "Wind Hawk",
+    formula: (character: Character, monster: Monster, buffs: Buffs) => {
+      let baseDamage = 3000 + (buffs.trueSight?.active ? 20 : 0);
+      return {
+        percent: (baseDamage + character.traits.con * 5) * (character.baseLevel / 100) *
+        (buffs.calamityGale?.active ? 1.2 : 1) *
+        (buffs.calamityGale?.active && ['brute', 'fish'].includes(monster.race) ? 1.5 : 1),
+        bonus: 0,
+      };
+    }
+  },
+  CRESCIVE_BOLT_MAX: {
+    key: "CRESCIVE_BOLT_MAX",
+    label: "Crescive Bolt (Max stacks)",
+    name: "Crescive Bolt (Max stacks)",
+    isMelee: false,
+    job: "Wind Hawk",
+    formula: (character: Character, monster: Monster, buffs: Buffs) => {
+      let baseDamage = 3000 + (buffs.trueSight?.active ? 20 : 0);
+      return {
+        percent: (baseDamage + character.traits.con * 5) * (character.baseLevel / 100) * 
+        1.3 * // 3 stacks of 20% damage increase each
+        (buffs.calamityGale?.active ? 1.2 : 1) *
+        (buffs.calamityGale?.active && ['brute', 'fish'].includes(monster.race) ? 1.5 : 1),
+        bonus: 0,
+      };
+    }
+  },
+  GALE_STORM: {
+    key: "GALE_STORM",
+    label: "Gale Storm",
+    name: "Gale Storm",
+    isMelee: false,
+    job: "Wind Hawk",
+    formula: (character: Character, monster: Monster, buffs: Buffs) => {
+      let baseDamage = 2500 + (buffs.trueSight?.active ? 20 : 0);
+      return {
+        percent: (baseDamage + character.traits.con * 5) * (character.baseLevel / 100) *
+          (buffs.calamityGale?.active && ['brute', 'fish'].includes(monster.race) ? 1.5 : 1),
         bonus: 0,
       };
     }
@@ -354,7 +402,7 @@ const ninjaSkills: Record<string, Skill> = {
     formula: (character: Character, monster: Monster, buffs: Buffs) => {
       const baseDamage = 2000;
       return {
-        percent: baseDamage * (character.baseLevel / 120) * (buffs.shadowWarrior ? 1.2 : 1),
+        percent: baseDamage * (character.baseLevel / 120) * (buffs.shadowWarrior?.active ? 1.2 : 1),
         bonus: 0,
       };
     }
@@ -368,12 +416,12 @@ const noviceSkills: Record<string, Skill> = {
     label: "Double Bowling Bash (Per hit)",
     isMelee: true,
     job: "Hyper Novice",
-    formula: (character: Character, monster: Monster) => {
+    formula: (character: Character, monster: Monster, buffs: Buffs) => {
       const baseDamage = 2400;
       return {
         percent:
           (baseDamage + 5 * character.traits.pow) * (character.baseLevel / 100) *
-          (character.buffs.includes("breakingLimit") ? 1.5 : 1),
+          (buffs.breakingLimit?.active ? 1.5 : 1),
         bonus: 0,
       };
     },
@@ -384,12 +432,12 @@ const noviceSkills: Record<string, Skill> = {
     label: "Shield Chain Rush",
     isMelee: false,
     job: "Hyper Novice",
-    formula: (character: Character, monster: Monster) => {
+    formula: (character: Character, monster: Monster, buffs: Buffs) => {
       const baseDamage = 3700;
       return {
         percent:
           (baseDamage + character.traits.pow * 5) * (character.baseLevel / 100) *
-          (character.buffs.includes("breakingLimit") ? 1.5 : 1),
+          (buffs.breakingLimit?.active ? 1.5 : 1),
         bonus: 0,
       };
     },
@@ -400,7 +448,7 @@ const noviceSkills: Record<string, Skill> = {
     label: "Spiral Pierce Max",
     isMelee: false,
     job: "Hyper Novice",
-    formula: (character: Character, monster: Monster) => {
+    formula: (character: Character, monster: Monster, buffs: Buffs) => {
       const baseDamage = 3300;
       const bonusFactor = {
         [SIZES[0]]: 2.5, // Small
@@ -411,7 +459,7 @@ const noviceSkills: Record<string, Skill> = {
         percent:
           (baseDamage + character.traits.pow * 5) * (bonusFactor[monster.size] || 1) *
           (character.baseLevel / 100) *
-          (character.buffs.includes("breakingLimit") ? 2 : 1),
+          (buffs.breakingLimit?.active ? 2 : 1),
         bonus: 0,
       };
     },
@@ -422,13 +470,13 @@ const noviceSkills: Record<string, Skill> = {
     label: "Mega Sonic Blow",
     isMelee: true,
     job: "Hyper Novice",
-    formula: (character: Character, monster: Monster) => {
+    formula: (character: Character, monster: Monster, buffs: Buffs) => {
       const baseDamage = 2800;
       return {
         percent:
           (baseDamage + character.traits.pow * 5) *
           (character.baseLevel / 100) *
-          (character.buffs.includes("breakingLimit") ? 2 : 1),
+          (buffs.breakingLimit?.active ? 2 : 1),
         bonus: 0,
       };
     },

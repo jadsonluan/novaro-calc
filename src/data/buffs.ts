@@ -31,6 +31,7 @@ export interface Buffs {
   // Archer
   trueSight?: Buff;
   unlimit?: Buff;
+  calamityGale?: Buff;
   fearBreeze?: Buff;
   // Acolyte
   allSpheres?: Buff;
@@ -107,13 +108,17 @@ export const emptyATKBuffs: Buffs = {
     active: false,
     tooltip: "All stats +5 and 20% added to the skill base damage"
   },
+  fearBreeze: {
+    active: false,
+    tooltip: "Increases Aimed Bolt and Arrow Storm damage"
+  },
   unlimit: {
     active: false,
     tooltip: "Final Damage +250%"
   },
-  fearBreeze: {
+  calamityGale: {
     active: false,
-    tooltip: "Increases Aimed Bolt and Arrow Storm damage"
+    tooltip: "Unlimit effect, increases Crescive Bolt damage and increases damage against Brute and Fish monsters"
   },
   // Acolyte
   allSpheres: {
@@ -382,6 +387,18 @@ const BUFF_EFFECTS: Record<keyof Buffs, BuffEffect> = {
         finalDmg: modifiers.finalDmg + UNLIMIT_INCREASE,
       },
       buffs: [...character.buffs, "unlimit"],
+    };
+  },
+  calamityGale: (character: Character) => {
+    const { modifiers } = character;
+    const UNLIMIT_INCREASE = 250;
+    return {
+      ...character,
+      modifiers: {
+        ...modifiers,
+        finalDmg: modifiers.finalDmg + (!character.buffs.includes('unlimit') ? UNLIMIT_INCREASE : 0),
+      },
+      buffs: [...character.buffs, "calamityGale"],
     };
   },
   // Acolyte

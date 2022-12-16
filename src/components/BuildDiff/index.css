@@ -19,7 +19,8 @@
 }
 
 .build-diff-body > :last-child > * {
-  padding-bottom: 5px
+  padding-bottom: 5px;
+  border-bottom-right-radius: 10px;
 }
 
 .positive-diff { background-color: #3ba55d !important;}
