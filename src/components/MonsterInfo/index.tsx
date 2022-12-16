@@ -2,7 +2,7 @@ import "./index.css";
 import { BuildMonsterSelect, Option } from "../Select";
 import { ELEMENTS, Element } from "../../data/element";
 import { BuildMonsterInput } from "../BuildInput";
-import { Monster, SIZES, MONSTER_TYPES, MonsterType, Size, ElementLevel } from "../../data/monster";
+import { Monster, SIZES, MONSTER_TYPES, MonsterType, Size, ElementLevel, Race, RACES } from "../../data/monster";
 
 const MonsterInfoATK = () => {
   return (
@@ -106,6 +106,11 @@ const MonsterInfo = ({ isMATK }: { isMATK: boolean }) => {
     value: item,
   }));
 
+  const raceOptions: Option[] = RACES.map((race: string) => ({
+    label: race,
+    value: race,
+  }));
+
   const elementOptions: Option[] = ELEMENTS.map((element: string) => ({
     label: element,
     value: element,
@@ -148,6 +153,18 @@ const MonsterInfo = ({ isMATK }: { isMATK: boolean }) => {
             return {
               ...prevState,
               size: value as unknown as Size,
+            };
+          }}
+        />
+
+        <BuildMonsterSelect
+          label="Race"
+          options={raceOptions}
+          getValue={(monster: Monster) => monster.race as string}
+          updateValue={(value: string) => (prevState: Monster) => {
+            return {
+              ...prevState,
+              race: value as unknown as Race,
             };
           }}
         />

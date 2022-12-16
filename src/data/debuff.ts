@@ -7,6 +7,8 @@ export interface Debuffs {
   oratio?: Buff;
   darkClaw?: Buff;
   magicIntoxication?: Buff;
+  allBloom?: Buff;
+  violentQuake?: Buff;
 }
 
 export const emptyATKDebuffs: Debuffs = {
@@ -22,6 +24,14 @@ export const emptyATKDebuffs: Debuffs = {
     active: false,
     tooltip: "Decreases holy property resistance"
   },
+  allBloom: {
+    active: false,
+    tooltip: "Takes 100% from fire property attacks"
+  },
+  violentQuake: {
+    active: false,
+    tooltip: "Takes 100% from earth property attacks"
+  },
 };
 
 export const emptyMATKDebuffs: Debuffs = {
@@ -32,6 +42,14 @@ export const emptyMATKDebuffs: Debuffs = {
   oratio: {
     active: false,
     tooltip: "Decreases holy property resistance"
+  },
+  allBloom: {
+    active: false,
+    tooltip: "Takes 100% from fire property attacks"
+  },
+  violentQuake: {
+    active: false,
+    tooltip: "Takes 100% from earth property attacks"
   },
 };
 
@@ -69,6 +87,18 @@ const DEBUFF_EFFECTS: Record<keyof Debuffs, BuffEffect> = {
       monster: { ...monster, debuffs: [...monster.debuffs, "oratio"] },
     };
   },
+  allBloom: (character: Character, monster: Monster) => {
+    return {
+      character: { ...character },
+      monster: { ...monster, debuffs: [...monster.debuffs, "allBloom"] },
+    };
+  },
+  violentQuake: (character: Character, monster: Monster) => {
+    return {
+      character: { ...character },
+      monster: { ...monster, debuffs: [...monster.debuffs, "violentQuake"] },
+    };
+  }
 };
 
 export function applyDebuff(

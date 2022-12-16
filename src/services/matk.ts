@@ -192,7 +192,14 @@ export function getFinalMATKDamage(range: DmgRange, build: BuildInfo) {
 
   finalDmg = applyModifier(finalDmg, character.MATK.smatk);
 
-  finalDmg = applyModifier(finalDmg, monster.finalModifier);
+  let monsterFinalModifier = monster.finalModifier;
+  if (monster.debuffs.includes("violentQuake") && character.weapon.element === "Earth") {
+    monsterFinalModifier += 100;
+  } else if (monster.debuffs.includes("allBloom") && character.weapon.element === "Fire") {
+    monsterFinalModifier += 100;
+  }
+
+  finalDmg = applyModifier(finalDmg, monsterFinalModifier);
   return {
     damage: finalDmg,
     modifiedCharacter: character,

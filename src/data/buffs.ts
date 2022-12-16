@@ -24,9 +24,11 @@ export interface Buffs {
   loudExclamation?: Buff;
   cartBoost?: Buff;
   pyroclastic?: Buff;
+  tempering?: Buff;
   // Mage
   magicAmplification?: Buff;
   recognizedSpell?: Buff;
+  climax?: Buff;
   striking?: Buff;
   // Archer
   trueSight?: Buff;
@@ -98,6 +100,10 @@ export const emptyATKBuffs: Buffs = {
     active: false,
     tooltip: "Pseudo Buff ATK +400"
   },
+  tempering: {
+    active: false,
+    tooltip: "P.atk +15"
+  },
   // Mage
   striking: {
     active: false,
@@ -162,6 +168,10 @@ export const emptyMATKBuffs: Buffs = {
   recognizedSpell: {
     active: false,
     tooltip: "Removes weapon MATK variance (overupgrade MATK variance still applies)"
+  },
+  climax: {
+    active: false,
+    tooltip: "Climax buff, acts as level 3 Climax for affected skills"
   },
   // Archer
   // Acolyte
@@ -326,6 +336,18 @@ const BUFF_EFFECTS: Record<keyof Buffs, BuffEffect> = {
       buffs: [...character.buffs, "pyroclastic"],
     };
   },
+  tempering: (character: Character) => {
+    const { ATK: { patk } } = character;
+    const PATK_INCREASE = 15;
+    return {
+      ...character,
+      ATK: {
+        ...character.ATK,
+        patk: patk + PATK_INCREASE,
+      },
+      buffs: [...character.buffs, "tempering"],
+    };
+  },
   // Mage
   magicAmplification: (character: Character) => {
     const { modifiers: { finalDmg } } = character;
@@ -344,6 +366,12 @@ const BUFF_EFFECTS: Record<keyof Buffs, BuffEffect> = {
       ...character,
       buffs: [...character.buffs, "recognizedSpell"],
     };
+  },
+  climax: (character: Character) => {
+    return {
+      ...character,
+      buffs: [...character.buffs, "climax"],
+    }
   },
   striking: (character: Character) => {
     const { ATK: { pseudoBuffATK } } = character;
