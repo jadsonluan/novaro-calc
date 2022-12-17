@@ -20,9 +20,7 @@ const About = () => {
       >
         <h2>About</h2>
         <p>
-          This is a tool to help you build your character in Ragnarok Online.
-          This tool is not affiliated with Gravity Interactive, Inc. or any of
-          its subsidiaries.
+          This is a tool to help you build your character in NovaRO.
         </p>
         <p>
           Most of the information to be add can be obtained from @battlestats or @bs.
@@ -32,7 +30,7 @@ const About = () => {
             <li>Equip MATK: Needs to be manually calculated</li>
             <li>Weapon MATK</li>
             <li>Buffs: if a buff is not on the 'Buffs' lists, then you need to manually add its bonuses (Ex: If you want the 'Benedictum' buff, add +10 POW/CRT/CON and the respective traits, p.atk/c.rate, gained to your current build)</li>
-            <li>Mastery ATK: Verify your character passives (Super Novice EX Breakthrough and Transcendence passives add Pseudo Buff ATK/Custom MATK) </li>
+            <li>Mastery ATK: Verify your character passives (Super Novice EX 'Breakthrough' and 'Transcendence' passives add Pseudo Buff ATK/Custom MATK) </li>
           </ul>
         </p>
         <p>
@@ -42,7 +40,7 @@ const About = () => {
         </p>
         <p>
           This tool is open source. You can find the source code on{" "}
-          <a style={{color: 'white'}} href="https://github.com/gabrielmla/novaro-calc">GitHub</a>.
+          <a style={{color: 'white'}} href="https://github.com/jadsonluan/novaro-calc">GitHub</a>.
         </p>
         <div className="buttons">
             <button onClick={handleClose}>Close</button>
