@@ -19,5 +19,5 @@
 }
 
 .character-misc .select {
-  grid-template-columns: 100px 1fr 1fr !important;
+  grid-template-columns: 100px 180px 180px !important;
 }
