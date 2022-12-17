@@ -1,13 +1,14 @@
 import "./index.css";
 import { useState } from "react";
 import Modal from "react-modal";
-import { SKILLS } from "../../data/skills";
+import { Skill, SKILLS } from "../../data/skills";
 import { MATK_SKILLS } from "../../data/matkSkills";
 import { capitalize, formatBattleStats } from "../../utils/format";
 import { ELEMENTS, Element } from "../../data/element";
 import { useBuild } from "../../hooks/useBuild";
 import { Character } from "../../data/character";
 import { RACES, SIZES, MONSTER_TYPES, Monster, Race, Size, MonsterType } from "../../data/monster";
+import { getJobsName } from "../../data/job";
 
 const ImportBS = ({ isMATK }: { isMATK: boolean }) => {
   const skills = isMATK ? MATK_SKILLS : SKILLS;
@@ -144,11 +145,25 @@ const ImportBS = ({ isMATK }: { isMATK: boolean }) => {
                 value={skill}
                 onChange={(event) => setSkill(skills[event.target.value].key)}
               >
-                {Object.values(skills).map((skill) => (
-                  <option key={skill.key} value={skill.key}>
-                    {skill.label}
-                  </option>
-                ))}
+                {["All", ...getJobsName()].map((job, i) => {
+                  const jobOptions = Object.values(skills).filter(
+                    (option) => option.job === job
+                  );
+
+                  return (
+                    jobOptions.length > 0 && (
+                      <optgroup key={i} label={capitalize(job)}>
+                        {jobOptions.map((skill: Skill, i: number) => {
+                          return (
+                            <option key={i} value={skill.key}>
+                              {capitalize(skill.label)}
+                            </option>
+                          );
+                        })}
+                      </optgroup>
+                    )
+                  );
+                })}
               </select>
             </div>
             <div>

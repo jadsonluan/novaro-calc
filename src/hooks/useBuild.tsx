@@ -9,6 +9,8 @@ import {
 } from "../data/input";
 
 export interface Build {
+  name: string;
+  setName: (name: string) => void;
   character: Character;
   setCharacter: (
     character: Character | ((prevState: Character) => Character)
@@ -26,6 +28,8 @@ interface ContextProps {
 }
 
 const initialBuild = {
+  name: '',
+  setName: (_name: string) => {},
   character: initialCharacter,
   setCharacter: (
     _character: Character | ((prevState: Character) => Character)
@@ -52,6 +56,9 @@ export const BuildProvider: React.FC = (props) => {
 
   const { children } = props;
 
+  const [name1, setName1] = useState(initialBuild1.name);
+  const [name2, setName2] = useState(initialBuild2.name);
+
   const [character1, setCharacter1] = useState(initialBuild1.character);
   const [character2, setCharacter2] = useState(initialBuild2.character);
 
@@ -68,6 +75,8 @@ export const BuildProvider: React.FC = (props) => {
     <BuildContext.Provider
       value={{
         build1: {
+          name: name1,
+          setName: setName1,
           character: character1,
           setCharacter: setCharacter1,
           monster: monster1,
@@ -78,6 +87,8 @@ export const BuildProvider: React.FC = (props) => {
           setDebuffs: setDebuffs1,
         },
         build2: {
+          name: name2,
+          setName: setName2,
           character: character2,
           setCharacter: setCharacter2,
           monster: monster2,

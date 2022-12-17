@@ -20,7 +20,7 @@ const useStorage = (isMATK: boolean) => {
 
     for (let i = 0; i < localStorage.length; i++) {
       key = localStorage.key(i);
-      if (!key || !key.includes(atkMatkPrefix(isMATK))) continue;
+      if (!key || !key.includes(atkMatkPrefix(isMATK)) || key.includes('crnt')) continue;
       result.push(key.split(atkMatkPrefix(isMATK))[1]);
     }
 
@@ -39,10 +39,17 @@ const useStorage = (isMATK: boolean) => {
 
       const data: BuildData = JSON.parse(rawData);
 
+      build1.setName(data.build1.name);
       build1.setCharacter({...INITIAL_BUILD.character, ...data.build1.character});
       build1.setMonster({...INITIAL_BUILD.monster, ...data.build1.monster});
+      build1.setBuffs({...INITIAL_BUILD.buffs, ...data.build1.buffs});
+      build1.setDebuffs({...INITIAL_BUILD.debuffs, ...data.build1.debuffs});
+
+      build2.setName(data.build2.name);
       build2.setCharacter({...INITIAL_BUILD.character, ...data.build2.character});
       build2.setMonster({...INITIAL_BUILD.monster, ...data.build2.monster});
+      build2.setBuffs({...INITIAL_BUILD.buffs, ...data.build2.buffs});
+      build2.setDebuffs({...INITIAL_BUILD.debuffs, ...data.build2.debuffs});
     },
     [INITIAL_BUILD, build1, build2, isMATK]
   );

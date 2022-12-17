@@ -11,7 +11,8 @@ import { CharacterMiscATK, CharacterMiscMATK } from "../CharacterMisc";
 import MonsterInfo from "../MonsterInfo";
 import "./index.css";
 
-const getBuildInfo = ({ character, monster, buffs, debuffs, }: Build) => ({
+const getBuildInfo = ({ name, character, monster, buffs, debuffs, }: Build) => ({
+  name,
   character,
   monster,
   buffs,

@@ -4,6 +4,7 @@ import { Debuffs, emptyATKDebuffs, emptyMATKDebuffs } from "./debuff";
 import { Monster, emptyMonster } from "./monster";
 
 export interface BuildInfo {
+  name: string;
   character: Character;
   monster: Monster;
   buffs: Buffs;
@@ -11,6 +12,7 @@ export interface BuildInfo {
 }
 
 export const INITIAL_ATK_BUILD: BuildInfo = {
+  name: '',
   character: emptyCharacter,
   monster: emptyMonster,
   buffs: emptyATKBuffs,
@@ -18,6 +20,7 @@ export const INITIAL_ATK_BUILD: BuildInfo = {
 };
 
 export const INITIAL_MATK_BUILD: BuildInfo = {
+  name: '',
   character: emptyCharacter,
   monster: emptyMonster,
   buffs: emptyMATKBuffs,

@@ -8,12 +8,16 @@ h1 {
   margin: 0
 }
 
+.navbar {
+  display: flex;
+  flex-direction: row;
+}
+
 .header {
   background-color: #40444b;
 }
 
 .app .header {
-  margin: auto;
   display: flex;
   justify-content: space-between;
   font-size: 16px;
@@ -21,9 +25,8 @@ h1 {
   border-bottom: 1px solid #40444b;
 }
 
-.navbar {
+.container {
   width: fit-content;
-  margin: initial !important;
   border-bottom-right-radius: 10px;
 }
 
@@ -36,6 +39,44 @@ h1 {
 
 .app .header .logo h6 {
   margin: 0
+}
+
+.build-names {
+  display: flex;
+  flex-direction: column;
+  width: 425px;
+  padding: 15px 15px;
+  border-bottom-right-radius: 10px;
+  border-bottom-left-radius: 10px;
+  background-color: #2C2F33;
+}
+
+.build-names .input-label {
+  display: grid;
+  grid-template-columns: 60px 1fr;
+}
+
+.build-names .input-label input {
+  margin: 0 5px;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+
+.build-names .input-label input {
+  font-size: 16px;
+  font-weight: 600;
+  text-align: center;
+  border: none;
+  padding: 0;
+  border-radius: 50px;
+  color: white;
+  background-color: #40444b;
+}
+
+.build-names .input-label input:focus {
+  outline: 1px solid #3ba55d;
+  color: #3ba55d;
 }
 
 .left-action {
