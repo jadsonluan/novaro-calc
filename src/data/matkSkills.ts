@@ -320,6 +320,24 @@ const wizardSkills: Record<string, Skill> = {
   },
 };
 
+const priestSkills: Record<string, Skill> = {
+  ADORAMUS: {
+    key: "ADORAMUS",
+    name: "Adoramus",
+    label: "Adoramus",
+    isMelee: false,
+    job: "Cardinal",
+    formula: (character: Character, monster: Monster, buffs: Buffs) => {
+      const baseDamage = 2800;
+      return {
+        percent:
+          (baseDamage) * (character.baseLevel / 100),
+        bonus: 0,
+      };
+    },
+  },
+}
+
 const noviceSkills: Record<string, Skill> = {
   METEOR_STORM_BUSTER: {
     key: "METEOR_STORM_BUSTER",
@@ -459,8 +477,9 @@ const noviceSkills: Record<string, Skill> = {
 
 export const MATK_SKILLS: Record<string, Skill> = {
   ...allSkills,
-  ...noviceSkills,
   ...wizardSkills,
+  ...priestSkills,
+  ...noviceSkills,
 };
 
 export function getSkill(name: string) {
