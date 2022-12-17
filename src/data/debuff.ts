@@ -45,11 +45,11 @@ export const emptyMATKDebuffs: Debuffs = {
   },
   allBloom: {
     active: false,
-    tooltip: "Takes 100% from fire property attacks"
+    tooltip: "Takes 100% more damage from fire property attacks"
   },
   violentQuake: {
     active: false,
-    tooltip: "Takes 100% from earth property attacks"
+    tooltip: "Takes 100% more damage from earth property attacks"
   },
 };
 
