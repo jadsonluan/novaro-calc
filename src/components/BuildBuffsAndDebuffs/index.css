@@ -1,5 +1,6 @@
 .build-buffs-and-debuffs {
   height: fit-content;
+  overflow: hidden;
 }
 
 .build-buffs-and-debuffs .header {

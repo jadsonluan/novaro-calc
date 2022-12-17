@@ -7,13 +7,15 @@
 }
 
 .build-buffs .build-content {
-  padding: 15px 25px;
+  padding: 0px 25px 15px 25px;
+  max-height: 432px;
+  overflow-y: auto;
 }
 
 .build-buffs .inside-header {
   display: grid;
   grid-template-columns: 200px 1fr 1fr;
-  padding: 10px 25px 0px 25px;
+  padding: 10px 25px 10px 25px;
 }
 
 .build-buffs .inside-header> :not(:first-child) {
