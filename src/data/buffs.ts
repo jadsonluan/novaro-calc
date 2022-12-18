@@ -31,6 +31,7 @@ export interface Buffs {
   recognizedSpell?: Buff;
   climax?: Buff;
   striking?: Buff;
+  spellEnchanting?: Buff;
   // Archer
   trueSight?: Buff;
   fearBreeze?: Buff;
@@ -266,6 +267,11 @@ export const emptyMATKBuffs: Buffs = {
   climax: {
     active: false,
     tooltip: "Climax buff, acts as level 3 Climax for affected skills",
+    job: "Mage",
+  },
+  spellEnchanting: {
+    active: false,
+    tooltip: "S.Matk +20",
     job: "Mage",
   },
   // Archer
@@ -541,6 +547,18 @@ const BUFF_EFFECTS: Record<keyof Buffs, BuffEffect> = {
         pseudoBuffATK: pseudoBuffATK + ATK_INCREASE,
       },
       buffs: [...character.buffs, "striking"],
+    };
+  },
+  spellEnchanting: (character: Character) => {
+    const { MATK: { smatk } } = character;
+    const MATK_INCREASE = 20;
+    return {
+      ...character,
+      MATK: {
+        ...character.MATK,
+        smatk: smatk + MATK_INCREASE,
+      },
+      buffs: [...character.buffs, "spellEnchanting"],
     };
   },
   // Archer

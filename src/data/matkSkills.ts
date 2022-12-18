@@ -357,6 +357,142 @@ const wizardSkills: Record<string, Skill> = {
       };
     },
   },
+  PSYCHIC_WAVE: {
+    key: "PSYCHIC_WAVE",
+    name: "Psychic Wave (Per Wave)",
+    label: "Psychic Wave (Pew Wave)",
+    isMelee: false,
+    job: "Elemental Master",
+    formula: (character: Character, monster: Monster, buffs: Buffs) => {
+      const baseDamage = 350 + character.stats.int * 3;
+      return {
+        percent:
+          (baseDamage) * (character.baseLevel / 100) *
+          (['Rod', 'Book'].includes(character.weapon.type) ? 2 : 1),
+        bonus: 0,
+      };
+    },
+  },
+  DIAMOND_DUST: {
+    key: "DIAMOND_DUST",
+    name: "Diamond Dust",
+    label: "Diamond Dust",
+    isMelee: false,
+    job: "Elemental Master",
+    formula: (character: Character, monster: Monster, buffs: Buffs) => {
+      const baseDamage = (character.stats.int * 2 + 300 * 5 + character.stats.int * 5);
+      return {
+        percent:
+          (baseDamage) * (character.baseLevel / 100),
+        bonus: 0,
+      };
+    },
+  },
+  EARTH_GRAVE: {
+    key: "EARTH_GRAVE",
+    name: "Earth Grave",
+    label: "Earth Grave",
+    isMelee: false,
+    job: "Elemental Master",
+    formula: (character: Character, monster: Monster, buffs: Buffs) => {
+      const baseDamage = (character.stats.int * 2 + 300 * 5 + character.stats.int * 5);
+      return {
+        percent:
+          (baseDamage) * (character.baseLevel / 100),
+        bonus: 0,
+      };
+    },
+  },
+  VARETYR_SPEAR: {
+    key: "VARETYR_SPEAR",
+    name: "Varetyr Spear",
+    label: "Varetyr Spear",
+    isMelee: false,
+    job: "Elemental Master",
+    formula: (character: Character, monster: Monster, buffs: Buffs) => {
+      const baseDamage = (character.stats.int * 10 + 150 * 10);
+      return {
+        percent:
+          (baseDamage) * (character.baseLevel / 100),
+        bonus: 0,
+      };
+    },
+  },
+  DIAMOND_STORM: {
+    key: "DIAMOND_STORM",
+    name: "Diamond Storm",
+    label: "Diamond Storm",
+    isMelee: false,
+    job: "Elemental Master",
+    formula: (character: Character, monster: Monster, buffs: Buffs) => {
+      const baseDamage = 6250;
+      return {
+        percent:
+          (baseDamage + character.traits.spl * 5) * (character.baseLevel / 100),
+        bonus: 0,
+      };
+    },
+  },
+  CONFLAGRATION: {
+    key: "CONFLAGRATION",
+    name: "Conflagration",
+    label: "Conflagration",
+    isMelee: false,
+    job: "Elemental Master",
+    formula: (character: Character, monster: Monster, buffs: Buffs) => {
+      const baseDamage = 2000;
+      return {
+        percent:
+          (baseDamage + character.traits.spl * 5) * (character.baseLevel / 100),
+        bonus: 0,
+      };
+    },
+  },
+  LIGHTNING_LAND: {
+    key: "LIGHTNING_LAND",
+    name: "Lightning Land",
+    label: "Lightning Land",
+    isMelee: false,
+    job: "Elemental Master",
+    formula: (character: Character, monster: Monster, buffs: Buffs) => {
+      const baseDamage = 2000;
+      return {
+        percent:
+          (baseDamage + character.traits.spl * 5) * (character.baseLevel / 100),
+        bonus: 0,
+      };
+    },
+  },
+  TERRA_DRIVE: {
+    key: "TERRA_DRIVE",
+    name: "Terra Drive",
+    label: "Terra Drive",
+    isMelee: false,
+    job: "Elemental Master",
+    formula: (character: Character, monster: Monster, buffs: Buffs) => {
+      const baseDamage = 6250;
+      return {
+        percent:
+          (baseDamage + character.traits.spl * 5) * (character.baseLevel / 100),
+        bonus: 0,
+      };
+    },
+  },
+  VENON_SWAMP: {
+    key: "VENON_SWAMP",
+    name: "Venon Swamp",
+    label: "Venon Swamp",
+    isMelee: false,
+    job: "Elemental Master",
+    formula: (character: Character, monster: Monster, buffs: Buffs) => {
+      const baseDamage = 2000;
+      return {
+        percent:
+          (baseDamage + character.traits.spl * 5) * (character.baseLevel / 100),
+        bonus: 0,
+      };
+    },
+  },
 };
 
 const archerSkills: Record<string, Skill> = {
