@@ -651,12 +651,78 @@ const noviceSkills: Record<string, Skill> = {
   },
 };
 
+const doramSkills: Record<string, Skill> = {
+  SILVERVINE_STEM_SPEAR: {
+    key: "SILVERVINE_STEM_SPEAR",
+    name: "Silvervine Stem Spear",
+    label: "Silvervine Stem Spear",
+    isMelee: false,
+    job: "Spirit Handler",
+    formula: (character: Character, monster: Monster, buffs: Buffs) => {
+      const baseDamage = 700;
+      return {
+        percent: (baseDamage),
+        bonus: 0,
+      };
+    },
+  },
+  CATNIP_METEOR: {
+    key: "CATNIP_METEOR",
+    name: "Catnip Meteor (Per Meteor)",
+    label: "Catnip Meteor (Per Meteor)",
+    isMelee: false,
+    job: "Spirit Handler",
+    formula: (character: Character, monster: Monster, buffs: Buffs) => {
+      const baseDamage = 700;
+      return {
+        percent:
+          (baseDamage + character.stats.int) *
+          (character.baseLevel / 100),
+        bonus: 0,
+      };
+    },
+  },
+  HYUNROK_BREEZE: {
+    key: "HYUNROK_BREEZE",
+    name: "Hyunrok Breeze",
+    label: "Hyunrok Breeze",
+    isMelee: false,
+    job: "Spirit Handler",
+    formula: (character: Character, monster: Monster, buffs: Buffs) => {
+      const baseDamage = 4400;
+      return {
+        percent:
+          (baseDamage + character.traits.spl * 5) *
+          (character.baseLevel / 100),
+        bonus: 0,
+      };
+    },
+  },
+  HYUNROK_CANNON: {
+    key: "HYUNROK_CANNON",
+    name: "Hyunrok Cannon",
+    label: "Hyunrok Cannon",
+    isMelee: false,
+    job: "Spirit Handler",
+    formula: (character: Character, monster: Monster, buffs: Buffs) => {
+      const baseDamage = 5150;
+      return {
+        percent:
+          (baseDamage + character.traits.spl * 5) *
+          (character.baseLevel / 100),
+        bonus: 0,
+      };
+    },
+  },
+};
+
 export const MATK_SKILLS: Record<string, Skill> = {
   ...allSkills,
   ...wizardSkills,
   ...priestSkills,
   ...soulLinkerSkills,
   ...noviceSkills,
+  ...doramSkills,
 };
 
 export function getSkill(name: string) {

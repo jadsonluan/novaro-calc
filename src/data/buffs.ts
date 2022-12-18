@@ -1,4 +1,4 @@
-import { deepCopy } from "../utils/helperFunctions";
+import { deepCopy, getTraitBonuses } from "../utils/helperFunctions";
 import { Character } from "./character";
 import { ELEMENTS } from "./element";
 import { Monster } from "./monster";
@@ -53,6 +53,12 @@ export interface Buffs {
   // Novice
   ruleBreak?: Buff;
   breakingLimit?: Buff;
+  // Doram
+  bunchOfShrimp?: Buff;
+  marineFestivalofKisul?: Buff;
+  sandFestivalofKisul?: Buff;
+  temporaryCommunion?: Buff;
+  blessingOfMysticalCreatures?: Buff;
 }
 
 export const emptyATKBuffs: Buffs = {
@@ -200,6 +206,27 @@ export const emptyATKBuffs: Buffs = {
     tooltip: "Increase Hyper Novice physical skills damage",
     job: "Novice",
   },
+  // Doram
+  bunchOfShrimp: {
+    active: false,
+    tooltip: "ATK/MATK +10%",
+    job: "Doram",
+  },
+  marineFestivalofKisul: {
+    active: false,
+    tooltip: "POW / CON / CRT +10",
+    job: "Doram",
+  },
+  temporaryCommunion: {
+    active: false,
+    tooltip: "P.Atk, S.Matk and H.Plus +15",
+    job: "Doram",
+  },
+  blessingOfMysticalCreatures: {
+    active: false,
+    tooltip: "P.Atk and S.Matk + 50",
+    job: "Doram",
+  },
 };
 
 export const emptyMATKBuffs: Buffs = {
@@ -261,6 +288,27 @@ export const emptyMATKBuffs: Buffs = {
     active: false,
     tooltip: "Increase Hyper Novice magic skills damage",
     job: "Novice",
+  },
+  // Doram
+  bunchOfShrimp: {
+    active: false,
+    tooltip: "ATK/MATK +10%",
+    job: "Doram",
+  },
+  sandFestivalofKisul: {
+    active: false,
+    tooltip: "SPL / STA / WIS +10",
+    job: "Doram",
+  },
+  temporaryCommunion: {
+    active: false,
+    tooltip: "P.Atk, S.Matk and H.Plus +15",
+    job: "Doram",
+  },
+  blessingOfMysticalCreatures: {
+    active: false,
+    tooltip: "P.Atk and S.Matk + 50",
+    job: "Doram",
   },
 };
 
@@ -647,6 +695,93 @@ const BUFF_EFFECTS: Record<keyof Buffs, BuffEffect> = {
   },
   ruleBreak: (character: Character) => {
     return { ...character, buffs: [...character.buffs, "ruleBreak"] };
+  },
+  // Doram
+  bunchOfShrimp: (character: Character) => {
+    const { modifiers: { class: classATK }, MATK: { matkPercent } } = character;
+    const MODIFIER_INCREASE = 10;
+    return {
+      ...character,
+      modifiers: {
+        ...character.modifiers,
+        class: classATK + MODIFIER_INCREASE,
+      },
+      MATK: {
+        ...character.MATK,
+        matkPercent: ((matkPercent / 100) * 1.1) * 100,
+      },
+      buffs: [...character.buffs, "bunchOfShrimp"],
+    };
+  },
+  marineFestivalofKisul: (character: Character) => {
+    const { traits: { pow, con, crt }, ATK: { patk, crate } } = character;
+    const TRAIT_INCREASE = 10;
+    return {
+      ...character,
+      traits: {
+        ...character.traits,
+        pow: pow + TRAIT_INCREASE,
+        con: con + TRAIT_INCREASE,
+        crt: crt + TRAIT_INCREASE,
+      },
+      ATK: {
+        ...character.ATK,
+        patk: patk + getTraitBonuses("pow", character.traits.pow, character.traits.pow + TRAIT_INCREASE) +
+          getTraitBonuses("con", character.traits.con, character.traits.con + TRAIT_INCREASE),
+        crate: crate + getTraitBonuses("crt", character.traits.crt, character.traits.crt + TRAIT_INCREASE),
+      },
+      buffs: [...character.buffs, "marineFestivalofKisul"],
+    };
+  },
+  sandFestivalofKisul: (character: Character) => {
+    const { traits: { spl, sta, wis }, MATK: { smatk } } = character;
+    const TRAIT_INCREASE = 10;
+    return {
+      ...character,
+      traits: {
+        ...character.traits,
+        spl: spl + TRAIT_INCREASE,
+        sta: sta + TRAIT_INCREASE,
+        wis: wis + TRAIT_INCREASE,
+      },
+      MATK: {
+        ...character.MATK,
+        smatk: smatk + getTraitBonuses("spl", character.traits.spl, character.traits.spl + TRAIT_INCREASE),
+      },
+      buffs: [...character.buffs, "sandFestivalofKisul"],
+    };
+  },
+  temporaryCommunion: (character: Character) => {
+    const { ATK: { patk }, MATK: { smatk } } = character;
+    const TRAIT_INCREASE = 15;
+    return {
+      ...character,
+      ATK: {
+        ...character.ATK,
+        patk: patk + TRAIT_INCREASE,
+      },
+      MATK: {
+        ...character.MATK,
+        smatk: smatk + TRAIT_INCREASE,
+      },
+      buffs: [...character.buffs, "temporaryCommunion"],
+    };
+  },
+  blessingOfMysticalCreatures: (character: Character) => {
+    const { ATK: { patk }, MATK: { smatk } } = character;
+    const TRAIT_INCREASE = 50;
+    return {
+      ...character,
+      ATK: {
+        ...character.ATK,
+        patk: patk + TRAIT_INCREASE,
+      },
+      MATK: {
+        ...character.MATK,
+        smatk: smatk + TRAIT_INCREASE,
+      },
+      buffs: [...character.buffs, "blessingOfMysticalCreatures"],
+    };
   },
 };
 

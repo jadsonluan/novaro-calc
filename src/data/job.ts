@@ -29,7 +29,7 @@ export type Job =
   | "Night Watch"
   | "Sky Emperor"
   | "Soul Ascetic"
-  | "Summoner"
+  | "Spirit Handler"
   | "Hyper Novice";
 
 export interface BaseStat {
@@ -126,7 +126,7 @@ export const JOBS: Record<Job, BaseStat & { initialJob: string }> = {
     baseSP: 985,
     initialJob: "Novice",
   },
-  Summoner: {
+  "Spirit Handler": {
     baseHP: 22810,
     baseSP: 985,
     initialJob: "Doram",
