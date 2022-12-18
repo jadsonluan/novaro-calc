@@ -3,6 +3,7 @@ import { BuildDebuffCheckBox } from "../BuildCheckBox";
 import { capitalize } from "../BuildBuffsAndDebuffs";
 import { Debuffs } from "../../data/debuff";
 import { INITIAL_JOBS } from "../../data/job";
+import { Fragment } from "react";
 
 const BuildDebuffs = ({ emptyDebuffs }: { emptyDebuffs: Debuffs }) => {
   const debuffs = Object.getOwnPropertyNames(emptyDebuffs);
@@ -20,7 +21,7 @@ const BuildDebuffs = ({ emptyDebuffs }: { emptyDebuffs: Debuffs }) => {
           );
 
           return groupOptions.length > 0 && (
-            <>
+            <Fragment key={job}>
               <b>{job}</b>
               <div className="debuff-options">
               {groupOptions.map((debuff) => (
@@ -39,7 +40,7 @@ const BuildDebuffs = ({ emptyDebuffs }: { emptyDebuffs: Debuffs }) => {
                 />
               ))}
               </div>
-            </>
+            </Fragment>
           )
         })}
       </div>

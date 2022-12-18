@@ -3,6 +3,7 @@ import { Buffs } from "../../data/buffs";
 import { BuildBuffCheckBox } from "../BuildCheckBox";
 import { capitalize } from "../BuildBuffsAndDebuffs";
 import { INITIAL_JOBS } from "../../data/job";
+import React, { Fragment } from "react";
 
 const BuildBuffs = ({ emptyBuffs }: { emptyBuffs: Buffs }) => {
   const buffs = Object.getOwnPropertyNames(emptyBuffs);
@@ -20,7 +21,7 @@ const BuildBuffs = ({ emptyBuffs }: { emptyBuffs: Buffs }) => {
           );
 
           return groupOptions.length > 0 && (
-            <>
+            <Fragment key={job}>
               <b>{job}</b>
               <div className="buff-options">
               {groupOptions.map((buff) => (
@@ -39,7 +40,7 @@ const BuildBuffs = ({ emptyBuffs }: { emptyBuffs: Buffs }) => {
                 />
               ))}
               </div>
-            </>
+            </Fragment>
           )
         })}
       </div>

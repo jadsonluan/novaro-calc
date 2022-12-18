@@ -156,6 +156,21 @@ const wizardSkills: Record<string, Skill> = {
       };
     },
   },
+  CRIMSON_ARROW: {
+    key: "CRIMSON_ARROW",
+    name: "Crimson Arrow",
+    label: "Crimson Arrow",
+    isMelee: false,
+    job: "Archmage",
+    formula: (character: Character, monster: Monster, buffs: Buffs) => {
+      const baseDamage = 1500;
+      return {
+        percent:
+          (baseDamage + character.traits.spl * 5) * (character.baseLevel / 100),
+        bonus: 0,
+      };
+    },
+  },
   CRIMSON_ARROW_EXPLOSION: {
     key: "CRIMSON_ARROW_EXPLOSION",
     name: "Crimson Arrow (Explosion)",
