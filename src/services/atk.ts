@@ -302,6 +302,8 @@ export function getFinalATKDamage(range: DmgRange, build: BuildInfo) {
     monsterFinalModifier += 100;
   } else if (monster.debuffs.includes("allBloom") && character.weapon.element === "Fire") {
     monsterFinalModifier += 100;
+  } else if (monster.debuffs.includes("soulCurse") && character.weapon.element === "Shadow") {
+    monsterFinalModifier = ((1 + monsterFinalModifier / 100) * (monster.type === 'normal' ? 2 : 1.2)) * 100;
   }
 
   finalDmg = applyModifier(finalDmg, monsterFinalModifier);
