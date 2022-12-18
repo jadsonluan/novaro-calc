@@ -33,9 +33,12 @@ export interface Buffs {
   striking?: Buff;
   // Archer
   trueSight?: Buff;
+  fearBreeze?: Buff;
   unlimit?: Buff;
   calamityGale?: Buff;
-  fearBreeze?: Buff;
+  marchOfProntera?: Buff;
+  serenadeOfJawaii?: Buff;
+  mysticSymphony?: Buff;
   // Acolyte
   allSpheres?: Buff;
   odinsBlessing?: Buff;
@@ -158,6 +161,16 @@ export const emptyATKBuffs: Buffs = {
     tooltip: "Unlimit effect, increases Crescive Bolt damage and increases damage against Brute and Fish monsters",
     job: "Archer",
   },
+  marchOfProntera: {
+    active: false,
+    tooltip: "P.Atk +15",
+    job: "Archer",
+  },
+  mysticSymphony: {
+    active: false,
+    tooltip: "Increases damage of Rhythm Shooting, Rose Blossom and Sound Blend. Increases damage against Fish and Demi-Human races",
+    job: "Archer",
+  },
   // Acolyte
   allSpheres: {
     active: false,
@@ -256,6 +269,16 @@ export const emptyMATKBuffs: Buffs = {
     job: "Mage",
   },
   // Archer
+  serenadeOfJawaii: {
+    active: false,
+    tooltip: "S.Matk +15",
+    job: "Archer",
+  },
+  mysticSymphony: {
+    active: false,
+    tooltip: "Increases damage of Rhythm Shooting, Rose Blossom and Sound Blend. Increases damage against Fish and Demi-Human races",
+    job: "Archer",
+  },
   // Acolyte
   odinsBlessing: {
     active: false,
@@ -562,6 +585,42 @@ const BUFF_EFFECTS: Record<keyof Buffs, BuffEffect> = {
         finalDmg: modifiers.finalDmg + (!character.buffs.includes('unlimit') ? UNLIMIT_INCREASE : 0),
       },
       buffs: [...character.buffs, "calamityGale"],
+    };
+  },
+  marchOfProntera: (character: Character) => {
+    const { ATK: { patk } } = character;
+    const PATK_INCREASE = 15;
+    return {
+      ...character,
+      ATK: {
+        ...character.ATK,
+        patk: patk + PATK_INCREASE,
+      },
+      buffs: [...character.buffs, "marchOfProntera"],
+    };
+  },
+  serenadeOfJawaii: (character: Character) => {
+    const { MATK: { smatk } } = character;
+    const SMATK_INCREASE = 15;
+    return {
+      ...character,
+      MATK: {
+        ...character.MATK,
+        smatk: smatk + SMATK_INCREASE,
+      },
+      buffs: [...character.buffs, "serenadeOfJawaii"],
+    };
+  },
+  mysticSymphony: (character: Character, monster: Monster) => {
+    const { modifiers: { race } } = character;
+    const RACE_MODIFIER = 30;
+    return {
+      ...character,
+      modifiers: {
+        ...character.modifiers,
+        race: race + (['fish', 'demihuman'].includes(monster.race) ? RACE_MODIFIER : 0),
+      },
+      buffs: [...character.buffs, "mysticSymphony"],
     };
   },
   // Acolyte

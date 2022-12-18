@@ -359,6 +359,70 @@ const wizardSkills: Record<string, Skill> = {
   },
 };
 
+const archerSkills: Record<string, Skill> = {
+  REVERBERATION: {
+    key: "REVERBERATION",
+    label: "Reverberation",
+    name: "Reverberation",
+    isMelee: false,
+    job: "Troubadour / Trouvere",
+    formula: (character: Character, monster: Monster, buffs: Buffs) => {
+      let baseDamage = 2200;
+      return {
+        percent: (baseDamage) * (character.baseLevel / 100) *
+        (monster.debuffs.includes('soundBlend') ? 1.3 : 1),
+        bonus: 0,
+      };
+    }
+  },
+  METALLIC_SOUND: {
+    key: "METALLIC_SOUND",
+    label: "Metallic Sound",
+    name: "Metallic Sound",
+    isMelee: false,
+    job: "Troubadour / Trouvere",
+    formula: (character: Character, monster: Monster, buffs: Buffs) => {
+      let baseDamage = 1800 * 2;
+      return {
+        percent: (baseDamage) * (character.baseLevel / 100) *
+         (monster.debuffs.includes('soundBlend') ? 1.7 : 1),
+        bonus: 0,
+      };
+    }
+  },
+  SOUND_BLEND: {
+    key: "SOUND_BLEND",
+    label: "Sound Blend",
+    name: "Sound Blend",
+    isMelee: false,
+    job: "Troubadour / Trouvere",
+    formula: (character: Character, monster: Monster, buffs: Buffs) => {
+      let baseDamage = 600 + character.traits.spl * 5;
+      return {
+        percent: (baseDamage) *
+         (character.baseLevel / 100) *
+         (buffs.mysticSymphony?.active ? 1.4 : 1),
+        bonus: 0,
+      };
+    }
+  },
+  METALLIC_FURY: {
+    key: "METALLIC_FURY",
+    label: "Metallic Fury (per hit)",
+    name: "Metallic Fury (per hit)",
+    isMelee: false,
+    job: "Troubadour / Trouvere",
+    formula: (character: Character, monster: Monster, buffs: Buffs) => {
+      let baseDamage = 4500 + character.traits.spl * 5;
+      return {
+        percent: baseDamage *
+         (character.baseLevel / 100),
+        bonus: 0,
+      };
+    }
+  },
+};
+
 const priestSkills: Record<string, Skill> = {
   ADORAMUS: {
     key: "ADORAMUS",
@@ -719,6 +783,7 @@ const doramSkills: Record<string, Skill> = {
 export const MATK_SKILLS: Record<string, Skill> = {
   ...allSkills,
   ...wizardSkills,
+  ...archerSkills,
   ...priestSkills,
   ...soulLinkerSkills,
   ...noviceSkills,

@@ -331,6 +331,57 @@ const bardSkills: Record<string, Skill> = {
       };
     }
   },
+  RHYTHM_SHOOTING: {
+    key: "RHYTHM_SHOOTING",
+    label: "Rhythm Shooting",
+    name: "Rhythm Shooting",
+    isMelee: false,
+    job: "Troubadour / Trouvere",
+    formula: (character: Character, monster: Monster, buffs: Buffs) => {
+      let baseDamage = 600 + character.traits.con * 5;
+      return {
+        percent: (baseDamage) * 3 *
+         (character.baseLevel / 100) *
+         (buffs.mysticSymphony?.active ? 2 : 1) *
+         (monster.debuffs.includes('soundBlend') ? 2.1 : 1),
+        bonus: 0,
+      };
+    }
+  },
+  ROSE_BLOSSOM: {
+    key: "ROSE_BLOSSOM",
+    label: "Rose Blossom",
+    name: "Rose Blossom",
+    isMelee: false,
+    job: "Troubadour / Trouvere",
+    formula: (character: Character, monster: Monster, buffs: Buffs) => {
+      let baseDamage = 3750 + character.traits.con * 5;
+      return {
+        percent: baseDamage *
+         (character.baseLevel / 100) *
+         (buffs.mysticSymphony?.active ? 2 : 1) *
+         (monster.debuffs.includes('soundBlend') ? 1.3 : 1),
+        bonus: 0,
+      };
+    }
+  },
+  ROSE_BLOSSOM_EXPLOSION: {
+    key: "ROSE_BLOSSOM_EXPLOSION",
+    label: "Rose Blossom (Explosion)",
+    name: "Rose Blossom (Explosion)",
+    isMelee: false,
+    job: "Troubadour / Trouvere",
+    formula: (character: Character, monster: Monster, buffs: Buffs) => {
+      let baseDamage = 1750 + character.traits.con * 5;
+      return {
+        percent: baseDamage *
+         (character.baseLevel / 100) *
+         (buffs.mysticSymphony?.active ? 2 : 1) *
+         (monster.debuffs.includes('soundBlend') ? 1.80 : 1),
+        bonus: 0,
+      };
+    }
+  },
 }
 
 const monkSkills: Record<string, Skill> = {

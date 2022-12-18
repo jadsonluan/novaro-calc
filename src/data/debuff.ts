@@ -4,6 +4,7 @@ import { Character } from "./character";
 import { Monster } from "./monster";
 
 export interface Debuffs {
+  soundBlend?: Buff;
   oratio?: Buff;
   darkClaw?: Buff;
   magicIntoxication?: Buff;
@@ -33,6 +34,11 @@ export const emptyATKDebuffs: Debuffs = {
     tooltip: "Takes 100% from earth property attacks",
     job: "Mage"
   },
+  soundBlend: {
+    active: false,
+    tooltip: "Increases damage of some Troubadour / Trouvere skills",
+    job: "Archer"
+  },
   oratio: {
     active: false,
     tooltip: "Decreases holy property resistance",
@@ -60,6 +66,11 @@ export const emptyMATKDebuffs: Debuffs = {
     active: false,
     tooltip: "Takes 100% more damage from earth property attacks",
     job: "Mage"
+  },
+  soundBlend: {
+    active: false,
+    tooltip: "Increases damage of some Troubadour / Trouvere skills",
+    job: "Archer"
   },
   oratio: {
     active: false,
@@ -99,6 +110,12 @@ const DEBUFF_EFFECTS: Record<keyof Debuffs, BuffEffect> = {
         finalModifier: monster.finalModifier + MODIFIER,
         debuffs: [...monster.debuffs, "magicIntoxication"],
       },
+    };
+  },
+  soundBlend: (character: Character, monster: Monster) => {
+    return {
+      character: { ...character },
+      monster: { ...monster, debuffs: [...monster.debuffs, "soundBlend"] },
     };
   },
   oratio: (character: Character, monster: Monster) => {
