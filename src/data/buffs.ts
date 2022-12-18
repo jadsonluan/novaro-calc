@@ -42,7 +42,13 @@ export interface Buffs {
   shadowWarrior?: Buff;
   earthCharm?: Buff;
   // Taekwon
+  fairySoul?: Buff;
   falconSoul?: Buff;
+  talismanOfWarrior?: Buff;
+  talismanOfMagician?: Buff;
+  talismanOfFiveElements?: Buff;
+  soulofHeavenAndEarth?: Buff;
+  circleOfDirectionAndElementals?: Buff;
   // Novice
   ruleBreak?: Buff;
   breakingLimit?: Buff;
@@ -149,6 +155,18 @@ export const emptyATKBuffs: Buffs = {
     active: false,
     tooltip: "Pseudo Buff ATK +50"
   },
+  talismanOfWarrior: {
+    active: false,
+    tooltip: "P.Atk +10"
+  },
+  talismanOfFiveElements: {
+    active: false,
+    tooltip: "Increase damage against Neutral, Water, Earth, Fire and Wind property monsters by 20%"
+  },
+  soulofHeavenAndEarth: {
+    active: false,
+    tooltip: "Increases Melee, Ranged and All Magical Element 25%"
+  },
   // Novice
   breakingLimit: {
     active: false,
@@ -181,6 +199,26 @@ export const emptyMATKBuffs: Buffs = {
   },
   // Ninja
   // Taekwon
+  fairySoul: {
+    active: false,
+    tooltip: "Pseudo Buff MATK +50"
+  },
+  talismanOfMagician: {
+    active: false,
+    tooltip: "S.Matk +10"
+  },
+  talismanOfFiveElements: {
+    active: false,
+    tooltip: "Increase damage against Neutral, Water, Earth, Fire and Wind property monsters by 20%"
+  },
+  soulofHeavenAndEarth: {
+    active: false,
+    tooltip: "Increases Melee, Ranged and All Magical Element 25%"
+  },
+  circleOfDirectionAndElementals: {
+    active: false,
+    tooltip: "S.Matk +25 and activates 'Blessing of the Four Directions and Five Elementals'"
+  },
   // Novice
   ruleBreak: {
     active: false,
@@ -479,6 +517,18 @@ const BUFF_EFFECTS: Record<keyof Buffs, BuffEffect> = {
     };
   },
   // Taekwon
+  fairySoul: (character: Character) => {
+    const { MATK: { buffMATK } } = character;
+    const MATK_INCREASE = 50;
+    return {
+      ...character,
+      MATK: {
+        ...character.MATK,
+        buffMATK: buffMATK + MATK_INCREASE,
+      },
+      buffs: [...character.buffs, "fairySoul"],
+    };
+  },
   falconSoul: (character: Character) => {
     const { ATK: { pseudoBuffATK } } = character;
     const ATK_INCREASE = 50;
@@ -489,6 +539,68 @@ const BUFF_EFFECTS: Record<keyof Buffs, BuffEffect> = {
         pseudoBuffATK: pseudoBuffATK + ATK_INCREASE,
       },
       buffs: [...character.buffs, "falconSoul"],
+    };
+  },
+  talismanOfWarrior: (character: Character) => {
+    const { ATK: { patk }} = character;
+    const PATK_INCREASE = 10;
+    return {
+      ...character,
+      ATK: {
+        ...character.ATK,
+        patk: patk + PATK_INCREASE,
+      },
+      buffs: [...character.buffs, "talismanOfWarrior"],
+    };
+  },
+  talismanOfMagician: (character: Character) => {
+    const { MATK: { smatk }} = character;
+    const SMATK_INCREASE = 10;
+    return {
+      ...character,
+      MATK: {
+        ...character.MATK,
+        smatk: smatk + SMATK_INCREASE,
+      },
+      buffs: [...character.buffs, "talismanOfMagician"],
+    };
+  },
+  talismanOfFiveElements: (character: Character) => {
+    const { modifiers: { targetProperty } } = character;
+    const MODIFIER_INCREASE = 20;
+    return {
+      ...character,
+      modifiers: {
+        ...character.modifiers,
+        targetProperty: targetProperty + MODIFIER_INCREASE,
+      },
+      buffs: [...character.buffs, "talismanOfFiveElements"],
+    };
+  },
+  soulofHeavenAndEarth: (character: Character) => {
+    const { modifiers: { melee, ranged, skillProperty } } = character;
+    const MODIFIER_INCREASE = 25;
+    return {
+      ...character,
+      modifiers: {
+        ...character.modifiers,
+          melee: melee + MODIFIER_INCREASE,
+          ranged: ranged + MODIFIER_INCREASE,
+          skillProperty: skillProperty + MODIFIER_INCREASE,
+      },
+      buffs: [...character.buffs, "soulofHeavenAndEarth"],
+    };
+  },
+  circleOfDirectionAndElementals: (character: Character) => {
+    const { MATK: { smatk }} = character;
+    const SMATK_INCREASE = 25;
+    return {
+      ...character,
+      MATK: {
+        ...character.MATK,
+        smatk: smatk + SMATK_INCREASE,
+      },
+      buffs: [...character.buffs, "circleOfDirectionAndElementals"],
     };
   },
   // Novice

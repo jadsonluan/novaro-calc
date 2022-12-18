@@ -84,7 +84,10 @@ const wizardSkills: Record<string, Skill> = {
     formula: (character: Character, monster: Monster) => {
       const baseDamage = 900;
       return {
-        percent: (baseDamage + character.traits.spl * 4) * (character.baseLevel / 100) * 7,
+        percent:
+          (baseDamage + character.traits.spl * 4) *
+          (character.baseLevel / 100) *
+          7,
         bonus: 0,
       };
     },
@@ -98,7 +101,8 @@ const wizardSkills: Record<string, Skill> = {
     formula: (character: Character, monster: Monster) => {
       const baseDamage = 2500;
       return {
-        percent: (baseDamage + character.traits.spl * 5) * (character.baseLevel / 100),
+        percent:
+          (baseDamage + character.traits.spl * 5) * (character.baseLevel / 100),
         bonus: 0,
       };
     },
@@ -113,8 +117,7 @@ const wizardSkills: Record<string, Skill> = {
       const baseDamage = 3000;
       return {
         percent:
-          (baseDamage + character.traits.spl * 5) *
-          (character.baseLevel / 100),
+          (baseDamage + character.traits.spl * 5) * (character.baseLevel / 100),
         bonus: 0,
       };
     },
@@ -126,7 +129,8 @@ const wizardSkills: Record<string, Skill> = {
     isMelee: false,
     job: "Archmage",
     formula: (character: Character, monster: Monster, buffs: Buffs) => {
-      const baseDamage = 5000 + (['undead', 'dragon'].includes(monster.race) ? 6000 : 0);
+      const baseDamage =
+        5000 + (["undead", "dragon"].includes(monster.race) ? 6000 : 0);
       return {
         percent:
           (baseDamage + character.traits.spl * 15) *
@@ -142,7 +146,8 @@ const wizardSkills: Record<string, Skill> = {
     isMelee: false,
     job: "Archmage",
     formula: (character: Character, monster: Monster, buffs: Buffs) => {
-      const baseDamage = 2000 + (['undead', 'dragon'].includes(monster.race) ? 2000 : 0);
+      const baseDamage =
+        2000 + (["undead", "dragon"].includes(monster.race) ? 2000 : 0);
       return {
         percent:
           (baseDamage + character.traits.spl * 15) *
@@ -161,7 +166,9 @@ const wizardSkills: Record<string, Skill> = {
       const baseDamage = 1500;
       return {
         percent:
-          (baseDamage + (buffs.climax?.active ? 1500 : 0) + character.traits.spl * 2.5) *
+          (baseDamage +
+            (buffs.climax?.active ? 1500 : 0) +
+            character.traits.spl * 2.5) *
           2 *
           (character.baseLevel / 100),
         bonus: 0,
@@ -177,7 +184,9 @@ const wizardSkills: Record<string, Skill> = {
     formula: (character: Character, monster: Monster, buffs: Buffs) => {
       const baseDamage = 500;
       return {
-        percent: (baseDamage + character.traits.spl * 5) * (character.baseLevel / 100) *
+        percent:
+          (baseDamage + character.traits.spl * 5) *
+          (character.baseLevel / 100) *
           (buffs.climax?.active ? 2 : 1),
         bonus: 0,
       };
@@ -192,7 +201,8 @@ const wizardSkills: Record<string, Skill> = {
     formula: (character: Character, monster: Monster) => {
       const baseDamage = 750;
       return {
-        percent: (baseDamage + character.traits.spl * 5) * (character.baseLevel / 100),
+        percent:
+          (baseDamage + character.traits.spl * 5) * (character.baseLevel / 100),
         bonus: 0,
       };
     },
@@ -207,7 +217,9 @@ const wizardSkills: Record<string, Skill> = {
       const baseDamage = 3000;
       return {
         percent:
-          (baseDamage + (buffs.climax?.active ? 1250 : 0) + character.traits.spl * 5) *
+          (baseDamage +
+            (buffs.climax?.active ? 1250 : 0) +
+            character.traits.spl * 5) *
           (character.baseLevel / 100),
         bonus: 0,
       };
@@ -222,7 +234,9 @@ const wizardSkills: Record<string, Skill> = {
     formula: (character: Character, monster: Monster, buffs: Buffs) => {
       const baseDamage = 4000;
       return {
-        percent: (baseDamage + character.traits.spl * 5) * (character.baseLevel / 100) *
+        percent:
+          (baseDamage + character.traits.spl * 5) *
+          (character.baseLevel / 100) *
           (buffs.climax?.active ? 1.5 : 1),
         bonus: 0,
       };
@@ -237,7 +251,8 @@ const wizardSkills: Record<string, Skill> = {
     formula: (character: Character, monster: Monster) => {
       const baseDamage = 450;
       return {
-        percent: (baseDamage + character.traits.spl * 5) * (character.baseLevel / 100),
+        percent:
+          (baseDamage + character.traits.spl * 5) * (character.baseLevel / 100),
         bonus: 0,
       };
     },
@@ -252,7 +267,9 @@ const wizardSkills: Record<string, Skill> = {
       const baseDamage = 3000;
       return {
         percent:
-          (baseDamage + (buffs.climax?.active ? 1250 : 0) + character.traits.spl * 5) *
+          (baseDamage +
+            (buffs.climax?.active ? 1250 : 0) +
+            character.traits.spl * 5) *
           (character.baseLevel / 100),
         bonus: 0,
       };
@@ -267,7 +284,9 @@ const wizardSkills: Record<string, Skill> = {
     formula: (character: Character, monster: Monster, buffs: Buffs) => {
       const baseDamage = 8000;
       return {
-        percent: (baseDamage + character.traits.spl * 5) * (character.baseLevel / 100) *
+        percent:
+          (baseDamage + character.traits.spl * 5) *
+          (character.baseLevel / 100) *
           (buffs.climax?.active ? 2 : 1),
         bonus: 0,
       };
@@ -282,7 +301,8 @@ const wizardSkills: Record<string, Skill> = {
     formula: (character: Character, monster: Monster) => {
       const baseDamage = 1250;
       return {
-        percent: (baseDamage + character.traits.spl * 5) * (character.baseLevel / 100),
+        percent:
+          (baseDamage + character.traits.spl * 5) * (character.baseLevel / 100),
         bonus: 0,
       };
     },
@@ -297,7 +317,9 @@ const wizardSkills: Record<string, Skill> = {
       const baseDamage = 3000;
       return {
         percent:
-          (baseDamage + (buffs.climax?.active ? 1250 : 0) + character.traits.spl * 5) *
+          (baseDamage +
+            (buffs.climax?.active ? 1250 : 0) +
+            character.traits.spl * 5) *
           (character.baseLevel / 100),
         bonus: 0,
       };
@@ -312,7 +334,9 @@ const wizardSkills: Record<string, Skill> = {
     formula: (character: Character, monster: Monster, buffs: Buffs) => {
       const baseDamage = 600;
       return {
-        percent: (baseDamage + character.traits.spl * 5) * (character.baseLevel / 100) *
+        percent:
+          (baseDamage + character.traits.spl * 5) *
+          (character.baseLevel / 100) *
           (buffs.climax?.active ? 2 : 1),
         bonus: 0,
       };
@@ -330,13 +354,144 @@ const priestSkills: Record<string, Skill> = {
     formula: (character: Character, monster: Monster, buffs: Buffs) => {
       const baseDamage = 2800;
       return {
-        percent:
-          (baseDamage) * (character.baseLevel / 100),
+        percent: baseDamage * (character.baseLevel / 100),
         bonus: 0,
       };
     },
   },
-}
+};
+
+const soulLinkerSkills: Record<string, Skill> = {
+  ESPA: {
+    key: "ESPA",
+    name: "Espa",
+    label: "Espa",
+    isMelee: false,
+    job: "Soul Ascetic",
+    formula: (character: Character, monster: Monster, buffs: Buffs) => {
+      const baseDamage = 3000;
+      return {
+        percent: baseDamage * (character.baseLevel / 100),
+        bonus: 0,
+      };
+    },
+  },
+  EXORCISM_OF_MALICIOUS_SOUL: {
+    key: "EXORCISM_OF_MALICIOUS_SOUL",
+    name: "Exorcism of Malicious Soul",
+    label: "Exorcism of Malicious Soul",
+    isMelee: false,
+    job: "Soul Ascetic",
+    formula: (character: Character, monster: Monster, buffs: Buffs) => {
+      const baseDamage =
+        ((monster.debuffs.includes("soulCurse") ? 1250 : 750) +
+          20 + // Soul Mastery lv 10;
+          character.traits.spl * 5) *
+        20; // Max Souls;
+      return {
+        percent: baseDamage * (character.baseLevel / 100),
+        bonus: 0,
+      };
+    },
+  },
+  TALISMAN_OF_BLUE_DRAGON: {
+    key: "TALISMAN_OF_BLUE_DRAGON",
+    name: "Talisman of Blue Dragon",
+    label: "Talisman of Blue Dragon",
+    isMelee: false,
+    job: "Soul Ascetic",
+    formula: (character: Character, monster: Monster, buffs: Buffs) => {
+      const baseDamage =
+        5250 + (buffs.circleOfDirectionAndElementals?.active ? 2250 : 0);
+      return {
+        percent:
+          (baseDamage + character.traits.spl * 5) * (character.baseLevel / 100),
+        bonus: 0,
+      };
+    },
+  },
+  TALISMAN_OF_WHITE_TIGER: {
+    key: "TALISMAN_OF_WHITE_TIGER",
+    name: "Talisman of White Tiger",
+    label: "Talisman of White Tiger",
+    isMelee: false,
+    job: "Soul Ascetic",
+    formula: (character: Character, monster: Monster, buffs: Buffs) => {
+      const baseDamage =
+        4250 + (buffs.circleOfDirectionAndElementals?.active ? 1500 : 0);
+      return {
+        percent:
+          (baseDamage + character.traits.spl * 5) * (character.baseLevel / 100),
+        bonus: 0,
+      };
+    },
+  },
+  TALISMAN_OF_RED_PHOENIX: {
+    key: "TALISMAN_OF_RED_PHOENIX",
+    name: "Talisman of Red Phoenix",
+    label: "Talisman of Red Phoenix",
+    isMelee: false,
+    job: "Soul Ascetic",
+    formula: (character: Character, monster: Monster, buffs: Buffs) => {
+      const baseDamage =
+        5250 + (buffs.circleOfDirectionAndElementals?.active ? 2000 : 0);
+      return {
+        percent:
+          (baseDamage + character.traits.spl * 5) * (character.baseLevel / 100),
+        bonus: 0,
+      };
+    },
+  },
+  TALISMAN_OF_BLACK_TORTOISE: {
+    key: "TALISMAN_OF_BLACK_TORTOISE",
+    name: "Talisman of Black Tortoise",
+    label: "Talisman of Black Tortoise",
+    isMelee: false,
+    job: "Soul Ascetic",
+    formula: (character: Character, monster: Monster, buffs: Buffs) => {
+      const baseDamage =
+        7250 + (buffs.circleOfDirectionAndElementals?.active ? 2250 : 0);
+      return {
+        percent:
+          (baseDamage + character.traits.spl * 5) * (character.baseLevel / 100),
+        bonus: 0,
+      };
+    },
+  },
+  TALISMAN_OF_FOUR_BEARING_GOD: {
+    key: "TALISMAN_OF_FOUR_BEARING_GOD",
+    name: "Talisman of Four Bearing God",
+    label: "Talisman of Four Bearing God",
+    isMelee: false,
+    job: "Soul Ascetic",
+    formula: (character: Character, monster: Monster, buffs: Buffs) => {
+      const baseDamage = 1750;
+      return {
+        percent:
+          (baseDamage + character.traits.spl * 5) * (character.baseLevel / 100) *
+          (buffs.circleOfDirectionAndElementals?.active ? 7 : 1),
+        bonus: 0,
+      };
+    },
+  },
+  CIRCLE_OF_DIRECTIONS_AND_ELEMENTALS: {
+    key: "CIRCLE_OF_DIRECTIONS_AND_ELEMENTALS",
+    name: "Circle of Directions and Elementals",
+    label: "Circle of Directions and Elementals",
+    isMelee: false,
+    job: "Soul Ascetic",
+    formula: (character: Character, monster: Monster, buffs: Buffs) => {
+      const baseDamage = 8250;
+      return {
+        percent:
+          (baseDamage + character.traits.spl * 5) *
+          (character.baseLevel / 100) *
+          5, // Hits
+        bonus: 0,
+      };
+    },
+  },
+};
 
 const noviceSkills: Record<string, Skill> = {
   METEOR_STORM_BUSTER: {
@@ -349,7 +504,8 @@ const noviceSkills: Record<string, Skill> = {
       const baseDamage = 3800;
       return {
         percent:
-          (baseDamage + 5 * character.traits.spl) * (character.baseLevel / 100) *
+          (baseDamage + 5 * character.traits.spl) *
+          (character.baseLevel / 100) *
           (buffs.ruleBreak?.active ? 1.5 : 1),
         bonus: 0,
       };
@@ -365,7 +521,8 @@ const noviceSkills: Record<string, Skill> = {
       const baseDamage = 2450;
       return {
         percent:
-          (baseDamage + character.traits.spl * 5) * (character.baseLevel / 100) *
+          (baseDamage + character.traits.spl * 5) *
+          (character.baseLevel / 100) *
           (buffs.ruleBreak?.active ? 1.5 : 1),
         bonus: 0,
       };
@@ -381,7 +538,8 @@ const noviceSkills: Record<string, Skill> = {
       const baseDamage = 18300;
       return {
         percent:
-          (baseDamage + character.traits.spl * 5) * (character.baseLevel / 100) *
+          (baseDamage + character.traits.spl * 5) *
+          (character.baseLevel / 100) *
           (buffs.ruleBreak?.active ? 1.7 : 1),
         bonus: 0,
       };
@@ -416,7 +574,8 @@ const noviceSkills: Record<string, Skill> = {
       const baseDamage = 6900;
       return {
         percent:
-          (baseDamage + character.traits.spl * 5) * (character.baseLevel / 100) *
+          (baseDamage + character.traits.spl * 5) *
+          (character.baseLevel / 100) *
           (buffs.ruleBreak?.active ? 1.7 : 1),
         bonus: 0,
       };
@@ -432,7 +591,8 @@ const noviceSkills: Record<string, Skill> = {
       const baseDamage = 18400;
       return {
         percent:
-          (baseDamage + character.traits.spl * 5) * (character.baseLevel / 100) *
+          (baseDamage + character.traits.spl * 5) *
+          (character.baseLevel / 100) *
           (buffs.ruleBreak?.active ? 1.5 : 1),
         bonus: 0,
       };
@@ -467,7 +627,8 @@ const noviceSkills: Record<string, Skill> = {
       const baseDamage = 3150;
       return {
         percent:
-          (baseDamage + character.traits.spl * 5) * (character.baseLevel / 100) *
+          (baseDamage + character.traits.spl * 5) *
+          (character.baseLevel / 100) *
           (buffs.ruleBreak?.active ? 2 : 1),
         bonus: 0,
       };
@@ -479,6 +640,7 @@ export const MATK_SKILLS: Record<string, Skill> = {
   ...allSkills,
   ...wizardSkills,
   ...priestSkills,
+  ...soulLinkerSkills,
   ...noviceSkills,
 };
 
