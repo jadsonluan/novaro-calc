@@ -3,7 +3,7 @@ export const INITIAL_JOBS: string[] = [
   'Merchant',
   'Thief',
   'Mage',
-  'Priest',
+  'Acolyte',
   'Archer',
   'Ninja',
   'Gunslinger',

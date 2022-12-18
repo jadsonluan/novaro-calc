@@ -9,47 +9,67 @@ export interface Debuffs {
   magicIntoxication?: Buff;
   allBloom?: Buff;
   violentQuake?: Buff;
+  soulCurse?: Buff;
 }
 
 export const emptyATKDebuffs: Debuffs = {
   darkClaw: {
     active: false,
-    tooltip: "+150%(75% for boss) melee damage inflicted"
+    tooltip: "+150%(75% for boss) melee damage inflicted",
+    job: "Thief"
   },
   magicIntoxication: {
     active: false,
-    tooltip: "Takes 50% more damage from all properties"
-  },
-  oratio: {
-    active: false,
-    tooltip: "Decreases holy property resistance"
+    tooltip: "Takes 50% more damage from all properties",
+    job: "Mage"
   },
   allBloom: {
     active: false,
-    tooltip: "Takes 100% from fire property attacks"
+    tooltip: "Takes 100% from fire property attacks",
+    job: "Mage"
   },
   violentQuake: {
     active: false,
-    tooltip: "Takes 100% from earth property attacks"
+    tooltip: "Takes 100% from earth property attacks",
+    job: "Mage"
+  },
+  oratio: {
+    active: false,
+    tooltip: "Decreases holy property resistance",
+    job: "Priest"
+  },
+  soulCurse: {
+    active: false,
+    tooltip: "Takes 100% (20% if boss type) more damage from shadow property attacks",
+    job: "Taekwon"
   },
 };
 
 export const emptyMATKDebuffs: Debuffs = {
   magicIntoxication: {
     active: false,
-    tooltip: "Takes 50% more damage from all properties"
-  },
-  oratio: {
-    active: false,
-    tooltip: "Decreases holy property resistance"
+    tooltip: "Takes 50% more damage from all properties",
+    job: "Mage"
   },
   allBloom: {
     active: false,
-    tooltip: "Takes 100% more damage from fire property attacks"
+    tooltip: "Takes 100% more damage from fire property attacks",
+    job: "Mage"
   },
   violentQuake: {
     active: false,
-    tooltip: "Takes 100% more damage from earth property attacks"
+    tooltip: "Takes 100% more damage from earth property attacks",
+    job: "Mage"
+  },
+  oratio: {
+    active: false,
+    tooltip: "Decreases holy property resistance",
+    job: "Priest"
+  },
+  soulCurse: {
+    active: false,
+    tooltip: "Takes 100% (20% if boss type) more damage from shadow property attacks",
+    job: "Taekwon"
   },
 };
 
@@ -98,7 +118,13 @@ const DEBUFF_EFFECTS: Record<keyof Debuffs, BuffEffect> = {
       character: { ...character },
       monster: { ...monster, debuffs: [...monster.debuffs, "violentQuake"] },
     };
-  }
+  },
+  soulCurse: (character: Character, monster: Monster) => {
+    return {
+      character: { ...character },
+      monster: { ...monster, debuffs: [...monster.debuffs, "soulCurse"] },
+    };
+  },
 };
 
 export function applyDebuff(

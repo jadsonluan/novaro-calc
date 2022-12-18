@@ -6,6 +6,7 @@ import { Monster } from "./monster";
 export interface Buff {
   active: boolean;
   tooltip: string;
+  job: string;
 }
 
 export interface Buffs {
@@ -47,7 +48,7 @@ export interface Buffs {
   talismanOfWarrior?: Buff;
   talismanOfMagician?: Buff;
   talismanOfFiveElements?: Buff;
-  soulofHeavenAndEarth?: Buff;
+  soulOfHeavenAndEarth?: Buff;
   circleOfDirectionAndElementals?: Buff;
   // Novice
   ruleBreak?: Buff;
@@ -58,119 +59,146 @@ export const emptyATKBuffs: Buffs = {
   // Swordsman
   magnumBreak: {
     active: false,
-    tooltip: "+20% fire property weaponATK"
+    tooltip: "+20% fire property weaponATK",
+    job: "Swordsman",
   },
   concentration: {
     active: false,
-    tooltip: "+15% weaponATK and equipATK"
+    tooltip: "+15% weaponATK and equipATK",
+    job: "Swordsman",
   },
   asirRune: {
     active: false,
-    tooltip: "Pseudo Buff ATK +70"
+    tooltip: "Pseudo Buff ATK +70",
+    job: "Swordsman",
   },
   turisusRune: {
     active: false,
-    tooltip: "STR +30 and +15% Melee % Bonus"
+    tooltip: "STR +30 and +15% Melee % Bonus",
+    job: "Swordsman",
   },
   luxAnimaRune: {
     active: false,
-    tooltip: "+30% for the following modifiers: HP & SP, Melee, Ranged, Critical and Size"
+    tooltip: "+30% for the following modifiers: HP & SP, Melee, Ranged, Critical and Size",
+    job: "Swordsman",
   },
   shieldSpell: {
     active: false,
-    tooltip: "Pseudo Buff ATK +150"
+    tooltip: "Pseudo Buff ATK +150",
+    job: "Swordsman",
   },
   inspiration: {
     active: false,
-    tooltip: "Pseudo Buff ATK +200, all stats +30 and +20% HP"
+    tooltip: "Pseudo Buff ATK +200, all stats +30 and +20% HP",
+    job: "Swordsman",
   },
   // Thief
   enchantDeadlyPoison: {
     active: false,
-    tooltip: "WeaponATK x5 and extraATK x4"
+    tooltip: "WeaponATK x5 and extraATK x4",
+    job: "Thief",
   },
   pyrexia: {
     active: false,
-    tooltip: "+5% Melee % Bonus and +15% Critical % Bonus"
+    tooltip: "+5% Melee % Bonus and +15% Critical % Bonus",
+    job: "Thief",
   },
   // Merchant
   loudExclamation: {
     active: false,
-    tooltip: "STR +4 and Pseudo Buff ATK +30"
+    tooltip: "STR +4 and Pseudo Buff ATK +30",
+    job: "Merchant",
   },
   cartBoost: {
     active: false,
-    tooltip: "Mastery ATK +50"
+    tooltip: "Mastery ATK +50",
+    job: "Merchant",
   },
   pyroclastic: {
     active: false,
-    tooltip: "Pseudo Buff ATK +400"
+    tooltip: "Pseudo Buff ATK +400",
+    job: "Merchant",
   },
   tempering: {
     active: false,
-    tooltip: "P.atk +15"
+    tooltip: "P.atk +15",
+    job: "Merchant",
   },
   // Mage
   striking: {
     active: false,
-    tooltip: "Pseudo Buff ATK +100"
+    tooltip: "Pseudo Buff ATK +100",
+    job: "Mage",
   },
   // Archer
   trueSight: {
     active: false,
-    tooltip: "All stats +5 and 20% added to the skill base damage"
+    tooltip: "All stats +5 and 20% added to the skill base damage",
+    job: "Archer",
   },
   fearBreeze: {
     active: false,
-    tooltip: "Increases Aimed Bolt and Arrow Storm damage"
+    tooltip: "Increases Aimed Bolt and Arrow Storm damage",
+    job: "Archer",
   },
   unlimit: {
     active: false,
-    tooltip: "Final Damage +250%"
+    tooltip: "Final Damage +250%",
+    job: "Archer",
   },
   calamityGale: {
     active: false,
-    tooltip: "Unlimit effect, increases Crescive Bolt damage and increases damage against Brute and Fish monsters"
+    tooltip: "Unlimit effect, increases Crescive Bolt damage and increases damage against Brute and Fish monsters",
+    job: "Archer",
   },
   // Acolyte
   allSpheres: {
     active: false,
-    tooltip: "Mastery ATK +3 * spheres = +45"
+    tooltip: "Mastery ATK +3 * spheres = +45",
+    job: "Acolyte",
   },
   odinsBlessing: {
     active: false,
-    tooltip: "Pseudo Buff ATK +100"
+    tooltip: "Pseudo Buff ATK +100",
+    job: "Acolyte",
   },
   // Ninja
   shadowWarrior: {
     active: false,
-    tooltip: "Increases Cross Slash damage"
+    tooltip: "Increases Cross Slash damage",
+    job: "Ninja",
   },
   earthCharm: {
     active: false,
-    tooltip: "WeaponATK +15% per charm = +150% and increases Elemental % Bonus +30% against Wind monsters "
+    tooltip: "WeaponATK +15% per charm = +150% and increases Elemental % Bonus +30% against Wind monsters",
+    job: "Ninja",
   },
   // Taekwon
   falconSoul: {
     active: false,
-    tooltip: "Pseudo Buff ATK +50"
+    tooltip: "Pseudo Buff ATK +50",
+    job: "Taekwon",
   },
   talismanOfWarrior: {
     active: false,
-    tooltip: "P.Atk +10"
+    tooltip: "P.Atk +10",
+    job: "Taekwon",
   },
   talismanOfFiveElements: {
     active: false,
-    tooltip: "Increase damage against Neutral, Water, Earth, Fire and Wind property monsters by 20%"
+    tooltip: "Increase damage against Neutral, Water, Earth, Fire and Wind property monsters by 20%",
+    job: "Taekwon",
   },
-  soulofHeavenAndEarth: {
+  soulOfHeavenAndEarth: {
     active: false,
-    tooltip: "Increases Melee, Ranged and All Magical Element 25%"
+    tooltip: "Increases Melee, Ranged and All Elemement Magical by 25%",
+    job: "Taekwon",
   },
   // Novice
   breakingLimit: {
     active: false,
-    tooltip: "Increase Hyper Novice physical skills damage"
+    tooltip: "Increase Hyper Novice physical skills damage",
+    job: "Novice",
   },
 };
 
@@ -181,48 +209,58 @@ export const emptyMATKBuffs: Buffs = {
   // Mage
   magicAmplification: {
     active: false,
-    tooltip: "MATK +50%"
+    tooltip: "MATK +50%",
+    job: "Mage",
   },
   recognizedSpell: {
     active: false,
-    tooltip: "Removes weapon MATK variance (overupgrade MATK variance still applies)"
+    tooltip: "Removes weapon MATK variance (overupgrade MATK variance still applies)",
+    job: "Mage",
   },
   climax: {
     active: false,
-    tooltip: "Climax buff, acts as level 3 Climax for affected skills"
+    tooltip: "Climax buff, acts as level 3 Climax for affected skills",
+    job: "Mage",
   },
   // Archer
   // Acolyte
   odinsBlessing: {
     active: false,
-    tooltip: "Buff MATK +100"
+    tooltip: "Buff MATK +100",
+    job: "Acolyte",
   },
   // Ninja
   // Taekwon
   fairySoul: {
     active: false,
-    tooltip: "Pseudo Buff MATK +50"
+    tooltip: "Pseudo Buff MATK +50",
+    job: "Taekwon",
   },
   talismanOfMagician: {
     active: false,
-    tooltip: "S.Matk +10"
+    tooltip: "S.Matk +10",
+    job: "Taekwon",
   },
   talismanOfFiveElements: {
     active: false,
-    tooltip: "Increase damage against Neutral, Water, Earth, Fire and Wind property monsters by 20%"
+    tooltip: "Increase damage against Neutral, Water, Earth, Fire and Wind property monsters by 20%",
+    job: "Taekwon",
   },
-  soulofHeavenAndEarth: {
+  soulOfHeavenAndEarth: {
     active: false,
-    tooltip: "Increases Melee, Ranged and All Magical Element 25%"
+    tooltip: "Increases Melee, Ranged and All Elemement Magical by 25%",
+    job: "Taekwon",
   },
   circleOfDirectionAndElementals: {
     active: false,
-    tooltip: "S.Matk +25 and activates 'Blessing of the Four Directions and Five Elementals'"
+    tooltip: "S.Matk +25 and activates 'Blessing of the Four Directions and Five Elementals'",
+    job: "Taekwon",
   },
   // Novice
   ruleBreak: {
     active: false,
-    tooltip: "Increase Hyper Novice magic skills damage"
+    tooltip: "Increase Hyper Novice magic skills damage",
+    job: "Novice",
   },
 };
 
@@ -577,7 +615,7 @@ const BUFF_EFFECTS: Record<keyof Buffs, BuffEffect> = {
       buffs: [...character.buffs, "talismanOfFiveElements"],
     };
   },
-  soulofHeavenAndEarth: (character: Character) => {
+  soulOfHeavenAndEarth: (character: Character) => {
     const { modifiers: { melee, ranged, skillProperty } } = character;
     const MODIFIER_INCREASE = 25;
     return {
@@ -588,7 +626,7 @@ const BUFF_EFFECTS: Record<keyof Buffs, BuffEffect> = {
           ranged: ranged + MODIFIER_INCREASE,
           skillProperty: skillProperty + MODIFIER_INCREASE,
       },
-      buffs: [...character.buffs, "soulofHeavenAndEarth"],
+      buffs: [...character.buffs, "soulOfHeavenAndEarth"],
     };
   },
   circleOfDirectionAndElementals: (character: Character) => {
