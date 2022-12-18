@@ -55,6 +55,7 @@ export interface Buffs {
   breakingLimit?: Buff;
   // Doram
   bunchOfShrimp?: Buff;
+  chattering?: Buff;
   marineFestivalofKisul?: Buff;
   sandFestivalofKisul?: Buff;
   temporaryCommunion?: Buff;
@@ -212,6 +213,11 @@ export const emptyATKBuffs: Buffs = {
     tooltip: "ATK/MATK +10%",
     job: "Doram",
   },
+  chattering: {
+    active: false,
+    tooltip: "Pseudo Buff ATK +100",
+    job: "Doram",
+  },
   marineFestivalofKisul: {
     active: false,
     tooltip: "POW / CON / CRT +10",
@@ -293,6 +299,11 @@ export const emptyMATKBuffs: Buffs = {
   bunchOfShrimp: {
     active: false,
     tooltip: "ATK/MATK +10%",
+    job: "Doram",
+  },
+  chattering: {
+    active: false,
+    tooltip: "Buff MATK +100",
     job: "Doram",
   },
   sandFestivalofKisul: {
@@ -711,6 +722,23 @@ const BUFF_EFFECTS: Record<keyof Buffs, BuffEffect> = {
         matkPercent: ((matkPercent / 100) * 1.1) * 100,
       },
       buffs: [...character.buffs, "bunchOfShrimp"],
+    };
+  },
+  chattering: (character: Character) => {
+    const { ATK: { pseudoBuffATK }, MATK: { buffMATK } } = character;
+    const ATK_INCREASE = 100;
+    const MATK_INCREASE = 100;
+    return {
+      ...character,
+      ATK: {
+        ...character.ATK,
+        pseudoBuffATK: pseudoBuffATK + ATK_INCREASE,
+      },
+      MATK: {
+        ...character.MATK,
+        buffMATK: buffMATK + MATK_INCREASE,
+      },
+      buffs: [...character.buffs, "chattering"],
     };
   },
   marineFestivalofKisul: (character: Character) => {
