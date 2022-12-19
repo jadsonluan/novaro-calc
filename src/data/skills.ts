@@ -523,7 +523,121 @@ const starGladiatorSkills: Record<string, Skill> = {
     formula: (character: Character, monster: Monster) => {
       const baseDamage = 3200;
       return {
-        percent: baseDamage * (character.baseLevel / 100),
+        percent: baseDamage * (character.baseLevel / 100) *
+         (character.buffs.includes('lightOfTheSun') ? 1.25 : 1),
+        bonus: 0,
+      };
+    },
+  },
+  NOON_BLAST: {
+    key: "NOON_BLAST",
+    label: "Noon Blast",
+    name: "Noon Blast",
+    isMelee: true,
+    job: "Sky Emperor",
+    formula: (character: Character, monster: Monster) => {
+      const baseDamage = 6000 + 250;
+      return {
+        percent: (baseDamage + character.traits.pow * 5) * (character.baseLevel / 100),
+        bonus: 0,
+      };
+    },
+  },
+  SUNSET_BLAST: {
+    key: "SUNSET_BLAST",
+    label: "Sunset Blast",
+    name: "Sunset Blast",
+    isMelee: true,
+    job: "Sky Emperor",
+    formula: (character: Character, monster: Monster) => {
+      const baseDamage = 2400 + 250;
+      return {
+        percent: (baseDamage + character.traits.pow * 5) * (character.baseLevel / 100),
+        bonus: 0,
+      };
+    },
+  },
+  MIDNIGHT_KICK: {
+    key: "MIDNIGHT_KICK",
+    label: "Midnight Kick",
+    name: "Midnight Kick",
+    isMelee: true,
+    job: "Sky Emperor",
+    formula: (character: Character, monster: Monster) => {
+      const baseDamage = 7500 + 250;
+      return {
+        percent: (baseDamage + character.traits.pow * 5) * (character.baseLevel / 100),
+        bonus: 0,
+      };
+    },
+  },
+  DAWN_BREAK: {
+    key: "DAWN_BREAK",
+    label: "Dawn Break",
+    name: "Dawn Break",
+    isMelee: true,
+    job: "Sky Emperor",
+    formula: (character: Character, monster: Monster) => {
+      const baseDamage = 3300 + 250;
+      return {
+        percent: (baseDamage + character.traits.pow * 5) * (character.baseLevel / 100),
+        bonus: 0,
+      };
+    },
+  },
+  TWINKLING_GALAXY: {
+    key: "TWINKLING_GALAXY",
+    label: "Twinkling Galaxy (Per Star)",
+    name: "Twinkling Galaxy (Per Star)",
+    isMelee: true,
+    job: "Sky Emperor",
+    formula: (character: Character, monster: Monster) => {
+      const baseDamage = 2200;
+      return {
+        percent: (baseDamage + character.traits.pow * 5) * (character.baseLevel / 100),
+        bonus: 0,
+      };
+    },
+  },
+  STAR_BURST: {
+    key: "STAR_BURST",
+    label: "Star Burst (Per Star)",
+    name: "Star Burst (Per Star)",
+    isMelee: true,
+    job: "Sky Emperor",
+    formula: (character: Character, monster: Monster) => {
+      const baseDamage = 2500 + 250;
+      return {
+        percent: (baseDamage + character.traits.pow * 5) * (character.baseLevel / 100),
+        bonus: 0,
+      };
+    },
+  },
+  STAR_CANNON: {
+    key: "STAR_CANNON",
+    label: "Star Cannon (Per Star)",
+    name: "Star Cannon (Per Star)",
+    isMelee: true,
+    job: "Sky Emperor",
+    formula: (character: Character, monster: Monster) => {
+      const baseDamage = 2700 + 250;
+      return {
+        percent: (baseDamage + character.traits.pow * 5) * (character.baseLevel / 100),
+        bonus: 0,
+      };
+    },
+  },
+  ALL_IN_THE_SKY: {
+    key: "ALL_IN_THE_SKY",
+    label: "All in the Sky",
+    name: "All in the Sky",
+    isMelee: true,
+    job: "Sky Emperor",
+    formula: (character: Character, monster: Monster) => {
+      const baseDamage = 20000;
+      return {
+        percent: (baseDamage + character.traits.pow * 5) * (character.baseLevel / 100) *
+         (['demon', 'demihuman'].includes(monster.race) ? 3 : 1),
         bonus: 0,
       };
     },

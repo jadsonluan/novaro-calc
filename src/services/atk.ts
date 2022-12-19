@@ -14,6 +14,7 @@ const DEX_WEAPONS: WeaponType[] = ["Whip", "Instrument", "Bow", "Gun"];
 
 const BASE_CRITICAL_DAMAGE = 40;
 const RES_REDUCTION_CAP = 625;
+const KIHOP_BONUS = 85;
 
 function isDexWeapon(weaponType: WeaponType) {
   return DEX_WEAPONS.includes(weaponType);
@@ -115,16 +116,25 @@ function getWeaponATK(
 }
 
 function getExtraATK(character: Character, monster: Monster) {
-  let { ATK: { equipATK, consumableATK, ammoATK, pseudoBuffATK } } = character;
+  let { ATK: { equipATK, consumableATK, ammoATK, pseudoBuffATK }, stats } = character;
 
   let increasedEquipATK = 0;
 
-  if (character.job === "Sky Emperor") {
-    increasedEquipATK += getModifierIncrease(equipATK, 85);
-  }
-
   if (character.buffs.includes('concentration')) {
     increasedEquipATK += getModifierIncrease(equipATK, 15);
+  }
+
+  if (character.job === "Sky Emperor") {
+    increasedEquipATK += getModifierIncrease(equipATK, KIHOP_BONUS);
+
+    let OPPOSITION_BONUS = character.buffs.includes("opposition")
+    ? (character.baseLevel +
+        stats.dex +
+        stats.luk +
+        (monster.size === "large" || character.buffs.includes('miracle') ? stats.str : 0)) /
+      3
+    : 0;
+    increasedEquipATK += getModifierIncrease(equipATK + increasedEquipATK, OPPOSITION_BONUS);
   }
 
   equipATK += increasedEquipATK
@@ -193,35 +203,76 @@ function getModifierIncrease(damage: number, mod: number) {
 }
 
 function getATK(range: DmgRange, character: Character, monster: Monster) {
-  const { ATK: { masteryATK, buffATK } } = character;
+  let { ATK: { masteryATK, buffATK }, stats } = character;
 
-  const sizePenalty = !character.ignorePenalty ? getSizePenalty(character.weapon.type, monster.size) : 1;
-  let wATK = Math.max(
-    0,
-    getWeaponATK(range, character, sizePenalty, monster)
-  );
+  const sizePenalty = !character.ignorePenalty
+    ? getSizePenalty(character.weapon.type, monster.size)
+    : 1;
+  let wATK = Math.max(0, getWeaponATK(range, character, sizePenalty, monster));
 
   let extraElementalATK = 0;
-  if (character.buffs.includes('magnumBreak')) {
+  if (character.buffs.includes("magnumBreak")) {
     // Fire property extra dmg
-    extraElementalATK = getModifierIncrease(wATK, 20) * getPropertyModifier(ELEMENTS[3], monster.element, Number(monster.elementLevel), monster.debuffs);
+    extraElementalATK =
+      getModifierIncrease(wATK, 20) *
+      getPropertyModifier(
+        ELEMENTS[3],
+        monster.element,
+        Number(monster.elementLevel),
+        monster.debuffs
+      );
   }
   wATK += extraElementalATK;
 
-  const _statusATK = getStatusATK(character);
+  let statusATK = getStatusATK(character);
 
-  const statusATK = applyModifier(
-    _statusATK,
-    character.job === "Sky Emperor" ? 85 : 0
-  );
+  let OPPOSITION_BONUS = character.buffs.includes("opposition")
+    ? (character.baseLevel +
+        stats.dex +
+        stats.luk +
+        (monster.size === "large" || character.buffs.includes('miracle') ? stats.str : 0)) /
+      3
+    : 0;
+
+  if (character.job === "Sky Emperor") {
+    statusATK = applyModifier(
+      statusATK,
+      KIHOP_BONUS // Kihop lv 5
+    );
+  
+    statusATK = applyModifier(
+      statusATK,
+      OPPOSITION_BONUS // Opposition
+    );
+  
+    wATK = applyModifier(
+      wATK,
+      KIHOP_BONUS // Kihop lv 5
+    );
+  
+    wATK = applyModifier(
+      wATK,
+      OPPOSITION_BONUS // Opposition
+    );
+  
+    masteryATK = applyModifier(
+      masteryATK,
+      KIHOP_BONUS // Kihop lv 5
+    );
+  
+    masteryATK = applyModifier(
+      masteryATK,
+      OPPOSITION_BONUS // Opposition
+    );
+  }
 
   const extraATK = getExtraATK(character, monster);
 
   return (
     statusATK * 2 +
-    applyModifier(wATK, character.job === "Sky Emperor" ? 85 : 0) +
+    wATK +
     extraATK +
-    applyModifier(masteryATK, character.job === "Sky Emperor" ? 85 : 0) +
+    masteryATK +
     buffATK
   );
 }

@@ -51,6 +51,9 @@ export interface Buffs {
   shadowWarrior?: Buff;
   earthCharm?: Buff;
   // Taekwon
+  opposition?: Buff;
+  miracle?: Buff;
+  lightOfTheSun?: Buff;
   fairySoul?: Buff;
   falconSoul?: Buff;
   talismanOfWarrior?: Buff;
@@ -214,6 +217,21 @@ export const emptyATKBuffs: Buffs = {
     job: "Ninja",
   },
   // Taekwon
+  opposition: {
+    active: false,
+    tooltip: "Increase ATK base on [Base Level + DEX + LUK (+ STR if large)] / 3",
+    job: "Taekwon",
+  },
+  miracle: {
+    active: false,
+    tooltip: "Increase ATK base on [Base Level + DEX + LUK + STR] / 3 (Overrides Opposition)",
+    job: "Taekwon",
+  },
+  lightOfTheSun: {
+    active: false,
+    tooltip: "Solar Burst damage +25%",
+    job: "Taekwon",
+  },
   falconSoul: {
     active: false,
     tooltip: "Pseudo Buff ATK +50",
@@ -781,6 +799,15 @@ const BUFF_EFFECTS: Record<keyof Buffs, BuffEffect> = {
     };
   },
   // Taekwon
+  opposition: (character: Character) => {
+    return { ...character, buffs: [...character.buffs, "opposition"] };
+  },
+  miracle: (character: Character) => {
+    return { ...character, buffs: [...character.buffs, "miracle"] };
+  },
+  lightOfTheSun: (character: Character) => {
+    return { ...character, buffs: [...character.buffs, "lightOfTheSun"] };
+  },
   fairySoul: (character: Character) => {
     const { MATK: { buffMATK } } = character;
     const MATK_INCREASE = 50;
