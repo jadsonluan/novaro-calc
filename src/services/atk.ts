@@ -308,7 +308,7 @@ export function getFinalATKDamage(range: DmgRange, build: BuildInfo) {
 
   finalDmg = applyModifier(finalDmg, monsterFinalModifier);
   return {
-    damage: finalDmg,
+    damage: Math.floor(finalDmg - (getModifierIncrease(finalDmg, 0.7))),
     modifiedCharacter: character,
   };
 }

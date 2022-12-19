@@ -11,6 +11,7 @@ h1 {
 .navbar {
   display: flex;
   flex-direction: row;
+  justify-content: space-between;
 }
 
 .header {
@@ -44,11 +45,12 @@ h1 {
 .build-names {
   display: flex;
   flex-direction: column;
-  width: 425px;
+  width: 420px;
   padding: 15px 15px;
   border-bottom-right-radius: 10px;
   border-bottom-left-radius: 10px;
   background-color: #2C2F33;
+  margin-right: 15px;
 }
 
 .build-names .input-label {

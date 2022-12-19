@@ -86,7 +86,7 @@ function App() {
           <a href={!isMATK ? '/novaro-calc/matk' : '/novaro-calc'}>{!isMATK ? 'MATK' : 'ATK'} calc</a>
         </div>
       </header>
-      <header className="header build-names" style={{marginLeft: '65px'}}>
+      <header className="header build-names">
         <div className="input-label">
           <span>Build 1:</span><input value={build1.name} onChange={(e: ChangeEvent<HTMLInputElement>) => build1.setName(e.target.value)} />
         </div>
