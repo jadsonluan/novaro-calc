@@ -107,8 +107,8 @@ const ImportBS = ({ isMATK }: { isMATK: boolean }) => {
         // onAfterOpen={afterOpenModal}
         onRequestClose={closeModal}
         contentLabel="Example Modal"
-        className="modal"
-        overlayClassName="modal-overlay"
+        className="import-bs-modal"
+        overlayClassName="import-bs-modal-overlay"
         ariaHideApp={false}
       >
         <h2>Importing @BS</h2>

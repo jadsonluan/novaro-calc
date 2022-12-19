@@ -152,13 +152,13 @@ function getRangeBonuses(sections: Record<string, string[]>) {
 
   let melee = 0;
   let ranged = 0;
-  let _key, value;
+  let value;
   section.forEach((line) => {
     if (line.includes("Short Attack Rate")) {
-      [_key, value] = line.trim().split(" +");
+      [, value] = line.trim().split(" +");
       melee = Number(value.slice(0, -1));
     } else if (line.includes("Ranged Attack Rate")) {
-      [_key, value] = line.trim().split(" +");
+      [, value] = line.trim().split(" +");
       ranged = Number(value.slice(0, -1));
     }
   });

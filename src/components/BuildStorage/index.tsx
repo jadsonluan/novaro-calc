@@ -25,8 +25,8 @@ const BuildStorage = ({ isMATK }: { isMATK: boolean }) => {
         isOpen={isOpen}
         onRequestClose={closeModal}
         contentLabel="Example Modal"
-        className="modal"
-        overlayClassName="modal-overlay"
+        className="build-storage-modal"
+        overlayClassName="build-storage-modal-overlay"
         ariaHideApp={false}
       >
         <h1>Build Storage</h1>

@@ -1,4 +1,4 @@
-.modal {
+.build-storage-modal {
   position: absolute;
   top: 50%;
   left: 50%;
@@ -13,7 +13,7 @@
   min-width: 500px;
 }
 
-.modal-overlay {
+.build-storage-modal-overlay {
   background-color: rgba(0, 0, 0, 0.75);
   position: fixed;
   left: 0;
@@ -22,19 +22,19 @@
   bottom: 0;
 }
 
-.modal .save-area {
+.build-storage-modal .save-area {
   display: flex;
   flex-direction: column;
   margin: 15px 0;
 }
 
-.modal .save-area .build-name-input {
+.build-storage-modal .save-area .build-name-input {
   display: flex;
   flex-direction: row;
   margin-top: 5px;
 }
 
-.modal .save-area .build-name-input input {
+.build-storage-modal .save-area .build-name-input input {
   text-align: center;
   border: none;
   padding: 0;
@@ -45,7 +45,7 @@
   font-weight: bold;
 }
 
-.modal .save-area .build-name-input button {
+.build-storage-modal .save-area .build-name-input button {
   text-align: center;
   border: none;
   padding: 5px 10px;
@@ -58,22 +58,22 @@
   font-weight: bold;
 }
 
-.modal .save-area .build-name-input input:focus {
+.build-storage-modal .save-area .build-name-input input:focus {
   outline: 1px solid deepskyblue;
   color: deepskyblue;
 }
 
-.modal .save-area .build-name-input button:hover {
+.build-storage-modal .save-area .build-name-input button:hover {
   background-color: white;
   outline-color: white;
   color: deepskyblue;
 }
 
-.modal .stored-builds {
+.build-storage-modal .stored-builds {
   margin: 10px 0;
 }
 
-.modal .stored-builds .builds {
+.build-storage-modal .stored-builds .builds {
   margin-top: 5px;
   display: flex;
   flex-direction: column;
@@ -81,21 +81,21 @@
   overflow-y: auto;
 }
 
-.modal .stored-builds .builds::-webkit-scrollbar {
+.build-storage-modal .stored-builds .builds::-webkit-scrollbar {
   width: 10px;
 }
 
-.modal .stored-builds .builds::-webkit-scrollbar-track {
+.build-storage-modal .stored-builds .builds::-webkit-scrollbar-track {
   background: #2c2f33;
   border-radius: 10px;
 }
 
-.modal .stored-builds .builds::-webkit-scrollbar-thumb {
+.build-storage-modal .stored-builds .builds::-webkit-scrollbar-thumb {
   background: #40444b;
   border-radius: 10px;
 }
 
-.modal .stored-builds .builds::-webkit-scrollbar-thumb:hover {
+.build-storage-modal .stored-builds .builds::-webkit-scrollbar-thumb:hover {
   background: #e6e6e6;
 }
 
@@ -111,7 +111,7 @@
   flex-direction: row;
 }
 
-.modal .stored-builds .builds button {
+.build-storage-modal .stored-builds .builds button {
   text-align: center;
   border: none;
   border-radius: 25px;
@@ -124,14 +124,14 @@
   align-items: center;
 }
 
-.modal .stored-builds .builds .load-button { background-color: deepskyblue; }
+.build-storage-modal .stored-builds .builds .load-button { background-color: deepskyblue; }
 
-.modal .stored-builds .builds .load-button:hover {
+.build-storage-modal .stored-builds .builds .load-button:hover {
   background-color: white;
   color: deepskyblue;
 }
 
-.modal .stored-builds .delete-button {
+.build-storage-modal .stored-builds .delete-button {
   background-color: crimson;
   justify-self: flex-end;
 }

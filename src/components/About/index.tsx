@@ -14,8 +14,8 @@ const About = () => {
         isOpen={show}
         onRequestClose={handleClose}
         contentLabel="Example Modal"
-        className="modal"
-        overlayClassName="modal-overlay"
+        className="about-modal"
+        overlayClassName="about-modal-overlay"
         ariaHideApp={false}
       >
         <h2>About</h2>
