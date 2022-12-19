@@ -1,3 +1,19 @@
+import { Element } from "./element";
+
+export interface Weapon {
+  type: WeaponType;
+  level: number;
+  atk: number;
+  matk: number;
+  refine: number;
+  grade: Grade;
+  element: Element;
+}
+
+export type Grade = "No Grade" | "D" | "C" | "B" | "A";
+
+export const GRADES: Grade[] = ["No Grade", "D", "C", "B", "A"];
+
 type WeaponType =
   | "Axe"
   | "Bare Hand"
@@ -70,7 +86,7 @@ export const WEAPON_PENALTIES: Record<WeaponType, WeaponPenalty> = {
   },
   Dagger: {
     small: 1,
-    medium: 75,
+    medium: 0.75,
     large: 0.5,
   },
   Gun: {

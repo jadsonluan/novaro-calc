@@ -1,16 +1,20 @@
-import { Buffs, Character, Monster } from "../../data/input";
+import { Buffs } from "../../data/buffs";
+import { Character } from "../../data/character";
+import { Debuffs } from "../../data/debuff";
+import { Monster } from "../../data/monster";
 import { Build, useBuild } from "../../hooks/useBuild";
 import "./index.css";
 
-export interface BuildCheckBoxProps<T extends Character | Monster | Buffs> {
+export interface BuildCheckBoxProps<T extends Character | Monster | Buffs | Debuffs> {
   label: string;
   getValue: (target: T) => boolean;
   updateValue: (value: boolean) => (prevState: T) => T;
   target: (build: Build) => T;
   setTarget: (build: Build) => (target: T | ((prevState: T) => T)) => void;
+  tooltip?: string;
 }
 
-interface CheckBoxProps<T extends Character | Monster | Buffs>
+interface CheckBoxProps<T extends Character | Monster | Buffs | Debuffs>
   extends Omit<BuildCheckBoxProps<T>, "label"> {
   build: Build;
 }
@@ -19,11 +23,12 @@ interface BuildCharacterCheckBoxProps<T extends Character>
   extends Omit<BuildCheckBoxProps<T>, "target" | "setTarget"> {}
 interface BuildMonsterCheckBoxProps<T extends Monster>
   extends Omit<BuildCheckBoxProps<T>, "target" | "setTarget"> {}
-
 interface BuildBuffCheckBoxProps<T extends Buffs>
   extends Omit<BuildCheckBoxProps<T>, "target" | "setTarget"> {}
+  interface BuildDebuffCheckBoxProps<T extends Debuffs>
+  extends Omit<BuildCheckBoxProps<T>, "target" | "setTarget"> {}
 
-function CheckBox<T extends Character | Monster | Buffs>(
+function CheckBox<T extends Character | Monster | Buffs | Debuffs>(
   props: CheckBoxProps<T>
 ) {
   const { getValue, updateValue, target, setTarget, build } = props;
@@ -44,7 +49,7 @@ function CheckBox<T extends Character | Monster | Buffs>(
   );
 }
 
-function BuildCheckBox<T extends Character | Monster | Buffs>(
+function BuildCheckBox<T extends Character | Monster | Buffs | Debuffs>(
   props: BuildCheckBoxProps<T>
 ) {
   const { label } = props;
@@ -53,7 +58,7 @@ function BuildCheckBox<T extends Character | Monster | Buffs>(
 
   return (
     <div className="checkbox-container">
-      <label>{label}</label>
+      <label title={props.tooltip}>{label}</label>
       <CheckBox {...props} build={build1} />
       <CheckBox {...props} build={build2} />
     </div>
@@ -90,6 +95,16 @@ export const BuildBuffCheckBox = (props: BuildBuffCheckBoxProps<Buffs>) => {
       {...props}
       target={(build: Build) => build.buffs}
       setTarget={(build: Build) => build.setBuffs}
+    />
+  );
+};
+
+export const BuildDebuffCheckBox = (props: BuildDebuffCheckBoxProps<Debuffs>) => {
+  return (
+    <BuildCheckBox<Debuffs>
+      {...props}
+      target={(build: Build) => build.debuffs}
+      setTarget={(build: Build) => build.setDebuffs}
     />
   );
 };

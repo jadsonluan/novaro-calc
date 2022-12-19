@@ -31,11 +31,11 @@ const BuildDiff = (props: BuildDiffProps) => {
       <div className="build-diff-body">
         {items.map((item: BuildDiffItem, i: number) => {
           const { label: description, value1, value2 } = item;
-          let diff = ((value2 - value1) / value1) * 100;
+          let diff = value1 !== 0 ? ((value2 - value1) / value1) * 100 : 0;
           diff = Number.isNaN(diff) ? 0 : diff;
 
           return (
-            <div>
+            <div key={label + '-' + i}>
               <div>{description}</div>
               <div>{value1.toLocaleString()}</div>
               <div>{value2.toLocaleString()}</div>

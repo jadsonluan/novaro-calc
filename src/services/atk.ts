@@ -1,30 +1,30 @@
 import {
   BuildInfo,
-  Character,
-  Monster,
-  Size,
-  Stats,
-  Weapon,
 } from "../data/input";
-import WeaponType, { WEAPON_PENALTIES } from "../data/weapon";
-import { getPropertyModifier } from "../data/element";
+import WeaponType, { GRADES, Weapon, WEAPON_PENALTIES } from "../data/weapon";
+import { ELEMENTS, getPropertyModifier } from "../data/element";
 import { getSkill } from "../data/skills";
 import { applyBuffs } from "../data/buffs";
+import { applyDebuff } from "../data/debuff";
+import { Character, Stats } from "../data/character";
+import { Monster, Size } from "../data/monster";
 export type DmgRange = "MIN" | "MAX";
 
 const DEX_WEAPONS: WeaponType[] = ["Whip", "Instrument", "Bow", "Gun"];
 
 const BASE_CRITICAL_DAMAGE = 40;
+const RES_REDUCTION_CAP = 625;
 
 function isDexWeapon(weaponType: WeaponType) {
   return DEX_WEAPONS.includes(weaponType);
 }
 
 function getStatusATK(character: Character) {
-  const { stats, baseLevel, weapon, bonusStatusATK } = character;
+  const { stats, traits, baseLevel, weapon, ATK: { bonusStatusATK } } = character;
   const { str, dex, luk } = stats;
+  const { pow } = traits;
 
-  // vantagem elemental. sempre neutro a não ser que use warm wind
+  // elemental advantage is always 1, unless using warm wind
   const propertyModifier = 1;
 
   const mainStatBonus = isDexWeapon(weapon.type)
@@ -32,28 +32,29 @@ function getStatusATK(character: Character) {
     : str + dex / 5;
 
   const baseStatusATK = Math.floor(
-    (baseLevel / 4 + mainStatBonus + luk / 3 + bonusStatusATK) *
+    (baseLevel / 4 + mainStatBonus + luk / 3 + bonusStatusATK + pow * 5) *
       propertyModifier
   );
   return baseStatusATK;
 }
 
 function getRefineBonus(weapon: Weapon) {
-  const { refine, level } = weapon;
-  const atkPerRefine = [2, 3, 5, 7];
+  const { refine, level, grade } = weapon;
+  const atkPerGrade = [8, 8.8, 10.4, 12, 16];
+  const atkPerRefine = [2, 3, 5, 7, atkPerGrade[GRADES.indexOf(grade)]];
 
   // ATK per refine > 15
-  const AtkPerHighUpgrade = [3, 6, 9, 12];
+  const AtkPerHighUpgrade = [3, 6, 9, 12, 0];
   const overRefine = Math.max(0, refine - 15);
   const highUpgradeBonus = overRefine * AtkPerHighUpgrade[level - 1];
-  return refine * atkPerRefine[level - 1] + highUpgradeBonus;
+  return Math.floor(refine * atkPerRefine[level - 1] + highUpgradeBonus);
 }
 
 function getMaxOverUpgradeBonus(weapon: Weapon) {
   const { level, refine } = weapon;
-  const safetyLimit = [7, 6, 5, 4];
+  const safetyLimit = [7, 6, 5, 4, 3];
   // ATK per refine > safetyLimit
-  const maxAtkPerOverUpgrade = [3, 5, 8, 14];
+  const maxAtkPerOverUpgrade = [3, 5, 8, 14, 0];
   const overRefine = Math.max(0, refine - safetyLimit[level - 1]);
   return overRefine * maxAtkPerOverUpgrade[level - 1];
 }
@@ -87,8 +88,24 @@ function getWeaponATK(
 
   overUpgradeATK = weapon.type === "Bare Hand" ? 0 : overUpgradeATK;
 
-  const totalWeaponATK =
+  let totalWeaponATK =
     weapon.atk + variance + statBonus + refineATK + overUpgradeATK;
+
+  let increasedTotalWeaponATK = 0;
+
+  if (character.buffs.includes('enchantDeadlyPoison')) {
+    increasedTotalWeaponATK += getModifierIncrease(totalWeaponATK, 400);
+  }
+
+  if (character.buffs.includes('earthCharm')) {
+    increasedTotalWeaponATK += getModifierIncrease(totalWeaponATK, 150);
+  }
+
+  if (character.buffs.includes('concentration')) {
+    increasedTotalWeaponATK += getModifierIncrease(totalWeaponATK, 15);
+  }
+
+  totalWeaponATK += increasedTotalWeaponATK;
 
   return applyCardModifiers(
     Math.floor(totalWeaponATK * sizePenalty),
@@ -98,18 +115,29 @@ function getWeaponATK(
 }
 
 function getExtraATK(character: Character, monster: Monster) {
-  const { equipATK, consumableATK, ammoATK, pseudoBuffATK } = character;
+  let { ATK: { equipATK, consumableATK, ammoATK, pseudoBuffATK } } = character;
 
-  const finalEquipATK = applyModifier(
-    equipATK,
-    character.job === "Star Emperor" ? 85 : 0
-  );
+  let increasedEquipATK = 0;
 
-  return applyCardModifiers(
-    finalEquipATK + consumableATK + ammoATK + pseudoBuffATK,
+  if (character.job === "Sky Emperor") {
+    increasedEquipATK += getModifierIncrease(equipATK, 85);
+  }
+
+  if (character.buffs.includes('concentration')) {
+    increasedEquipATK += getModifierIncrease(equipATK, 15);
+  }
+
+  equipATK += increasedEquipATK
+
+  let extraATK = applyCardModifiers(
+    Math.floor(equipATK + consumableATK + ammoATK + pseudoBuffATK),
     character,
     monster
   );
+
+  extraATK = applyModifier(extraATK, character.buffs.includes('enchantDeadlyPoison') ? 300 : 0);
+
+  return extraATK;
 }
 
 function getSizePenalty(weaponType: WeaponType, monsterSize: Size) {
@@ -126,7 +154,7 @@ function applyCardModifiers(
   character: Character,
   monster: Monster
 ) {
-  const {
+  let {
     race,
     size,
     targetProperty,
@@ -139,7 +167,8 @@ function applyCardModifiers(
   const property = getPropertyModifier(
     character.weapon.element,
     monster.element,
-    Number(monster.elementLevel)
+    Number(monster.elementLevel),
+    monster.debuffs
   );
 
   let finalModifiers = 1000;
@@ -159,29 +188,40 @@ function applyModifier(damage: number, mod: number) {
   return Math.floor(damage * (1 + mod / 100));
 }
 
-function getATK(range: DmgRange, character: Character, monster: Monster) {
-  const { masteryATK, buffATK } = character;
+function getModifierIncrease(damage: number, mod: number) {
+  return Math.floor(Math.floor(damage * (1 + mod / 100)) - damage);
+}
 
-  const sizePenalty = getSizePenalty(character.weapon.type, monster.size);
-  const wATK = Math.max(
+function getATK(range: DmgRange, character: Character, monster: Monster) {
+  const { ATK: { masteryATK, buffATK } } = character;
+
+  const sizePenalty = !character.ignorePenalty ? getSizePenalty(character.weapon.type, monster.size) : 1;
+  let wATK = Math.max(
     0,
     getWeaponATK(range, character, sizePenalty, monster)
   );
+
+  let extraElementalATK = 0;
+  if (character.buffs.includes('magnumBreak')) {
+    // Fire property extra dmg
+    extraElementalATK = getModifierIncrease(wATK, 20) * getPropertyModifier(ELEMENTS[3], monster.element, Number(monster.elementLevel), monster.debuffs);
+  }
+  wATK += extraElementalATK;
 
   const _statusATK = getStatusATK(character);
 
   const statusATK = applyModifier(
     _statusATK,
-    character.job === "Star Emperor" ? 85 : 0
+    character.job === "Sky Emperor" ? 85 : 0
   );
 
   const extraATK = getExtraATK(character, monster);
 
   return (
     statusATK * 2 +
-    applyModifier(wATK, character.job === "Star Emperor" ? 85 : 0) +
+    applyModifier(wATK, character.job === "Sky Emperor" ? 85 : 0) +
     extraATK +
-    applyModifier(masteryATK, character.job === "Star Emperor" ? 85 : 0) +
+    applyModifier(masteryATK, character.job === "Sky Emperor" ? 85 : 0) +
     buffATK
   );
 }
@@ -196,35 +236,45 @@ function getHardDEF(monster: Monster, bypass: number) {
   return (finalHardDef + 4000) / (4000 + finalHardDef * 10);
 }
 
-function getDEF(monster: Monster, bypass: number, skill: string) {
+function getRES(monster: Monster, traitBypass: number) {
+  let { res } = monster;
+  res -= res * traitBypass / 100;
+  return res > RES_REDUCTION_CAP ? 0.5 : (res + 5000) / (5000 + res * 10);
+}
+
+function getDEF(monster: Monster, bypass: number, traitBypass: number, skillName: string) {
+  const RES = getRES(monster, traitBypass);
   const hardDEF = getHardDEF(monster, bypass);
   const softDEF = getSoftDEF(monster);
+  const skill = getSkill(skillName);
 
-  if (skill === "CART_CANNON") {
-    return { hardDEF: 1, softDEF: softDEF + hardDEF };
+  if (skill.hardAsSoftDef) {
+    return { RES, hardDEF: 1, softDEF: softDEF + hardDEF };
   }
 
-  return { hardDEF, softDEF };
+  return { RES, hardDEF, softDEF };
 }
 
 function applyCritical(damage: number, character: Character) {
-  let finalDamage = applyModifier(damage, BASE_CRITICAL_DAMAGE);
+  let finalDamage = applyModifier(damage, BASE_CRITICAL_DAMAGE + character.ATK.crate);
   finalDamage = applyModifier(finalDamage, character.modifiers.critical / 2);
   return finalDamage;
 }
 
-export function getFinalDamage(range: DmgRange, build: BuildInfo) {
-  const { character: rawCharacter, monster, buffs } = build;
-  const character = applyBuffs(rawCharacter, buffs);
+export function getFinalATKDamage(range: DmgRange, build: BuildInfo) {
+  const { character: rawCharacter, monster: rawMonster, buffs, debuffs } = build;
+  const buffedCharacter = applyBuffs(rawCharacter, rawMonster, buffs);
+  const { character, monster } = applyDebuff(buffedCharacter, rawMonster, debuffs);
   const skill = getSkill(character.skill);
   const { modifiers: mods } = character;
-  const formula = skill.formula(character, monster);
+  const formula = skill.formula(character, monster, build.buffs);
 
   const rangeMod = skill.isMelee ? mods.melee : mods.ranged;
   const atk = getATK(character.crit ? "MAX" : range, character, monster);
-  const { hardDEF, softDEF } = getDEF(
+  const { RES, hardDEF, softDEF } = getDEF(
     monster,
     character.bypass,
+    character.traitBypass,
     character.skill
   );
 
@@ -233,11 +283,32 @@ export function getFinalDamage(range: DmgRange, build: BuildInfo) {
   finalDmg = applyModifier(finalDmg, mods.custom);
   finalDmg = applyModifier(finalDmg, rangeMod);
   finalDmg = applyModifier(finalDmg, mods.dmg);
+
+  finalDmg = Math.floor(applyModifier(finalDmg, RES));
   finalDmg = Math.floor(finalDmg * hardDEF) - softDEF;
+  
   finalDmg = applyModifier(finalDmg, mods.finalDmg);
   finalDmg = character.crit ? applyCritical(finalDmg, character) : finalDmg;
-  return (
-    Math.max(0, finalDmg) +
-    Math.max(0, applyModifier(formula.bonus, mods.finalDmg))
+  finalDmg = Math.max(0, finalDmg) + Math.max(0, applyModifier(formula.bonus, mods.finalDmg))
+  finalDmg = applyModifier(
+    finalDmg,
+    skill.isMelee ? monster.meleeModifier : monster.rangedModifier
   );
+
+  finalDmg = applyModifier(finalDmg, character.ATK.patk);
+
+  let monsterFinalModifier = monster.finalModifier;
+  if (monster.debuffs.includes("violentQuake") && character.weapon.element === "Earth") {
+    monsterFinalModifier += 100;
+  } else if (monster.debuffs.includes("allBloom") && character.weapon.element === "Fire") {
+    monsterFinalModifier += 100;
+  } else if (monster.debuffs.includes("soulCurse") && character.weapon.element === "Shadow") {
+    monsterFinalModifier = ((1 + monsterFinalModifier / 100) * (monster.type === 'normal' ? 2 : 1.2)) * 100;
+  }
+
+  finalDmg = applyModifier(finalDmg, monsterFinalModifier);
+  return {
+    damage: finalDmg,
+    modifiedCharacter: character,
+  };
 }

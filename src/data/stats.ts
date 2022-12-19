@@ -1,5 +1,5 @@
 import { getBaseStat, is4thJob } from "../data/job";
-import { Character } from "./input";
+import { Character } from "./character";
 
 export function getHP(character: Character) {
   const { hp: hpInfo, stats } = character;

@@ -4,8 +4,8 @@ import useStorage from "../../hooks/useStorage";
 
 import "./index.css";
 
-const BuildStorage = () => {
-  const { builds, save, load, remove } = useStorage();
+const BuildStorage = ({ isMATK }: { isMATK: boolean }) => {
+  const { builds, save, load, remove } = useStorage(isMATK);
 
   const [isOpen, setOpen] = useState(false);
 
@@ -27,6 +27,7 @@ const BuildStorage = () => {
         contentLabel="Example Modal"
         className="modal"
         overlayClassName="modal-overlay"
+        ariaHideApp={false}
       >
         <h1>Build Storage</h1>
 

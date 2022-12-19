@@ -1,23 +1,27 @@
 import { BuildInfo } from "../../data/input";
 import { getHP, getSP } from "../../data/stats";
 import { Build, useBuild } from "../../hooks/useBuild";
-import { getFinalDamage } from "../../services/atk";
-import BuildATK from "../BuildATK";
-import BuildBuffs from "../BuildBuffs";
+import { getFinalATKDamage } from "../../services/atk";
+import { getFinalMATKDamage } from "../../services/matk";
+import { BuildATK, BuildMATK } from "../BuildATK";
+import BuildBuffsAndDebuffs from "../BuildBuffsAndDebuffs";
 import BuildDiff, { BuildDiffItem } from "../BuildDiff";
 import BuildStats from "../BuildStats";
-import CharacterMisc from "../CharacterMisc";
+import { CharacterMiscATK, CharacterMiscMATK } from "../CharacterMisc";
 import MonsterInfo from "../MonsterInfo";
 import "./index.css";
 
-const getBuildInfo = ({ character, monster, buffs }: Build) => ({
+const getBuildInfo = ({ name, character, monster, buffs, debuffs, }: Build) => ({
+  name,
   character,
   monster,
   buffs,
+  debuffs,
 });
 
-const MainPage = () => {
+const MainPage = ({ isMATK }: { isMATK: boolean }) => {
   const { build1, build2 } = useBuild();
+  const getFinalDamage = !isMATK ? getFinalATKDamage : getFinalMATKDamage;
 
   const buildInfo1: BuildInfo = getBuildInfo(build1);
   const buildInfo2: BuildInfo = getBuildInfo(build2);
@@ -29,15 +33,15 @@ const MainPage = () => {
   const maxDamage2 = getFinalDamage("MAX", buildInfo2);
 
   const dmgItems: BuildDiffItem[] = [
-    { label: "Min.", value1: minDamage1, value2: minDamage2 },
-    { label: "Max.", value1: maxDamage1, value2: maxDamage2 },
+    { label: "Min.", value1: minDamage1.damage, value2: minDamage2.damage },
+    { label: "Max.", value1: maxDamage1.damage, value2: maxDamage2.damage },
   ];
 
-  const maxHP1 = getHP(build1.character);
-  const maxHP2 = getHP(build2.character);
+  const maxHP1 = getHP(maxDamage1.modifiedCharacter);
+  const maxHP2 = getHP(maxDamage2.modifiedCharacter);
 
-  const maxSP1 = getSP(build1.character);
-  const maxSP2 = getSP(build2.character);
+  const maxSP1 = getSP(maxDamage1.modifiedCharacter);
+  const maxSP2 = getSP(maxDamage2.modifiedCharacter);
 
   const statItems: BuildDiffItem[] = [
     { label: "Max. HP", value1: maxHP1, value2: maxHP2 },
@@ -48,17 +52,17 @@ const MainPage = () => {
     <div className="main">
       <div className="first-col">
         <BuildDiff label="Damage" items={dmgItems} />
-        <BuildATK />
+        {!isMATK ? <BuildATK /> : <BuildMATK />}
       </div>
 
       <div className="second-col">
         <BuildDiff label="Stat" items={statItems} />
         <BuildStats />
-        <CharacterMisc />
+        {!isMATK ? <CharacterMiscATK /> : <CharacterMiscMATK />}
       </div>
       <div className="third-col">
-        <MonsterInfo />
-        <BuildBuffs />
+        <MonsterInfo isMATK={isMATK} />
+        <BuildBuffsAndDebuffs isMATK={isMATK} />
       </div>
     </div>
   );

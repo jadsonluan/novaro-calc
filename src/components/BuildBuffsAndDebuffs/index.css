@@ -1,0 +1,39 @@
+.build-buffs-and-debuffs {
+  height: fit-content;
+  overflow: hidden;
+}
+
+.build-buffs-and-debuffs .header {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  border-bottom: unset;
+}
+
+.build-buffs-and-debuffs .header .tab {
+  width: 100%;
+  color: #fff;
+  padding: 5px;
+  text-align: center;
+  cursor: pointer;
+}
+
+.build-buffs-and-debuffs .header .tab:first-child {
+  border-top-left-radius: 10px;
+}
+
+.build-buffs-and-debuffs .header .tab:last-child {
+  border-top-right-radius: 10px;
+}
+
+.build-buffs-and-debuffs .header .tab.active {
+  background-color: hsl(214deg 7% 19%);
+}
+
+.build-buffs-and-debuffs .header .tab.inactive {
+  background-color: hsl(218deg 7% 27%);
+}
+
+.build-buffs-and-debuffs .header .tab.inactive:hover {
+  background-color: hsl(218deg 7% 30%);
+}

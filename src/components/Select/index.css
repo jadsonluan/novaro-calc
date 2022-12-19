@@ -14,7 +14,34 @@
   text-transform: capitalize;
 }
 
+.select select optgroup {
+  font-size: 14px;
+  color: #bfbfbf;
+}
+
+.select select option {
+  font-size: 12px;
+  color: white;
+}
+
 .select select optgroup option {
   text-align-last: left;
 }
 
+.select select::-webkit-scrollbar {
+  width: 10px;
+}
+
+.select select::-webkit-scrollbar-track {
+  background: #40444b;
+  border-radius: 10px;
+}
+
+.select select::-webkit-scrollbar-thumb {
+  background: #2c2f33;
+  border-radius: 10px;
+}
+
+.select select::-webkit-scrollbar-thumb:hover {
+  background: #e6e6e6;
+}

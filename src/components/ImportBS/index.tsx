@@ -1,25 +1,20 @@
 import "./index.css";
 import { useState } from "react";
 import Modal from "react-modal";
-import { SKILLS } from "../../data/skills";
-import {
-  Character,
-  Monster,
-  MonsterType,
-  MONSTER_TYPES,
-  Race,
-  RACES,
-  Size,
-  SIZES,
-} from "../../data/input";
+import { Skill, SKILLS } from "../../data/skills";
+import { MATK_SKILLS } from "../../data/matkSkills";
 import { capitalize, formatBattleStats } from "../../utils/format";
 import { ELEMENTS, Element } from "../../data/element";
 import { useBuild } from "../../hooks/useBuild";
+import { Character } from "../../data/character";
+import { RACES, SIZES, MONSTER_TYPES, Monster, Race, Size, MonsterType } from "../../data/monster";
+import { getJobsName } from "../../data/job";
 
-const ImportBS = () => {
+const ImportBS = ({ isMATK }: { isMATK: boolean }) => {
+  const skills = isMATK ? MATK_SKILLS : SKILLS;
   const [modalIsOpen, setIsOpen] = useState(false);
   const [build, setBuild] = useState("1");
-  const [skill, setSkill] = useState(SKILLS["AUTO_ATTACK"].key);
+  const [skill, setSkill] = useState(skills["BASIC_ATTACK"].key);
   const [race, setRace] = useState(RACES[0]);
   const [element, setElement] = useState(ELEMENTS[0]);
   const [size, setSize] = useState(SIZES[0]);
@@ -37,14 +32,21 @@ const ImportBS = () => {
       element,
       size,
       monsterType,
-    });
+    }, isMATK);
 
     const characterCallback: (prevState: Character) => Character = (
       prevState: Character
     ) => ({
       ...prevState,
       skill,
-      equipATK: response.equipATK,
+      ATK: {
+        ...prevState.ATK,
+        equipATK: response.equipATK,
+      },
+      MATK: {
+        ...prevState.MATK,
+        matkPercent: response.MATKpercent,
+      },
       bypass: response.bypass,
       hp: {
         ...prevState.hp,
@@ -67,9 +69,12 @@ const ImportBS = () => {
         ranged: response.ranged,
         race: response.raceBonus,
         size: response.sizeBonus,
-        class: response.monsterTypeBonus,
+        class: !isMATK ? response.monsterTypeBonus : 0,
+        monster: isMATK ? response.monsterTypeBonus : 0,
         targetProperty: response.propertyBonus,
         skill: response.skillBonus,
+        critical: response.critical,
+        skillProperty: response.elementBonuses,
       },
     });
 
@@ -104,6 +109,7 @@ const ImportBS = () => {
         contentLabel="Example Modal"
         className="modal"
         overlayClassName="modal-overlay"
+        ariaHideApp={false}
       >
         <h2>Importing @BS</h2>
         <ol>
@@ -137,13 +143,27 @@ const ImportBS = () => {
               <b>Skill</b>
               <select
                 value={skill}
-                onChange={(event) => setSkill(SKILLS[event.target.value].key)}
+                onChange={(event) => setSkill(skills[event.target.value].key)}
               >
-                {Object.values(SKILLS).map((skill) => (
-                  <option key={skill.key} value={skill.key}>
-                    {skill.label}
-                  </option>
-                ))}
+                {["All", ...getJobsName()].map((job, i) => {
+                  const jobOptions = Object.values(skills).filter(
+                    (option) => option.job === job
+                  );
+
+                  return (
+                    jobOptions.length > 0 && (
+                      <optgroup key={i} label={capitalize(job)}>
+                        {jobOptions.map((skill: Skill, i: number) => {
+                          return (
+                            <option key={i} value={skill.key}>
+                              {capitalize(skill.label)}
+                            </option>
+                          );
+                        })}
+                      </optgroup>
+                    )
+                  );
+                })}
               </select>
             </div>
             <div>
