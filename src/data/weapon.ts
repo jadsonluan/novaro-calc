@@ -29,8 +29,7 @@ type WeaponType =
   | "One Hand Sword"
   | "Rod"
   | "Spear"
-  | "Spear (Dragon)"
-  | "Spear (Gryphon)"
+  | "Spear (Mounted)"
   | "Two Hand Sword"
   | "Whip";
 
@@ -51,8 +50,7 @@ export const WEAPONS: WeaponType[] = [
   "One Hand Sword",
   "Rod",
   "Spear",
-  "Spear (Dragon)",
-  "Spear (Gryphon)",
+  "Spear (Mounted)",
   "Two Hand Sword",
   "Whip",
 ];
@@ -110,17 +108,12 @@ export const WEAPON_PENALTIES: Record<WeaponType, WeaponPenalty> = {
     large: 1,
   },
   Spear: {
-    small: 1,
-    medium: 1,
-    large: 1,
-  },
-  "Spear (Gryphon)": {
     small: 0.75,
-    medium: 1,
+    medium: 0.75,
     large: 1,
   },
-  "Spear (Dragon)": {
-    small: 1,
+  "Spear (Mounted)": {
+    small: 0.75,
     medium: 1,
     large: 1,
   },

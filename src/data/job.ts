@@ -94,12 +94,12 @@ export const JOBS: Record<Job, BaseStat & { initialJob: string }> = {
   Cardinal: {
     baseHP: 16855,
     baseSP: 1985,
-    initialJob: "Priest",
+    initialJob: "Acolyte",
   },
   Inquisitor: {
     baseHP: 41335,
     baseSP: 1340,
-    initialJob: "Priest",
+    initialJob: "Acolyte",
   },
   "Night Watch": {
     baseHP: 24329,

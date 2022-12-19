@@ -62,6 +62,48 @@ const knightSkills: Record<string, Skill> = {
       };
     },
   },
+  HACK_AND_SLASHER_2HSWORD: {
+    key: "HACK_AND_SLASHER_2HSWORD",
+    label: "Hack and Slasher (2H Sword)",
+    name: "Hack and Slasher (2H Sword)",
+    isMelee: true,
+    job: "Dragon Knight",
+    formula: (character: Character, monster: Monster) => {
+      const baseDamage = 1500 + character.traits.pow * 7;
+      return {
+        percent: baseDamage * (character.baseLevel / 100) * 2,
+        bonus: 0,
+      };
+    },
+  },
+  HACK_AND_SLASHER_2HSPEAR: {
+    key: "HACK_AND_SLASHER_2HSPEAR",
+    label: "Hack and Slasher (2H Spear)",
+    name: "Hack and Slasher (2H Spear)",
+    isMelee: false,
+    job: "Dragon Knight",
+    formula: (character: Character, monster: Monster) => {
+      const baseDamage = 1500 + character.traits.pow * 7;
+      return {
+        percent: baseDamage * (character.baseLevel / 100) * 2,
+        bonus: 0,
+      };
+    },
+  },
+  STORM_SLASH: {
+    key: "STORM_SLASH",
+    label: "Storm Slash",
+    name: "Storm Slash",
+    isMelee: true,
+    job: "Dragon Knight",
+    formula: (character: Character, monster: Monster) => {
+      const baseDamage = 600 + character.traits.pow * 5;
+      return {
+        percent: baseDamage * (character.baseLevel / 100) * 5,
+        bonus: 0,
+      };
+    },
+  },
 }
 
 const crusaderSkills: Record<string, Skill> = {
