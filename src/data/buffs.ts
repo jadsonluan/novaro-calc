@@ -43,6 +43,10 @@ export interface Buffs {
   // Acolyte
   allSpheres?: Buff;
   odinsBlessing?: Buff;
+  benedictum?: Buff;
+  religio?: Buff;
+  presensAcies?: Buff;
+  competentia?: Buff;
   // Ninja
   shadowWarrior?: Buff;
   earthCharm?: Buff;
@@ -127,7 +131,7 @@ export const emptyATKBuffs: Buffs = {
   },
   pyroclastic: {
     active: false,
-    tooltip: "Pseudo Buff ATK +400",
+    tooltip: "Pseudo Buff ATK +450",
     job: "Merchant",
   },
   tempering: {
@@ -181,6 +185,21 @@ export const emptyATKBuffs: Buffs = {
   odinsBlessing: {
     active: false,
     tooltip: "Pseudo Buff ATK +100",
+    job: "Acolyte",
+  },
+  benedictum: {
+    active: false,
+    tooltip: "POW / CON / CRT +10",
+    job: "Acolyte",
+  },
+  presensAcies: {
+    active: false,
+    tooltip: "C.Rate +10",
+    job: "Acolyte",
+  },
+  competentia: {
+    active: false,
+    tooltip: "P.Atk and S.Matk +50",
     job: "Acolyte",
   },
   // Ninja
@@ -289,6 +308,21 @@ export const emptyMATKBuffs: Buffs = {
   odinsBlessing: {
     active: false,
     tooltip: "Buff MATK +100",
+    job: "Acolyte",
+  },
+  benedictum: {
+    active: false,
+    tooltip: "POW / CON / CRT +10",
+    job: "Acolyte",
+  },
+  religio: {
+    active: false,
+    tooltip: "SPL / STA / WIS +10",
+    job: "Acolyte",
+  },
+  competentia: {
+    active: false,
+    tooltip: "P.Atk and S.Matk +50",
     job: "Acolyte",
   },
   // Ninja
@@ -490,7 +524,7 @@ const BUFF_EFFECTS: Record<keyof Buffs, BuffEffect> = {
   },
   pyroclastic: (character: Character) => {
     const { ATK: { pseudoBuffATK } } = character;
-    const ATK_INCREASE = 400;
+    const ATK_INCREASE = 450;
     return {
       ...character,
       ATK: {
@@ -656,6 +690,62 @@ const BUFF_EFFECTS: Record<keyof Buffs, BuffEffect> = {
         buffMATK: buffMATK + ATK_INCREASE,
       },
       buffs: [...character.buffs, "odinsBlessing"],
+    };
+  },
+  benedictum: (character: Character) => {
+    const { traits: { pow, con, crt } } = character;
+    const TRAIT_INCREASE = 10;
+    return {
+      ...character,
+      traits: {
+        ...character.traits,
+        pow: pow + TRAIT_INCREASE,
+        con: con + TRAIT_INCREASE,
+        crt: crt + TRAIT_INCREASE,
+      },
+      buffs: [...character.buffs, "benedictum"],
+    };
+  },
+  religio: (character: Character) => {
+    const { traits: { spl, sta, wis } } = character;
+    const TRAIT_INCREASE = 10;
+    return {
+      ...character,
+      traits: {
+        ...character.traits,
+        spl: spl + TRAIT_INCREASE,
+        sta: sta + TRAIT_INCREASE,
+        wis: wis + TRAIT_INCREASE,
+      },
+      buffs: [...character.buffs, "religio"],
+    };
+  },
+  presensAcies: (character: Character) => {
+    const { ATK: { crate } } = character;
+    const TRAIT_INCREASE = 10;
+    return {
+      ...character,
+      ATK: {
+        ...character.ATK,
+        crate: crate + TRAIT_INCREASE,
+      },
+      buffs: [...character.buffs, "presensAcies"],
+    };
+  },
+  competentia: (character: Character) => {
+    const { ATK: { patk }, MATK: { smatk } } = character;
+    const TRAIT_INCREASE = 50;
+    return {
+      ...character,
+      ATK: {
+        ...character.ATK,
+        patk: patk + TRAIT_INCREASE,
+      },
+      MATK: {
+        ...character.MATK,
+        smatk: smatk + TRAIT_INCREASE,
+      },
+      buffs: [...character.buffs, "competentia"],
     };
   },
   allSpheres: (character: Character) => {

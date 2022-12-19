@@ -574,6 +574,62 @@ const priestSkills: Record<string, Skill> = {
       };
     },
   },
+  FRAMEN: {
+    key: "FRAMEN",
+    name: "Framen",
+    label: "Framen",
+    isMelee: false,
+    job: "Cardinal",
+    formula: (character: Character, monster: Monster, buffs: Buffs) => {
+      const baseDamage = 2500 + 250 + (['demon', 'undead'].includes(monster.race) ? 750 : 0);
+      return {
+        percent: (baseDamage + character.traits.spl * 5) * (character.baseLevel / 100),
+        bonus: 0,
+      };
+    },
+  },
+  ARBITRIUM: {
+    key: "ARBITRIUM",
+    name: "Arbitrium",
+    label: "Arbitrium",
+    isMelee: false,
+    job: "Cardinal",
+    formula: (character: Character, monster: Monster, buffs: Buffs) => {
+      const baseDamage = 4000 + 1000;
+      return {
+        percent: (baseDamage + character.traits.spl * 5) * (character.baseLevel / 100),
+        bonus: 0,
+      };
+    },
+  },
+  ARBITRIUM_2ND: {
+    key: "ARBITRIUM_2ND",
+    name: "Arbitrium (2nd hit)",
+    label: "Arbitrium (2nd hit)",
+    isMelee: false,
+    job: "Cardinal",
+    formula: (character: Character, monster: Monster, buffs: Buffs) => {
+      const baseDamage = 5500 + 1000;
+      return {
+        percent: (baseDamage + character.traits.spl * 5) * (character.baseLevel / 100),
+        bonus: 0,
+      };
+    },
+  },
+  PNEUMATICUS_PROCELLA: {
+    key: "PNEUMATICUS_PROCELLA",
+    name: "Pneumaticus Procella (per wave)",
+    label: "Pneumaticus Procella (per wave)",
+    isMelee: false,
+    job: "Cardinal",
+    formula: (character: Character, monster: Monster, buffs: Buffs) => {
+      const baseDamage = 2000 + 500 + (['demon', 'undead'].includes(monster.race) ? 1000 : 0);
+      return {
+        percent: (baseDamage + character.traits.spl * 10) * (character.baseLevel / 100),
+        bonus: 0,
+      };
+    },
+  },
 };
 
 const soulLinkerSkills: Record<string, Skill> = {

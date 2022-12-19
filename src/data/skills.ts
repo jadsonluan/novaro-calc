@@ -426,6 +426,51 @@ const bardSkills: Record<string, Skill> = {
   },
 }
 
+const priestSkills: Record<string, Skill> = {
+  PETITIO: {
+    key: "PETITIO",
+    label: "Petitio (Mace)",
+    name: "Petitio (Mace)",
+    isMelee: true,
+    job: "Cardinal",
+    formula: (character: Character, monster: Monster) => {
+      const baseDamage = 2700 + character.traits.pow * 5;
+      return {
+        percent: baseDamage * (character.baseLevel / 100),
+        bonus: 0,
+      };
+    },
+  },
+  PETITIO_BOOK: {
+    key: "PETITIO_BOOK",
+    label: "Petitio (Book)",
+    name: "Petitio (Book)",
+    isMelee: false,
+    job: "Cardinal",
+    formula: (character: Character, monster: Monster) => {
+      const baseDamage = 2700 + character.traits.pow * 5;
+      return {
+        percent: baseDamage * (character.baseLevel / 100),
+        bonus: 0,
+      };
+    },
+  },
+  EFFLIGO: {
+    key: "EFFLIGO",
+    label: "Effligo",
+    name: "Effligo",
+    isMelee: true,
+    job: "Cardinal",
+    formula: (character: Character, monster: Monster) => {
+      const baseDamage = 8000 + (['demon', 'undead'].includes(monster.race) ? 4000 : 0);
+      return {
+        percent: (baseDamage + character.traits.pow * 5) * (character.baseLevel / 100),
+        bonus: 0,
+      };
+    },
+  },
+};
+
 const monkSkills: Record<string, Skill> = {
   TRIPLE_ATTACK: {
     key: "TRIPLE_ATTACK",
@@ -586,6 +631,7 @@ export const SKILLS: Record<string, Skill> = {
   ...alchemistSkills,
   ...hunterSkills,
   ...bardSkills,
+  ...priestSkills,
   ...monkSkills,
   ...starGladiatorSkills,
   ...ninjaSkills,
