@@ -219,12 +219,12 @@ export const emptyATKBuffs: Buffs = {
   // Taekwon
   opposition: {
     active: false,
-    tooltip: "Increase ATK base on [Base Level + DEX + LUK (+ STR if large)] / 3",
+    tooltip: "Increase ATK based on [Base Level + DEX + LUK (+ STR if Large)] / 3",
     job: "Taekwon",
   },
   miracle: {
     active: false,
-    tooltip: "Increase ATK base on [Base Level + DEX + LUK + STR] / 3 (Overrides Opposition)",
+    tooltip: "Increase ATK based on [Base Level + DEX + LUK + STR] / 3 (Overrides Opposition)",
     job: "Taekwon",
   },
   lightOfTheSun: {
