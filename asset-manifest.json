@@ -1,16 +1,16 @@
 {
   "files": {
-    "main.css": "/static/css/main.2467dba6.css",
-    "main.js": "/static/js/main.66adb33d.js",
-    "static/js/787.34d30e15.chunk.js": "/static/js/787.34d30e15.chunk.js",
-    "static/media/My project-1.png": "/static/media/My project-1.01cf5877c1b6ec241294.png",
-    "index.html": "/index.html",
-    "main.2467dba6.css.map": "/static/css/main.2467dba6.css.map",
-    "main.66adb33d.js.map": "/static/js/main.66adb33d.js.map",
-    "787.34d30e15.chunk.js.map": "/static/js/787.34d30e15.chunk.js.map"
+    "main.css": "/novaro-calc/static/css/main.deee21ae.css",
+    "main.js": "/novaro-calc/static/js/main.0c987473.js",
+    "static/js/787.34d30e15.chunk.js": "/novaro-calc/static/js/787.34d30e15.chunk.js",
+    "static/media/My project-1.png": "/novaro-calc/static/media/My project-1.01cf5877c1b6ec241294.png",
+    "index.html": "/novaro-calc/index.html",
+    "main.deee21ae.css.map": "/novaro-calc/static/css/main.deee21ae.css.map",
+    "main.0c987473.js.map": "/novaro-calc/static/js/main.0c987473.js.map",
+    "787.34d30e15.chunk.js.map": "/novaro-calc/static/js/787.34d30e15.chunk.js.map"
   },
   "entrypoints": [
-    "static/css/main.2467dba6.css",
-    "static/js/main.66adb33d.js"
+    "static/css/main.deee21ae.css",
+    "static/js/main.0c987473.js"
   ]
 }
