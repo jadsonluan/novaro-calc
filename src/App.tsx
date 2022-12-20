@@ -1,5 +1,5 @@
 import { ChangeEvent, useEffect } from "react";
-import { Link, Route, Routes } from "react-router-dom";
+import { Link, Route, Routes, useLocation } from "react-router-dom";
 import "./App.css";
 import About from "./components/About";
 import BuildStorage from "./components/BuildStorage";
@@ -22,8 +22,8 @@ const copy = (
 
 function App() {
   const { build1, build2 } = useBuild();
-  const location = window.location.href;
-  const isMATK = location.includes("matk");
+  const location = useLocation()
+  const isMATK = location.pathname.includes('/matk');
   const INITIAL_BUILD = !isMATK ? INITIAL_ATK_BUILD : INITIAL_MATK_BUILD;
   const stringfiedInitialBuilds = JSON.stringify(INITIAL_BUILD)
   
@@ -97,10 +97,9 @@ function App() {
       </header>
       </div>
       <Routes>
-        <Route path="/" element={<MainPage isMATK={false} />} />
-        <Route path="/matk" element={<MainPage isMATK={true} />} />
+        <Route path="/" element={<MainPage isMATK={isMATK} />} />
+        <Route path="/matk" element={<MainPage isMATK={isMATK} />} />
       </Routes>
-      <MainPage isMATK={isMATK} />
     </div>
   );
 }
