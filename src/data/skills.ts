@@ -659,6 +659,160 @@ const ninjaSkills: Record<string, Skill> = {
       };
     }
   },
+  KUNAI_DISTORTION: {
+    key: "KUNAI_DISTORTION",
+    label: "Kunai - Distortion",
+    name: "Kunai - Distortion",
+    isMelee: false,
+    job: "Shinkiro / Shiranui",
+    formula: (character: Character, monster: Monster, buffs: Buffs) => {
+      const baseDamage = 4000 + 700;
+      return {
+        percent: (baseDamage + character.traits.pow * 5) * (character.baseLevel / 100),
+        bonus: 0,
+      };
+    }
+  },
+  KUNAI_ROTATION: {
+    key: "KUNAI_ROTATION",
+    label: "Kunai - Rotation (Per Wave)",
+    name: "Kunai - Rotation (Per Wave)",
+    isMelee: false,
+    job: "Shinkiro / Shiranui",
+    formula: (character: Character, monster: Monster, buffs: Buffs) => {
+      const baseDamage = 3300 + 2500;
+      return {
+        percent: (baseDamage + character.traits.pow * 5) * (character.baseLevel / 100) * 3,
+        bonus: 0,
+      };
+    }
+  },
+  KUNAI_REFRACTION: {
+    key: "KUNAI_REFRACTION",
+    label: "Kunai - Refraction (Per Hit)",
+    name: "Kunai - Refraction (Per Hit)",
+    isMelee: false,
+    job: "Shinkiro / Shiranui",
+    formula: (character: Character, monster: Monster, buffs: Buffs) => {
+      const baseDamage = 3800 + 350;
+      return {
+        percent: (baseDamage + character.traits.pow * 5) * (character.baseLevel / 100),
+        bonus: 0,
+      };
+    }
+  },
+  KUNAI_NIGHTMARE: {
+    key: "KUNAI_NIGHTMARE",
+    label: "Kunai - Nightmare",
+    name: "Kunai - Nightmare",
+    isMelee: false,
+    job: "Shinkiro / Shiranui",
+    formula: (character: Character, monster: Monster, buffs: Buffs) => {
+      const baseDamage = 15000;
+      return {
+        percent: (baseDamage + character.traits.pow * 5) * (character.baseLevel / 100),
+        bonus: 0,
+      };
+    }
+  },
+  HUUMA_SHURIKEN_GRASP: {
+    key: "HUUMA_SHURIKEN_GRASP",
+    label: "Huuma Shuriken - Grasp",
+    name: "Huuma Shuriken - Grasp",
+    isMelee: false,
+    job: "Shinkiro / Shiranui",
+    formula: (character: Character, monster: Monster, buffs: Buffs) => {
+      const baseDamage = 2700 + 500;
+      return {
+        percent: (baseDamage + character.traits.pow * 5) * (character.baseLevel / 100),
+        bonus: 0,
+      };
+    }
+  },
+  HUUMA_SHURIKEN_CONSTRUCT: {
+    key: "HUUMA_SHURIKEN_CONSTRUCT",
+    label: "Huuma Shuriken - Construct",
+    name: "Huuma Shuriken - Construct",
+    isMelee: false,
+    job: "Shinkiro / Shiranui",
+    formula: (character: Character, monster: Monster, buffs: Buffs) => {
+      const baseDamage = 4600 + 3000;
+      return {
+        percent: (baseDamage + character.traits.pow * 5) * (character.baseLevel / 100),
+        bonus: 0,
+      };
+    }
+  },
+  HUUMA_SHURIKEN_CONSTRUCT_EXPLOSION: {
+    key: "HUUMA_SHURIKEN_CONSTRUCT_EXPLOSION",
+    label: "Huuma Shuriken - Construct (Explosion)",
+    name: "Huuma Shuriken - Construct (Explosion)",
+    isMelee: false,
+    job: "Shinkiro / Shiranui",
+    formula: (character: Character, monster: Monster, buffs: Buffs) => {
+      const baseDamage = 6800 + 3000;
+      return {
+        percent: (baseDamage + character.traits.pow * 5) * (character.baseLevel / 100),
+        bonus: 0,
+      };
+    }
+  },
+  SHADOW_HUNTING: {
+    key: "SHADOW_HUNTING",
+    label: "Shadow - Hunting",
+    name: "Shadow - Hunting",
+    isMelee: false,
+    job: "Shinkiro / Shiranui",
+    formula: (character: Character, monster: Monster, buffs: Buffs) => {
+      const baseDamage = 4500 + 500;
+      return {
+        percent: (baseDamage + character.traits.pow * 5) * (character.baseLevel / 100),
+        bonus: 0,
+      };
+    }
+  },
+  SHADOW_DANCE: {
+    key: "SHADOW_DANCE",
+    label: "Shadow - Dance",
+    name: "Shadow - Dance",
+    isMelee: false,
+    job: "Shinkiro / Shiranui",
+    formula: (character: Character, monster: Monster, buffs: Buffs) => {
+      const baseDamage = 6500 + 5000;
+      return {
+        percent: (baseDamage + character.traits.pow * 5) * (character.baseLevel / 100),
+        bonus: 0,
+      };
+    }
+  },
+  SHADOW_FLASH: {
+    key: "SHADOW_FLASH",
+    label: "Shadow - Flash",
+    name: "Shadow - Flash",
+    isMelee: false,
+    job: "Shinkiro / Shiranui",
+    formula: (character: Character, monster: Monster, buffs: Buffs) => {
+      const baseDamage = 9000 + 10000;
+      return {
+        percent: (baseDamage + character.traits.pow * 5) * (character.baseLevel / 100),
+        bonus: 0,
+      };
+    }
+  },
+  SHADOW_NIGHTMARE: {
+    key: "SHADOW_NIGHTMARE",
+    label: "Shadow - Nightmare",
+    name: "Shadow - Nightmare",
+    isMelee: false,
+    job: "Shinkiro / Shiranui",
+    formula: (character: Character, monster: Monster, buffs: Buffs) => {
+      const baseDamage = 15000;
+      return {
+        percent: (baseDamage + character.traits.pow * 5) * (character.baseLevel / 100),
+        bonus: 0,
+      };
+    }
+  },
 }
 
 const noviceSkills: Record<string, Skill> = {
