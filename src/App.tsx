@@ -1,4 +1,5 @@
 import { ChangeEvent, useEffect } from "react";
+import { Link, Route, Routes } from "react-router-dom";
 import "./App.css";
 import About from "./components/About";
 import BuildStorage from "./components/BuildStorage";
@@ -83,7 +84,7 @@ function App() {
           </div>
         </div>
         <div className="links">
-          <a href={!isMATK ? '/matk' : '/'}>{!isMATK ? 'MATK' : 'ATK'} calc</a>
+          <Link to={!isMATK ? '/matk' : '/'} reloadDocument>{!isMATK ? 'MATK' : 'ATK'} calc</Link>
         </div>
       </header>
       <header className="header build-names">
@@ -95,6 +96,10 @@ function App() {
         </div>
       </header>
       </div>
+      <Routes>
+        <Route path="/" element={<MainPage isMATK={false} />} />
+        <Route path="/matk" element={<MainPage isMATK={true} />} />
+      </Routes>
       <MainPage isMATK={isMATK} />
     </div>
   );
