@@ -83,7 +83,7 @@ function App() {
           </div>
         </div>
         <div className="links">
-          <a href={!isMATK ? '/novaro-calc/matk' : '/novaro-calc'}>{!isMATK ? 'MATK' : 'ATK'} calc</a>
+          <a href={!isMATK ? '/matk' : '/'}>{!isMATK ? 'MATK' : 'ATK'} calc</a>
         </div>
       </header>
       <header className="header build-names">
