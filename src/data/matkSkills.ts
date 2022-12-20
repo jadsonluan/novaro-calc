@@ -632,6 +632,93 @@ const priestSkills: Record<string, Skill> = {
   },
 };
 
+const ninjaSkills: Record<string, Skill> = {
+  RED_FLAME_CANNON: {
+    key: "RED_FLAME_CANNON",
+    name: "Red Flame Cannon",
+    label: "Red Flame Cannon",
+    isMelee: false,
+    job: "Shinkiro / Shiranui",
+    formula: (character: Character, monster: Monster, buffs: Buffs) => {
+      const baseDamage = 6200 + 5000;
+      return {
+        percent: (baseDamage + character.traits.spl * 5) * (character.baseLevel / 100),
+        bonus: 0,
+      };
+    },
+  },
+  COLD_BLOODED_CANNON: {
+    key: "COLD_BLOODED_CANNON",
+    name: "Cold Blooded Cannon",
+    label: "Cold Blooded Cannon",
+    isMelee: false,
+    job: "Shinkiro / Shiranui",
+    formula: (character: Character, monster: Monster, buffs: Buffs) => {
+      const baseDamage = 3500 + 2500;
+      return {
+        percent: (baseDamage + character.traits.spl * 5) * (character.baseLevel / 100),
+        bonus: 0,
+      };
+    },
+  },
+  THUNDERING_CANNON: {
+    key: "THUNDERING_CANNON",
+    name: "Thundering Cannon",
+    label: "Thundering Cannon",
+    isMelee: false,
+    job: "Shinkiro / Shiranui",
+    formula: (character: Character, monster: Monster, buffs: Buffs) => {
+      const baseDamage = 6500 + 5000;
+      return {
+        percent: (baseDamage + character.traits.spl * 5) * (character.baseLevel / 100),
+        bonus: 0,
+      };
+    },
+  },
+  GOLDEN_DRAGON_CANNON: {
+    key: "GOLDEN_DRAGON_CANNON",
+    name: "Golden Dragon Cannon",
+    label: "Golden Dragon Cannon",
+    isMelee: false,
+    job: "Shinkiro / Shiranui",
+    formula: (character: Character, monster: Monster, buffs: Buffs) => {
+      const baseDamage = 1500 + 700; // Should be 2350
+      return {
+        percent: (baseDamage + character.traits.spl * 5) * (character.baseLevel / 100),
+        bonus: 0,
+      };
+    },
+  },
+  DARKENING_DRAGON: {
+    key: "DARKENING_DRAGON",
+    name: "Darkening Dragon",
+    label: "Darkening Dragon",
+    isMelee: false,
+    job: "Shinkiro / Shiranui",
+    formula: (character: Character, monster: Monster, buffs: Buffs) => {
+      const baseDamage = 5400;
+      return {
+        percent: (baseDamage + character.traits.spl * 5) * (character.baseLevel / 100),
+        bonus: 0,
+      };
+    },
+  },
+  DARK_DRAGON_NIGHTMARE: {
+    key: "DARK_DRAGON_NIGHTMARE",
+    name: "Dark Dragon - Nightmare",
+    label: "Dark Dragon - Nightmare",
+    isMelee: false,
+    job: "Shinkiro / Shiranui",
+    formula: (character: Character, monster: Monster, buffs: Buffs) => {
+      const baseDamage = 12000;
+      return {
+        percent: (baseDamage + character.traits.spl * 5) * (character.baseLevel / 100),
+        bonus: 0,
+      };
+    },
+  },
+};
+
 const soulLinkerSkills: Record<string, Skill> = {
   ESPA: {
     key: "ESPA",
@@ -977,6 +1064,7 @@ export const MATK_SKILLS: Record<string, Skill> = {
   ...wizardSkills,
   ...archerSkills,
   ...priestSkills,
+  ...ninjaSkills,
   ...soulLinkerSkills,
   ...noviceSkills,
   ...doramSkills,
