@@ -761,7 +761,7 @@ const ninjaSkills: Record<string, Skill> = {
     key: "SHADOW_HUNTING",
     label: "Shadow - Hunting",
     name: "Shadow - Hunting",
-    isMelee: false,
+    isMelee: true,
     job: "Shinkiro / Shiranui",
     formula: (character: Character, monster: Monster, buffs: Buffs) => {
       const baseDamage = 4500 + 500;
@@ -775,7 +775,7 @@ const ninjaSkills: Record<string, Skill> = {
     key: "SHADOW_DANCE",
     label: "Shadow - Dance",
     name: "Shadow - Dance",
-    isMelee: false,
+    isMelee: true,
     job: "Shinkiro / Shiranui",
     formula: (character: Character, monster: Monster, buffs: Buffs) => {
       const baseDamage = 6500 + 5000;
@@ -789,7 +789,7 @@ const ninjaSkills: Record<string, Skill> = {
     key: "SHADOW_FLASH",
     label: "Shadow - Flash",
     name: "Shadow - Flash",
-    isMelee: false,
+    isMelee: true,
     job: "Shinkiro / Shiranui",
     formula: (character: Character, monster: Monster, buffs: Buffs) => {
       const baseDamage = 9000 + 10000;
@@ -803,7 +803,7 @@ const ninjaSkills: Record<string, Skill> = {
     key: "SHADOW_NIGHTMARE",
     label: "Shadow - Nightmare",
     name: "Shadow - Nightmare",
-    isMelee: false,
+    isMelee: true,
     job: "Shinkiro / Shiranui",
     formula: (character: Character, monster: Monster, buffs: Buffs) => {
       const baseDamage = 15000;
@@ -889,6 +889,87 @@ const noviceSkills: Record<string, Skill> = {
   },
 };
 
+const doramSkills: Record<string, Skill> = {
+  PICKY_PECK: {
+    key: "PICKY_PECK",
+    name: "Picky Peck",
+    label: "Picky Peck",
+    isMelee: false,
+    job: "Spirit Handler",
+    formula: (character: Character, monster: Monster, buffs: Buffs) => {
+      const baseDamage = 700;
+      return {
+        percent: (baseDamage),
+        bonus: 0,
+      };
+    },
+  },
+  LUNATIC_CARROT_BEAT: {
+    key: "LUNATIC_CARROT_BEAT",
+    name: "Lunatic Carrot Beat",
+    label: "Lunatic Carrot Beat",
+    isMelee: false,
+    job: "Spirit Handler",
+    formula: (character: Character, monster: Monster, buffs: Buffs) => {
+      const baseDamage = 700;
+      return {
+        percent:
+          (baseDamage + character.stats.str) *
+          (character.baseLevel / 100),
+        bonus: 0,
+      };
+    },
+  },
+  CHULHO_SONIC_CLAW: {
+    key: "CHULHO_SONIC_CLAW",
+    name: "Chulho Sonic Claw",
+    label: "Chulho Sonic Claw",
+    isMelee: false,
+    job: "Spirit Handler",
+    formula: (character: Character, monster: Monster, buffs: Buffs) => {
+      const baseDamage = 3150 + 500;
+      return {
+        percent:
+          (baseDamage + character.traits.pow * 5) *
+          (character.baseLevel / 100),
+        bonus: 0,
+      };
+    },
+  },
+  HOWLING_OF_CHULHO: {
+    key: "HOWLING_OF_CHULHO",
+    name: "Howling of Chulho",
+    label: "Howling of Chulho",
+    isMelee: false,
+    job: "Spirit Handler",
+    formula: (character: Character, monster: Monster, buffs: Buffs) => {
+      const baseDamage = 7250 + 500;
+      return {
+        percent:
+          (baseDamage + character.traits.pow * 5) *
+          (character.baseLevel / 100),
+        bonus: 0,
+      };
+    },
+  },
+  HOGOGONG_STRIKE: {
+    key: "HOGOGONG_STRIKE",
+    name: "Hogogong Strike",
+    label: "Hogogong Strike",
+    isMelee: false,
+    job: "Spirit Handler",
+    formula: (character: Character, monster: Monster, buffs: Buffs) => {
+      const baseDamage = 1500 + 200;
+      return {
+        percent:
+          (baseDamage + character.traits.pow * 5) *
+          (character.baseLevel / 100),
+        bonus: 0,
+      };
+    },
+  },
+}
+
 export const SKILLS: Record<string, Skill> = {
   ...allSkills,
   ...knightSkills,
@@ -904,6 +985,7 @@ export const SKILLS: Record<string, Skill> = {
   ...starGladiatorSkills,
   ...ninjaSkills,
   ...noviceSkills,
+  ...doramSkills,
 };
 
 export function getSkill(name: string) {
