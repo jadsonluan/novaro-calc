@@ -360,7 +360,7 @@ const wizardSkills: Record<string, Skill> = {
   PSYCHIC_WAVE: {
     key: "PSYCHIC_WAVE",
     name: "Psychic Wave (Per Wave)",
-    label: "Psychic Wave (Pew Wave)",
+    label: "Psychic Wave (Per Wave)",
     isMelee: false,
     job: "Elemental Master",
     formula: (character: Character, monster: Monster, buffs: Buffs) => {
