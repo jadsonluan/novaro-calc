@@ -32,7 +32,17 @@ const About = () => {
             <li>If a buff is in the 'Buffs' list, all of its bonuses will be applied but wont show directly on the input fields. (Example: buffs that increase POW/SPL will increase not only your POW/SPL but also your P.Atk/S.Matk)</li>
             <li>If a buff is not on the 'Buffs' lists, then you need to manually add its bonuses</li>
             <li>Mastery ATK: Verify your character passives (Super Novice EX 'Breakthrough' and 'Transcendence' passives add Pseudo Buff ATK/Custom MATK) </li>
+          </ul>
+        </p>
+        <p>
+          Stuff that is not yet implemented:
+          <ul>
             <li><b>HP AND SP calculations are using 3rd job formulas, so ignore them for now.</b></li>
+            <li>Tooltips for 'ATK/MATK and Modifiers' fields, to help users know what to input</li>
+            <li>Imperial Guard Skills</li>
+            <li>Assassin Cross Skills</li>
+            <li>Abyss Chaser Skills</li>
+            <li>Inquisitor Skills</li>
           </ul>
         </p>
         <p>
