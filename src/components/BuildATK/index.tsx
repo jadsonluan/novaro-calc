@@ -150,7 +150,7 @@ export const BuildATK = () => {
         max={100}
       />
       <BuildCharacterInput
-        label="Property % Bonus"
+        label="Monster Property % Bonus"
         getValue={(character: Character) => character.modifiers.targetProperty}
         updateValue={(value: number) => (prev: Character) => {
           const { modifiers } = prev;
@@ -375,7 +375,7 @@ export const BuildMATK = () => {
         max={100}
       />
       <BuildCharacterInput
-        label="Element % Bonus"
+        label="Magic Element % Bonus"
         getValue={(character: Character) => character.modifiers.skillProperty}
         updateValue={(value: number) => (prev: Character) => {
           const { modifiers } = prev;
@@ -386,7 +386,7 @@ export const BuildMATK = () => {
         }}
       />
       <BuildCharacterInput
-        label="Property % Bonus"
+        label="Monster Property % Bonus"
         getValue={(character: Character) => character.modifiers.targetProperty}
         updateValue={(value: number) => (prev: Character) => {
           const { modifiers } = prev;
