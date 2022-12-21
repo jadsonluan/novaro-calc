@@ -18,7 +18,7 @@ import {
 } from "../../data/monster";
 import { getJobsName } from "../../data/job";
 import { evaluate } from "mathjs";
-import WeaponType, { WEAPONS } from "../../data/weapon";
+import WeaponType, { Grade, GRADES, WEAPONS } from "../../data/weapon";
 import { getEquipMATK } from "../../services/matk";
 import { getTraitBonuses } from "../../utils/helperFunctions";
 
@@ -28,23 +28,24 @@ const ImportBS = ({ isMATK }: { isMATK: boolean }) => {
   const [build, setBuild] = useState("1");
   const [skill, setSkill] = useState(skills["BASIC_ATTACK"].key);
   const [race, setRace] = useState(RACES[0]);
+  const [monsterElement, setMonsterElement] = useState(ELEMENTS[0]);
   const [element, setElement] = useState(ELEMENTS[0]);
   const [size, setSize] = useState(SIZES[0]);
   const [monsterType, setMonsterType] = useState(MONSTER_TYPES[0]);
   const [weaponType, setWeaponType] = useState(WEAPONS[0]);
+  const [weaponBase, setWeaponBase] = useState('0');
+  const [weaponGrade, setWeaponGrade] = useState(GRADES[0]);
+  const [weaponRefine, setWeaponRefine] = useState('0');
+  const [shadowWeaponRefine, setShadowWeaponRefine] = useState('0');
   const [level, setLevel] = useState('0');
   const [stats, setStats] = useState({
     str: '0',
-    agi: '0',
-    vit: '0',
     int: '0',
     dex: '0',
     luk: '0',
   });
   const [traits, setTraits] = useState({
     pow: '0',
-    sta: '0',
-    wis: '0',
     spl: '0',
     con: '0',
     crt: '0',
@@ -76,8 +77,6 @@ const ImportBS = ({ isMATK }: { isMATK: boolean }) => {
         stats: {
           ...emptyCharacter.stats,
           str: Number(stats.str),
-          agi: Number(stats.agi),
-          vit: Number(stats.vit),
           int: Number(stats.int),
           dex: Number(stats.dex),
           luk: Number(stats.luk),
@@ -85,15 +84,17 @@ const ImportBS = ({ isMATK }: { isMATK: boolean }) => {
         traits: {
           ...emptyCharacter.traits,
           pow: Number(traits.pow),
-          sta: Number(traits.sta),
-          wis: Number(traits.wis),
           spl: Number(traits.spl),
           con: Number(traits.con),
           crt: Number(traits.crt),
         },
+        shadowWeaponRefine: Number(shadowWeaponRefine),
         weapon: {
           ...emptyCharacter.weapon,
-          matk: response.baseMATK,
+          matk: Number(weaponBase),
+          level: response.weaponLVL,
+          refine: Number(weaponRefine),
+          grade: weaponGrade
         },
         MATK: {
           ...emptyCharacter.MATK,
@@ -108,12 +109,11 @@ const ImportBS = ({ isMATK }: { isMATK: boolean }) => {
     ) => ({
       ...prevState,
       skill,
+      shadowWeaponRefine: Number(shadowWeaponRefine),
       baseLevel: Number(level),
       stats: {
         ...prevState.stats,
         str: Number(stats.str),
-        agi: Number(stats.agi),
-        vit: Number(stats.vit),
         int: Number(stats.int),
         dex: Number(stats.dex),
         luk: Number(stats.luk),
@@ -121,8 +121,6 @@ const ImportBS = ({ isMATK }: { isMATK: boolean }) => {
       traits: {
         ...prevState.traits,
         pow: Number(traits.pow),
-        sta: Number(traits.sta),
-        wis: Number(traits.wis),
         spl: Number(traits.spl),
         con: Number(traits.con),
         crt: Number(traits.crt),
@@ -130,14 +128,16 @@ const ImportBS = ({ isMATK }: { isMATK: boolean }) => {
       ATK: {
         ...prevState.ATK,
         equipATK: response.equipATK,
-        patk: getTraitBonuses("pow", 0, Number(traits.pow)) + getTraitBonuses("con", 0, Number(traits.con)),
+        patk: getTraitBonuses("pow", 0, Number(traits.pow)) + getTraitBonuses("con", 0, Number(traits.con)) +
+         (response.weaponLVL === 5 ? Number(weaponRefine) * 2 : 0),
         crate: getTraitBonuses("crt", 0, Number(traits.crt))
       },
       MATK: {
         ...prevState.MATK,
         equipMATK: equipMATK,
         matkPercent: response.MATKpercent,
-        smatk: getTraitBonuses("spl", 0, Number(traits.spl)) + getTraitBonuses("con", 0, Number(traits.con)),
+        smatk: getTraitBonuses("spl", 0, Number(traits.spl)) + getTraitBonuses("con", 0, Number(traits.con)) +
+          (response.weaponLVL === 5 ? Number(weaponRefine) * 2 : 0),
       },
       bypass: response.bypass,
       hp: {
@@ -154,8 +154,11 @@ const ImportBS = ({ isMATK }: { isMATK: boolean }) => {
         ...prevState.weapon,
         level: response.weaponLVL,
         atk: response.baseATK,
-        matk: response.baseMATK,
+        matk: Number(weaponBase),
         type: weaponType,
+        refine: Number(weaponRefine),
+        grade: weaponGrade,
+        element: element,
       },
       modifiers: {
         ...prevState.modifiers,
@@ -176,7 +179,7 @@ const ImportBS = ({ isMATK }: { isMATK: boolean }) => {
       prevState: Monster
     ) => ({
       ...prevState,
-      element,
+      monsterElement,
       race,
       size,
       type: monsterType,
@@ -298,6 +301,21 @@ const ImportBS = ({ isMATK }: { isMATK: boolean }) => {
                 </select>
               </div>
               <div>
+                <b>Element</b>
+                <select
+                  value={element}
+                  onChange={(event) =>
+                    setElement(event.target.value as Element)
+                  }
+                >
+                  {Object.values(ELEMENTS).map((element) => (
+                    <option key={element} value={element}>
+                      {capitalize(element)}
+                    </option>
+                  ))}
+                </select>
+              </div>
+              <div>
                 <b>Weapon</b>
                 <select
                   value={weaponType}
@@ -311,6 +329,74 @@ const ImportBS = ({ isMATK }: { isMATK: boolean }) => {
                     </option>
                   ))}
                 </select>
+              </div>
+              <div>
+                <b>Weapon Grade</b>
+                <select
+                  value={weaponGrade}
+                  onChange={(event) =>
+                    setWeaponGrade(event.target.value as Grade)
+                  }
+                >
+                  {Object.values(GRADES).map((grade) => (
+                    <option key={grade} value={grade}>
+                      {capitalize(grade)}
+                    </option>
+                  ))}
+                </select>
+              </div>
+              <div>
+                <b>Weapon {!isMATK ? 'ATK' : 'MATK'}</b>
+                <input
+                  type="text"
+                  value={weaponBase || '0'}
+                  onChange={(event) =>
+                    setWeaponBase(event.target.value)
+                  }
+                  onBlur={(event) => {
+                    const value = evaluateNumber(event.target.value);
+                    let parsedValue = parseInt(value);
+                    parsedValue = Math.max(parsedValue, 0);
+
+                    setWeaponBase(`${parsedValue}`);
+                  }}
+                />
+              </div>
+              <div>
+                <b>Weapon Refine</b>
+                <input
+                  type="text"
+                  value={weaponRefine || '0'}
+                  onChange={(event) =>
+                    setWeaponRefine(event.target.value)
+                  }
+                  onBlur={(event) => {
+                    const value = evaluateNumber(event.target.value);
+                    let parsedValue = parseInt(value);
+                    parsedValue = Math.max(parsedValue, 0);
+                    parsedValue = Math.min(parsedValue, 20);
+
+                    setWeaponRefine(`${parsedValue}`);
+                  }}
+                />
+              </div>
+              <div>
+                <b>S.Weapon Refine</b>
+                <input
+                  type="text"
+                  value={shadowWeaponRefine || '0'}
+                  onChange={(event) =>
+                    setShadowWeaponRefine(event.target.value)
+                  }
+                  onBlur={(event) => {
+                    const value = evaluateNumber(event.target.value);
+                    let parsedValue = parseInt(value);
+                    parsedValue = Math.max(parsedValue, 0);
+                    parsedValue = Math.min(parsedValue, 10);
+
+                    setShadowWeaponRefine(`${parsedValue}`);
+                  }}
+                />
               </div>
               <div>
                 <b>Enemy Race</b>
@@ -328,14 +414,14 @@ const ImportBS = ({ isMATK }: { isMATK: boolean }) => {
               <div>
                 <b>Enemy Element</b>
                 <select
-                  value={element}
+                  value={monsterElement}
                   onChange={(event) =>
-                    setElement(event.target.value as Element)
+                    setMonsterElement(event.target.value as Element)
                   }
                 >
-                  {Object.values(ELEMENTS).map((element) => (
-                    <option key={element} value={element}>
-                      {capitalize(element)}
+                  {Object.values(ELEMENTS).map((monsterElement) => (
+                    <option key={monsterElement} value={monsterElement}>
+                      {capitalize(monsterElement)}
                     </option>
                   ))}
                 </select>
@@ -404,8 +490,6 @@ const ImportBS = ({ isMATK }: { isMATK: boolean }) => {
                   />
                 </div>
               ))}
-            </div>
-            <div className="stats">
               {Object.keys(traits).map((trait) => (
                 <div key={trait}>
                   <b>{trait.toLocaleUpperCase()}</b>

@@ -34,8 +34,10 @@ function getEquipATK(sections: Record<string, string[]>) {
 function getTotalMATK(sections: Record<string, string[]>) {
   const section = sections["Battle Stats"];
   const line = section[0];
+  const minMATK = getValueFromLine(0, line)
+  const maxMATK = getValueFromLine(1, line)
 
-  return getValueFromLine(0, line);
+  return (minMATK + maxMATK) / 2;
 }
 
 function getMATKpercent(sections: Record<string, string[]>) {

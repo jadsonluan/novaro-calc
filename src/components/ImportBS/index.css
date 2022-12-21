@@ -10,6 +10,7 @@
   color: white;
   padding: 10px 25px;
   border-radius: 25px;
+  max-width: 800px;
 }
 
 .import-bs-modal ::-webkit-scrollbar {
@@ -38,7 +39,7 @@
 .import-bs-modal .form .inputs {
   display: flex;
   flex-direction: row;
-  justify-content: space-between;
+  justify-content: space-evenly;
   align-items: flex-start;
   column-gap: 2rem;
   margin-bottom: 1rem;
@@ -71,7 +72,7 @@
 
 .import-bs-modal .form .inputs .stats > div {
   display: grid;
-  grid-template-columns: 60px 120px;
+  grid-template-columns: 60px 200px;
   margin: 5px 0;
 }
 

@@ -19,7 +19,13 @@ export function getEquipMATK (character: Character, totalMATK: number) {
   statusMATK = Math.round(applyModifier(statusMATK, matkPercentMultiplier));
 
   let nonStatusMATK = totalMATK - statusMATK;
-  nonStatusMATK = Math.round(nonStatusMATK / (1 + matkPercentMultiplier / 100)) - character.weapon.matk;
+  nonStatusMATK = Math.round(nonStatusMATK / (1 + matkPercentMultiplier / 100));
+  nonStatusMATK -= character.weapon.matk + getRefineBonus(character.weapon);
+  nonStatusMATK -= character.shadowWeaponRefine;
+
+  if (character.job === 'Hyper Novice') {
+    nonStatusMATK -= 100 // Transcedence passive
+  }
 
   return Math.max(0, nonStatusMATK);
 }
