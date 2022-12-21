@@ -72,8 +72,8 @@ export const JOBS: Record<Job, BaseStat & { initialJob: string }> = {
     initialJob: "Thief",
   },
   Archmage: {
-    baseHP: 20166,
-    baseSP: 1985,
+    baseHP: 39509,
+    baseSP: 2590,
     initialJob: "Mage",
   },
   "Elemental Master": {
