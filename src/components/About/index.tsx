@@ -27,8 +27,7 @@ const About = () => {
           But some information is not available in @bs, so you will have to
           manually input it.
           <ul>
-            <li>Equip MATK: Needs to be manually calculated (you can add simple math calculations in the fields like 20+50)</li>
-            <li>Weapon MATK</li>
+            <li>Weapon and Shadow Weapon refines</li>
             <li>If a buff is in the 'Buffs' list, all of its bonuses will be applied but wont show directly on the input fields. (Example: buffs that increase POW/SPL will increase not only your POW/SPL but also your P.Atk/S.Matk)</li>
             <li>If a buff is not on the 'Buffs' lists, then you need to manually add its bonuses</li>
             <li>Mastery ATK: Verify your character passives (Super Novice EX 'Breakthrough' and 'Transcendence' passives add Pseudo Buff ATK/Custom MATK) </li>
