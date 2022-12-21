@@ -31,6 +31,13 @@ function getEquipATK(sections: Record<string, string[]>) {
   return getValueFromLine(EQUIP_ATK_INDEX, line);
 }
 
+function getTotalMATK(sections: Record<string, string[]>) {
+  const section = sections["Battle Stats"];
+  const line = section[0];
+
+  return getValueFromLine(0, line);
+}
+
 function getMATKpercent(sections: Record<string, string[]>) {
   const section = sections["Battle Stats"];
   const line = section[1];
@@ -38,18 +45,29 @@ function getMATKpercent(sections: Record<string, string[]>) {
   return Number(getLineDigits(line));
 }
 
-function getWeaponInfo(sections: Record<string, string[]>) {
+function getWeaponInfo(sections: Record<string, string[]>, isMATK: boolean) {
   const BASE_ATK_LINE_INDEX = 0;
+  const BASE_MATK_LINE_INDEX = 2;
+  const REFINE_ATK_INDEX = 1;
   const WEAPON_LVL_LINE_INDEX = 1;
   const section = sections["Right-Hand Weapon"];
 
   const baseAtkLine = section[BASE_ATK_LINE_INDEX];
   const baseATK = getValueFromLine(BASE_ATK_LINE_INDEX, baseAtkLine);
+  const baseMATK = getValueFromLine(BASE_MATK_LINE_INDEX, baseAtkLine);
+
+  const refineAtkLine = section[BASE_ATK_LINE_INDEX];
+  const refineAtk = getValueFromLine(REFINE_ATK_INDEX, refineAtkLine)
 
   const weaponLvlLine = section[WEAPON_LVL_LINE_INDEX];
   const weaponLVL = getValueFromLine(WEAPON_LVL_LINE_INDEX, weaponLvlLine);
 
-  return { baseATK, weaponLVL };
+  return {
+    baseATK,
+    baseMATK: baseMATK - refineAtk,
+    weaponLVL,
+    baseAndRefineATK: !isMATK ? baseATK + refineAtk : baseMATK,
+  };
 }
 
 function getBonusFromSection(
@@ -217,7 +235,8 @@ export function formatBattleStats(
 
   const equipATK = getEquipATK(sections);
   const MATKpercent = getMATKpercent(sections);
-  const { baseATK, weaponLVL } = getWeaponInfo(sections);
+  const totalMATK = getTotalMATK(sections);
+  const { baseATK, baseMATK, weaponLVL, baseAndRefineATK } = getWeaponInfo(sections, isMATK);
   const elementBonuses = getElementBonuses(sections, monsterInfo.element);
   const propertyBonus = getPropertyBonus(sections, monsterInfo.element, isMATK);
   const raceBonus = getRaceBonus(sections, monsterInfo.race, isMATK);
@@ -235,9 +254,12 @@ export function formatBattleStats(
 
   return {
     equipATK,
+    totalMATK,
     MATKpercent,
     baseATK,
+    baseMATK,
     weaponLVL,
+    baseAndRefineATK,
     elementBonuses,
     propertyBonus,
     raceBonus,

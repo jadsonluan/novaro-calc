@@ -12,6 +12,18 @@ export type DmgRange = "MIN" | "MAX";
 
 const MRES_REDUCTION_CAP = 625;
 
+export function getEquipMATK (character: Character, totalMATK: number) {
+  const matkPercentMultiplier = (character.MATK.matkPercent - 100);
+
+  let statusMATK = getStatusMATK(character);
+  statusMATK = Math.round(applyModifier(statusMATK, matkPercentMultiplier));
+
+  let nonStatusMATK = totalMATK - statusMATK;
+  nonStatusMATK = Math.round(nonStatusMATK / (1 + matkPercentMultiplier / 100)) - character.weapon.matk;
+
+  return Math.max(0, nonStatusMATK);
+}
+
 function getStatusMATK(character: Character) {
   const { stats, traits, baseLevel } = character;
   const { int, dex, luk } = stats;
