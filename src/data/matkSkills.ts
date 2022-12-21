@@ -760,7 +760,7 @@ const soulLinkerSkills: Record<string, Skill> = {
     job: "Soul Ascetic",
     formula: (character: Character, monster: Monster, buffs: Buffs) => {
       const baseDamage =
-        5250 + (buffs.circleOfDirectionAndElementals?.active ? 2250 : 0);
+        5250 + (buffs.circleOfDirectionsAndElementals?.active ? 2250 : 0);
       return {
         percent:
           (baseDamage + character.traits.spl * 5) * (character.baseLevel / 100),
@@ -776,7 +776,7 @@ const soulLinkerSkills: Record<string, Skill> = {
     job: "Soul Ascetic",
     formula: (character: Character, monster: Monster, buffs: Buffs) => {
       const baseDamage =
-        4250 + (buffs.circleOfDirectionAndElementals?.active ? 1500 : 0);
+        4250 + (buffs.circleOfDirectionsAndElementals?.active ? 1500 : 0);
       return {
         percent:
           (baseDamage + character.traits.spl * 5) * (character.baseLevel / 100),
@@ -792,7 +792,7 @@ const soulLinkerSkills: Record<string, Skill> = {
     job: "Soul Ascetic",
     formula: (character: Character, monster: Monster, buffs: Buffs) => {
       const baseDamage =
-        5250 + (buffs.circleOfDirectionAndElementals?.active ? 2000 : 0);
+        5250 + (buffs.circleOfDirectionsAndElementals?.active ? 2000 : 0);
       return {
         percent:
           (baseDamage + character.traits.spl * 5) * (character.baseLevel / 100),
@@ -808,7 +808,7 @@ const soulLinkerSkills: Record<string, Skill> = {
     job: "Soul Ascetic",
     formula: (character: Character, monster: Monster, buffs: Buffs) => {
       const baseDamage =
-        7250 + (buffs.circleOfDirectionAndElementals?.active ? 2250 : 0);
+        7250 + (buffs.circleOfDirectionsAndElementals?.active ? 2250 : 0);
       return {
         percent:
           (baseDamage + character.traits.spl * 5) * (character.baseLevel / 100),
@@ -827,7 +827,7 @@ const soulLinkerSkills: Record<string, Skill> = {
       return {
         percent:
           (baseDamage + character.traits.spl * 5) * (character.baseLevel / 100) *
-          (buffs.circleOfDirectionAndElementals?.active ? 7 : 1),
+          (buffs.circleOfDirectionsAndElementals?.active ? 7 : 1),
         bonus: 0,
       };
     },
@@ -842,7 +842,7 @@ const soulLinkerSkills: Record<string, Skill> = {
       const baseDamage = 8250;
       return {
         percent:
-          (baseDamage + character.traits.spl * 5) *
+          (baseDamage + character.traits.spl * 10) *
           (character.baseLevel / 100) *
           5, // Hits
         bonus: 0,

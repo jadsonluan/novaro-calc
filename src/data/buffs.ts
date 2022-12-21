@@ -60,7 +60,7 @@ export interface Buffs {
   talismanOfMagician?: Buff;
   talismanOfFiveElements?: Buff;
   soulOfHeavenAndEarth?: Buff;
-  circleOfDirectionAndElementals?: Buff;
+  circleOfDirectionsAndElementals?: Buff;
   // Novice
   ruleBreak?: Buff;
   breakingLimit?: Buff;
@@ -365,7 +365,7 @@ export const emptyMATKBuffs: Buffs = {
     tooltip: "Increases Melee, Ranged and All Elemement Magical by 25%",
     job: "Taekwon",
   },
-  circleOfDirectionAndElementals: {
+  circleOfDirectionsAndElementals: {
     active: false,
     tooltip: "S.Matk +25 and activates 'Blessing of the Four Directions and Five Elementals'",
     job: "Taekwon",
@@ -882,7 +882,7 @@ const BUFF_EFFECTS: Record<keyof Buffs, BuffEffect> = {
       buffs: [...character.buffs, "soulOfHeavenAndEarth"],
     };
   },
-  circleOfDirectionAndElementals: (character: Character) => {
+  circleOfDirectionsAndElementals: (character: Character) => {
     const { MATK: { smatk }} = character;
     const SMATK_INCREASE = 25;
     return {
@@ -891,7 +891,7 @@ const BUFF_EFFECTS: Record<keyof Buffs, BuffEffect> = {
         ...character.MATK,
         smatk: smatk + SMATK_INCREASE,
       },
-      buffs: [...character.buffs, "circleOfDirectionAndElementals"],
+      buffs: [...character.buffs, "circleOfDirectionsAndElementals"],
     };
   },
   // Novice
