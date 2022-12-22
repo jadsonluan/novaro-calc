@@ -15,7 +15,7 @@ const BuildDebuffs = ({ emptyDebuffs }: { emptyDebuffs: Debuffs }) => {
         <b>Build 2</b>
       </div>
       <div className="build-content">
-      {INITIAL_JOBS.map((job, i) => {
+      {["All", ...INITIAL_JOBS].map((job, i) => {
           const groupOptions = debuffs.filter(
             (debuff) => emptyDebuffs[debuff as keyof Debuffs]?.job === job
           );

@@ -15,7 +15,7 @@ const BuildBuffs = ({ emptyBuffs }: { emptyBuffs: Buffs }) => {
         <b>Build 2</b>
       </div>
       <div className="build-content">
-        {INITIAL_JOBS.map((job, i) => {
+        {["All", ...INITIAL_JOBS].map((job, i) => {
           const groupOptions = buffs.filter(
             (buff) => emptyBuffs[buff as keyof Buffs]?.job === job
           );

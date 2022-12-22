@@ -10,6 +10,9 @@ export interface Buff {
 }
 
 export interface Buffs {
+  // All
+  blueHerbActivator?: Buff;
+  redHerbActivator?: Buff;
   // Swordsman
   magnumBreak?: Buff;
   concentration?: Buff;
@@ -74,6 +77,12 @@ export interface Buffs {
 }
 
 export const emptyATKBuffs: Buffs = {
+  // All
+  redHerbActivator: {
+    active: false,
+    tooltip: "+15% melee/ranged damage",
+    job: "All",
+  },
   // Swordsman
   magnumBreak: {
     active: false,
@@ -287,6 +296,12 @@ export const emptyATKBuffs: Buffs = {
 };
 
 export const emptyMATKBuffs: Buffs = {
+  // All
+  blueHerbActivator: {
+    active: false,
+    tooltip: "+15% all element magic damage",
+    job: "All",
+  },
   // Swordsman
   // Thief
   // Merchant
@@ -407,6 +422,36 @@ export const emptyMATKBuffs: Buffs = {
 type BuffEffect = (character: Character, monster: Monster) => Character;
 
 const BUFF_EFFECTS: Record<keyof Buffs, BuffEffect> = {
+  // All
+  blueHerbActivator: (character: Character) => {
+    const {
+      modifiers: { skillProperty },
+    } = character;
+    const MODIFIER_INCREASE = 15;
+    return {
+      ...character,
+      modifiers: {
+        ...character.modifiers,
+        skillProperty: skillProperty + MODIFIER_INCREASE,
+      },
+      buffs: [...character.buffs, "blueHerbActivator"],
+    };
+  },
+  redHerbActivator: (character: Character) => {
+    const {
+      modifiers: { melee, ranged },
+    } = character;
+    const MODIFIER_INCREASE = 15;
+    return {
+      ...character,
+      modifiers: {
+        ...character.modifiers,
+        melee: melee + MODIFIER_INCREASE,
+        ranged: ranged + MODIFIER_INCREASE,
+      },
+      buffs: [...character.buffs, "redHerbActivator"],
+    };
+  },
   // Swordsman
   magnumBreak: (character: Character) => {
     return { ...character, buffs: [...character.buffs, "magnumBreak"] };
@@ -415,7 +460,9 @@ const BUFF_EFFECTS: Record<keyof Buffs, BuffEffect> = {
     return { ...character, buffs: [...character.buffs, "concentration"] };
   },
   asirRune: (character: Character) => {
-    const { ATK: { pseudoBuffATK } } = character;
+    const {
+      ATK: { pseudoBuffATK },
+    } = character;
     const ATK_INCREASE = 70;
     return {
       ...character,
@@ -444,18 +491,20 @@ const BUFF_EFFECTS: Record<keyof Buffs, BuffEffect> = {
       ...character,
       hp: { ...hp, percent: hp.percent + PERCENT_INCREASE },
       sp: { ...sp, percent: sp.percent + PERCENT_INCREASE },
-      modifiers: { 
-        ...modifiers, 
+      modifiers: {
+        ...modifiers,
         size: modifiers.size + PERCENT_INCREASE,
         melee: modifiers.melee + PERCENT_INCREASE,
         ranged: modifiers.ranged + PERCENT_INCREASE,
         critical: modifiers.critical + PERCENT_INCREASE,
-       },
+      },
       buffs: [...character.buffs, "luxAnima"],
     };
   },
   shieldSpell: (character: Character) => {
-    const { ATK: { pseudoBuffATK } } = character;
+    const {
+      ATK: { pseudoBuffATK },
+    } = character;
     const ATK_INCREASE = 150;
     return {
       ...character,
@@ -467,7 +516,11 @@ const BUFF_EFFECTS: Record<keyof Buffs, BuffEffect> = {
     };
   },
   inspiration: (character: Character) => {
-    const { stats, hp, ATK: { pseudoBuffATK } } = character;
+    const {
+      stats,
+      hp,
+      ATK: { pseudoBuffATK },
+    } = character;
     const ATK_INCREASE = 200;
     const STAT_INCREASE = 30;
     const HP_PERCENT_INCREASE = 20;
@@ -512,7 +565,10 @@ const BUFF_EFFECTS: Record<keyof Buffs, BuffEffect> = {
   },
   // Merchant
   loudExclamation: (character: Character) => {
-    const { ATK: { pseudoBuffATK }, stats } = character;
+    const {
+      ATK: { pseudoBuffATK },
+      stats,
+    } = character;
     const ATK_INCREASE = 30;
     const STAT_INCREASE = 4;
     return {
@@ -529,7 +585,9 @@ const BUFF_EFFECTS: Record<keyof Buffs, BuffEffect> = {
     };
   },
   cartBoost: (character: Character) => {
-    const { ATK: { masteryATK } } = character;
+    const {
+      ATK: { masteryATK },
+    } = character;
     const ATK_INCREASE = 30;
     return {
       ...character,
@@ -541,7 +599,9 @@ const BUFF_EFFECTS: Record<keyof Buffs, BuffEffect> = {
     };
   },
   pyroclastic: (character: Character) => {
-    const { ATK: { pseudoBuffATK } } = character;
+    const {
+      ATK: { pseudoBuffATK },
+    } = character;
     const ATK_INCREASE = 450;
     return {
       ...character,
@@ -553,7 +613,9 @@ const BUFF_EFFECTS: Record<keyof Buffs, BuffEffect> = {
     };
   },
   tempering: (character: Character) => {
-    const { ATK: { patk } } = character;
+    const {
+      ATK: { patk },
+    } = character;
     const PATK_INCREASE = 15;
     return {
       ...character,
@@ -566,7 +628,9 @@ const BUFF_EFFECTS: Record<keyof Buffs, BuffEffect> = {
   },
   // Mage
   magicAmplification: (character: Character) => {
-    const { modifiers: { finalDmg } } = character;
+    const {
+      modifiers: { finalDmg },
+    } = character;
     const MOD_INCREASE = 50;
     return {
       ...character,
@@ -587,10 +651,12 @@ const BUFF_EFFECTS: Record<keyof Buffs, BuffEffect> = {
     return {
       ...character,
       buffs: [...character.buffs, "climax"],
-    }
+    };
   },
   striking: (character: Character) => {
-    const { ATK: { pseudoBuffATK } } = character;
+    const {
+      ATK: { pseudoBuffATK },
+    } = character;
     const ATK_INCREASE = 100;
     return {
       ...character,
@@ -602,7 +668,9 @@ const BUFF_EFFECTS: Record<keyof Buffs, BuffEffect> = {
     };
   },
   spellEnchanting: (character: Character) => {
-    const { MATK: { smatk } } = character;
+    const {
+      MATK: { smatk },
+    } = character;
     const MATK_INCREASE = 20;
     return {
       ...character,
@@ -652,13 +720,17 @@ const BUFF_EFFECTS: Record<keyof Buffs, BuffEffect> = {
       ...character,
       modifiers: {
         ...modifiers,
-        finalDmg: modifiers.finalDmg + (!character.buffs.includes('unlimit') ? UNLIMIT_INCREASE : 0),
+        finalDmg:
+          modifiers.finalDmg +
+          (!character.buffs.includes("unlimit") ? UNLIMIT_INCREASE : 0),
       },
       buffs: [...character.buffs, "calamityGale"],
     };
   },
   marchOfProntera: (character: Character) => {
-    const { ATK: { patk } } = character;
+    const {
+      ATK: { patk },
+    } = character;
     const PATK_INCREASE = 15;
     return {
       ...character,
@@ -670,7 +742,9 @@ const BUFF_EFFECTS: Record<keyof Buffs, BuffEffect> = {
     };
   },
   serenadeOfJawaii: (character: Character) => {
-    const { MATK: { smatk } } = character;
+    const {
+      MATK: { smatk },
+    } = character;
     const SMATK_INCREASE = 15;
     return {
       ...character,
@@ -682,20 +756,27 @@ const BUFF_EFFECTS: Record<keyof Buffs, BuffEffect> = {
     };
   },
   mysticSymphony: (character: Character, monster: Monster) => {
-    const { modifiers: { race } } = character;
+    const {
+      modifiers: { race },
+    } = character;
     const RACE_MODIFIER = 30;
     return {
       ...character,
       modifiers: {
         ...character.modifiers,
-        race: race + (['fish', 'demihuman'].includes(monster.race) ? RACE_MODIFIER : 0),
+        race:
+          race +
+          (["fish", "demihuman"].includes(monster.race) ? RACE_MODIFIER : 0),
       },
       buffs: [...character.buffs, "mysticSymphony"],
     };
   },
   // Acolyte
   odinsBlessing: (character: Character) => {
-    const { ATK: { pseudoBuffATK }, MATK: { buffMATK } } = character;
+    const {
+      ATK: { pseudoBuffATK },
+      MATK: { buffMATK },
+    } = character;
     const ATK_INCREASE = 100;
     return {
       ...character,
@@ -711,7 +792,9 @@ const BUFF_EFFECTS: Record<keyof Buffs, BuffEffect> = {
     };
   },
   benedictum: (character: Character) => {
-    const { traits: { pow, con, crt } } = character;
+    const {
+      traits: { pow, con, crt },
+    } = character;
     const TRAIT_INCREASE = 10;
     return {
       ...character,
@@ -725,7 +808,9 @@ const BUFF_EFFECTS: Record<keyof Buffs, BuffEffect> = {
     };
   },
   religio: (character: Character) => {
-    const { traits: { spl, sta, wis } } = character;
+    const {
+      traits: { spl, sta, wis },
+    } = character;
     const TRAIT_INCREASE = 10;
     return {
       ...character,
@@ -739,7 +824,9 @@ const BUFF_EFFECTS: Record<keyof Buffs, BuffEffect> = {
     };
   },
   presensAcies: (character: Character) => {
-    const { ATK: { crate } } = character;
+    const {
+      ATK: { crate },
+    } = character;
     const TRAIT_INCREASE = 10;
     return {
       ...character,
@@ -751,7 +838,10 @@ const BUFF_EFFECTS: Record<keyof Buffs, BuffEffect> = {
     };
   },
   competentia: (character: Character) => {
-    const { ATK: { patk }, MATK: { smatk } } = character;
+    const {
+      ATK: { patk },
+      MATK: { smatk },
+    } = character;
     const TRAIT_INCREASE = 50;
     return {
       ...character,
@@ -767,7 +857,9 @@ const BUFF_EFFECTS: Record<keyof Buffs, BuffEffect> = {
     };
   },
   allSpheres: (character: Character) => {
-    const { ATK: { masteryATK } } = character;
+    const {
+      ATK: { masteryATK },
+    } = character;
     const ATK_PER_SPHERE = 3;
     return {
       ...character,
@@ -809,7 +901,9 @@ const BUFF_EFFECTS: Record<keyof Buffs, BuffEffect> = {
     return { ...character, buffs: [...character.buffs, "lightOfTheSun"] };
   },
   fairySoul: (character: Character) => {
-    const { MATK: { buffMATK } } = character;
+    const {
+      MATK: { buffMATK },
+    } = character;
     const MATK_INCREASE = 50;
     return {
       ...character,
@@ -821,7 +915,9 @@ const BUFF_EFFECTS: Record<keyof Buffs, BuffEffect> = {
     };
   },
   falconSoul: (character: Character) => {
-    const { ATK: { pseudoBuffATK } } = character;
+    const {
+      ATK: { pseudoBuffATK },
+    } = character;
     const ATK_INCREASE = 50;
     return {
       ...character,
@@ -833,7 +929,9 @@ const BUFF_EFFECTS: Record<keyof Buffs, BuffEffect> = {
     };
   },
   talismanOfWarrior: (character: Character) => {
-    const { ATK: { patk }} = character;
+    const {
+      ATK: { patk },
+    } = character;
     const PATK_INCREASE = 10;
     return {
       ...character,
@@ -845,7 +943,9 @@ const BUFF_EFFECTS: Record<keyof Buffs, BuffEffect> = {
     };
   },
   talismanOfMagician: (character: Character) => {
-    const { MATK: { smatk }} = character;
+    const {
+      MATK: { smatk },
+    } = character;
     const SMATK_INCREASE = 10;
     return {
       ...character,
@@ -857,7 +957,9 @@ const BUFF_EFFECTS: Record<keyof Buffs, BuffEffect> = {
     };
   },
   talismanOfFiveElements: (character: Character) => {
-    const { modifiers: { targetProperty } } = character;
+    const {
+      modifiers: { targetProperty },
+    } = character;
     const MODIFIER_INCREASE = 20;
     return {
       ...character,
@@ -869,21 +971,25 @@ const BUFF_EFFECTS: Record<keyof Buffs, BuffEffect> = {
     };
   },
   soulOfHeavenAndEarth: (character: Character) => {
-    const { modifiers: { melee, ranged, skillProperty } } = character;
+    const {
+      modifiers: { melee, ranged, skillProperty },
+    } = character;
     const MODIFIER_INCREASE = 25;
     return {
       ...character,
       modifiers: {
         ...character.modifiers,
-          melee: melee + MODIFIER_INCREASE,
-          ranged: ranged + MODIFIER_INCREASE,
-          skillProperty: skillProperty + MODIFIER_INCREASE,
+        melee: melee + MODIFIER_INCREASE,
+        ranged: ranged + MODIFIER_INCREASE,
+        skillProperty: skillProperty + MODIFIER_INCREASE,
       },
       buffs: [...character.buffs, "soulOfHeavenAndEarth"],
     };
   },
   circleOfDirectionsAndElementals: (character: Character) => {
-    const { MATK: { smatk }} = character;
+    const {
+      MATK: { smatk },
+    } = character;
     const SMATK_INCREASE = 25;
     return {
       ...character,
@@ -903,7 +1009,10 @@ const BUFF_EFFECTS: Record<keyof Buffs, BuffEffect> = {
   },
   // Doram
   bunchOfShrimp: (character: Character) => {
-    const { modifiers: { class: classATK }, MATK: { matkPercent } } = character;
+    const {
+      modifiers: { class: classATK },
+      MATK: { matkPercent },
+    } = character;
     const MODIFIER_INCREASE = 10;
     return {
       ...character,
@@ -913,13 +1022,16 @@ const BUFF_EFFECTS: Record<keyof Buffs, BuffEffect> = {
       },
       MATK: {
         ...character.MATK,
-        matkPercent: ((matkPercent / 100) * 1.1) * 100,
+        matkPercent: (matkPercent / 100) * 1.1 * 100,
       },
       buffs: [...character.buffs, "bunchOfShrimp"],
     };
   },
   chattering: (character: Character) => {
-    const { ATK: { pseudoBuffATK }, MATK: { buffMATK } } = character;
+    const {
+      ATK: { pseudoBuffATK },
+      MATK: { buffMATK },
+    } = character;
     const ATK_INCREASE = 100;
     const MATK_INCREASE = 100;
     return {
@@ -936,7 +1048,10 @@ const BUFF_EFFECTS: Record<keyof Buffs, BuffEffect> = {
     };
   },
   marineFestivalofKisul: (character: Character) => {
-    const { traits: { pow, con, crt }, ATK: { patk, crate } } = character;
+    const {
+      traits: { pow, con, crt },
+      ATK: { patk, crate },
+    } = character;
     const TRAIT_INCREASE = 10;
     return {
       ...character,
@@ -948,15 +1063,34 @@ const BUFF_EFFECTS: Record<keyof Buffs, BuffEffect> = {
       },
       ATK: {
         ...character.ATK,
-        patk: patk + getTraitBonuses("pow", character.traits.pow, character.traits.pow + TRAIT_INCREASE) +
-          getTraitBonuses("con", character.traits.con, character.traits.con + TRAIT_INCREASE),
-        crate: crate + getTraitBonuses("crt", character.traits.crt, character.traits.crt + TRAIT_INCREASE),
+        patk:
+          patk +
+          getTraitBonuses(
+            "pow",
+            character.traits.pow,
+            character.traits.pow + TRAIT_INCREASE
+          ) +
+          getTraitBonuses(
+            "con",
+            character.traits.con,
+            character.traits.con + TRAIT_INCREASE
+          ),
+        crate:
+          crate +
+          getTraitBonuses(
+            "crt",
+            character.traits.crt,
+            character.traits.crt + TRAIT_INCREASE
+          ),
       },
       buffs: [...character.buffs, "marineFestivalofKisul"],
     };
   },
   sandFestivalofKisul: (character: Character) => {
-    const { traits: { spl, sta, wis }, MATK: { smatk } } = character;
+    const {
+      traits: { spl, sta, wis },
+      MATK: { smatk },
+    } = character;
     const TRAIT_INCREASE = 10;
     return {
       ...character,
@@ -968,13 +1102,22 @@ const BUFF_EFFECTS: Record<keyof Buffs, BuffEffect> = {
       },
       MATK: {
         ...character.MATK,
-        smatk: smatk + getTraitBonuses("spl", character.traits.spl, character.traits.spl + TRAIT_INCREASE),
+        smatk:
+          smatk +
+          getTraitBonuses(
+            "spl",
+            character.traits.spl,
+            character.traits.spl + TRAIT_INCREASE
+          ),
       },
       buffs: [...character.buffs, "sandFestivalofKisul"],
     };
   },
   temporaryCommunion: (character: Character) => {
-    const { ATK: { patk }, MATK: { smatk } } = character;
+    const {
+      ATK: { patk },
+      MATK: { smatk },
+    } = character;
     const TRAIT_INCREASE = 15;
     return {
       ...character,
@@ -990,7 +1133,10 @@ const BUFF_EFFECTS: Record<keyof Buffs, BuffEffect> = {
     };
   },
   blessingOfMysticalCreatures: (character: Character) => {
-    const { ATK: { patk }, MATK: { smatk } } = character;
+    const {
+      ATK: { patk },
+      MATK: { smatk },
+    } = character;
     const TRAIT_INCREASE = 50;
     return {
       ...character,
