@@ -10,7 +10,7 @@ import { Character, Stats } from "../data/character";
 import { Monster, Size } from "../data/monster";
 export type DmgRange = "MIN" | "MAX";
 
-const DEX_WEAPONS: WeaponType[] = ["Whip", "Instrument", "Bow", "Gun"];
+const DEX_WEAPONS: WeaponType[] = ["Whip", "Instrument", "Bow", "Pistol", "Rifle", "Shotgun", "Gatling Gun", "Grenade Launcher"];
 
 const BASE_CRITICAL_DAMAGE = 40;
 const RES_REDUCTION_CAP = 625;
@@ -293,14 +293,25 @@ function getRES(monster: Monster, traitBypass: number) {
   return res > RES_REDUCTION_CAP ? 0.5 : (res + 5000) / (5000 + res * 10);
 }
 
-function getDEF(monster: Monster, bypass: number, traitBypass: number, skillName: string) {
+function getDEF(character: Character, monster: Monster) {
+  const { traitBypass, bypass, skill: skillName, weapon: { type: weaponType }} = character;
+
   const RES = getRES(monster, traitBypass);
   const hardDEF = getHardDEF(monster, bypass);
   const softDEF = getSoftDEF(monster);
   const skill = getSkill(skillName);
 
+  // Bypass when using specific weapon
+  if (['ONLY_ONE_BULLET'].includes(skill.key) && ['Pistol'].includes(weaponType)) {
+    return { RES, hardDEF: 1, softDEF: softDEF + monster.hardDEF };
+  }
+
+  if (['THE_VIGILANTE_AT_NIGHT'].includes(skill.key) && ['Gatling Gun'].includes(weaponType)) {
+    return { RES, hardDEF: 1, softDEF: softDEF + monster.hardDEF };
+  }
+
   if (skill.hardAsSoftDef) {
-    return { RES, hardDEF: 1, softDEF: softDEF + hardDEF };
+    return { RES, hardDEF: 1, softDEF: softDEF + monster.hardDEF };
   }
 
   return { RES, hardDEF, softDEF };
@@ -323,10 +334,8 @@ export function getFinalATKDamage(range: DmgRange, build: BuildInfo) {
   const rangeMod = skill.isMelee ? mods.melee : mods.ranged;
   const atk = getATK(character.crit ? "MAX" : range, character, monster);
   const { RES, hardDEF, softDEF } = getDEF(
-    monster,
-    character.bypass,
-    character.traitBypass,
-    character.skill
+    character,
+    monster
   );
 
   let finalDmg = Math.floor(atk * (formula.percent / 100));

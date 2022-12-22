@@ -815,6 +815,230 @@ const ninjaSkills: Record<string, Skill> = {
   },
 }
 
+const gunslingerSkills: Record<string, Skill> = {
+  ROUND_TRIP: {
+    key: "ROUND_TRIP",
+    label: "Round Trip",
+    name: "Round Trip",
+    isMelee: false,
+    job: "Night Watch",
+    formula: (character: Character, monster: Monster, buffs: Buffs) => {
+      const baseDamage = 2500 + (buffs.heatBarrel?.active ? 200 : 0);
+      return {
+        percent: (baseDamage) * (character.baseLevel / 100),
+        bonus: 0,
+      };
+    }
+  },
+  FIRE_DANCE: {
+    key: "FIRE_DANCE",
+    label: "Fire Dance",
+    name: "Fire Dance",
+    isMelee: false,
+    job: "Night Watch",
+    formula: (character: Character, monster: Monster, buffs: Buffs) => {
+      const baseDamage = 1200 + 200 + (buffs.heatBarrel?.active ? 200 : 0);
+      return {
+        percent: (baseDamage) * (character.baseLevel / 100),
+        bonus: 0,
+      };
+    }
+  },
+  WILD_FIRE: {
+    key: "WILD_FIRE",
+    label: "Wild Fire",
+    name: "Wild Fire",
+    isMelee: false,
+    job: "Night Watch",
+    formula: (character: Character, monster: Monster, buffs: Buffs) => {
+      const damageFactor: Record<string, number> = {
+        'Shotgun': 8000 + (buffs.intensiveAim?.active ? 25000 : 0),
+        'Grenade Launcher': 7000 + (buffs.intensiveAim?.active ? 25000 : 0),
+        default: 0,
+      }
+      const baseDamage = damageFactor[character.weapon.type] ? damageFactor[character.weapon.type] : damageFactor.default;
+
+      return {
+        percent: (baseDamage + (buffs.heatBarrel?.active ? 180 : 0) + character.traits.con * 5) * (character.baseLevel / 100),
+        bonus: 0,
+      };
+    }
+  },
+  MAGAZINE_FOR_ONE: {
+    key: "MAGAZINE_FOR_ONE",
+    label: "Magazine for One",
+    name: "Magazine for One",
+    isMelee: false,
+    job: "Night Watch",
+    formula: (character: Character, monster: Monster, buffs: Buffs) => {
+      const damageFactor: Record<string, number> = {
+        'Pistol': 2100 + (buffs.intensiveAim?.active ? 2500 : 0),
+        'Gatling Gun': 1700 + (buffs.intensiveAim?.active ? 2500 : 0),
+        default: 0,
+      }
+      const baseDamage = damageFactor[character.weapon.type] ? damageFactor[character.weapon.type] : damageFactor.default;
+
+      const hitFactor: Record<string, number> = {
+        'Pistol': 6,
+        'Gatling Gun': 10,
+        default: 0,
+      }
+      const hitNumber = hitFactor[character.weapon.type] ? hitFactor[character.weapon.type] : hitFactor.default;
+
+      return {
+        percent: (baseDamage + (buffs.heatBarrel?.active ? 200 : 0) + character.traits.con * 5) * (character.baseLevel / 100) * hitNumber,
+        bonus: 0,
+      };
+    }
+  },
+  SPIRAL_SHOOTING: {
+    key: "SPIRAL_SHOOTING",
+    label: "Spiral Shooting",
+    name: "Spiral Shooting",
+    isMelee: false,
+    job: "Night Watch",
+    formula: (character: Character, monster: Monster, buffs: Buffs) => {
+      const damageFactor: Record<string, number> = {
+        'Rifle': 4900 + (buffs.intensiveAim?.active ? 7500 : 0),
+        'Grenade Launcher': 6000 + (buffs.intensiveAim?.active ? 7500 : 0),
+        default: 0,
+      }
+      const baseDamage = damageFactor[character.weapon.type] ? damageFactor[character.weapon.type] : damageFactor.default;
+
+      const hitFactor: Record<string, number> = {
+        'Rifle': 1,
+        'Grenade Launcher': 2,
+        default: 0,
+      }
+      const hitNumber = hitFactor[character.weapon.type] ? hitFactor[character.weapon.type] : hitFactor.default;
+
+      return {
+        percent: (baseDamage + (buffs.heatBarrel?.active ? 200 : 0) + character.traits.con * 5) * (character.baseLevel / 100) * hitNumber,
+        bonus: 0,
+      };
+    }
+  },
+  ONLY_ONE_BULLET: {
+    key: "ONLY_ONE_BULLET",
+    label: "Only One Bullet",
+    name: "Only One Bullet",
+    isMelee: false,
+    job: "Night Watch",
+    hardAsSoftDef: true,
+    formula: (character: Character, monster: Monster, buffs: Buffs) => {
+      const damageFactor: Record<string, number> = {
+        'Pistol': 6500 + (buffs.intensiveAim?.active ? 12500 : 0),
+        'Rifle': 4750 + (buffs.intensiveAim?.active ? 12500 : 0),
+        default: 0,
+      }
+      const baseDamage = damageFactor[character.weapon.type] ? damageFactor[character.weapon.type] : damageFactor.default;
+
+      return {
+        percent: (baseDamage + (buffs.heatBarrel?.active ? 200 : 0) + character.traits.con * 5) * (character.baseLevel / 100),
+        bonus: 0,
+      };
+    }
+  },
+  THE_VIGILANTE_AT_NIGHT: {
+    key: "THE_VIGILANTE_AT_NIGHT",
+    label: "The Vigilante at Night",
+    name: "The Vigilante at Night",
+    isMelee: false,
+    job: "Night Watch",
+    hardAsSoftDef: true,
+    formula: (character: Character, monster: Monster, buffs: Buffs) => {
+      const damageFactor: Record<string, number> = {
+        'Shotgun': 3650 + (buffs.intensiveAim?.active ? 8525 : 0),
+        'Gatling Gun': 1250 + (buffs.intensiveAim?.active ? 4250 : 0),
+        default: 0,
+      }
+      const baseDamage = damageFactor[character.weapon.type] ? damageFactor[character.weapon.type] : damageFactor.default;
+
+      const hitFactor: Record<string, number> = {
+        'Shotgun': 4,
+        'Gatling Gun': 7,
+        default: 0,
+      }
+      const hitNumber = hitFactor[character.weapon.type] ? hitFactor[character.weapon.type] : hitFactor.default;
+
+      return {
+        percent: (baseDamage + (buffs.heatBarrel?.active ? 200 : 0) + character.traits.con * 5) * (character.baseLevel / 100) * hitNumber,
+        bonus: 0,
+      };
+    }
+  },
+  BASIC_GRENADE: {
+    key: "BASIC_GRENADE",
+    label: "Basic Grenade",
+    name: "Basic Grenade",
+    isMelee: false,
+    job: "Night Watch",
+    formula: (character: Character, monster: Monster, buffs: Buffs) => {
+      const baseDamage = 5500 + 400 + (buffs.heatBarrel?.active ? 200 : 0);
+      return {
+        percent: (baseDamage + character.traits.con * 5) * (character.baseLevel / 100),
+        bonus: 0,
+      };
+    }
+  },
+  HASTY_FIRE: {
+    key: "HASTY_FIRE",
+    label: "Hasty Fire (Per Hit)",
+    name: "Hasty Fire (Per Hit)",
+    isMelee: false,
+    job: "Night Watch",
+    formula: (character: Character, monster: Monster, buffs: Buffs) => {
+      const baseDamage = 6000 + 100 + (buffs.heatBarrel?.active ? 200 : 0);
+      return {
+        percent: (baseDamage + character.traits.con * 5) * (character.baseLevel / 100),
+        bonus: 0,
+      };
+    }
+  },
+  GRENADE_DROPPING: {
+    key: "GRENADE_DROPPING",
+    label: "Grenade Dropping (Per Explosion)",
+    name: "Grenade Dropping (Per Explosion)",
+    isMelee: false,
+    job: "Night Watch",
+    formula: (character: Character, monster: Monster, buffs: Buffs) => {
+      const baseDamage = 2750 + 250 + (buffs.heatBarrel?.active ? 200 : 0);
+      return {
+        percent: (baseDamage + character.traits.con * 5) * (character.baseLevel / 100),
+        bonus: 0,
+      };
+    }
+  },
+  MISSION_BOMBARD: {
+    key: "MISSION_BOMBARD",
+    label: "Mission Bombard (Initial Damage)",
+    name: "Mission Bombard (Initial Damage)",
+    isMelee: false,
+    job: "Night Watch",
+    formula: (character: Character, monster: Monster, buffs: Buffs) => {
+      const baseDamage = 15000 + 800 + (buffs.heatBarrel?.active ? 200 : 0);
+      return {
+        percent: (baseDamage + character.traits.con * 5) * (character.baseLevel / 100),
+        bonus: 0,
+      };
+    }
+  },
+  MISSION_BOMBARD_EXPLOSION: {
+    key: "MISSION_BOMBARD_EXPLOSION",
+    label: "Mission Bombard (Explosion)",
+    name: "Mission Bombard (Explosion)",
+    isMelee: false,
+    job: "Night Watch",
+    formula: (character: Character, monster: Monster, buffs: Buffs) => {
+      const baseDamage = 2800 + 250 + (buffs.heatBarrel?.active ? 200 : 0);
+      return {
+        percent: (baseDamage + character.traits.con * 5) * (character.baseLevel / 100),
+        bonus: 0,
+      };
+    }
+  },
+}
+
 const noviceSkills: Record<string, Skill> = {
   DOUBLE_BOWLING_BASH: {
     key: "DOUBLE_BOWLING_BASH",
@@ -984,6 +1208,7 @@ export const SKILLS: Record<string, Skill> = {
   ...monkSkills,
   ...starGladiatorSkills,
   ...ninjaSkills,
+  ...gunslingerSkills,
   ...noviceSkills,
   ...doramSkills,
 };

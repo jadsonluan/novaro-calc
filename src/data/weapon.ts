@@ -20,7 +20,11 @@ type WeaponType =
   | "Book"
   | "Bow"
   | "Dagger"
-  | "Gun"
+  | "Pistol"
+  | "Rifle"
+  | "Shotgun"
+  | "Gatling Gun"
+  | "Grenade Launcher"
   | "Huuma Shuriken"
   | "Instrument"
   | "Katar"
@@ -41,7 +45,11 @@ export const WEAPONS: WeaponType[] = [
   "Book",
   "Bow",
   "Dagger",
-  "Gun",
+  "Pistol",
+  "Rifle",
+  "Shotgun",
+  "Gatling Gun",
+  "Grenade Launcher",
   "Huuma Shuriken",
   "Instrument",
   "Katar",
@@ -87,7 +95,27 @@ export const WEAPON_PENALTIES: Record<WeaponType, WeaponPenalty> = {
     medium: 0.75,
     large: 0.5,
   },
-  Gun: {
+  Pistol: {
+    small: 1,
+    medium: 1,
+    large: 1,
+  },
+  Rifle: {
+    small: 1,
+    medium: 1,
+    large: 1,
+  },
+  Shotgun: {
+    small: 1,
+    medium: 1,
+    large: 1,
+  },
+  "Gatling Gun": {
+    small: 1,
+    medium: 1,
+    large: 1,
+  },
+  "Grenade Launcher": {
     small: 1,
     medium: 1,
     large: 1,

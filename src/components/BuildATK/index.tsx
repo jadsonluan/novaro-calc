@@ -77,17 +77,6 @@ export const BuildATK = () => {
         })}
       />
       <BuildCharacterInput
-        label="Bonus Status ATK"
-        getValue={(character: Character) => character.ATK.bonusStatusATK}
-        updateValue={(value: number) => (prev: Character) => ({
-          ...prev,
-          ATK: {
-            ...prev.ATK,
-            bonusStatusATK: value,
-          },
-        })}
-      />
-      <BuildCharacterInput
         label="Mastery ATK"
         getValue={(character: Character) => character.ATK.masteryATK}
         updateValue={(value: number) => (prev: Character) => ({
@@ -95,17 +84,6 @@ export const BuildATK = () => {
           ATK: {
             ...prev.ATK,
             masteryATK: value,
-          },
-        })}
-      />
-      <BuildCharacterInput
-        label="Buff ATK"
-        getValue={(character: Character) => character.ATK.buffATK}
-        updateValue={(value: number) => (prev: Character) => ({
-          ...prev,
-          ATK: {
-            ...prev.ATK,
-            buffATK: value,
           },
         })}
       />

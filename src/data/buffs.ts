@@ -53,6 +53,11 @@ export interface Buffs {
   // Ninja
   shadowWarrior?: Buff;
   earthCharm?: Buff;
+  // Gunslinger
+  platinumAlter?: Buff;
+  heatBarrel?: Buff;
+  intensiveAim?: Buff;
+  hiddenCard?: Buff;
   // Taekwon
   opposition?: Buff;
   miracle?: Buff;
@@ -160,7 +165,7 @@ export const emptyATKBuffs: Buffs = {
   // Archer
   trueSight: {
     active: false,
-    tooltip: "All stats +5 and 20% added to the skill base damage",
+    tooltip: "All stats +5 and 20% added to archer's skills base damage",
     job: "Archer",
   },
   fearBreeze: {
@@ -224,6 +229,27 @@ export const emptyATKBuffs: Buffs = {
     active: false,
     tooltip: "WeaponATK +15% per charm = +150% and increases Elemental % Bonus +30% against Wind monsters",
     job: "Ninja",
+  },
+  // Gunslinger
+  platinumAlter: {
+    active: false,
+    tooltip: "Increases Mastery ATK +100 if have 10 coins",
+    job: "Gunslinger",
+  },
+  heatBarrel: {
+    active: false,
+    tooltip: "160% (10 coins) damage add to Night Watch skills base damage",
+    job: "Gunslinger",
+  },
+  intensiveAim: {
+    active: false,
+    tooltip: "Pseudo Buff ATK +150, acts like you have 10 aiming stacks for Night Watch skills",
+    job: "Gunslinger",
+  },
+  hiddenCard: {
+    active: false,
+    tooltip: "Ranged % Bonus +100, P.Atk +30",
+    job: "Gunslinger",
   },
   // Taekwon
   opposition: {
@@ -873,6 +899,53 @@ const BUFF_EFFECTS: Record<keyof Buffs, BuffEffect> = {
   // Ninja
   shadowWarrior: (character: Character) => {
     return { ...character, buffs: [...character.buffs, "shadowWarrior"] };
+  },
+  // Gunslinger
+  platinumAlter: (character: Character) => {
+    const {
+      ATK: { masteryATK },
+    } = character;
+    const ATK_PER_COIN = 8;
+    return {
+      ...character,
+      ATK: {
+        ...character.ATK,
+        masteryATK: masteryATK + ATK_PER_COIN * 10,
+      },
+      buffs: [...character.buffs, "platinumAlter"],
+    };
+  },
+  heatBarrel: (character: Character) => {
+    return { ...character, buffs: [...character.buffs, "heatBarrel"] };
+  },
+  intensiveAim: (character: Character) => {
+    const { ATK: { pseudoBuffATK } } = character;
+    const ATK_INCREASE = 150;
+    return {
+      ...character,
+      ATK: {
+        ...character.ATK,
+        pseudoBuffATK: pseudoBuffATK + ATK_INCREASE,
+      },
+      buffs: [...character.buffs, "intensiveAim"],
+    };
+  },
+  hiddenCard: (character: Character) => {
+    const { ATK: { patk }, modifiers: { ranged } } = character;
+    const PATK_INCREASE = 30;
+    const MODIFIER_INCREASE = 100;
+    return {
+      ...character,
+      ATK: {
+        ...character.ATK,
+        patk: patk + PATK_INCREASE,
+      },
+      modifiers: {
+        ...character.modifiers,
+        ranged: ranged + MODIFIER_INCREASE,
+      },
+      buffs: [...character.buffs, "hiddenCard"],
+    };
   },
   earthCharm: (character: Character, monster: Monster) => {
     const { modifiers } = character;
