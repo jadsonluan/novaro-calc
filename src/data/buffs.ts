@@ -530,7 +530,7 @@ const BUFF_EFFECTS: Record<keyof Buffs, BuffEffect> = {
   },
   cartBoost: (character: Character) => {
     const { ATK: { masteryATK } } = character;
-    const ATK_INCREASE = 50;
+    const ATK_INCREASE = 30;
     return {
       ...character,
       ATK: {

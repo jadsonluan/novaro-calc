@@ -37,7 +37,7 @@ const ImportBS = ({ isMATK }: { isMATK: boolean }) => {
   const [weaponGrade, setWeaponGrade] = useState(GRADES[0]);
   const [weaponRefine, setWeaponRefine] = useState('0');
   const [shadowWeaponRefine, setShadowWeaponRefine] = useState('0');
-  const [level, setLevel] = useState('0');
+  const [level, setLevel] = useState('1');
   const [stats, setStats] = useState({
     str: '0',
     int: '0',
