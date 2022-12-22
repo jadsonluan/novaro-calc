@@ -24,6 +24,9 @@ export interface Buffs {
   // Thief
   enchantDeadlyPoison?: Buff;
   pyrexia?: Buff;
+  cloaking?: Buff;
+  potentVenom?: Buff;
+  shadowExceed?: Buff;
   // Merchant
   loudExclamation?: Buff;
   cartBoost?: Buff;
@@ -133,6 +136,21 @@ export const emptyATKBuffs: Buffs = {
   pyrexia: {
     active: false,
     tooltip: "+5% Melee % Bonus and +15% Critical % Bonus",
+    job: "Thief",
+  },
+  cloaking: {
+    active: false,
+    tooltip: "Increases Savage Impact and Shadow Stab damage",
+    job: "Thief",
+  },
+  potentVenom: {
+    active: false,
+    tooltip: "+30% Res bypass",
+    job: "Thief",
+  },
+  shadowExceed: {
+    active: false,
+    tooltip: "Increases Savage Impact and Eternal Slash damage",
     job: "Thief",
   },
   // Merchant
@@ -588,6 +606,21 @@ const BUFF_EFFECTS: Record<keyof Buffs, BuffEffect> = {
       },
       buffs: [...character.buffs, "pyrexia"],
     };
+  },
+  cloaking: (character: Character) => {
+    return { ...character, buffs: [...character.buffs, "cloaking"] };
+  },
+  potentVenom: (character: Character) => {
+    const { traitBypass } = character;
+    const MODIFIER_INCREASE = 30;
+    return {
+      ...character,
+      traitBypass: traitBypass +  MODIFIER_INCREASE,
+      buffs: [...character.buffs, "potentVenom"],
+    };
+  },
+  shadowExceed: (character: Character) => {
+    return { ...character, buffs: [...character.buffs, "shadowExceed"] };
   },
   // Merchant
   loudExclamation: (character: Character) => {

@@ -344,7 +344,7 @@ export function getFinalATKDamage(range: DmgRange, build: BuildInfo) {
   finalDmg = applyModifier(finalDmg, rangeMod);
   finalDmg = applyModifier(finalDmg, mods.dmg);
 
-  finalDmg = Math.floor(applyModifier(finalDmg, RES));
+  finalDmg = Math.floor(finalDmg * RES);
   finalDmg = Math.floor(finalDmg * hardDEF) - softDEF;
   
   finalDmg = applyModifier(finalDmg, mods.finalDmg);
@@ -368,7 +368,7 @@ export function getFinalATKDamage(range: DmgRange, build: BuildInfo) {
 
   finalDmg = applyModifier(finalDmg, monsterFinalModifier);
   return {
-    damage: Math.floor(finalDmg - (getModifierIncrease(finalDmg, 1))),
+    damage: Math.floor(finalDmg),
     modifiedCharacter: character,
   };
 }

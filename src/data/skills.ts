@@ -202,7 +202,7 @@ const assassinSkills: Record<string, Skill> = {
         percent: baseDamage * (character.baseLevel / 100),
         bonus: 0,
       };
-    }
+    },
   },
   COUNTER_SLASH: {
     key: "COUNTER_SLASH",
@@ -213,10 +213,13 @@ const assassinSkills: Record<string, Skill> = {
     formula: (character: Character, monster: Monster, buffs: Buffs) => {
       let baseDamage = 1800;
       return {
-        percent: (baseDamage * (character.baseLevel / 120)) + (character.stats.agi * 2) + (70 * 4),
+        percent:
+          baseDamage * (character.baseLevel / 120) +
+          character.stats.agi * 2 +
+          70 * 4,
         bonus: 0,
       };
-    }
+    },
   },
   SOUL_DESTROYER: {
     key: "SOUL_DESTROYER",
@@ -227,12 +230,149 @@ const assassinSkills: Record<string, Skill> = {
     formula: (character: Character, monster: Monster, buffs: Buffs) => {
       let baseDamage = 1500;
       return {
-        percent: ((baseDamage + character.stats.str + character.stats.int) * (character.baseLevel / 100)),
+        percent:
+          (baseDamage + character.stats.str + character.stats.int) *
+          (character.baseLevel / 100),
         bonus: 0,
       };
-    }
+    },
   },
-}
+  SAVAGE_IMPACT: {
+    key: "SAVAGE_IMPACT",
+    label: "Savage Impact",
+    name: "Savage Impact",
+    isMelee: true,
+    job: "Shadow Cross",
+    formula: (character: Character, monster: Monster, buffs: Buffs) => {
+      const baseDamage = 600;
+      return {
+        percent:
+          (baseDamage + (buffs.shadowExceed?.active ? 380 + character.traits.pow * 5 : 0) + character.traits.pow * 5) *
+          (character.baseLevel / 100) *
+          (buffs.cloaking?.active ? 5 : 3),
+        bonus: 0,
+      };
+    },
+  },
+  IMPACT_CRATER: {
+    key: "IMPACT_CRATER",
+    label: "Impact Crater",
+    name: "Impact Crater",
+    isMelee: true,
+    job: "Shadow Cross",
+    formula: (character: Character, monster: Monster) => {
+      const baseDamage = 325;
+      return {
+        percent:
+          (baseDamage + character.traits.pow * 5) * (character.baseLevel / 100),
+        bonus: 0,
+      };
+    },
+  },
+  IMPACT_CRATER_MAX: {
+    key: "IMPACT_CRATER_MAX",
+    label: "Impact Crater (Max Hits)",
+    name: "Impact Crater (Max Hits)",
+    isMelee: true,
+    job: "Shadow Cross",
+    formula: (character: Character, monster: Monster) => {
+      const baseDamage = 325;
+      return {
+        percent:
+          (baseDamage + character.traits.pow * 5) *
+          (character.baseLevel / 100) *
+          10,
+        bonus: 0,
+      };
+    },
+  },
+  DANCING_KNIVES: {
+    key: "DANCING_KNIVES",
+    label: "Dancing Knives",
+    name: "Dancing Knives",
+    isMelee: true,
+    job: "Shadow Cross",
+    formula: (character: Character, monster: Monster) => {
+      const baseDamage = 1000;
+      return {
+        percent:
+          (baseDamage + character.traits.pow * 5) * (character.baseLevel / 100),
+        bonus: 0,
+      };
+    },
+  },
+  ETERNAL_SLASH: {
+    key: "ETERNAL_SLASH",
+    label: "Eternal Slash",
+    name: "Eternal Slash",
+    isMelee: true,
+    job: "Shadow Cross",
+    formula: (character: Character, monster: Monster, buffs: Buffs) => {
+      const baseDamage = 1750;
+      return {
+        percent:
+          (baseDamage +
+            (buffs.shadowExceed?.active ? 700 + character.traits.pow * 2 : 0) +
+            character.traits.pow * 5) *
+          (character.baseLevel / 100),
+        bonus: 0,
+      };
+    },
+  },
+  ETERNAL_SLASH_MAX: {
+    key: "ETERNAL_SLASH_MAX",
+    label: "Eternal Slash (Max Hits)",
+    name: "Eternal Slash (Max Hits)",
+    isMelee: true,
+    job: "Shadow Cross",
+    formula: (character: Character, monster: Monster, buffs: Buffs) => {
+      const baseDamage = 1750;
+      return {
+        percent:
+          (baseDamage +
+            (buffs.shadowExceed?.active ? 700 + character.traits.pow * 2 : 0) +
+            character.traits.pow * 5) *
+          (character.baseLevel / 100) * 5,
+        bonus: 0,
+      };
+    },
+  },
+  SHADOW_STAB: {
+    key: "SHADOW_STAB",
+    label: "Shadow Stab",
+    name: "Shadow Stab",
+    isMelee: true,
+    job: "Shadow Cross",
+    hardAsSoftDef: true,
+    formula: (character: Character, monster: Monster, buffs: Buffs) => {
+      const baseDamage = 3760;
+      return {
+        percent:
+          (baseDamage + character.traits.pow * 5) *
+          (character.baseLevel / 100) *
+          (buffs.cloaking?.active ? 2 : 1),
+        bonus: 0,
+      };
+    },
+  },
+  FATAL_SHADOW_CLAW: {
+    key: "FATAL_SHADOW_CLAW",
+    label: "Fatal Shadow Claw",
+    name: "Fatal Shadow Claw",
+    isMelee: true,
+    job: "Shadow Cross",
+    formula: (character: Character, monster: Monster) => {
+      const baseDamage =
+        6500 + (["demihuman", "dragon"].includes(monster.race) ? 3000 : 0);
+      return {
+        percent:
+          (baseDamage + character.traits.pow * 10) *
+          (character.baseLevel / 100),
+        bonus: 0,
+      };
+    },
+  },
+};
 
 const rogueSkills: Record<string, Skill> = {
   FATAL_MENACE: {
