@@ -243,7 +243,7 @@ const ImportBS = ({ isMATK }: { isMATK: boolean }) => {
               </b>
             ) : (
               <b>
-                You need to fill 'Level', 'INT', 'DEX', 'LUK', 'SPL' and 'CON'
+                You need to fill 'Level', 'INT', 'DEX', 'LUK', 'SPL', 'CON' and Weapon fields 
                 so your Equip MATK and S.Matk are calculated correctly.
               </b>
             )}
