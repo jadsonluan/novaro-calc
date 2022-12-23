@@ -17,6 +17,54 @@ const allSkills: Record<string, Skill> = {
   },
 };
 
+const rogueSkills: Record<string, Skill> = {
+  FROM_THE_ABYSS: {
+    key: "FROM_THE_ABYSS",
+    name: "From The Abyss (Per Sphere)",
+    label: "From The Abyss (Per Sphere)",
+    isMelee: false,
+    job: "Abyss Chaser",
+    formula: (character: Character, monster: Monster) => {
+      const baseDamage = 500;
+      return {
+        percent:
+          (baseDamage + character.traits.spl * 5) * (character.baseLevel / 100),
+        bonus: 0,
+      };
+    },
+  },
+  ABYSS_SQUARE: {
+    key: "ABYSS_SQUARE",
+    name: "Abyss Square",
+    label: "Abyss Square",
+    isMelee: false,
+    job: "Abyss Chaser",
+    formula: (character: Character, monster: Monster) => {
+      const baseDamage = 1800 + 200;
+      return {
+        percent:
+          (baseDamage + character.traits.spl * 5) * (character.baseLevel / 100),
+        bonus: 0,
+      };
+    },
+  },
+  OMEGA_ABYSS_STRIKE: {
+    key: "OMEGA_ABYSS_STRIKE",
+    name: "Omega Abyss Strike",
+    label: "Omega Abyss Strike",
+    isMelee: false,
+    job: "Abyss Chaser",
+    formula: (character: Character, monster: Monster) => {
+      const baseDamage = 6000 + (['angel', 'demon'].includes(monster.race) ? 5500 : 0);
+      return {
+        percent:
+          (baseDamage + character.traits.spl * 10) * (character.baseLevel / 100),
+        bonus: 0,
+      };
+    },
+  },
+};
+
 const wizardSkills: Record<string, Skill> = {
   CRIMSON_ROCK: {
     key: "CRIMSON_ROCK",
@@ -1061,6 +1109,7 @@ const doramSkills: Record<string, Skill> = {
 
 export const MATK_SKILLS: Record<string, Skill> = {
   ...allSkills,
+  ...rogueSkills,
   ...wizardSkills,
   ...archerSkills,
   ...priestSkills,
