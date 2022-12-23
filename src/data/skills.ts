@@ -1088,8 +1088,8 @@ const gunslingerSkills: Record<string, Skill> = {
     hardAsSoftDef: true,
     formula: (character: Character, monster: Monster, buffs: Buffs) => {
       const damageFactor: Record<string, number> = {
-        'Shotgun': 3650 + (buffs.intensiveAim?.active ? 8525 : 0),
-        'Gatling Gun': 1250 + (buffs.intensiveAim?.active ? 4250 : 0),
+        'Shotgun': 4300 + (buffs.intensiveAim?.active ? 10000 : 0),
+        'Gatling Gun': 1500 + (buffs.intensiveAim?.active ? 5000 : 0),
         default: 0,
       }
       const baseDamage = damageFactor[character.weapon.type] ? damageFactor[character.weapon.type] : damageFactor.default;
