@@ -7,6 +7,7 @@ export interface Debuffs {
   soundBlend?: Buff;
   oratio?: Buff;
   darkClaw?: Buff;
+  raid?: Buff;
   magicIntoxication?: Buff;
   allBloom?: Buff;
   violentQuake?: Buff;
@@ -17,6 +18,11 @@ export const emptyATKDebuffs: Debuffs = {
   darkClaw: {
     active: false,
     tooltip: "+150%(75% for boss) melee damage inflicted",
+    job: "Thief"
+  },
+  raid: {
+    active: false,
+    tooltip: "+30% (15% for boss) final damage",
     job: "Thief"
   },
   magicIntoxication: {
@@ -52,6 +58,11 @@ export const emptyATKDebuffs: Debuffs = {
 };
 
 export const emptyMATKDebuffs: Debuffs = {
+  raid: {
+    active: false,
+    tooltip: "+30% (15%) final damage",
+    job: "Thief"
+  },
   magicIntoxication: {
     active: false,
     tooltip: "Takes 50% more damage from all properties",
@@ -90,6 +101,17 @@ type BuffEffect = (
 ) => { character: Character; monster: Monster };
 
 const DEBUFF_EFFECTS: Record<keyof Debuffs, BuffEffect> = {
+  raid: (character: Character, monster: Monster) => {
+    const MODIFIER = 30;
+    return {
+      character: { ...character },
+      monster: {
+        ...monster,
+        finalModifier: monster.finalModifier + (monster.type === 'normal' ? MODIFIER : MODIFIER / 2),
+        debuffs: [...monster.debuffs, "raid"],
+      },
+    };
+  },
   darkClaw: (character: Character, monster: Monster) => {
     const MODIFIER = 150;
     return {
@@ -107,7 +129,7 @@ const DEBUFF_EFFECTS: Record<keyof Debuffs, BuffEffect> = {
       character: { ...character },
       monster: {
         ...monster,
-        finalModifier: monster.finalModifier + MODIFIER,
+        finalPropertyModifier: monster.finalPropertyModifier + MODIFIER,
         debuffs: [...monster.debuffs, "magicIntoxication"],
       },
     };

@@ -382,9 +382,10 @@ const rogueSkills: Record<string, Skill> = {
     isMelee: true,
     job: "Abyss Chaser",
     formula: (character: Character, monster: Monster, buffs: Buffs) => {
-      let baseDamage = (1200 + character.stats.agi) * (character.weapon.type === "Dagger" ? 2 : 1);
+      let baseDamage = 1200 + (buffs.abyssDagger?.active ? 330 : 0);
       return {
-        percent: baseDamage * (character.baseLevel / 100),
+        percent: (baseDamage + character.stats.agi) * (character.baseLevel / 100) *
+         (character.weapon.type === "Dagger" ? 2 : 1),
         bonus: 0,
       };
     }
@@ -402,6 +403,111 @@ const rogueSkills: Record<string, Skill> = {
         bonus: 0,
       };
     }
+  },
+  ABYSS_DAGGER: {
+    key: "ABYSS_DAGGER",
+    label: "Abyss Dagger",
+    name: "Abyss Dagger",
+    isMelee: true,
+    job: "Abyss Chaser",
+    formula: (character: Character, monster: Monster) => {
+      const baseDamage = 1750;
+      return {
+        percent:
+          (baseDamage + character.traits.pow * 5) * (character.baseLevel / 100) * 2,
+        bonus: 0,
+      };
+    },
+  },
+  UNLUCKY_RUSH: {
+    key: "UNLUCKY_RUSH",
+    label: "Unlucky Rush",
+    name: "Unlucky Rush",
+    isMelee: true,
+    job: "Abyss Chaser",
+    formula: (character: Character, monster: Monster) => {
+      const baseDamage = 2500;
+      return {
+        percent:
+          (baseDamage + character.traits.pow * 5) * (character.baseLevel / 100),
+        bonus: 0,
+      };
+    },
+  },
+  DEFT_STAB: {
+    key: "DEFT_STAB",
+    label: "Deft Stab",
+    name: "Deft Stab",
+    isMelee: true,
+    job: "Abyss Chaser",
+    formula: (character: Character, monster: Monster) => {
+      const baseDamage = 3600;
+      return {
+        percent:
+          (baseDamage + character.traits.pow * 5) * (character.baseLevel / 100),
+        bonus: 0,
+      };
+    },
+  },
+  CHAIN_REACTION_SHOT: {
+    key: "CHAIN_REACTION_SHOT",
+    label: "Chain Reaction Shot",
+    name: "Chain Reaction Shot",
+    isMelee: false,
+    job: "Abyss Chaser",
+    formula: (character: Character, monster: Monster) => {
+      const baseDamage = 3000;
+      return {
+        percent:
+          (baseDamage + character.traits.con * 5) * (character.baseLevel / 100),
+        bonus: 0,
+      };
+    },
+  },
+  CHAIN_REACTION_SHOT_EXPLOSION: {
+    key: "CHAIN_REACTION_SHOT_EXPLOSION",
+    label: "Chain Reaction Shot (2nd Damage)",
+    name: "Chain Reaction Shot (2nd Damage)",
+    isMelee: false,
+    job: "Abyss Chaser",
+    formula: (character: Character, monster: Monster) => {
+      const baseDamage = 4750;
+      return {
+        percent:
+          (baseDamage + character.traits.con * 3) * (character.baseLevel / 100),
+        bonus: 0,
+      };
+    },
+  },
+  FRENZY_SHOT: {
+    key: "FRENZY_SHOT",
+    label: "Frenzy Shot",
+    name: "Frenzy Shot",
+    isMelee: false,
+    job: "Abyss Chaser",
+    formula: (character: Character, monster: Monster) => {
+      const baseDamage = 3500;
+      return {
+        percent:
+          (baseDamage + character.traits.con * 5) * (character.baseLevel / 100),
+        bonus: 0,
+      };
+    },
+  },
+  FRENZY_SHOT_MAX: {
+    key: "FRENZY_SHOT_MAX",
+    label: "Frenzy Shot (Max Hits)",
+    name: "Frenzy Shot (Max Hits)",
+    isMelee: false,
+    job: "Abyss Chaser",
+    formula: (character: Character, monster: Monster) => {
+      const baseDamage = 3500;
+      return {
+        percent:
+          (baseDamage + character.traits.con * 5) * (character.baseLevel / 100) * 3,
+        bonus: 0,
+      };
+    },
   },
 }
 

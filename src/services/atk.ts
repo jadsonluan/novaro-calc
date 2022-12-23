@@ -357,16 +357,18 @@ export function getFinalATKDamage(range: DmgRange, build: BuildInfo) {
 
   finalDmg = applyModifier(finalDmg, character.ATK.patk);
 
-  let monsterFinalModifier = monster.finalModifier;
+  let monsterFinalPropertyModifier = monster.finalPropertyModifier;
   if (monster.debuffs.includes("violentQuake") && character.weapon.element === "Earth") {
-    monsterFinalModifier += 100;
+    monsterFinalPropertyModifier += 100;
   } else if (monster.debuffs.includes("allBloom") && character.weapon.element === "Fire") {
-    monsterFinalModifier += 100;
+    monsterFinalPropertyModifier += 100;
   } else if (monster.debuffs.includes("soulCurse") && character.weapon.element === "Shadow") {
-    monsterFinalModifier = ((1 + monsterFinalModifier / 100) * (monster.type === 'normal' ? 2 : 1.2)) * 100;
+    monsterFinalPropertyModifier = ((1 + monsterFinalPropertyModifier / 100) * (monster.type === 'normal' ? 2 : 1.2)) * 100;
   }
 
-  finalDmg = applyModifier(finalDmg, monsterFinalModifier);
+  finalDmg = applyModifier(finalDmg, monsterFinalPropertyModifier);
+  finalDmg = applyModifier(finalDmg, monster.finalModifier);
+
   return {
     damage: Math.floor(finalDmg),
     modifiedCharacter: character,

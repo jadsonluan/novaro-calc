@@ -50,6 +50,7 @@ export interface Monster {
   race: Race;
   size: Size;
   type: MonsterType;
+  finalPropertyModifier: number;
   finalModifier: number;
   meleeModifier: number;
   rangedModifier: number;
@@ -71,6 +72,7 @@ export const emptyMonster: Monster = {
   race: "formless",
   size: "small",
   type: "normal",
+  finalPropertyModifier: 0,
   finalModifier: 0,
   meleeModifier: 0,
   rangedModifier: 0,

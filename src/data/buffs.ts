@@ -27,6 +27,9 @@ export interface Buffs {
   cloaking?: Buff;
   potentVenom?: Buff;
   shadowExceed?: Buff;
+  autoShadowSpell?: Buff;
+  abyssDagger?: Buff;
+  abyssSlayer?: Buff;
   // Merchant
   loudExclamation?: Buff;
   cartBoost?: Buff;
@@ -151,6 +154,16 @@ export const emptyATKBuffs: Buffs = {
   shadowExceed: {
     active: false,
     tooltip: "Increases Savage Impact and Eternal Slash damage",
+    job: "Thief",
+  },
+  abyssDagger: {
+    active: false,
+    tooltip: "Increases Fatal Menace damage",
+    job: "Thief",
+  },
+  abyssSlayer: {
+    active: false,
+    tooltip: "P.Atk and S.Matk +30",
     job: "Thief",
   },
   // Merchant
@@ -348,6 +361,16 @@ export const emptyMATKBuffs: Buffs = {
   },
   // Swordsman
   // Thief
+  autoShadowSpell: {
+    active: false,
+    tooltip: "+50 Matk",
+    job: "Thief",
+  },
+  abyssSlayer: {
+    active: false,
+    tooltip: "P.Atk and S.Matk +30",
+    job: "Thief",
+  },
   // Merchant
   // Mage
   magicAmplification: {
@@ -621,6 +644,40 @@ const BUFF_EFFECTS: Record<keyof Buffs, BuffEffect> = {
   },
   shadowExceed: (character: Character) => {
     return { ...character, buffs: [...character.buffs, "shadowExceed"] };
+  },
+  autoShadowSpell: (character: Character) => {
+    const {  MATK: { buffMATK } } = character;
+    const MATK_INCREASE = 50;
+    return {
+      ...character,
+      MATK: {
+        ...character.MATK,
+        buffMATK: buffMATK + MATK_INCREASE
+      },
+      buffs: [...character.buffs, "autoShadowSpell"],
+    };
+  },
+  abyssDagger: (character: Character) => {
+    return {
+      ...character,
+      buffs: [...character.buffs, "abyssDagger"],
+    };
+  },
+  abyssSlayer: (character: Character) => {
+    const { ATK: { patk }, MATK: { smatk } } = character;
+    const MODIFIER_INCREASE = 30;
+    return {
+      ...character,
+      ATK: {
+        ...character.ATK,
+        patk: patk + MODIFIER_INCREASE
+      },
+      MATK: {
+        ...character.MATK,
+        smatk: smatk + MODIFIER_INCREASE
+      },
+      buffs: [...character.buffs, "abyssSlayer"],
+    };
   },
   // Merchant
   loudExclamation: (character: Character) => {
