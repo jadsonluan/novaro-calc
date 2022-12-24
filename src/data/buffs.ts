@@ -44,6 +44,21 @@ export interface Buffs {
   magicAmplification?: Buff;
   recognizedSpell?: Buff;
   climax?: Buff;
+  seismicPower?: Buff;
+  frostWeapon?: Buff;
+  lightningLoader?: Buff;
+  flameLauncher?: Buff;
+  deluge?: Buff;
+  violentGale?: Buff;
+  volcano?: Buff;
+  earthInsigniaLv2?: Buff;
+  waterInsigniaLv2?: Buff;
+  windInsigniaLv2?: Buff;
+  fireInsigniaLv2?: Buff;
+  earthInsigniaLv3?: Buff;
+  waterInsigniaLv3?: Buff;
+  windInsigniaLv3?: Buff;
+  fireInsigniaLv3?: Buff;
   striking?: Buff;
   spellEnchanting?: Buff;
   // Archer
@@ -213,6 +228,41 @@ export const emptyATKBuffs: Buffs = {
     job: "Merchant",
   },
   // Mage
+  deluge: {
+    active: false,
+    tooltip: "+20% Water property damage",
+    job: "Mage",
+  },
+  violentGale: {
+    active: false,
+    tooltip: "+20% Wind property damage",
+    job: "Mage",
+  },
+  volcano: {
+    active: false,
+    tooltip: "+20% Fire property damage and +30 ATK",
+    job: "Mage",
+  },
+  earthInsigniaLv2: {
+    active: false,
+    tooltip: "Acts as Lv2 insignia buff. +10% ATK",
+    job: "Mage"
+  },
+  waterInsigniaLv2: {
+    active: false,
+    tooltip: "Acts as Lv2 insignia buff. +10% ATK",
+    job: "Mage"
+  },
+  windInsigniaLv2: {
+    active: false,
+    tooltip: "Acts as Lv2 insignia buff. +10% ATK",
+    job: "Mage"
+  },
+  fireInsigniaLv2: {
+    active: false,
+    tooltip: "Acts as Lv2 insignia buff. +10% ATK and +50 ATK",
+    job: "Mage"
+  },
   striking: {
     active: false,
     tooltip: "Pseudo Buff ATK +100",
@@ -422,6 +472,61 @@ export const emptyMATKBuffs: Buffs = {
     active: false,
     tooltip: "Climax buff, acts as level 3 Climax for affected skills",
     job: "Mage",
+  },
+  seismicPower: {
+    active: false,
+    tooltip: "+5% Earth elemental magic damage",
+    job: "Mage",
+  },
+  frostWeapon: {
+    active: false,
+    tooltip: "+5% Water elemental magic damage",
+    job: "Mage",
+  },
+  lightningLoader: {
+    active: false,
+    tooltip: "+5% Wind elemental magic damage",
+    job: "Mage",
+  },
+  flameLauncher: {
+    active: false,
+    tooltip: "+5% Fire elemental magic damage",
+    job: "Mage",
+  },
+  deluge: {
+    active: false,
+    tooltip: "+20% Water property damage",
+    job: "Mage",
+  },
+  violentGale: {
+    active: false,
+    tooltip: "+20% Wind property damage",
+    job: "Mage",
+  },
+  volcano: {
+    active: false,
+    tooltip: "+20% Fire property damage and +30 MATK",
+    job: "Mage",
+  },
+  earthInsigniaLv3: {
+    active: false,
+    tooltip: "Acts as Lv3 insignia buff. +25% Earth property damage",
+    job: "Mage"
+  },
+  waterInsigniaLv3: {
+    active: false,
+    tooltip: "Acts as Lv3 insignia buff. +25% Water property damage",
+    job: "Mage"
+  },
+  windInsigniaLv3: {
+    active: false,
+    tooltip: "Acts as Lv3 insignia buff. +25% Wind property damage",
+    job: "Mage"
+  },
+  fireInsigniaLv3: {
+    active: false,
+    tooltip: "Acts as Lv3 insignia buff. +50 MATK and +25% Fire property damage",
+    job: "Mage"
   },
   spellEnchanting: {
     active: false,
@@ -844,6 +949,250 @@ const BUFF_EFFECTS: Record<keyof Buffs, BuffEffect> = {
     return {
       ...character,
       buffs: [...character.buffs, "climax"],
+    };
+  },
+  seismicPower: (character: Character) => {
+    const {
+      modifiers: { skillProperty }
+    } = character;
+    const MODIFIER_INCREASE = 5;
+    return {
+      ...character,
+      modifiers: {
+        ...character.modifiers,
+        skillProperty: skillProperty + (character.weapon.element === 'Earth' ? MODIFIER_INCREASE : 0),
+      },
+      buffs: [...character.buffs, "seismicPower"],
+    };
+  },
+  frostWeapon: (character: Character) => {
+    const {
+      modifiers: { skillProperty }
+    } = character;
+    const MODIFIER_INCREASE = 5;
+    return {
+      ...character,
+      modifiers: {
+        ...character.modifiers,
+        skillProperty: skillProperty + (character.weapon.element === 'Water' ? MODIFIER_INCREASE : 0),
+      },
+      buffs: [...character.buffs, "frostWeapon"],
+    };
+  },
+  lightningLoader: (character: Character) => {
+    const {
+      modifiers: { skillProperty }
+    } = character;
+    const MODIFIER_INCREASE = 5;
+    return {
+      ...character,
+      modifiers: {
+        ...character.modifiers,
+        skillProperty: skillProperty + (character.weapon.element === 'Wind' ? MODIFIER_INCREASE : 0),
+      },
+      buffs: [...character.buffs, "lightningLoader"],
+    };
+  },
+  flameLauncher: (character: Character) => {
+    const {
+      modifiers: { skillProperty }
+    } = character;
+    const MODIFIER_INCREASE = 5;
+    return {
+      ...character,
+      modifiers: {
+        ...character.modifiers,
+        skillProperty: skillProperty + (character.weapon.element === 'Fire' ? MODIFIER_INCREASE : 0),
+      },
+      buffs: [...character.buffs, "flameLauncher"],
+    };
+  },
+  deluge: (character: Character) => {
+    const {
+      modifiers: { dmg }
+    } = character;
+    const MODIFIER_INCREASE = 20;
+  
+    return {
+      ...character,
+      modifiers: {
+        ...character.modifiers,
+        dmg: dmg + (character.weapon.element === 'Water' ? MODIFIER_INCREASE : 0),
+      },
+      buffs: [...character.buffs, "deluge"],
+    };
+  },
+  violentGale: (character: Character) => {
+    const {
+      modifiers: { dmg }
+    } = character;
+    const MODIFIER_INCREASE = 20;
+  
+    return {
+      ...character,
+      modifiers: {
+        ...character.modifiers,
+        dmg: dmg + (character.weapon.element === 'Wind' ? MODIFIER_INCREASE : 0),
+      },
+      buffs: [...character.buffs, "violentGale"],
+    };
+  },
+  volcano: (character: Character) => {
+    const {
+      ATK: { pseudoBuffATK },
+      MATK: { buffMATK },
+      modifiers: { dmg }
+    } = character;
+    const MODIFIER_INCREASE = 20;
+    const ATK_INCREASE = 30;
+  
+    return {
+      ...character,
+      ATK: {
+        ...character.ATK,
+        pseudoBuffATK: pseudoBuffATK + ATK_INCREASE
+      },
+      MATK: {
+        ...character.MATK,
+        buffMATK: buffMATK + ATK_INCREASE
+      },
+      modifiers: {
+        ...character.modifiers,
+        dmg: dmg + (character.weapon.element === 'Fire' ? MODIFIER_INCREASE : 0),
+      },
+      buffs: [...character.buffs, "volcano"],
+    };
+  },
+  earthInsigniaLv2: (character: Character) => {
+    const {
+      modifiers: { class: classATK }
+    } = character;
+    const CLASS_ATK_INCREASE = 10;
+  
+    return {
+      ...character,
+      modifiers: {
+        ...character.modifiers,
+        class: classATK + CLASS_ATK_INCREASE,
+      },
+      buffs: [...character.buffs, "earthInsigniaLv2"],
+    };
+  },
+  earthInsigniaLv3: (character: Character) => {
+    const {
+      modifiers: { dmg }
+    } = character;
+    const MODIFIER_INCREASE = 25;
+  
+    return {
+      ...character,
+      modifiers: {
+        ...character.modifiers,
+        dmg: dmg + (character.weapon.element === 'Earth' ? MODIFIER_INCREASE : 0),
+      },
+      buffs: [...character.buffs, "earthInsigniaLv3"],
+    };
+  },
+  waterInsigniaLv2: (character: Character) => {
+    const {
+      modifiers: { class: classATK }
+    } = character;
+    const CLASS_ATK_INCREASE = 10;
+  
+    return {
+      ...character,
+      modifiers: {
+        ...character.modifiers,
+        class: classATK + CLASS_ATK_INCREASE,
+      },
+      buffs: [...character.buffs, "waterInsigniaLv2"],
+    };
+  },
+  waterInsigniaLv3: (character: Character) => {
+    const {
+      modifiers: { dmg }
+    } = character;
+    const MODIFIER_INCREASE = 25;
+  
+    return {
+      ...character,
+      modifiers: {
+        ...character.modifiers,
+        dmg: dmg + (character.weapon.element === 'Water' ? MODIFIER_INCREASE : 0),
+      },
+      buffs: [...character.buffs, "waterInsigniaLv3"],
+    };
+  },
+  windInsigniaLv2: (character: Character) => {
+    const {
+      modifiers: { class: classATK }
+    } = character;
+    const CLASS_ATK_INCREASE = 10;
+  
+    return {
+      ...character,
+      modifiers: {
+        ...character.modifiers,
+        class: classATK + CLASS_ATK_INCREASE,
+      },
+      buffs: [...character.buffs, "windInsigniaLv2"],
+    };
+  },
+  windInsigniaLv3: (character: Character) => {
+    const {
+      modifiers: { dmg }
+    } = character;
+    const MODIFIER_INCREASE = 25;
+  
+    return {
+      ...character,
+      modifiers: {
+        ...character.modifiers,
+        dmg: dmg + (character.weapon.element === 'Wind' ? MODIFIER_INCREASE : 0),
+      },
+      buffs: [...character.buffs, "windInsigniaLv3"],
+    };
+  },
+  fireInsigniaLv2: (character: Character) => {
+    const {
+      ATK: { pseudoBuffATK },
+      modifiers: { class: classATK }
+    } = character;
+    const ATK_INCREASE = 50;
+    const CLASS_ATK_INCREASE = 10;
+  
+    return {
+      ...character,
+      ATK: {
+        ...character.ATK,
+        pseudoBuffATK: pseudoBuffATK + ATK_INCREASE,
+      },
+      modifiers: {
+        ...character.modifiers,
+        class: classATK + CLASS_ATK_INCREASE,
+      },
+      buffs: [...character.buffs, "fireInsigniaLv2"],
+    };
+  },
+  fireInsigniaLv3: (character: Character) => {
+    const {
+      MATK: { buffMATK },
+      modifiers: { dmg }
+    } = character;
+    const MATK_INCREASE = 50;
+    const MODIFIER_INCREASE = 25;
+  
+    return {
+      ...character,
+      MATK: {
+        ...character.MATK,
+        buffMATK: buffMATK + MATK_INCREASE,
+      },
+      modifiers: {
+        ...character.modifiers,
+        dmg: dmg + (character.weapon.element === 'Fire' ? MODIFIER_INCREASE : 0),
+      },
+      buffs: [...character.buffs, "fireInsigniaLv3"],
     };
   },
   striking: (character: Character) => {
