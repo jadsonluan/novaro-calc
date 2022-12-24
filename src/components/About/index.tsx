@@ -37,7 +37,6 @@ const About = () => {
           Stuff that is not yet implemented:
           <ul>
             <li><b>HP AND SP calculations are using 3rd job formulas, so ignore them for now.</b></li>
-            <li>Tooltips for 'ATK/MATK and Modifiers' fields, to help users know what to input</li>
             <li>Inquisitor Skills</li>
           </ul>
         </p>
