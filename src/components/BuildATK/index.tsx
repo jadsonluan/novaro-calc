@@ -56,6 +56,7 @@ export const BuildATK = () => {
       />
       <BuildCharacterInput
         label="Ammo ATK"
+        tooltip="Attack from your Arrow, Kunai, Cannon Ball"
         getValue={(character: Character) => character.ATK.ammoATK}
         updateValue={(value: number) => (prev: Character) => ({
           ...prev,
@@ -67,6 +68,7 @@ export const BuildATK = () => {
       />
       <BuildCharacterInput
         label="Pseudo Buff ATK"
+        tooltip="Most buffs that increases ATK goes here"
         getValue={(character: Character) => character.ATK.pseudoBuffATK}
         updateValue={(value: number) => (prev: Character) => ({
           ...prev,
@@ -78,6 +80,7 @@ export const BuildATK = () => {
       />
       <BuildCharacterInput
         label="Mastery ATK"
+        tooltip="Your character passives"
         getValue={(character: Character) => character.ATK.masteryATK}
         updateValue={(value: number) => (prev: Character) => ({
           ...prev,
@@ -89,6 +92,7 @@ export const BuildATK = () => {
       />
       <BuildCharacterInput
         label="Equip ATK"
+        tooltip="Come from Equipments and Cards"
         getValue={(character: Character) => character.ATK.equipATK}
         updateValue={(value: number) => (prev: Character) => ({
           ...prev,
@@ -156,6 +160,7 @@ export const BuildATK = () => {
       />
       <BuildCharacterInput
         label="Class % Bonus"
+        tooltip="This is ATK% on NovaRO, be careful between Normal/Boss Class bonus"
         getValue={(character: Character) => character.modifiers.class}
         updateValue={(value: number) => (prev: Character) => {
           const { modifiers } = prev;
@@ -172,6 +177,7 @@ export const BuildATK = () => {
       />
       <BuildCharacterInput
         label="Melee % Bonus"
+        tooltip="Short Attack Rate %"
         getValue={(character: Character) => character.modifiers.melee}
         updateValue={(value: number) => (prev: Character) => {
           const { modifiers } = prev;
@@ -180,6 +186,7 @@ export const BuildATK = () => {
       />
       <BuildCharacterInput
         label="Ranged % Bonus"
+        tooltip="Ranged Attack Rate %"
         getValue={(character: Character) => character.modifiers.ranged}
         updateValue={(value: number) => (prev: Character) => {
           const { modifiers } = prev;
@@ -188,6 +195,7 @@ export const BuildATK = () => {
       />
       <BuildCharacterInput
         label="Critical Damage % Bonus"
+        tooltip="The number after the 'Critical Damage 40%' in the @bs"
         getValue={(character: Character) => character.modifiers.critical}
         updateValue={(value: number) => (prev: Character) => {
           const { modifiers } = prev;
@@ -204,6 +212,7 @@ export const BuildATK = () => {
       />
       <BuildCharacterInput
         label="Shield Weight"
+        tooltip="Affects some Imperial Guard skills"
         getValue={(character: Character) => character.shield.weight}
         updateValue={(value: number) => (prev: Character) => {
           const { shield } = prev;
@@ -212,6 +221,7 @@ export const BuildATK = () => {
       />
       <BuildCharacterInput
         label="Shield Refine"
+        tooltip="Affects some Imperial Guard skills"
         getValue={(character: Character) => character.shield.refine}
         updateValue={(value: number) => (prev: Character) => {
           const { shield } = prev;
@@ -220,6 +230,7 @@ export const BuildATK = () => {
       />
       <BuildCharacterInput
         label="Monster Type % Bonus"
+        tooltip="Things like 'Damage against Kobold monsters'"
         getValue={(character: Character) => character.modifiers.monster}
         updateValue={(value: number) => (prev: Character) => {
           const { modifiers } = prev;
@@ -228,6 +239,7 @@ export const BuildATK = () => {
       />
       <BuildCharacterInput
         label="Weapon % Bonus"
+        tooltip="Advanced Katar Mastery % goes here"
         getValue={(character: Character) =>
           character.modifiers.advancedKatarMastery
         }
@@ -319,6 +331,7 @@ export const BuildMATK = () => {
       />
       <BuildCharacterInput
         label="Equip MATK"
+        tooltip="Come from Equipments and Cards"
         getValue={(character: Character) => character.MATK.equipMATK}
         updateValue={(value: number) => (prev: Character) => ({
           ...prev,
@@ -341,6 +354,7 @@ export const BuildMATK = () => {
       />
       <BuildCharacterInput
         label="Custom MATK"
+        tooltip="Any MATK adjustments"
         getValue={(character: Character) => character.MATK.pseudoBuffMATK}
         updateValue={(value: number) => (prev: Character) => ({
           ...prev,
@@ -416,6 +430,7 @@ export const BuildMATK = () => {
       />
       <BuildCharacterInput
         label="Monster Type % Bonus"
+        tooltip="Magical Class Bonus % against Normal/Boss monsters"
         getValue={(character: Character) => character.modifiers.monster}
         updateValue={(value: number) => (prev: Character) => {
           const { modifiers } = prev;

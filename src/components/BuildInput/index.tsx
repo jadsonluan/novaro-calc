@@ -6,6 +6,7 @@ import "./index.css";
 
 export interface BuildInputProps<T extends Character | Monster> {
   label: string;
+  tooltip?: string;
   getValue: (target: T) => number;
   updateValue: (value: number) => (prevState: T) => T;
   target: (build: Build) => T;
@@ -76,12 +77,12 @@ function Input<T extends Character | Monster>({
 }
 
 function BuildInput<T extends Character | Monster>(props: BuildInputProps<T>) {
-  const { label } = props;
+  const { label, tooltip } = props;
   const { build1, build2 } = useBuild();
 
   return (
     <div className="build-input">
-      <span>{label}</span>
+      <span title={tooltip}>{label}</span>
       <Input build={build1} {...props} />
       <Input build={build2} {...props} />
     </div>
