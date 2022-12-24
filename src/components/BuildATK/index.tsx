@@ -203,6 +203,22 @@ export const BuildATK = () => {
         }}
       />
       <BuildCharacterInput
+        label="Shield Weight"
+        getValue={(character: Character) => character.shield.weight}
+        updateValue={(value: number) => (prev: Character) => {
+          const { shield } = prev;
+          return { ...prev, shield: { ...shield, weight: value } };
+        }}
+      />
+      <BuildCharacterInput
+        label="Shield Refine"
+        getValue={(character: Character) => character.shield.refine}
+        updateValue={(value: number) => (prev: Character) => {
+          const { shield } = prev;
+          return { ...prev, shield: { ...shield, refine: value } };
+        }}
+      />
+      <BuildCharacterInput
         label="Monster Type % Bonus"
         getValue={(character: Character) => character.modifiers.monster}
         updateValue={(value: number) => (prev: Character) => {

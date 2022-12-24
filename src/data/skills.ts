@@ -107,16 +107,65 @@ const knightSkills: Record<string, Skill> = {
 }
 
 const crusaderSkills: Record<string, Skill> = {
-  OVERBRAND: {
-    key: "OVERBRAND",
-    label: "Overbrand",
-    name: "Overbrand",
+  RAPID_SMITHING: {
+    key: "RAPID_SMITHING",
+    label: "Rapid Smithing",
+    name: "Rapid Smithing",
+    isMelee: false,
+    job: "Imperial Guard",
+    formula: (character: Character, monster: Monster, buffs: Buffs) => {
+      const baseDamage =
+        1300 + character.shield.weight + character.shield.refine * 4;
+      return {
+        percent:
+          baseDamage *
+          (character.baseLevel / 100) *
+          (buffs.shieldShooting?.active ? 1.5 : 1),
+        bonus: 0,
+      };
+    },
+  },
+  SHIELD_PRESS: {
+    key: "SHIELD_PRESS",
+    label: "Shield Press",
+    name: "Shield Press",
     isMelee: true,
     job: "Imperial Guard",
-    formula: (character: Character, monster: Monster) => {
-      const baseDamage = 1500;
+    formula: (character: Character, monster: Monster, buffs: Buffs) => {
+      const baseDamage = 2000 + (buffs.shieldShooting?.active ? 2100 : 0);
       return {
-        percent: (baseDamage * (character.baseLevel / 100)) * 3,
+        percent:
+          (baseDamage + character.stats.str) * (character.baseLevel / 100) +
+          character.stats.vit +
+          (character.shield.weight / 2) * character.shield.refine,
+        bonus: 0,
+      };
+    },
+  },
+  EARTH_DRIVE: {
+    key: "EARTH_DRIVE",
+    label: "Earth Drive",
+    name: "Earth Drive",
+    isMelee: true,
+    job: "Imperial Guard",
+    formula: (character: Character, monster: Monster, buffs: Buffs) => {
+      const baseDamage = 1900 + (buffs.shieldShooting?.active ? 1850 : 0);
+      return {
+        percent: (baseDamage + character.stats.str + character.stats.vit) * (character.baseLevel / 100),
+        bonus: 0,
+      };
+    },
+  },
+  OVER_BRAND: {
+    key: "OVER_BRAND",
+    label: "Overbrand",
+    name: "Over Brand",
+    isMelee: true,
+    job: "Imperial Guard",
+    formula: (character: Character, monster: Monster, buffs: Buffs) => {
+      const baseDamage = 1500 + (buffs.moonSlasher?.active ? 500 : 0);
+      return {
+        percent: baseDamage * (character.baseLevel / 100) * 3,
         bonus: 0,
       };
     },
@@ -127,10 +176,11 @@ const crusaderSkills: Record<string, Skill> = {
     name: "Cannon Spear",
     isMelee: false,
     job: "Imperial Guard",
-    formula: (character: Character, monster: Monster) => {
-      const baseDamage = 600;
+    formula: (character: Character, monster: Monster, buffs: Buffs) => {
+      const baseDamage = 600 + (buffs.grandJudgment?.active ? 400 : 0);
       return {
-        percent: (baseDamage + character.stats.str * 5) * (character.baseLevel / 100),
+        percent:
+          (baseDamage + character.stats.str * 5) * (character.baseLevel / 100),
         bonus: 0,
       };
     },
@@ -141,15 +191,84 @@ const crusaderSkills: Record<string, Skill> = {
     name: "Vaninshing Point",
     isMelee: false,
     job: "Imperial Guard",
-    formula: (character: Character, monster: Monster) => {
-      const baseDamage = 1700;
+    formula: (character: Character, monster: Monster, buffs: Buffs) => {
+      const baseDamage = 1700 + (buffs.grandJudgment?.active ? 800 : 0);
       return {
         percent: baseDamage * (character.baseLevel / 100),
         bonus: 0,
       };
     },
   },
-}
+  OVERSLASH: {
+    key: "OVERSLASH",
+    label: "Overslash",
+    name: "Overslash",
+    isMelee: true,
+    job: "Imperial Guard",
+    formula: (character: Character, monster: Monster) => {
+      const baseDamage = 800 + 1100;
+      return {
+        percent:
+          (baseDamage + character.traits.pow * 5) *
+          (character.baseLevel / 100) *
+          3,
+        bonus: 0,
+      };
+    },
+  },
+  OVERSLASH_MAX: {
+    key: "OVERSLASH_MAX",
+    label: "Overslash (Max Enemies)",
+    name: "Overslash (Max Enemies)",
+    isMelee: true,
+    job: "Imperial Guard",
+    formula: (character: Character, monster: Monster) => {
+      const baseDamage = 800 + 1100;
+      return {
+        percent:
+          (baseDamage + character.traits.pow * 5) *
+          (character.baseLevel / 100) *
+          7,
+        bonus: 0,
+      };
+    },
+  },
+  SHIELD_SHOOTING: {
+    key: "SHIELD_SHOOTING",
+    label: "Shield Shooting",
+    name: "Shield Shooting",
+    isMelee: false,
+    job: "Imperial Guard",
+    formula: (character: Character, monster: Monster) => {
+      const baseDamage =
+        3000 +
+        1250 +
+        (character.shield.weight / 10) * (character.shield.refine * 5);
+      return {
+        percent:
+          (baseDamage + character.traits.pow * 5) * (character.baseLevel / 100),
+        bonus: 0,
+      };
+    },
+  },
+  GRAND_JUDGMENT: {
+    key: "GRAND_JUDGMENT",
+    label: "Grand Judgment",
+    name: "Grand Judgment",
+    isMelee: false,
+    job: "Imperial Guard",
+    formula: (character: Character, monster: Monster) => {
+      const baseDamage =
+        7500 + (["plant", "insect"].includes(monster.race) ? 3500 : 0);
+      return {
+        percent:
+          (baseDamage + character.traits.pow * 10) *
+          (character.baseLevel / 100),
+        bonus: 0,
+      };
+    },
+  },
+};
 
 const whiteSmithSkills: Record<string, Skill> = {
   ARM_CANNON: {

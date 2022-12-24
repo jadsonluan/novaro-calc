@@ -31,6 +31,11 @@ export interface SPInfo {
   percent: number;
 }
 
+interface Shield {
+  weight: number;
+  refine: number;
+}
+
 export interface ATKModifiers {
   equipATK: number;
   // nao funciona no nova para consumiveis
@@ -82,6 +87,7 @@ export interface Character {
   hp: HPInfo;
   sp: SPInfo;
   weapon: Weapon;
+  shield: Shield;
   modifiers: Modifiers;
   shadowWeaponRefine: number;
   ATK: ATKModifiers;
@@ -132,6 +138,10 @@ export const emptyCharacter: Character = {
     refine: 0,
     grade: "No Grade",
     type: "Bare Hand",
+  },
+  shield: {
+    weight: 0,
+    refine: 0,
   },
   modifiers: {
     advancedKatarMastery: 0,

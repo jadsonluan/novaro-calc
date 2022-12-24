@@ -19,8 +19,13 @@ export interface Buffs {
   asirRune?: Buff;
   turisusRune?: Buff;
   luxAnimaRune?: Buff;
+  moonSlasher?: Buff;
   shieldSpell?: Buff;
   inspiration?: Buff;
+  attackStance?: Buff;
+  shieldShooting?: Buff;
+  grandJudgment?: Buff;
+  holyShield?: Buff;
   // Thief
   enchantDeadlyPoison?: Buff;
   pyrexia?: Buff;
@@ -120,6 +125,11 @@ export const emptyATKBuffs: Buffs = {
     tooltip: "+30% for the following modifiers: HP & SP, Melee, Ranged, Critical and Size",
     job: "Swordsman",
   },
+  moonSlasher: {
+    active: false,
+    tooltip: "Increases Overbrand damage",
+    job: "Swordsman",
+  },
   shieldSpell: {
     active: false,
     tooltip: "Pseudo Buff ATK +150",
@@ -128,6 +138,21 @@ export const emptyATKBuffs: Buffs = {
   inspiration: {
     active: false,
     tooltip: "Pseudo Buff ATK +200, all stats +30 and +20% HP",
+    job: "Swordsman",
+  },
+  attackStance: {
+    active: false,
+    tooltip: "+15 P.Atk",
+    job: "Swordsman",
+  },
+  shieldShooting: {
+    active: false,
+    tooltip: "Increases Rapid Smithing, Shield Press and Earth Drive damage",
+    job: "Swordsman",
+  },
+  grandJudgment: {
+    active: false,
+    tooltip: "Increases Vanishing Point and Cannon Spear damage",
     job: "Swordsman",
   },
   // Thief
@@ -360,6 +385,16 @@ export const emptyMATKBuffs: Buffs = {
     job: "All",
   },
   // Swordsman
+  attackStance: {
+    active: false,
+    tooltip: "+15 S.Matk",
+    job: "Swordsman",
+  },
+  holyShield: {
+    active: false,
+    tooltip: "Increases Holy Rain damage and +15% Holy Property magical damage",
+    job: "Swordsman",
+  },
   // Thief
   autoShadowSpell: {
     active: false,
@@ -568,6 +603,9 @@ const BUFF_EFFECTS: Record<keyof Buffs, BuffEffect> = {
       buffs: [...character.buffs, "luxAnima"],
     };
   },
+  moonSlasher: (character: Character) => {
+    return { ...character, buffs: [...character.buffs, "moonSlasher"] };
+  },
   shieldSpell: (character: Character) => {
     const {
       ATK: { pseudoBuffATK },
@@ -610,6 +648,45 @@ const BUFF_EFFECTS: Record<keyof Buffs, BuffEffect> = {
         luk: stats.luk + STAT_INCREASE,
       },
       buffs: [...character.buffs, "inspiration"],
+    };
+  },
+  attackStance: (character: Character) => {
+    const {
+      ATK: { patk },
+      MATK: { smatk }
+    } = character;
+    const ATK_INCREASE = 15;
+    return {
+      ...character,
+      ATK: {
+        ...character.ATK,
+        patk: patk + ATK_INCREASE,
+      },
+      MATK: {
+        ...character.MATK,
+        smatk: smatk + ATK_INCREASE,
+      },
+      buffs: [...character.buffs, "attackStance"],
+    };
+  },
+  shieldShooting: (character: Character) => {
+    return { ...character, buffs: [...character.buffs, "shieldShooting"] };
+  },
+  grandJudgment: (character: Character) => {
+    return { ...character, buffs: [...character.buffs, "grandJudgment"] };
+  },
+  holyShield: (character: Character) => {
+    const {
+      modifiers: { skillProperty }
+    } = character;
+    const MODIFIER_INCREASE = 15;
+    return {
+      ...character,
+      modifiers: {
+        ...character.modifiers,
+        skillProperty: skillProperty + (character.weapon.element === 'Holy' ? MODIFIER_INCREASE : 0),
+      },
+      buffs: [...character.buffs, "holyShield"],
     };
   },
   // Thief

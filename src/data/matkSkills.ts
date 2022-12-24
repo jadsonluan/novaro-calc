@@ -17,6 +17,54 @@ const allSkills: Record<string, Skill> = {
   },
 };
 
+const crusaderSkills: Record<string, Skill> = {
+  RAY_OF_GENESIS: {
+    key: "RAY_OF_GENESIS",
+    name: "Ray of Genesis",
+    label: "Ray of Genesis",
+    isMelee: false,
+    job: "Imperial Guard",
+    formula: (character: Character, monster: Monster) => {
+      const baseDamage = 3500;
+      return {
+        percent:
+          (baseDamage + character.stats.int) * (character.baseLevel / 100),
+        bonus: 0,
+      };
+    },
+  },
+  CROSS_RAIN: {
+    key: "CROSS_RAIN",
+    name: "Cross Rain (Per Hit)",
+    label: "Cross Rain (Per Hit)",
+    isMelee: false,
+    job: "Imperial Guard",
+    formula: (character: Character, monster: Monster, buffs: Buffs) => {
+      const baseDamage = 1500 + (buffs.holyShield?.active ? 1000 : 500) + (buffs.holyShield?.active ? 1000 : 0);
+      return {
+        percent:
+          (baseDamage + character.traits.spl * 5) * (character.baseLevel / 100),
+        bonus: 0,
+      };
+    },
+  },
+  JUDGMENT_CROSS: {
+    key: "JUDGMENT_CROSS",
+    name: "Judgment Cross",
+    label: "Judgment Cross",
+    isMelee: false,
+    job: "Imperial Guard",
+    formula: (character: Character, monster: Monster) => {
+      const baseDamage = 7500 + (['plant', 'insect'].includes(monster.race) ? 3500 : 0);
+      return {
+        percent:
+          (baseDamage + character.traits.spl * 15) * (character.baseLevel / 100),
+        bonus: 0,
+      };
+    },
+  },
+};
+
 const rogueSkills: Record<string, Skill> = {
   FROM_THE_ABYSS: {
     key: "FROM_THE_ABYSS",
@@ -1109,6 +1157,7 @@ const doramSkills: Record<string, Skill> = {
 
 export const MATK_SKILLS: Record<string, Skill> = {
   ...allSkills,
+  ...crusaderSkills,
   ...rogueSkills,
   ...wizardSkills,
   ...archerSkills,

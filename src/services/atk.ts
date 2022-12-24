@@ -370,7 +370,12 @@ export function getFinalATKDamage(range: DmgRange, build: BuildInfo) {
   finalDmg = applyModifier(finalDmg, monster.finalModifier);
 
   return {
-    damage: Math.floor(finalDmg),
+    damage: Math.floor(
+      Math.floor(finalDmg) -
+        (character.job === "Imperial Guard"
+          ? getModifierIncrease(finalDmg, 0.25)
+          : getModifierIncrease(finalDmg, 0.1))
+    ),
     modifiedCharacter: character,
   };
 }
