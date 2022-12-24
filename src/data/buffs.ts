@@ -43,6 +43,7 @@ export interface Buffs {
   // Mage
   magicAmplification?: Buff;
   recognizedSpell?: Buff;
+  intenseTelekinesis?: Buff;
   climax?: Buff;
   seismicPower?: Buff;
   frostWeapon?: Buff;
@@ -466,6 +467,11 @@ export const emptyMATKBuffs: Buffs = {
   recognizedSpell: {
     active: false,
     tooltip: "Removes weapon MATK variance (overupgrade MATK variance still applies)",
+    job: "Mage",
+  },
+  intenseTelekinesis: {
+    active: false,
+    tooltip: "+200% Ghost property magic damage",
     job: "Mage",
   },
   climax: {
@@ -943,6 +949,21 @@ const BUFF_EFFECTS: Record<keyof Buffs, BuffEffect> = {
     return {
       ...character,
       buffs: [...character.buffs, "recognizedSpell"],
+    };
+  },
+  intenseTelekinesis: (character: Character) => {
+    const {
+      modifiers: { dmg }
+    } = character;
+    const MODIFIER_INCREASE = 200;
+  
+    return {
+      ...character,
+      modifiers: {
+        ...character.modifiers,
+        dmg: dmg + (character.weapon.element === 'Ghost' ? MODIFIER_INCREASE : 0),
+      },
+      buffs: [...character.buffs, "intenseTelekinesis"],
     };
   },
   climax: (character: Character) => {

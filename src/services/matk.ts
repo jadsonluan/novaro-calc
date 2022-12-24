@@ -145,6 +145,10 @@ function applyModifier(damage: number, mod: number) {
   return Math.floor(damage * (1 + mod / 100));
 }
 
+function getModifierIncrease(damage: number, mod: number) {
+  return Math.floor(Math.floor(damage * (1 + mod / 100)) - damage);
+}
+
 function getMATK(range: DmgRange, character: Character, monster: Monster) {
   const { MATK: { buffMATK } } = character;
 
@@ -215,7 +219,7 @@ export function getFinalMATKDamage(range: DmgRange, build: BuildInfo) {
   finalDmg = applyModifier(finalDmg, monster.finalModifier);
 
   return {
-    damage: Math.floor(finalDmg),
+    damage: Math.floor(finalDmg) - Math.floor(getModifierIncrease(finalDmg, 0.1)),
     modifiedCharacter: character,
   };
 }
