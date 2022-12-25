@@ -37,6 +37,9 @@ export interface Buffs {
   abyssSlayer?: Buff;
   // Merchant
   loudExclamation?: Buff;
+  overThrust?: Buff;
+  maximumOverThrust?: Buff;
+  powerMaximize?: Buff;
   cartBoost?: Buff;
   pyroclastic?: Buff;
   tempering?: Buff;
@@ -211,6 +214,21 @@ export const emptyATKBuffs: Buffs = {
   loudExclamation: {
     active: false,
     tooltip: "STR +4 and Pseudo Buff ATK +30",
+    job: "Merchant",
+  },
+  overThrust: {
+    active: false,
+    tooltip: "Adds +25% ATK to Meister skills base formula",
+    job: "Merchant",
+  },
+  maximumOverThrust: {
+    active: false,
+    tooltip: "Adds +100% ATK to Meister skills base formula",
+    job: "Merchant",
+  },
+  powerMaximize: {
+    active: false,
+    tooltip: "Removes Weapon Base ATK variance (over upgrade variance still applies)",
     job: "Merchant",
   },
   cartBoost: {
@@ -887,6 +905,15 @@ const BUFF_EFFECTS: Record<keyof Buffs, BuffEffect> = {
       },
       buffs: [...character.buffs, "loudExclamation"],
     };
+  },
+  overThrust: (character: Character) => {
+    return { ...character, buffs: [...character.buffs, "overThrust"] };
+  },
+  maximumOverThrust: (character: Character) => {
+    return { ...character, buffs: [...character.buffs, "maximumOverThrust"] };
+  },
+  powerMaximize: (character: Character) => {
+    return { ...character, buffs: [...character.buffs, "powerMaximize"] };
   },
   cartBoost: (character: Character) => {
     const {

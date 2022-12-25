@@ -81,8 +81,8 @@ function getWeaponATK(
   let overUpgradeATK;
 
   if (range === "MIN") {
-    overUpgradeATK = 0;
-    variance *= -1;
+    overUpgradeATK = character.buffs.includes('powerMaximize') ? 1 : 0;
+    variance *= character.buffs.includes('powerMaximize') ? 1 :-1;
   } else {
     overUpgradeATK = Math.max(1, getMaxOverUpgradeBonus(weapon));
   }

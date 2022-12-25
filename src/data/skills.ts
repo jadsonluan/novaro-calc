@@ -19,6 +19,19 @@ export interface Skill {
   formula: (character: Character, monster: Monster, buffs: Buffs) => FormulaReturn;
 }
 
+function getWhitesmithATKBonus(character: Character,buffs: Buffs) {
+  if (buffs.overThrust?.active || buffs.maximumOverThrust?.active) {
+    let ATK_MODIFIER = 25;
+
+    if (character.job !== 'Meister') ATK_MODIFIER = 15;
+    if (buffs.maximumOverThrust?.active) ATK_MODIFIER = 100;
+
+    return ATK_MODIFIER;
+  }
+
+  return 0;
+} 
+
 const allSkills: Record<string, Skill> = {
   BASIC_ATTACK: {
     key: "BASIC_ATTACK",
@@ -278,8 +291,8 @@ const whiteSmithSkills: Record<string, Skill> = {
     isMelee: false,
     job: "Meister",
     hardAsSoftDef: true,
-    formula: (character: Character, monster: Monster) => {
-      const baseDamage = 2150;
+    formula: (character: Character, monster: Monster, buffs: Buffs) => {
+      const baseDamage = 2150 + getWhitesmithATKBonus(character, buffs);
       return {
         percent:
           (baseDamage) * (character.baseLevel / 100),
