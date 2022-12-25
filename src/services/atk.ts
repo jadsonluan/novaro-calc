@@ -36,6 +36,7 @@ function getStatusATK(character: Character) {
     (baseLevel / 4 + mainStatBonus + luk / 3 + bonusStatusATK + pow * 5) *
       propertyModifier
   );
+
   return baseStatusATK;
 }
 
@@ -89,24 +90,27 @@ function getWeaponATK(
 
   overUpgradeATK = weapon.type === "Bare Hand" ? 0 : overUpgradeATK;
 
-  let totalWeaponATK =
-    weapon.atk + variance + statBonus + refineATK + overUpgradeATK;
+  let weaponATK = weapon.atk + refineATK;
 
-  let increasedTotalWeaponATK = 0;
+  let increasedWeaponATK = 0;
+
+  if (character.buffs.includes('runeStrawberryCake')) {
+    weaponATK += getModifierIncrease(weaponATK, 5);
+  }
 
   if (character.buffs.includes('enchantDeadlyPoison')) {
-    increasedTotalWeaponATK += getModifierIncrease(totalWeaponATK, 400);
+    increasedWeaponATK += getModifierIncrease(weaponATK, 400);
   }
 
   if (character.buffs.includes('earthCharm')) {
-    increasedTotalWeaponATK += getModifierIncrease(totalWeaponATK, 150);
+    increasedWeaponATK += getModifierIncrease(weaponATK, 150);
   }
 
   if (character.buffs.includes('concentration')) {
-    increasedTotalWeaponATK += getModifierIncrease(totalWeaponATK, 15);
+    increasedWeaponATK += getModifierIncrease(weaponATK, 15);
   }
 
-  totalWeaponATK += increasedTotalWeaponATK;
+  let totalWeaponATK = (weaponATK + increasedWeaponATK) + statBonus + variance + overUpgradeATK;
 
   return applyCardModifiers(
     Math.floor(totalWeaponATK * sizePenalty),
@@ -268,6 +272,10 @@ function getATK(range: DmgRange, character: Character, monster: Monster) {
 
   const extraATK = getExtraATK(character, monster);
 
+  if (character.buffs.includes('runeStrawberryCake')) {
+    statusATK += getModifierIncrease(statusATK, 5);
+  }
+
   return (
     statusATK * 2 +
     wATK +
@@ -318,8 +326,16 @@ function getDEF(character: Character, monster: Monster) {
 }
 
 function applyCritical(damage: number, character: Character) {
-  let finalDamage = applyModifier(damage, BASE_CRITICAL_DAMAGE + character.ATK.crate);
-  finalDamage = applyModifier(finalDamage, character.modifiers.critical / 2);
+  let finalDamage = applyModifier(
+    damage,
+    BASE_CRITICAL_DAMAGE + character.ATK.crate
+  );
+  finalDamage = applyModifier(
+    finalDamage,
+    character.skill === "BASIC_ATTACK"
+      ? character.modifiers.critical
+      : character.modifiers.critical / 2
+  );
   return finalDamage;
 }
 
@@ -364,8 +380,8 @@ export function getFinalATKDamage(range: DmgRange, build: BuildInfo) {
     damage: Math.floor(
       Math.floor(finalDmg) -
         (character.job === "Imperial Guard"
-          ? getModifierIncrease(finalDmg, 0.25)
-          : getModifierIncrease(finalDmg, 0.1))
+          ? getModifierIncrease(finalDmg, 0.20)
+          : getModifierIncrease(finalDmg, 0.05))
     ),
     modifiedCharacter: character,
   };

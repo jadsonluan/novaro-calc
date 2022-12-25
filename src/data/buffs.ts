@@ -13,6 +13,15 @@ export interface Buffs {
   // All
   blueHerbActivator?: Buff;
   redHerbActivator?: Buff;
+  boxOfResentment?: Buff;
+  tyrBlessing?: Buff;
+  distilledFightingSpirit?: Buff;
+  cursedFragment?: Buff;
+  limitedPowerBooster?: Buff;
+  redBooster?: Buff;
+  infinityDrink?: Buff;
+  sacredDraught?: Buff;
+  runeStrawberryCake?: Buff;
   // Swordsman
   magnumBreak?: Buff;
   concentration?: Buff;
@@ -116,6 +125,51 @@ export const emptyATKBuffs: Buffs = {
   redHerbActivator: {
     active: false,
     tooltip: "+15% melee/ranged damage",
+    job: "All",
+  },
+  tyrBlessing: {
+    active: false,
+    tooltip: "+20 Status ATK. Does not stack with Box Of Resentment, Distilled Fighting Spirit or Cursed Fragment",
+    job: "All",
+  },
+  boxOfResentment: {
+    active: false,
+    tooltip: "+20 Status ATK. Does not stack with Tyr Blessing, Distilled Fighting Spirit or Cursed Fragment",
+    job: "All",
+  },
+  distilledFightingSpirit: {
+    active: false,
+    tooltip: "+30 Status ATK. Does not stack with Tyr Blessing, Box Of Resentment or Cursed Fragment",
+    job: "All",
+  },
+  cursedFragment: {
+    active: false,
+    tooltip: "+50 Status ATK. Does not stack with Tyr Blessing, Box Of Resentment or Distilled Fighting Spirit",
+    job: "All",
+  },
+  redBooster: {
+    active: false,
+    tooltip: "+30 Status ATK",
+    job: "All",
+  },
+  limitedPowerBooster: {
+    active: false,
+    tooltip: "+30 Status ATK and +1% ATK",
+    job: "All",
+  },
+  infinityDrink: {
+    active: false,
+    tooltip: "+5% Critical Damage and +5% Ranged Damage",
+    job: "All",
+  },
+  sacredDraught: {
+    active: false,
+    tooltip: "+3% ATK",
+    job: "All",
+  },
+  runeStrawberryCake: {
+    active: false,
+    tooltip: "+5% (Weapon Base ATK + Refine ATK) and +5% Status ATK",
     job: "All",
   },
   // Swordsman
@@ -682,6 +736,185 @@ const BUFF_EFFECTS: Record<keyof Buffs, BuffEffect> = {
       },
       buffs: [...character.buffs, "redHerbActivator"],
     };
+  },
+  cursedFragment: (character: Character) => {
+    const {
+      ATK: { bonusStatusATK },
+    } = character;
+    const ATK_INCREASE = 50;
+    return {
+      ...character,
+      ATK: {
+        ...character.ATK,
+        bonusStatusATK:
+          bonusStatusATK +
+          (!character.buffs.some((buff: string) =>
+            [
+              "boxOfResentment",
+              "tyrBlessing",
+              "distilledFightingSpirit",
+            ].includes(buff)
+          )
+            ? ATK_INCREASE
+            : 0),
+      },
+      buffs: [...character.buffs, "cursedFragment"],
+    };
+  },
+  distilledFightingSpirit: (character: Character) => {
+    const {
+      ATK: { bonusStatusATK },
+    } = character;
+    const ATK_INCREASE = 30;
+    return {
+      ...character,
+      ATK: {
+        ...character.ATK,
+        bonusStatusATK:
+          bonusStatusATK +
+          (!character.buffs.some((buff: string) =>
+            [
+              "boxOfResentment",
+              "tyrBlessing",
+              "cursedFragment",
+            ].includes(buff)
+          )
+            ? ATK_INCREASE
+            : 0),
+      },
+      buffs: [...character.buffs, "distilledFightingSpirit"],
+    };
+  },
+  boxOfResentment: (character: Character) => {
+    const {
+      ATK: { bonusStatusATK },
+    } = character;
+    const ATK_INCREASE = 20;
+    return {
+      ...character,
+      ATK: {
+        ...character.ATK,
+        bonusStatusATK:
+          bonusStatusATK +
+          (!character.buffs.some((buff: string) =>
+            [
+              "tyrBlessing",
+              "distilledFightingSpirit",
+              "cursedFragment",
+            ].includes(buff)
+          )
+            ? ATK_INCREASE
+            : 0),
+      },
+      buffs: [...character.buffs, "boxOfResentment"],
+    };
+  },
+  tyrBlessing: (character: Character) => {
+    const {
+      ATK: { bonusStatusATK },
+    } = character;
+    const ATK_INCREASE = 20;
+    return {
+      ...character,
+      ATK: {
+        ...character.ATK,
+        bonusStatusATK:
+          bonusStatusATK +
+          (!character.buffs.some((buff: string) =>
+            [
+              "boxOfResentment",
+              "distilledFightingSpirit",
+              "cursedFragment",
+            ].includes(buff)
+          )
+            ? ATK_INCREASE
+            : 0),
+      },
+      buffs: [...character.buffs, "tyrBlessing"],
+    };
+  },
+  redBooster: (character: Character) => {
+    const {
+      ATK: { bonusStatusATK },
+      MATK: { consumableMATK }
+    } = character;
+    const ATK_INCREASE = 30;
+    return {
+      ...character,
+      ATK: {
+        ...character.ATK,
+        bonusStatusATK: bonusStatusATK + ATK_INCREASE,
+      },
+      MATK: {
+        ...character.MATK,
+        consumableMATK: consumableMATK + ATK_INCREASE,
+      },
+      buffs: [...character.buffs, "redBooster"],
+    };
+  },
+  limitedPowerBooster: (character: Character) => {
+    const {
+      ATK: { bonusStatusATK },
+      modifiers: { class: classATK },
+      MATK: { consumableMATK, matkPercent }
+    } = character;
+    const ATK_INCREASE = 30;
+    const ATK_PERCENT_INCREASE = 1;
+    return {
+      ...character,
+      ATK: {
+        ...character.ATK,
+        bonusStatusATK: bonusStatusATK + ATK_INCREASE,
+      },
+      modifiers: {
+        ...character.modifiers,
+        class: classATK + ATK_PERCENT_INCREASE,
+      },
+      MATK: {
+        ...character.MATK,
+        consumableMATK: consumableMATK + ATK_INCREASE,
+        matkPercent: matkPercent + ATK_PERCENT_INCREASE,
+      },
+      buffs: [...character.buffs, "limitedPowerBooster"],
+    };
+  },
+  infinityDrink: (character: Character) => {
+    const {
+      modifiers: { ranged, critical, skillProperty },
+    } = character;
+    const MODIFIER_INCREASE = 5;
+    return {
+      ...character,
+      modifiers: {
+        ...character.modifiers,
+        critical: critical + MODIFIER_INCREASE,
+        ranged: ranged + MODIFIER_INCREASE,
+        skillProperty: skillProperty + MODIFIER_INCREASE,
+      },
+      buffs: [...character.buffs, "infinityDrink"],
+    };
+  },
+  sacredDraught: (character: Character) => {
+    const {
+      modifiers: { class: classATK },
+      MATK: { matkPercent }
+    } = character;
+    const ATK_PERCENT_INCREASE = 3;
+    return {
+      ...character,
+      modifiers: {
+        ...character.modifiers,
+        class: classATK + ATK_PERCENT_INCREASE,
+      },
+      MATK: {
+        ...character.MATK,
+        matkPercent: matkPercent + ATK_PERCENT_INCREASE,
+      },
+      buffs: [...character.buffs, "sacredDraught"],
+    };
+  },
+  runeStrawberryCake: (character: Character) => {
+    return { ...character, buffs: [...character.buffs, "runeStrawberryCake"] };
   },
   // Swordsman
   magnumBreak: (character: Character) => {
