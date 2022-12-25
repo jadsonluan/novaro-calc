@@ -38,6 +38,8 @@ const About = () => {
           <ul>
             <li><b>HP AND SP calculations are using 3rd job formulas, so ignore them for now.</b></li>
             <li>Inquisitor Skills</li>
+            <li>Meister Skills</li>
+            <li>Biolo Acid Skills</li>
           </ul>
         </p>
         <p>
