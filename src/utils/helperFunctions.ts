@@ -10,3 +10,5 @@ export const getTraitBonuses = (trait: "pow" | "con" | "spl" | "crt", oldValue: 
 
   return traits[trait](newBonus) - traits[trait](oldValue);
 }
+
+export const deepCopyNestedObject = (obj: Record<string, any>) => obj ? JSON.parse(JSON.stringify(obj)) : {};

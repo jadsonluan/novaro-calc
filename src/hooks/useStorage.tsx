@@ -1,6 +1,8 @@
 import { useCallback, useEffect, useState } from "react";
+import _ from 'lodash';
 import { BuildInfo, INITIAL_ATK_BUILD, INITIAL_MATK_BUILD } from "../data/input";
 import { useBuild } from "./useBuild";
+import { deepCopyNestedObject } from "../utils/helperFunctions";
 
 interface BuildData {
   build1: BuildInfo;
@@ -39,17 +41,17 @@ const useStorage = (isMATK: boolean) => {
 
       const data: BuildData = JSON.parse(rawData);
 
-      build1.setName(data.build1.name);
-      build1.setCharacter({...INITIAL_BUILD.character, ...data.build1.character});
-      build1.setMonster({...INITIAL_BUILD.monster, ...data.build1.monster});
-      build1.setBuffs({...INITIAL_BUILD.buffs, ...data.build1.buffs});
-      build1.setDebuffs({...INITIAL_BUILD.debuffs, ...data.build1.debuffs});
+      build1.setName(data.build1.name || '');
+      build1.setCharacter(_.merge(deepCopyNestedObject(INITIAL_BUILD.character), deepCopyNestedObject(data.build1.character)));
+      build1.setMonster(_.merge(deepCopyNestedObject(INITIAL_BUILD.monster), deepCopyNestedObject(data.build1.monster)));
+      build1.setBuffs(_.merge(deepCopyNestedObject(INITIAL_BUILD.buffs), deepCopyNestedObject(data.build1.buffs)));
+      build1.setDebuffs(_.merge(deepCopyNestedObject(INITIAL_BUILD.debuffs), deepCopyNestedObject(data.build1.debuffs)));
 
-      build2.setName(data.build2.name);
-      build2.setCharacter({...INITIAL_BUILD.character, ...data.build2.character});
-      build2.setMonster({...INITIAL_BUILD.monster, ...data.build2.monster});
-      build2.setBuffs({...INITIAL_BUILD.buffs, ...data.build2.buffs});
-      build2.setDebuffs({...INITIAL_BUILD.debuffs, ...data.build2.debuffs});
+      build2.setName(data.build2.name || '');
+      build2.setCharacter(_.merge(deepCopyNestedObject(INITIAL_BUILD.character), deepCopyNestedObject(data.build2.character)));
+      build2.setMonster(_.merge(deepCopyNestedObject(INITIAL_BUILD.monster), deepCopyNestedObject(data.build2.monster)));
+      build2.setBuffs(_.merge(deepCopyNestedObject(INITIAL_BUILD.buffs), deepCopyNestedObject(data.build2.buffs)));
+      build2.setDebuffs(_.merge(deepCopyNestedObject(INITIAL_BUILD.debuffs), deepCopyNestedObject(data.build2.debuffs)));
     },
     [INITIAL_BUILD, build1, build2, isMATK]
   );

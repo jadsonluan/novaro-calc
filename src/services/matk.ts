@@ -31,7 +31,7 @@ export function getEquipMATK (character: Character, totalMATK: number) {
 }
 
 function getStatusMATK(character: Character) {
-  const { stats, traits, baseLevel, MATK: { bonusStatusMATK } } = character;
+  const { stats, traits, baseLevel, MATK: { bonusStatusMATK = 0 } } = character;
   const { int, dex, luk } = stats;
   const { spl } = traits;
 
