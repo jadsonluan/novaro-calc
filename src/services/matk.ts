@@ -31,19 +31,21 @@ export function getEquipMATK (character: Character, totalMATK: number) {
 }
 
 function getStatusMATK(character: Character) {
-  const { stats, traits, baseLevel } = character;
+  const { stats, traits, baseLevel, MATK: { bonusStatusMATK } } = character;
   const { int, dex, luk } = stats;
   const { spl } = traits;
 
 
-  const baseStatusMATK = Math.floor(
+  let baseStatusMATK = Math.floor(
     Math.floor(baseLevel / 4) +
       int +
       Math.floor(int / 2) +
       Math.floor(dex / 5) +
       Math.floor(luk / 3) +
+      bonusStatusMATK +
       spl * 5
   );
+
   return baseStatusMATK;
 }
 
@@ -215,8 +217,12 @@ export function getFinalMATKDamage(range: DmgRange, build: BuildInfo) {
 
   finalDmg = applyModifier(finalDmg, character.MATK.smatk);
 
-  finalDmg = applyModifier(finalDmg,  monster.finalPropertyModifier);
+  finalDmg = applyModifier(finalDmg, monster.finalPropertyModifier);
   finalDmg = applyModifier(finalDmg, monster.finalModifier);
+
+  if (character.buffs.includes('runeStrawberryCake')) {
+    finalDmg = applyModifier(finalDmg, 5)
+  }
 
   return {
     damage: Math.floor(finalDmg) - Math.floor(getModifierIncrease(finalDmg, 0.1)),

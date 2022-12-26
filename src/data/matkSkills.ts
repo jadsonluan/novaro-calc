@@ -453,6 +453,9 @@ const wizardSkills: Record<string, Skill> = {
       };
     },
   },
+};
+
+const sageSkills: Record<string, Skill> = {
   PSYCHIC_WAVE: {
     key: "PSYCHIC_WAVE",
     name: "Psychic Wave (Per Wave)",
@@ -589,7 +592,7 @@ const wizardSkills: Record<string, Skill> = {
       };
     },
   },
-};
+}
 
 const archerSkills: Record<string, Skill> = {
   REVERBERATION: {
@@ -1160,6 +1163,7 @@ export const MATK_SKILLS: Record<string, Skill> = {
   ...crusaderSkills,
   ...rogueSkills,
   ...wizardSkills,
+  ...sageSkills,
   ...archerSkills,
   ...priestSkills,
   ...ninjaSkills,

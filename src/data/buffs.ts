@@ -14,8 +14,10 @@ export interface Buffs {
   blueHerbActivator?: Buff;
   redHerbActivator?: Buff;
   boxOfResentment?: Buff;
+  boxOfDrowsiness?: Buff;
   tyrBlessing?: Buff;
   distilledFightingSpirit?: Buff;
+  herbOfIncantation?: Buff;
   cursedFragment?: Buff;
   limitedPowerBooster?: Buff;
   redBooster?: Buff;
@@ -507,6 +509,51 @@ export const emptyMATKBuffs: Buffs = {
     tooltip: "+15% all element magic damage",
     job: "All",
   },
+  tyrBlessing: {
+    active: false,
+    tooltip: "+20 Status MATK. Does not stack with Box Of Drowsiness, Herb of Incantation or Cursed Fragment",
+    job: "All",
+  },
+  boxOfDrowsiness: {
+    active: false,
+    tooltip: "+20 Status MATK. Does not stack with Tyr Blessing, Herb of Incantation or Cursed Fragment",
+    job: "All",
+  },
+  herbOfIncantation: {
+    active: false,
+    tooltip: "+30 Status MATK. Does not stack with Tyr Blessing, Box Of Drowsiness or Cursed Fragment",
+    job: "All",
+  },
+  cursedFragment: {
+    active: false,
+    tooltip: "+50 Status MATK. Does not stack with Tyr Blessing, Box Of Drowsiness or Herb of Incantation",
+    job: "All",
+  },
+  redBooster: {
+    active: false,
+    tooltip: "+30 Status MATK",
+    job: "All",
+  },
+  limitedPowerBooster: {
+    active: false,
+    tooltip: "+30 Status MATK and +1% MATK",
+    job: "All",
+  },
+  infinityDrink: {
+    active: false,
+    tooltip: "+5% All Element magical damage",
+    job: "All",
+  },
+  sacredDraught: {
+    active: false,
+    tooltip: "+3% MATK",
+    job: "All",
+  },
+  runeStrawberryCake: {
+    active: false,
+    tooltip: "+5% magic damage",
+    job: "All",
+  },
   // Swordsman
   attackStance: {
     active: false,
@@ -740,6 +787,7 @@ const BUFF_EFFECTS: Record<keyof Buffs, BuffEffect> = {
   cursedFragment: (character: Character) => {
     const {
       ATK: { bonusStatusATK },
+      MATK: { bonusStatusMATK },
     } = character;
     const ATK_INCREASE = 50;
     return {
@@ -753,6 +801,20 @@ const BUFF_EFFECTS: Record<keyof Buffs, BuffEffect> = {
               "boxOfResentment",
               "tyrBlessing",
               "distilledFightingSpirit",
+            ].includes(buff)
+          )
+            ? ATK_INCREASE
+            : 0),
+      },
+      MATK: {
+        ...character.MATK,
+        bonusStatusMATK:
+          bonusStatusMATK +
+          (!character.buffs.some((buff: string) =>
+            [
+              "boxOfDrowsiness",
+              "tyrBlessing",
+              "herbOfIncantation",
             ].includes(buff)
           )
             ? ATK_INCREASE
@@ -785,6 +847,30 @@ const BUFF_EFFECTS: Record<keyof Buffs, BuffEffect> = {
       buffs: [...character.buffs, "distilledFightingSpirit"],
     };
   },
+  herbOfIncantation: (character: Character) => {
+    const {
+      MATK: { bonusStatusMATK },
+    } = character;
+    const ATK_INCREASE = 30;
+    return {
+      ...character,
+      MATK: {
+        ...character.MATK,
+        bonusStatusMATK:
+          bonusStatusMATK +
+          (!character.buffs.some((buff: string) =>
+            [
+              "tyrBlessing",
+              "boxOfDrowsiness",
+              "cursedFragment",
+            ].includes(buff)
+          )
+            ? ATK_INCREASE
+            : 0),
+      },
+      buffs: [...character.buffs, "herbOfIncantation"],
+    };
+  },
   boxOfResentment: (character: Character) => {
     const {
       ATK: { bonusStatusATK },
@@ -809,9 +895,34 @@ const BUFF_EFFECTS: Record<keyof Buffs, BuffEffect> = {
       buffs: [...character.buffs, "boxOfResentment"],
     };
   },
+  boxOfDrowsiness: (character: Character) => {
+    const {
+      MATK: { bonusStatusMATK },
+    } = character;
+    const ATK_INCREASE = 20;
+    return {
+      ...character,
+      MATK: {
+        ...character.MATK,
+        bonusStatusMATK:
+          bonusStatusMATK +
+          (!character.buffs.some((buff: string) =>
+            [
+              "tyrBlessing",
+              "herbOfIncantation",
+              "cursedFragment",
+            ].includes(buff)
+          )
+            ? ATK_INCREASE
+            : 0),
+      },
+      buffs: [...character.buffs, "boxOfDrowsiness"],
+    };
+  },
   tyrBlessing: (character: Character) => {
     const {
       ATK: { bonusStatusATK },
+      MATK: { bonusStatusMATK },
     } = character;
     const ATK_INCREASE = 20;
     return {
@@ -830,13 +941,27 @@ const BUFF_EFFECTS: Record<keyof Buffs, BuffEffect> = {
             ? ATK_INCREASE
             : 0),
       },
+      MATK: {
+        ...character.MATK,
+        bonusStatusMATK:
+          bonusStatusMATK +
+          (!character.buffs.some((buff: string) =>
+            [
+              "boxOfDrowsiness",
+              "herbOfIncantation",
+              "cursedFragment",
+            ].includes(buff)
+          )
+            ? ATK_INCREASE
+            : 0),
+      },
       buffs: [...character.buffs, "tyrBlessing"],
     };
   },
   redBooster: (character: Character) => {
     const {
       ATK: { bonusStatusATK },
-      MATK: { consumableMATK }
+      MATK: { bonusStatusMATK }
     } = character;
     const ATK_INCREASE = 30;
     return {
@@ -847,7 +972,7 @@ const BUFF_EFFECTS: Record<keyof Buffs, BuffEffect> = {
       },
       MATK: {
         ...character.MATK,
-        consumableMATK: consumableMATK + ATK_INCREASE,
+        bonusStatusMATK: bonusStatusMATK + ATK_INCREASE,
       },
       buffs: [...character.buffs, "redBooster"],
     };
@@ -856,7 +981,7 @@ const BUFF_EFFECTS: Record<keyof Buffs, BuffEffect> = {
     const {
       ATK: { bonusStatusATK },
       modifiers: { class: classATK },
-      MATK: { consumableMATK, matkPercent }
+      MATK: { bonusStatusMATK, matkPercent }
     } = character;
     const ATK_INCREASE = 30;
     const ATK_PERCENT_INCREASE = 1;
@@ -872,7 +997,7 @@ const BUFF_EFFECTS: Record<keyof Buffs, BuffEffect> = {
       },
       MATK: {
         ...character.MATK,
-        consumableMATK: consumableMATK + ATK_INCREASE,
+        bonusStatusMATK: bonusStatusMATK + ATK_INCREASE,
         matkPercent: matkPercent + ATK_PERCENT_INCREASE,
       },
       buffs: [...character.buffs, "limitedPowerBooster"],

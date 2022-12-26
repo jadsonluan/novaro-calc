@@ -95,7 +95,7 @@ function getWeaponATK(
   let increasedWeaponATK = 0;
 
   if (character.buffs.includes('runeStrawberryCake')) {
-    weaponATK += getModifierIncrease(weaponATK, 5);
+    increasedWeaponATK += getModifierIncrease(weaponATK, 5);
   }
 
   if (character.buffs.includes('enchantDeadlyPoison')) {

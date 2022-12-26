@@ -38,9 +38,7 @@ interface Shield {
 
 export interface ATKModifiers {
   equipATK: number;
-  // nao funciona no nova para consumiveis
   consumableATK: number;
-  // parecido com consumableATK mas o nova usa esse invés do consumableATK para alguns iten
   bonusStatusATK: number;
   ammoATK: number;
   pseudoBuffATK: number;
@@ -54,6 +52,7 @@ export interface MATKModifiers {
   matkPercent: number;
   equipMATK: number;
   consumableMATK: number;
+  bonusStatusMATK: number;
   pseudoBuffMATK: number;
   buffMATK: number;
   smatk: number;
@@ -175,6 +174,7 @@ export const emptyCharacter: Character = {
     matkPercent: 100,
     equipMATK: 0,
     consumableMATK: 0,
+    bonusStatusMATK: 0,
     pseudoBuffMATK: 0,
     buffMATK: 0,
     smatk: 0,
