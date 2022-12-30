@@ -98,22 +98,24 @@ function getWeaponATK(
     increasedWeaponATK += getModifierIncrease(weaponATK, 5);
   }
 
+  let totalWeaponATK = (weaponATK + increasedWeaponATK) + statBonus + variance + overUpgradeATK;
+
+  let increasedTotalWeaponATK = 0;
+
   if (character.buffs.includes('enchantDeadlyPoison')) {
-    increasedWeaponATK += getModifierIncrease(weaponATK, 400);
+    increasedTotalWeaponATK += getModifierIncrease(totalWeaponATK, 400);
   }
 
   if (character.buffs.includes('earthCharm')) {
-    increasedWeaponATK += getModifierIncrease(weaponATK, 150);
+    increasedTotalWeaponATK += getModifierIncrease(totalWeaponATK, 150);
   }
 
   if (character.buffs.includes('concentration')) {
-    increasedWeaponATK += getModifierIncrease(weaponATK, 15);
+    increasedTotalWeaponATK += getModifierIncrease(totalWeaponATK, 15);
   }
 
-  let totalWeaponATK = (weaponATK + increasedWeaponATK) + statBonus + variance + overUpgradeATK;
-
   return applyCardModifiers(
-    Math.floor(totalWeaponATK * sizePenalty),
+    Math.floor((totalWeaponATK + increasedTotalWeaponATK) * sizePenalty),
     character,
     monster
   );
@@ -123,6 +125,9 @@ function getExtraATK(character: Character, monster: Monster) {
   let { ATK: { equipATK, consumableATK, ammoATK, pseudoBuffATK }, stats } = character;
 
   let increasedEquipATK = 0;
+  let increasedConsumableATK = 0;
+  let increasedAmmoATK = 0;
+  let icnreasedPseudoBuffATK = 0;
 
   if (character.buffs.includes('concentration')) {
     increasedEquipATK += getModifierIncrease(equipATK, 15);
@@ -141,15 +146,24 @@ function getExtraATK(character: Character, monster: Monster) {
     increasedEquipATK += getModifierIncrease(equipATK + increasedEquipATK, OPPOSITION_BONUS);
   }
 
+  increasedEquipATK += getModifierIncrease(equipATK, character.buffs.includes('enchantDeadlyPoison') ? 300 : 0);
   equipATK += increasedEquipATK
 
-  let extraATK = applyCardModifiers(
-    Math.floor(equipATK + consumableATK + ammoATK + pseudoBuffATK),
+  increasedConsumableATK += getModifierIncrease(consumableATK, character.buffs.includes('enchantDeadlyPoison') ? 300 : 0);
+  consumableATK += increasedConsumableATK;
+
+  ammoATK += increasedAmmoATK;
+
+  icnreasedPseudoBuffATK += getModifierIncrease(pseudoBuffATK, character.buffs.includes('enchantDeadlyPoison') ? 400 : 0);
+  pseudoBuffATK += icnreasedPseudoBuffATK;
+
+  let extraATK = Math.floor(equipATK + consumableATK + ammoATK + pseudoBuffATK);
+
+  extraATK = applyCardModifiers(
+    extraATK,
     character,
     monster
-  );
-
-  extraATK = applyModifier(extraATK, character.buffs.includes('enchantDeadlyPoison') ? 300 : 0);
+    );
 
   return extraATK;
 }
