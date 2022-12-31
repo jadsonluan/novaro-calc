@@ -23,10 +23,6 @@ export function getEquipMATK (character: Character, totalMATK: number) {
   nonStatusMATK -= character.weapon.matk + getRefineBonus(character.weapon);
   nonStatusMATK -= character.shadowWeaponRefine;
 
-  if (character.job === 'Hyper Novice') {
-    nonStatusMATK -= 100 // Transcedence passive
-  }
-
   return Math.max(0, nonStatusMATK);
 }
 
