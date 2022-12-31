@@ -57,10 +57,18 @@ function App() {
   return (
     <div className="app">
       <div className="navbar">
+      <header className="header build-names">
+        <div className="input-label">
+          <span>Build 1:</span><input value={build1.name} onChange={(e: ChangeEvent<HTMLInputElement>) => build1.setName(e.target.value)} />
+        </div>
+        <div className="input-label">
+          <span>Build 2:</span><input value={build2.name} onChange={(e: ChangeEvent<HTMLInputElement>) => build2.setName(e.target.value)} />
+        </div>
+      </header>
       <header className="header container">
         <div className="left-action">
           <div className="logo">
-            <h1>NovaRO Calc: {isMATK ? 'MATK' : 'ATK'}</h1>
+            <p>NovaRO Calc: {isMATK ? 'MATK' : 'ATK'}</p>
             <h6>Created by: Luan and Gabriel</h6>
           </div>
           <div className="actions">
@@ -85,14 +93,6 @@ function App() {
         </div>
         <div className="links">
           <Link to={!isMATK ? '/matk' : '/'} reloadDocument>{!isMATK ? 'MATK' : 'ATK'} calc</Link>
-        </div>
-      </header>
-      <header className="header build-names">
-        <div className="input-label">
-          <span>Build 1:</span><input value={build1.name} onChange={(e: ChangeEvent<HTMLInputElement>) => build1.setName(e.target.value)} />
-        </div>
-        <div className="input-label">
-          <span>Build 2:</span><input value={build2.name} onChange={(e: ChangeEvent<HTMLInputElement>) => build2.setName(e.target.value)} />
         </div>
       </header>
       </div>

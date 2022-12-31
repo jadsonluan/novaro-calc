@@ -319,6 +319,24 @@ const alchemistSkills: Record<string, Skill> = {
       };
     },
   },
+  ACIFIED_ZONE: {
+    key: "ACIFIED_ZONE",
+    label: "Acified Zone",
+    name: "Acified Zone",
+    isMelee: false,
+    job: "Biolo",
+    hardAsSoftDef: true,
+    formula: (character: Character, monster: Monster, buffs: Buffs) => {
+      const baseDamage = 2000;
+      return {
+        percent:
+          (baseDamage + 5 * character.traits.pow) * (character.baseLevel / 100) *
+          (1 + (buffs.researchReport?.active ? 0.7 : 0) + (['formless', 'plant'].includes(monster.race) ? 0.3 : 0)) *
+          5,
+        bonus: 0,
+      };
+    },
+  },
 }
 
 const assassinSkills: Record<string, Skill> = {

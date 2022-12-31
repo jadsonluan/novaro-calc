@@ -54,6 +54,7 @@ export interface Buffs {
   cartBoost?: Buff;
   pyroclastic?: Buff;
   tempering?: Buff;
+  researchReport?: Buff;
   // Mage
   magicAmplification?: Buff;
   recognizedSpell?: Buff;
@@ -300,6 +301,11 @@ export const emptyATKBuffs: Buffs = {
   tempering: {
     active: false,
     tooltip: "P.atk +15",
+    job: "Merchant",
+  },
+  researchReport: {
+    active: false,
+    tooltip: "Increases Acified Zone damage and acid skills damage against Formless and Plant monsters",
     job: "Merchant",
   },
   // Mage
@@ -1314,6 +1320,9 @@ const BUFF_EFFECTS: Record<keyof Buffs, BuffEffect> = {
       },
       buffs: [...character.buffs, "tempering"],
     };
+  },
+  researchReport: (character: Character, monster: Monster) => {
+    return { ...character, buffs: [...character.buffs, "researchReport"] };
   },
   // Mage
   magicAmplification: (character: Character) => {
