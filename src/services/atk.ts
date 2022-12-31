@@ -73,7 +73,7 @@ function getWeaponATK(
   sizePenalty: number,
   monster: Monster
 ) {
-  const { weapon, stats, shadowWeaponRefine } = character;
+  const { weapon, stats, shadowWeaponRefine, ATK: { weaponBuffATK } } = character;
 
   const statBonus = getStatBonus(weapon, stats);
   const refineATK = getRefineBonus(weapon) + shadowWeaponRefine;
@@ -98,7 +98,7 @@ function getWeaponATK(
     increasedWeaponATK += getModifierIncrease(weaponATK, 5);
   }
 
-  let totalWeaponATK = (weaponATK + increasedWeaponATK) + statBonus + variance + overUpgradeATK;
+  let totalWeaponATK = (weaponATK + increasedWeaponATK) + statBonus + variance + overUpgradeATK + weaponBuffATK;
 
   let increasedTotalWeaponATK = 0;
 
@@ -152,9 +152,10 @@ function getExtraATK(character: Character, monster: Monster) {
   increasedConsumableATK += getModifierIncrease(consumableATK, character.buffs.includes('enchantDeadlyPoison') ? 300 : 0);
   consumableATK += increasedConsumableATK;
 
+  increasedAmmoATK += getModifierIncrease(ammoATK, character.buffs.includes('enchantDeadlyPoison') ? 300 : 0);
   ammoATK += increasedAmmoATK;
 
-  icnreasedPseudoBuffATK += getModifierIncrease(pseudoBuffATK, character.buffs.includes('enchantDeadlyPoison') ? 400 : 0);
+  icnreasedPseudoBuffATK += getModifierIncrease(pseudoBuffATK, character.buffs.includes('enchantDeadlyPoison') ? 300 : 0);
   pseudoBuffATK += icnreasedPseudoBuffATK;
 
   let extraATK = Math.floor(equipATK + consumableATK + ammoATK + pseudoBuffATK);

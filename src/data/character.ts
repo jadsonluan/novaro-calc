@@ -42,6 +42,7 @@ export interface ATKModifiers {
   bonusStatusATK: number;
   ammoATK: number;
   pseudoBuffATK: number;
+  weaponBuffATK: number;
   masteryATK: number;
   buffATK: number;
   patk: number;
@@ -165,6 +166,7 @@ export const emptyCharacter: Character = {
     bonusStatusATK: 0,
     ammoATK: 0,
     pseudoBuffATK: 0,
+    weaponBuffATK: 0,
     masteryATK: 0,
     buffATK: 0,
     patk: 0,

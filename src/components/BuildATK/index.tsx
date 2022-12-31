@@ -67,14 +67,14 @@ export const BuildATK = () => {
         })}
       />
       <BuildCharacterInput
-        label="Pseudo Buff ATK"
+        label="Weapon Buff ATK"
         tooltip="Most buffs that increases ATK goes here"
-        getValue={(character: Character) => character.ATK.pseudoBuffATK}
+        getValue={(character: Character) => character.ATK.weaponBuffATK}
         updateValue={(value: number) => (prev: Character) => ({
           ...prev,
           ATK: {
             ...prev.ATK,
-            pseudoBuffATK: value,
+            weaponBuffATK: value,
           },
         })}
       />

@@ -1056,14 +1056,14 @@ const BUFF_EFFECTS: Record<keyof Buffs, BuffEffect> = {
   },
   asirRune: (character: Character) => {
     const {
-      ATK: { pseudoBuffATK },
+      ATK: { weaponBuffATK },
     } = character;
     const ATK_INCREASE = 70;
     return {
       ...character,
       ATK: {
         ...character.ATK,
-        pseudoBuffATK: pseudoBuffATK + ATK_INCREASE,
+        weaponBuffATK: weaponBuffATK + ATK_INCREASE,
       },
       buffs: [...character.buffs, "asirRune"],
     };
@@ -1101,14 +1101,14 @@ const BUFF_EFFECTS: Record<keyof Buffs, BuffEffect> = {
   },
   shieldSpell: (character: Character) => {
     const {
-      ATK: { pseudoBuffATK },
+      ATK: { weaponBuffATK },
     } = character;
     const ATK_INCREASE = 150;
     return {
       ...character,
       ATK: {
         ...character.ATK,
-        pseudoBuffATK: pseudoBuffATK + ATK_INCREASE,
+        weaponBuffATK: weaponBuffATK + ATK_INCREASE,
       },
       buffs: [...character.buffs, "shieldSpell"],
     };
@@ -1117,7 +1117,7 @@ const BUFF_EFFECTS: Record<keyof Buffs, BuffEffect> = {
     const {
       stats,
       hp,
-      ATK: { pseudoBuffATK },
+      ATK: { weaponBuffATK },
     } = character;
     const ATK_INCREASE = 200;
     const STAT_INCREASE = 30;
@@ -1130,7 +1130,7 @@ const BUFF_EFFECTS: Record<keyof Buffs, BuffEffect> = {
       },
       ATK: {
         ...character.ATK,
-        pseudoBuffATK: pseudoBuffATK + ATK_INCREASE,
+        weaponBuffATK: weaponBuffATK + ATK_INCREASE,
       },
       stats: {
         str: stats.str + STAT_INCREASE,
@@ -1252,7 +1252,7 @@ const BUFF_EFFECTS: Record<keyof Buffs, BuffEffect> = {
   // Merchant
   loudExclamation: (character: Character) => {
     const {
-      ATK: { pseudoBuffATK },
+      ATK: { weaponBuffATK },
       stats,
     } = character;
     const ATK_INCREASE = 30;
@@ -1265,7 +1265,7 @@ const BUFF_EFFECTS: Record<keyof Buffs, BuffEffect> = {
       },
       ATK: {
         ...character.ATK,
-        pseudoBuffATK: pseudoBuffATK + ATK_INCREASE,
+        weaponBuffATK: weaponBuffATK + ATK_INCREASE,
       },
       buffs: [...character.buffs, "loudExclamation"],
     };
@@ -1295,14 +1295,14 @@ const BUFF_EFFECTS: Record<keyof Buffs, BuffEffect> = {
   },
   pyroclastic: (character: Character) => {
     const {
-      ATK: { pseudoBuffATK },
+      ATK: { weaponBuffATK },
     } = character;
     const ATK_INCREASE = 450;
     return {
       ...character,
       ATK: {
         ...character.ATK,
-        pseudoBuffATK: pseudoBuffATK + ATK_INCREASE,
+        weaponBuffATK: weaponBuffATK + ATK_INCREASE,
       },
       buffs: [...character.buffs, "pyroclastic"],
     };
@@ -1454,7 +1454,7 @@ const BUFF_EFFECTS: Record<keyof Buffs, BuffEffect> = {
   },
   volcano: (character: Character) => {
     const {
-      ATK: { pseudoBuffATK },
+      ATK: { weaponBuffATK },
       MATK: { buffMATK },
       modifiers: { dmg }
     } = character;
@@ -1465,7 +1465,7 @@ const BUFF_EFFECTS: Record<keyof Buffs, BuffEffect> = {
       ...character,
       ATK: {
         ...character.ATK,
-        pseudoBuffATK: pseudoBuffATK + ATK_INCREASE
+        weaponBuffATK: weaponBuffATK + ATK_INCREASE
       },
       MATK: {
         ...character.MATK,
@@ -1570,7 +1570,7 @@ const BUFF_EFFECTS: Record<keyof Buffs, BuffEffect> = {
   },
   fireInsigniaLv2: (character: Character) => {
     const {
-      ATK: { pseudoBuffATK },
+      ATK: { weaponBuffATK },
       modifiers: { class: classATK }
     } = character;
     const ATK_INCREASE = 50;
@@ -1580,7 +1580,7 @@ const BUFF_EFFECTS: Record<keyof Buffs, BuffEffect> = {
       ...character,
       ATK: {
         ...character.ATK,
-        pseudoBuffATK: pseudoBuffATK + ATK_INCREASE,
+        weaponBuffATK: weaponBuffATK + ATK_INCREASE,
       },
       modifiers: {
         ...character.modifiers,
@@ -1612,14 +1612,14 @@ const BUFF_EFFECTS: Record<keyof Buffs, BuffEffect> = {
   },
   striking: (character: Character) => {
     const {
-      ATK: { pseudoBuffATK },
+      ATK: { weaponBuffATK },
     } = character;
     const ATK_INCREASE = 100;
     return {
       ...character,
       ATK: {
         ...character.ATK,
-        pseudoBuffATK: pseudoBuffATK + ATK_INCREASE,
+        weaponBuffATK: weaponBuffATK + ATK_INCREASE,
       },
       buffs: [...character.buffs, "striking"],
     };
@@ -1731,7 +1731,7 @@ const BUFF_EFFECTS: Record<keyof Buffs, BuffEffect> = {
   // Acolyte
   odinsBlessing: (character: Character) => {
     const {
-      ATK: { pseudoBuffATK },
+      ATK: { weaponBuffATK },
       MATK: { buffMATK },
     } = character;
     const ATK_INCREASE = 100;
@@ -1739,7 +1739,7 @@ const BUFF_EFFECTS: Record<keyof Buffs, BuffEffect> = {
       ...character,
       ATK: {
         ...character.ATK,
-        pseudoBuffATK: pseudoBuffATK + ATK_INCREASE,
+        weaponBuffATK: weaponBuffATK + ATK_INCREASE,
       },
       MATK: {
         ...character.MATK,
@@ -1850,13 +1850,13 @@ const BUFF_EFFECTS: Record<keyof Buffs, BuffEffect> = {
     return { ...character, buffs: [...character.buffs, "heatBarrel"] };
   },
   intensiveAim: (character: Character) => {
-    const { ATK: { pseudoBuffATK } } = character;
+    const { ATK: { weaponBuffATK } } = character;
     const ATK_INCREASE = 150;
     return {
       ...character,
       ATK: {
         ...character.ATK,
-        pseudoBuffATK: pseudoBuffATK + ATK_INCREASE,
+        weaponBuffATK: weaponBuffATK + ATK_INCREASE,
       },
       buffs: [...character.buffs, "intensiveAim"],
     };
@@ -1920,14 +1920,14 @@ const BUFF_EFFECTS: Record<keyof Buffs, BuffEffect> = {
   },
   falconSoul: (character: Character) => {
     const {
-      ATK: { pseudoBuffATK },
+      ATK: { weaponBuffATK },
     } = character;
     const ATK_INCREASE = 50;
     return {
       ...character,
       ATK: {
         ...character.ATK,
-        pseudoBuffATK: pseudoBuffATK + ATK_INCREASE,
+        weaponBuffATK: weaponBuffATK + ATK_INCREASE,
       },
       buffs: [...character.buffs, "falconSoul"],
     };
@@ -2033,7 +2033,7 @@ const BUFF_EFFECTS: Record<keyof Buffs, BuffEffect> = {
   },
   chattering: (character: Character) => {
     const {
-      ATK: { pseudoBuffATK },
+      ATK: { weaponBuffATK },
       MATK: { buffMATK },
     } = character;
     const ATK_INCREASE = 100;
@@ -2042,7 +2042,7 @@ const BUFF_EFFECTS: Record<keyof Buffs, BuffEffect> = {
       ...character,
       ATK: {
         ...character.ATK,
-        pseudoBuffATK: pseudoBuffATK + ATK_INCREASE,
+        weaponBuffATK: weaponBuffATK + ATK_INCREASE,
       },
       MATK: {
         ...character.MATK,
