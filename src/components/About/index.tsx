@@ -44,7 +44,7 @@ const About = () => {
         <p>
           This tool is a work in progress. If you have any suggestions or
           feedback, please contact me at my{" "}
-          <a style={{color: 'white'}} href="mailto:gabmla19@gmail.com">Gmail</a> or Gabriel M.#6838 on Discord.
+          <a style={{color: 'white'}} href="mailto:gabmla19@gmail.com">Gmail</a>, <b>Gabriel M.#6838</b> on Discord or my main character ingame <b>Amalfabeta</b> (Biolo, I usually stay in Brasilis).
         </p>
         <div className="buttons">
             <button onClick={handleClose}>Close</button>
