@@ -734,7 +734,7 @@ const priestSkills: Record<string, Skill> = {
 const ninjaSkills: Record<string, Skill> = {
   FLAMING_PETALS: {
     key: "FLAMING_PETALS",
-    name: "Flaming Petals",
+    name: "Crimson Fire Petal",
     label: "Flaming Petals",
     isMelee: false,
     job: "Shinkiro / Shiranui",
@@ -748,7 +748,7 @@ const ninjaSkills: Record<string, Skill> = {
   },
   FREEZING_SPEAR: {
     key: "FREEZING_SPEAR",
-    name: "Freezing Spear",
+    name: "Spear of Ice",
     label: "Freezing Spear",
     isMelee: false,
     job: "Shinkiro / Shiranui",
