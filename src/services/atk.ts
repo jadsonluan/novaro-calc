@@ -127,7 +127,7 @@ function getExtraATK(character: Character, monster: Monster) {
   let increasedEquipATK = 0;
   let increasedConsumableATK = 0;
   let increasedAmmoATK = 0;
-  let icnreasedPseudoBuffATK = 0;
+  let increasedPseudoBuffATK = 0;
 
   if (character.buffs.includes('concentration')) {
     increasedEquipATK += getModifierIncrease(equipATK, 15);
@@ -155,8 +155,11 @@ function getExtraATK(character: Character, monster: Monster) {
   increasedAmmoATK += getModifierIncrease(ammoATK, character.buffs.includes('enchantDeadlyPoison') ? 300 : 0);
   ammoATK += increasedAmmoATK;
 
-  icnreasedPseudoBuffATK += getModifierIncrease(pseudoBuffATK, character.buffs.includes('enchantDeadlyPoison') ? 300 : 0);
-  pseudoBuffATK += icnreasedPseudoBuffATK;
+  increasedPseudoBuffATK += getModifierIncrease(pseudoBuffATK, character.buffs.includes('enchantDeadlyPoison') ? 300 : 0);
+  increasedPseudoBuffATK += character.buffs.includes("investigate")
+    ? Math.floor(Math.floor(((monster.hardDEF - monster.hardDEFDebuff) * (1 - character.bypass / 100))) / 2)
+    : 0;
+  pseudoBuffATK += increasedPseudoBuffATK;
 
   let extraATK = Math.floor(equipATK + consumableATK + ammoATK + pseudoBuffATK);
 
@@ -319,10 +322,10 @@ function getRES(monster: Monster, traitBypass: number) {
 function getDEF(character: Character, monster: Monster) {
   const { traitBypass, bypass, skill: skillName, weapon: { type: weaponType }} = character;
 
+  const skill = getSkill(skillName);
   const RES = getRES(monster, traitBypass);
   const hardDEF = getHardDEF(monster, bypass);
   const softDEF = getSoftDEF(monster);
-  const skill = getSkill(skillName);
 
   // Bypass when using specific weapon
   if (['ONLY_ONE_BULLET'].includes(skill.key) && ['Pistol'].includes(weaponType)) {
@@ -335,6 +338,10 @@ function getDEF(character: Character, monster: Monster) {
 
   if (skill.hardAsSoftDef) {
     return { RES, hardDEF: 1, softDEF: softDEF + monster.hardDEF };
+  }
+
+  if (character.buffs.includes('investigate')) {
+    return { RES, hardDEF: 1, softDEF };
   }
 
   return { RES, hardDEF, softDEF };
@@ -367,7 +374,7 @@ export function getFinalATKDamage(range: DmgRange, build: BuildInfo) {
   const { RES, hardDEF, softDEF } = getDEF(
     character,
     monster
-  );
+    );
 
   let finalDmg = Math.floor(atk * (formula.percent / 100));
   finalDmg = applyModifier(finalDmg, mods.skill);

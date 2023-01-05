@@ -25,6 +25,7 @@ export interface Buffs {
   infinityDrink?: Buff;
   sacredDraught?: Buff;
   runeStrawberryCake?: Buff;
+  investigate?: Buff;
   // Swordsman
   magnumBreak?: Buff;
   concentration?: Buff;
@@ -179,6 +180,11 @@ export const emptyATKBuffs: Buffs = {
   runeStrawberryCake: {
     active: false,
     tooltip: "+5% (Weapon Base ATK + Refine ATK) and +5% Status ATK",
+    job: "All",
+  },
+  investigate: {
+    active: false,
+    tooltip: "Ignores monster Hard DEF and gain this DEF / 2 as PseudoBuffATK",
     job: "All",
   },
   // Swordsman
@@ -1093,6 +1099,9 @@ const BUFF_EFFECTS: Record<keyof Buffs, BuffEffect> = {
   },
   runeStrawberryCake: (character: Character) => {
     return { ...character, buffs: [...character.buffs, "runeStrawberryCake"] };
+  },
+  investigate: (character: Character) => {
+    return { ...character, buffs: [...character.buffs, "investigate"] };
   },
   // Swordsman
   magnumBreak: (character: Character) => {
