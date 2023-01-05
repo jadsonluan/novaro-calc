@@ -823,7 +823,7 @@ const ninjaSkills: Record<string, Skill> = {
     isMelee: false,
     job: "Shinkiro / Shiranui",
     formula: (character: Character, monster: Monster, buffs: Buffs) => {
-      const baseDamage = 1500 + 700; // Should be 2350
+      const baseDamage = 2350 + 700;
       return {
         percent: (baseDamage + character.traits.spl * 5) * (character.baseLevel / 100),
         bonus: 0,
@@ -900,8 +900,7 @@ const soulLinkerSkills: Record<string, Skill> = {
     isMelee: false,
     job: "Soul Ascetic",
     formula: (character: Character, monster: Monster, buffs: Buffs) => {
-      const baseDamage =
-        5250 + (buffs.circleOfDirectionsAndElementals?.active ? 2250 : 0);
+      const baseDamage = 4500 + 750 + (buffs.circleOfDirectionsAndElementals?.active ? 2250 : 0);
       return {
         percent:
           (baseDamage + character.traits.spl * 5) * (character.baseLevel / 100),
@@ -916,8 +915,7 @@ const soulLinkerSkills: Record<string, Skill> = {
     isMelee: false,
     job: "Soul Ascetic",
     formula: (character: Character, monster: Monster, buffs: Buffs) => {
-      const baseDamage =
-        4250 + (buffs.circleOfDirectionsAndElementals?.active ? 1500 : 0);
+      const baseDamage = 3500 + 750 + (buffs.circleOfDirectionsAndElementals?.active ? 1500 : 0);
       return {
         percent:
           (baseDamage + character.traits.spl * 5) * (character.baseLevel / 100),
@@ -932,8 +930,7 @@ const soulLinkerSkills: Record<string, Skill> = {
     isMelee: false,
     job: "Soul Ascetic",
     formula: (character: Character, monster: Monster, buffs: Buffs) => {
-      const baseDamage =
-        5250 + (buffs.circleOfDirectionsAndElementals?.active ? 2000 : 0);
+      const baseDamage = 4500 + 750 + (buffs.circleOfDirectionsAndElementals?.active ? 2000 : 0);
       return {
         percent:
           (baseDamage + character.traits.spl * 5) * (character.baseLevel / 100),
@@ -948,8 +945,7 @@ const soulLinkerSkills: Record<string, Skill> = {
     isMelee: false,
     job: "Soul Ascetic",
     formula: (character: Character, monster: Monster, buffs: Buffs) => {
-      const baseDamage =
-        7250 + (buffs.circleOfDirectionsAndElementals?.active ? 2250 : 0);
+      const baseDamage = 6500 + 750 + (buffs.circleOfDirectionsAndElementals?.active ? 2250 : 0);
       return {
         percent:
           (baseDamage + character.traits.spl * 5) * (character.baseLevel / 100),
@@ -964,7 +960,7 @@ const soulLinkerSkills: Record<string, Skill> = {
     isMelee: false,
     job: "Soul Ascetic",
     formula: (character: Character, monster: Monster, buffs: Buffs) => {
-      const baseDamage = 1750;
+      const baseDamage = 1000 + 750;
       return {
         percent:
           (baseDamage + character.traits.spl * 5) * (character.baseLevel / 100) *

@@ -1078,7 +1078,7 @@ const ninjaSkills: Record<string, Skill> = {
     formula: (character: Character, monster: Monster, buffs: Buffs) => {
       const baseDamage = 3300 + 2500;
       return {
-        percent: (baseDamage + character.traits.pow * 5) * (character.baseLevel / 100) * 3,
+        percent: (baseDamage + character.traits.pow * 5) * (character.baseLevel / 100),
         bonus: 0,
       };
     }
@@ -1188,7 +1188,7 @@ const ninjaSkills: Record<string, Skill> = {
     isMelee: true,
     job: "Shinkiro / Shiranui",
     formula: (character: Character, monster: Monster, buffs: Buffs) => {
-      const baseDamage = 9000 + 10000;
+      const baseDamage = 9700 + 10000;
       return {
         percent: (baseDamage + character.traits.pow * 5) * (character.baseLevel / 100),
         bonus: 0,
