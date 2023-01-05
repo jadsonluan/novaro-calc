@@ -4,10 +4,14 @@ import { Character } from "./character";
 import { Monster } from "./monster";
 
 export interface Debuffs {
+  // Archer
   soundBlend?: Buff;
+  // Acolyte
   oratio?: Buff;
+  // Thief
   darkClaw?: Buff;
   raid?: Buff;
+  // Mage
   magicIntoxication?: Buff;
   allBloom?: Buff;
   violentQuake?: Buff;
@@ -15,6 +19,9 @@ export interface Debuffs {
   waterInsignia?: Buff;
   windInsignia?: Buff;
   fireInsignia?: Buff;
+  // Ninja
+  wateryEvasion?: Buff;
+  // Taekwon
   soulCurse?: Buff;
 }
 
@@ -131,6 +138,11 @@ export const emptyMATKDebuffs: Debuffs = {
     active: false,
     tooltip: "Decreases holy property resistance",
     job: "Priest"
+  },
+  wateryEvasion: {
+    active: false,
+    tooltip: "Increases Freezing Spear damage",
+    job: "Ninja"
   },
   soulCurse: {
     active: false,
@@ -278,6 +290,12 @@ const DEBUFF_EFFECTS: Record<keyof Debuffs, BuffEffect> = {
         ...monster,
         debuffs: [...monster.debuffs, "fireInsignia"],
       },
+    };
+  },
+  wateryEvasion: (character: Character, monster: Monster) => {
+    return {
+      character: { ...character },
+      monster: { ...monster, debuffs: [...monster.debuffs, "wateryEvasion"] },
     };
   },
   soulCurse: (character: Character, monster: Monster) => {

@@ -732,6 +732,48 @@ const priestSkills: Record<string, Skill> = {
 };
 
 const ninjaSkills: Record<string, Skill> = {
+  FLAMING_PETALS: {
+    key: "FLAMING_PETALS",
+    name: "Flaming Petals",
+    label: "Flaming Petals",
+    isMelee: false,
+    job: "Shinkiro / Shiranui",
+    formula: (character: Character, monster: Monster, buffs: Buffs) => {
+      const baseDamage = 90 + (buffs.fireCharm?.active ? 200 : 0);
+      return {
+        percent: (baseDamage) * 10,
+        bonus: 0,
+      };
+    },
+  },
+  FREEZING_SPEAR: {
+    key: "FREEZING_SPEAR",
+    name: "Freezing Spear",
+    label: "Freezing Spear",
+    isMelee: false,
+    job: "Shinkiro / Shiranui",
+    formula: (character: Character, monster: Monster, buffs: Buffs) => {
+      const baseDamage = 70 + (buffs.iceCharm?.active ? 200 : 0) + (monster.debuffs.includes('wateryEvasion') ? 20 : 0);
+      return {
+        percent: (baseDamage) * 12,
+        bonus: 0,
+      };
+    },
+  },
+  WIND_BLADE: {
+    key: "WIND_BLADE",
+    name: "Wind Blade",
+    label: "Wind Blade",
+    isMelee: false,
+    job: "Shinkiro / Shiranui",
+    formula: (character: Character, monster: Monster, buffs: Buffs) => {
+      const baseDamage = 150 + (buffs.windCharm?.active ? 200 : 0);
+      return {
+        percent: (baseDamage) * 6,
+        bonus: 0,
+      };
+    },
+  },
   RED_FLAME_CANNON: {
     key: "RED_FLAME_CANNON",
     name: "Red Flame Cannon",

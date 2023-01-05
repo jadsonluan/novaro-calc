@@ -185,7 +185,7 @@ function getMDEF(monster: Monster, bypass: number, traitBypass: number,) {
 
 export function getFinalMATKDamage(range: DmgRange, build: BuildInfo) {
   const { character: rawCharacter, monster: rawMonster, buffs, debuffs } = build;
-  const buffedCharacter = applyBuffs(rawCharacter, rawMonster, buffs);
+  const buffedCharacter = applyBuffs(rawCharacter, rawMonster, buffs, true);
   const { character, monster } = applyDebuff(buffedCharacter, rawMonster, debuffs);
 
   const skill = getSkill(character.skill);

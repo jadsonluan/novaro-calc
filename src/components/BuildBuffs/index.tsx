@@ -27,7 +27,7 @@ const BuildBuffs = ({ emptyBuffs }: { emptyBuffs: Buffs }) => {
               {groupOptions.map((buff) => (
                 <BuildBuffCheckBox
                   key={buff}
-                  label={capitalize(buff)}
+                  label={emptyBuffs[buff as keyof Buffs]?.label || capitalize(buff)}
                   getValue={(buffs: Buffs) => buffs[buff as keyof Buffs]?.active || false}
                   updateValue={(value: boolean) => (prevState: Buffs) => ({
                     ...prevState,

@@ -4,6 +4,7 @@ import { ELEMENTS } from "./element";
 import { Monster } from "./monster";
 
 export interface Buff {
+  label?: string;
   active: boolean;
   tooltip: string;
   job: string;
@@ -93,8 +94,13 @@ export interface Buffs {
   presensAcies?: Buff;
   competentia?: Buff;
   // Ninja
-  shadowWarrior?: Buff;
+  fireCharm?: Buff;
+  iceCharm?: Buff;
+  windCharm?: Buff;
   earthCharm?: Buff;
+  shadowWarrior?: Buff;
+  sixteenthNight?: Buff;
+  distorcedCrescent?: Buff;
   // Gunslinger
   platinumAlter?: Buff;
   heatBarrel?: Buff;
@@ -412,9 +418,24 @@ export const emptyATKBuffs: Buffs = {
     tooltip: "Increases Cross Slash damage",
     job: "Ninja",
   },
+  fireCharm: {
+    active: false,
+    tooltip: "Increases Race % Bonus +30% against Earth monsters",
+    job: "Ninja",
+  },
+  iceCharm: {
+    active: false,
+    tooltip: "Increases Race % Bonus +30% against Fire monsters",
+    job: "Ninja",
+  },
+  windCharm: {
+    active: false,
+    tooltip: "Increases Race % Bonus +30% against Water monsters",
+    job: "Ninja",
+  },
   earthCharm: {
     active: false,
-    tooltip: "WeaponATK +15% per charm = +150% and increases Elemental % Bonus +30% against Wind monsters",
+    tooltip: "WeaponATK +15% per charm = +150% and increases Race % Bonus +30% against Wind monsters",
     job: "Ninja",
   },
   // Gunslinger
@@ -697,6 +718,32 @@ export const emptyMATKBuffs: Buffs = {
     job: "Acolyte",
   },
   // Ninja
+  fireCharm: {
+    active: false,
+    tooltip: "Increases Flaming Petals damage",
+    job: "Ninja",
+  },
+  iceCharm: {
+    active: false,
+    tooltip: "Increases Freezing Spear damage",
+    job: "Ninja",
+  },
+  windCharm: {
+    active: false,
+    tooltip: "Increases Wind Blade damage",
+    job: "Ninja",
+  },
+  sixteenthNight: {
+    label: "16th Night",
+    active: false,
+    tooltip: "Matk +125",
+    job: "Ninja",
+  },
+  distorcedCrescent: {
+    active: false,
+    tooltip: "Increases MATK based on Base Level",
+    job: "Ninja",
+  },
   // Taekwon
   fairySoul: {
     active: false,
@@ -757,7 +804,7 @@ export const emptyMATKBuffs: Buffs = {
   },
 };
 
-type BuffEffect = (character: Character, monster: Monster) => Character;
+type BuffEffect = (character: Character, monster: Monster, isMATK: boolean) => Character;
 
 const BUFF_EFFECTS: Record<keyof Buffs, BuffEffect> = {
   // All
@@ -1828,8 +1875,97 @@ const BUFF_EFFECTS: Record<keyof Buffs, BuffEffect> = {
     };
   },
   // Ninja
+  fireCharm: (character: Character, monster: Monster, isMATK: boolean) => {
+    const { modifiers } = character;
+    const INCREASED_PROPERTY_DAMAGE = 30;
+    return {
+      ...character,
+      modifiers: {
+        ...modifiers,
+        targetProperty:
+          monster.element === ELEMENTS[2] && !isMATK
+            ? modifiers.targetProperty + INCREASED_PROPERTY_DAMAGE
+            : modifiers.targetProperty,
+      },
+      buffs: [...character.buffs, "fireCharm"],
+    };
+  },
+  iceCharm: (character: Character, monster: Monster, isMATK: boolean) => {
+    const { modifiers } = character;
+    const INCREASED_PROPERTY_DAMAGE = 30;
+    return {
+      ...character,
+      modifiers: {
+        ...modifiers,
+        targetProperty:
+          monster.element === ELEMENTS[3] && !isMATK
+            ? modifiers.targetProperty + INCREASED_PROPERTY_DAMAGE
+            : modifiers.targetProperty,
+      },
+      buffs: [...character.buffs, "iceCharm"],
+    };
+  },
+  windCharm: (character: Character, monster: Monster, isMATK: boolean) => {
+    const { modifiers } = character;
+    const INCREASED_PROPERTY_DAMAGE = 30;
+    return {
+      ...character,
+      modifiers: {
+        ...modifiers,
+        targetProperty:
+          monster.element === ELEMENTS[1] && !isMATK
+            ? modifiers.targetProperty + INCREASED_PROPERTY_DAMAGE
+            : modifiers.targetProperty,
+      },
+      buffs: [...character.buffs, "windCharm"],
+    };
+  },
+  earthCharm: (character: Character, monster: Monster, isMATK: boolean) => {
+    const { modifiers } = character;
+    const INCREASED_PROPERTY_DAMAGE = 30;
+    // Also increases totalWeaponATk by 15% per charm (150% total)
+    return {
+      ...character,
+      modifiers: {
+        ...modifiers,
+        targetProperty:
+          monster.element === ELEMENTS[4] && !isMATK
+            ? modifiers.targetProperty + INCREASED_PROPERTY_DAMAGE
+            : modifiers.targetProperty,
+      },
+      buffs: [...character.buffs, "earthCharm"],
+    };
+  },
   shadowWarrior: (character: Character) => {
     return { ...character, buffs: [...character.buffs, "shadowWarrior"] };
+  },
+  sixteenthNight: (character: Character) => {
+    const {
+      MATK: { buffMATK },
+    } = character;
+    const MATK_INCREASE = 125;
+    return {
+      ...character,
+      MATK: {
+        ...character.MATK,
+        buffMATK: buffMATK + MATK_INCREASE,
+      },
+      buffs: [...character.buffs, "sixteenthNight"],
+    };
+  },
+  distorcedCrescent: (character: Character) => {
+    const {
+      MATK: { buffMATK },
+    } = character;
+    const MATK_INCREASE = (Math.floor(character.baseLevel / 3) * 2 + 200);
+    return {
+      ...character,
+      MATK: {
+        ...character.MATK,
+        buffMATK: buffMATK + MATK_INCREASE,
+      },
+      buffs: [...character.buffs, "distorcedCrescent"],
+    };
   },
   // Gunslinger
   platinumAlter: (character: Character) => {
@@ -1876,22 +2012,6 @@ const BUFF_EFFECTS: Record<keyof Buffs, BuffEffect> = {
         ranged: ranged + MODIFIER_INCREASE,
       },
       buffs: [...character.buffs, "hiddenCard"],
-    };
-  },
-  earthCharm: (character: Character, monster: Monster) => {
-    const { modifiers } = character;
-    const INCREASED_PROPERTY_DAMAGE = 30;
-    // Also increases totalWeaponATk by 15% per charm (150% total)
-    return {
-      ...character,
-      modifiers: {
-        ...modifiers,
-        targetProperty:
-          monster.element === ELEMENTS[4]
-            ? modifiers.targetProperty + INCREASED_PROPERTY_DAMAGE
-            : modifiers.targetProperty,
-      },
-      buffs: [...character.buffs, "earthCharm"],
     };
   },
   // Taekwon
@@ -2160,14 +2280,15 @@ const BUFF_EFFECTS: Record<keyof Buffs, BuffEffect> = {
 export function applyBuffs(
   character: Character,
   monster: Monster,
-  buffs: Buffs
+  buffs: Buffs,
+  isMATK: boolean,
 ) {
   let buffedCharacter = deepCopy(character) as Character;
 
   Object.keys(BUFF_EFFECTS).forEach((key) => {
     if (!buffs[key as keyof Buffs]?.active) return;
     const effect = BUFF_EFFECTS[key as keyof Buffs];
-    buffedCharacter = effect(buffedCharacter, monster);
+    buffedCharacter = effect(buffedCharacter, monster, isMATK);
   });
 
   return buffedCharacter;
