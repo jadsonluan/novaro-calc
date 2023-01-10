@@ -827,7 +827,7 @@ const priestSkills: Record<string, Skill> = {
     key: "PETITIO",
     label: "Petitio (Mace)",
     name: "Petitio (Mace)",
-    isMelee: true,
+    isMelee: false,
     job: "Cardinal",
     formula: (character: Character, monster: Monster) => {
       const baseDamage = 2700 + character.traits.pow * 5;
@@ -841,7 +841,7 @@ const priestSkills: Record<string, Skill> = {
     key: "PETITIO_BOOK",
     label: "Petitio (Book)",
     name: "Petitio (Book)",
-    isMelee: false,
+    isMelee: true,
     job: "Cardinal",
     formula: (character: Character, monster: Monster) => {
       const baseDamage = 2700 + character.traits.pow * 5;
