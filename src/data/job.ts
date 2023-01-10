@@ -1,15 +1,15 @@
 export const INITIAL_JOBS: string[] = [
-  'Swordsman',
-  'Merchant',
-  'Thief',
-  'Mage',
-  'Acolyte',
-  'Archer',
-  'Ninja',
-  'Gunslinger',
-  'Taekwon',
-  'Novice',
-  'Doram',
+  "Swordsman",
+  "Merchant",
+  "Thief",
+  "Mage",
+  "Acolyte",
+  "Archer",
+  "Ninja",
+  "Gunslinger",
+  "Taekwon",
+  "Novice",
+  "Doram",
 ];
 
 export type Job =
@@ -37,7 +37,26 @@ export interface BaseStat {
   baseSP: number;
 }
 
-const FOURTH_JOBS: Job[] = ["Inquisitor"];
+const TRANS_JOBS: Job[] = [
+  "Dragon Knight",
+  "Imperial Guard",
+  "Meister",
+  "Biolo",
+  "Shadow Cross",
+  "Abyss Chaser",
+  "Archmage",
+  "Elemental Master",
+  "Cardinal",
+  "Inquisitor",
+  "Wind Hawk",
+  "Troubadour / Trouvere",
+  "Shinkiro / Shiranui",
+  "Night Watch",
+  "Sky Emperor",
+  "Soul Ascetic",
+  "Spirit Handler",
+  "Hyper Novice",
+];
 
 // TODO: Adicionar baseHP/SP de: Doram, SA, Oboro/Kagerou, Shadow Chaser
 export const JOBS: Record<Job, BaseStat & { initialJob: string }> = {
@@ -134,13 +153,13 @@ export const JOBS: Record<Job, BaseStat & { initialJob: string }> = {
 };
 
 export function getJobsName() {
-  return Object.getOwnPropertyNames(JOBS)
+  return Object.getOwnPropertyNames(JOBS);
 }
 
 export function getBaseStat(job: Job) {
   return JOBS[job] ?? { baseHP: 1, baseSP: 1 };
 }
 
-export function is4thJob(job: Job) {
-  return FOURTH_JOBS.includes(job);
+export function isTrans(job: Job) {
+  return TRANS_JOBS.includes(job);
 }

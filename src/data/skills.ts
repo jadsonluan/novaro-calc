@@ -879,6 +879,20 @@ const monkSkills: Record<string, Skill> = {
       bonus: 0,
     }),
   },
+  TIGER_CANNON: {
+    key: "TIGER_CANNON",
+    label: "Tiger Cannon",
+    name: "Tiger Cannon",
+    isMelee: true,
+    job: "Inquisitor",
+    formula: (character: Character, monster: Monster) => {
+      const baseDamage = (0.3 * getHP(character) + 0.15 * getSP(character)) / 4;
+      return {
+        percent: baseDamage * (character.baseLevel / 100),
+        bonus: 5000 + monster.baseLevel * 10,
+      };
+    },
+  },
   TIGER_CANNON_COMBO: {
     key: "TIGER_CANNON_COMBO",
     label: "Tiger Cannon (Combo)",
@@ -893,6 +907,118 @@ const monkSkills: Record<string, Skill> = {
       };
     },
   },
+  EXPLOSION_BLASTER: {
+    key: "EXPLOSION_BLASTER",
+    label: "Explosion Blaster",
+    name: "Explosion Blaster",
+    isMelee: false,
+    job: "Inquisitor",
+    formula: (character: Character, monster: Monster) => {
+      const baseDamage = 3250 + (monster.debuffs.includes('oleumSanctum') ? 1000 : 0);
+      return {
+        percent: (baseDamage + character.traits.pow * 5) * (character.baseLevel / 100),
+        bonus: 0,
+      };
+    },
+  },
+  MASSIVE_FLAME_BLASTER: {
+    key: "MASSIVE_FLAME_BLASTER",
+    label: "Massive Flame Blaster",
+    name: "Massive Flame Blaster",
+    isMelee: false,
+    job: "Inquisitor",
+    formula: (character: Character, monster: Monster) => {
+      const baseDamage = 8000 + (['demon', 'brute'].includes(monster.race) ? 3000 : 0);
+      return {
+        percent: (baseDamage + character.traits.pow * 10) * (character.baseLevel / 100),
+        bonus: 0,
+      };
+    },
+  },
+  FIRST_BRAND: {
+    key: "FIRST_BRAND",
+    label: "First Brand",
+    name: "First Brand",
+    isMelee: true,
+    job: "Inquisitor",
+    formula: (character: Character, monster: Monster) => {
+      const baseDamage = 2250;
+      return {
+        percent: (baseDamage + character.traits.pow * 5) * (character.baseLevel / 100),
+        bonus: 0,
+      };
+    },
+  },
+  SECOND_FAITH: {
+    key: "SECOND_FAITH",
+    label: "Second Faith",
+    name: "Second Faith",
+    isMelee: true,
+    job: "Inquisitor",
+    formula: (character: Character, monster: Monster) => {
+      const baseDamage = 2500;
+      return {
+        percent: (baseDamage + character.traits.pow * 5) * (character.baseLevel / 100),
+        bonus: 0,
+      };
+    },
+  },
+  THIRD_PUNISH: {
+    key: "THIRD_PUNISH",
+    label: "Third Punish",
+    name: "Third Punish",
+    isMelee: true,
+    job: "Inquisitor",
+    formula: (character: Character, monster: Monster) => {
+      const baseDamage = 3250;
+      return {
+        percent: (baseDamage + character.traits.pow * 5) * (character.baseLevel / 100) * 2,
+        bonus: 0,
+      };
+    },
+  },
+  SECOND_JUDGMENT: {
+    key: "SECOND_JUDGMENT",
+    label: "Second Judgment",
+    name: "Second Judgment",
+    isMelee: true,
+    job: "Inquisitor",
+    formula: (character: Character, monster: Monster) => {
+      const baseDamage = 2500;
+      return {
+        percent: (baseDamage + character.traits.pow * 5) * (character.baseLevel / 100),
+        bonus: 0,
+      };
+    },
+  },
+  THIRD_CONSECRATION: {
+    key: "THIRD_CONSECRATION",
+    label: "Third Consecration",
+    name: "Third Consecration",
+    isMelee: true,
+    job: "Inquisitor",
+    formula: (character: Character, monster: Monster) => {
+      const baseDamage = 3350;
+      return {
+        percent: (baseDamage + character.traits.pow * 5) * (character.baseLevel / 100) * 5,
+        bonus: 0,
+      };
+    },
+  },
+  SECOND_FLAME: {
+    key: "SECOND_FLAME",
+    label: "Second Flame",
+    name: "Second Flame",
+    isMelee: true,
+    job: "Inquisitor",
+    formula: (character: Character, monster: Monster) => {
+      const baseDamage = 2750;
+      return {
+        percent: (baseDamage + character.traits.pow * 5) * (character.baseLevel / 100),
+        bonus: 0,
+      };
+    },
+  },
   THIRD_FLAME_BOMB: {
     key: "THIRD_FLAME_BOMB",
     label: "Third Flame Bomb",
@@ -902,7 +1028,7 @@ const monkSkills: Record<string, Skill> = {
     formula: (character: Character, monster: Monster) => {
       const baseDamage = 3250 + 0.2 * getHP(character);
       return {
-        percent: baseDamage * (character.baseLevel / 100),
+        percent: (baseDamage + character.traits.pow * 10) * (character.baseLevel / 100) * 3,
         bonus: 0,
       };
     },

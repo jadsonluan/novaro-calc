@@ -88,12 +88,15 @@ export interface Buffs {
   serenadeOfJawaii?: Buff;
   mysticSymphony?: Buff;
   // Acolyte
-  allSpheres?: Buff;
   odinsBlessing?: Buff;
   benedictum?: Buff;
   religio?: Buff;
   presensAcies?: Buff;
   competentia?: Buff;
+  risingDragon?: Buff;
+  gentleTouchRevitalize?: Buff;
+  firmFaith?: Buff;
+  powerfulFaith?: Buff;
   // Ninja
   fireCharm?: Buff;
   iceCharm?: Buff;
@@ -393,11 +396,6 @@ export const emptyATKBuffs: Buffs = {
     job: "Archer",
   },
   // Acolyte
-  allSpheres: {
-    active: false,
-    tooltip: "Mastery ATK +3 * spheres = +45",
-    job: "Acolyte",
-  },
   odinsBlessing: {
     active: false,
     tooltip: "Pseudo Buff ATK +100",
@@ -416,6 +414,26 @@ export const emptyATKBuffs: Buffs = {
   competentia: {
     active: false,
     tooltip: "P.Atk and S.Matk +50",
+    job: "Acolyte",
+  },
+  risingDragon: {
+    active: false,
+    tooltip: "Mastery ATK +3 * spheres = +45 and MaxHP/SP +10%",
+    job: "Acolyte",
+  },
+  gentleTouchRevitalize: {
+    active: false,
+    tooltip: "MaxHP + 10% and increases Tiger Cannon damage by 30%",
+    job: "Acolyte",
+  },
+  firmFaith: {
+    active: false,
+    tooltip: "MaxHP +10%",
+    job: "Acolyte",
+  },
+  powerfulFaith: {
+    active: false,
+    tooltip: "ATK +30 and P.Atk +15",
     job: "Acolyte",
   },
   // Ninja
@@ -1869,18 +1887,77 @@ const BUFF_EFFECTS: Record<keyof Buffs, BuffEffect> = {
       buffs: [...character.buffs, "competentia"],
     };
   },
-  allSpheres: (character: Character) => {
+  risingDragon: (character: Character) => {
     const {
       ATK: { masteryATK },
+      hp: { percent: percentHP },
+      sp: { percent: percentSP },
     } = character;
     const ATK_PER_SPHERE = 3;
     return {
       ...character,
       ATK: {
         ...character.ATK,
-        masteryATK: masteryATK + ATK_PER_SPHERE * 15,
+        masteryATK: masteryATK + ATK_PER_SPHERE * 10,
       },
-      buffs: [...character.buffs, "allSpheres"],
+      hp: {
+        ...character.hp,
+        percent: percentHP + 10,
+      },
+      sp: {
+        ...character.sp,
+        percent: percentSP + 10,
+      },
+      buffs: [...character.buffs, "risingDragon"],
+    };
+  },
+  gentleTouchRevitalize: (character: Character) => {
+    const {
+      hp: { percent: percentHP },
+      modifiers: { skill }
+    } = character;
+    const SKILL_MODIFIER = 30;
+    return {
+      ...character,
+      hp: {
+        ...character.hp,
+        percent: percentHP + 10,
+      },
+      modifiers: {
+        ...character.modifiers,
+        skill: skill + (['TIGER_CANNON', 'TIGER_CANNON_COMBO'].includes(character.skill) ? SKILL_MODIFIER : 0),
+      },
+      buffs: [...character.buffs, "gentleTouchRevitalize"],
+    };
+  },
+  firmFaith: (character: Character) => {
+    const {
+      hp: { percent }
+    } = character;
+    const HP_INCREASE = 10;
+    return {
+      ...character,
+      hp: {
+        ...character.hp,
+        percent: percent + HP_INCREASE
+      },
+      buffs: [...character.buffs, "firmFaith"],
+    };
+  },
+  powerfulFaith: (character: Character) => {
+    const {
+      ATK: { weaponBuffATK, patk },
+    } = character;
+    const ATK_INCREASE = 30;
+    const PATK_INCREASE = 15;
+    return {
+      ...character,
+      ATK: {
+        ...character.ATK,
+        weaponBuffATK: weaponBuffATK + ATK_INCREASE,
+        patk: patk + PATK_INCREASE
+      },
+      buffs: [...character.buffs, "powerfulFaith"],
     };
   },
   // Ninja

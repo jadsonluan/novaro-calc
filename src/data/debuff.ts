@@ -7,6 +7,7 @@ export interface Debuffs {
   // Archer
   soundBlend?: Buff;
   // Acolyte
+  oleumSanctum?: Buff;
   oratio?: Buff;
   // Thief
   darkClaw?: Buff;
@@ -79,7 +80,12 @@ export const emptyATKDebuffs: Debuffs = {
   oratio: {
     active: false,
     tooltip: "Decreases holy property resistance",
-    job: "Priest"
+    job: "Acolyte"
+  },
+  oleumSanctum: {
+    active: false,
+    tooltip: "Increases long ranged damage by 50%",
+    job: "Acolyte"
   },
   soulCurse: {
     active: false,
@@ -200,6 +206,17 @@ const DEBUFF_EFFECTS: Record<keyof Debuffs, BuffEffect> = {
     return {
       character: { ...character },
       monster: { ...monster, debuffs: [...monster.debuffs, "oratio"] },
+    };
+  },
+  oleumSanctum: (character: Character, monster: Monster) => {
+    const MODIFIER = 50;
+    return {
+      character: { ...character },
+      monster: {
+        ...monster,
+        rangedModifier: monster.rangedModifier + MODIFIER,
+        debuffs: [...monster.debuffs, "oleumSanctum"],
+      },
     };
   },
   allBloom: (character: Character, monster: Monster) => {
