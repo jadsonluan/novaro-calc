@@ -1401,7 +1401,7 @@ const BUFF_EFFECTS: Record<keyof Buffs, BuffEffect> = {
       buffs: [...character.buffs, "tempering"],
     };
   },
-  hellTreePowder: (character: Character) => {
+  hellTreePowder: (character: Character, monster: Monster) => {
     const {
       modifiers: { race, ranged }
     } = character;
@@ -1411,7 +1411,7 @@ const BUFF_EFFECTS: Record<keyof Buffs, BuffEffect> = {
       ...character,
       modifiers: {
         ...character.modifiers,
-        race: race + RACE_MODIFIER,
+        race: race + (['formless', 'plant'].includes(monster.race) ? RACE_MODIFIER : 0),
         ranged: ranged + RANGED_MODIFIER,
       },
       buffs: [...character.buffs, "hellTreePowder"],
