@@ -331,7 +331,7 @@ const alchemistSkills: Record<string, Skill> = {
       return {
         percent:
           (baseDamage + 5 * character.traits.pow) * (character.baseLevel / 100) *
-          (1 + (buffs.researchReport?.active ? 0.7 : 0) + (['formless', 'plant'].includes(monster.race) ? 0.3 : 0)) *
+          (1 + (buffs.researchReport?.active ? 0.7 : 0) + (buffs.researchReport?.active && ['formless', 'plant'].includes(monster.race) ? 0.3 : 0)) *
           5,
         bonus: 0,
       };
@@ -1114,7 +1114,7 @@ const starGladiatorSkills: Record<string, Skill> = {
     isMelee: true,
     job: "Sky Emperor",
     formula: (character: Character, monster: Monster) => {
-      const baseDamage = 2200;
+      const baseDamage = 2200 + 150;
       return {
         percent: (baseDamage + character.traits.pow * 5) * (character.baseLevel / 100),
         bonus: 0,

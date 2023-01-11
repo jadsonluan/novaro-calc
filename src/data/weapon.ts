@@ -141,7 +141,7 @@ export const WEAPON_PENALTIES: Record<WeaponType, WeaponPenalty> = {
     large: 1,
   },
   "Spear (Mounted)": {
-    small: 0.75,
+    small: 1,
     medium: 1,
     large: 1,
   },

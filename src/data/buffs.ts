@@ -56,6 +56,7 @@ export interface Buffs {
   cartBoost?: Buff;
   pyroclastic?: Buff;
   tempering?: Buff;
+  hellTreePowder?: Buff;
   researchReport?: Buff;
   // Mage
   magicAmplification?: Buff;
@@ -316,6 +317,11 @@ export const emptyATKBuffs: Buffs = {
   tempering: {
     active: false,
     tooltip: "P.atk +15",
+    job: "Merchant",
+  },
+  hellTreePowder: {
+    active: false,
+    tooltip: "Increases damage against Formless and Plant types and increases Ranged physical damage",
     job: "Merchant",
   },
   researchReport: {
@@ -1393,6 +1399,22 @@ const BUFF_EFFECTS: Record<keyof Buffs, BuffEffect> = {
         patk: patk + PATK_INCREASE,
       },
       buffs: [...character.buffs, "tempering"],
+    };
+  },
+  hellTreePowder: (character: Character) => {
+    const {
+      modifiers: { race, ranged }
+    } = character;
+    const RACE_MODIFIER = 25;
+    const RANGED_MODIFIER = 20;
+    return {
+      ...character,
+      modifiers: {
+        ...character.modifiers,
+        race: race + RACE_MODIFIER,
+        ranged: ranged + RANGED_MODIFIER,
+      },
+      buffs: [...character.buffs, "hellTreePowder"],
     };
   },
   researchReport: (character: Character, monster: Monster) => {
