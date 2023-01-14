@@ -300,6 +300,66 @@ const whiteSmithSkills: Record<string, Skill> = {
       };
     },
   },
+  AXE_TORNADO: {
+    key: "AXE_TORNADO",
+    label: "Axe Tornado",
+    name: "Axe Tornado",
+    isMelee: true,
+    job: "Meister",
+    formula: (character: Character, monster: Monster, buffs: Buffs) => {
+      const baseDamage = 1100 + getWhitesmithATKBonus(character, buffs);
+      return {
+        percent:
+          (baseDamage + character.stats.vit) * (buffs.axeStomp?.active ? 1.4 : 1) * (character.baseLevel / 100),
+        bonus: 0,
+      };
+    },
+  },
+  POWER_SWING: {
+    key: "POWER_SWING",
+    label: "Power Swing",
+    name: "Power Swing",
+    isMelee: true,
+    job: "Meister",
+    formula: (character: Character, monster: Monster, buffs: Buffs) => {
+      const baseDamage = 1300 + getWhitesmithATKBonus(character, buffs);
+      return {
+        percent:
+          (baseDamage + character.stats.dex) * (character.baseLevel / 100),
+        bonus: 0,
+      };
+    },
+  },
+  AXE_STOMP: {
+    key: "AXE_STOMP",
+    label: "Axe Stomp (Per Hit)",
+    name: "Axe Stomp",
+    isMelee: true,
+    job: "Meister",
+    formula: (character: Character, monster: Monster, buffs: Buffs) => {
+      const baseDamage = 2000 + getWhitesmithATKBonus(character, buffs);
+      return {
+        percent:
+          (baseDamage + character.traits.pow * 5) * (character.baseLevel / 100),
+        bonus: 0,
+      };
+    },
+  },
+  RUSH_QUAKE: {
+    key: "RUSH_QUAKE",
+    label: "Rush Quake",
+    name: "Rush Quake",
+    isMelee: true,
+    job: "Meister",
+    formula: (character: Character, monster: Monster, buffs: Buffs) => {
+      const baseDamage = 7500 + (['formless', 'insect'].includes(monster.race) ? 3500 : 0) + getWhitesmithATKBonus(character, buffs);
+      return {
+        percent:
+          (baseDamage) * (character.baseLevel / 100),
+        bonus: 0,
+      };
+    },
+  },
 }
 
 const alchemistSkills: Record<string, Skill> = {

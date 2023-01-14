@@ -12,6 +12,8 @@ export interface Debuffs {
   // Thief
   darkClaw?: Buff;
   raid?: Buff;
+  // Merchant
+  quake?: Buff;
   // Mage
   magicIntoxication?: Buff;
   allBloom?: Buff;
@@ -27,6 +29,26 @@ export interface Debuffs {
 }
 
 export const emptyATKDebuffs: Debuffs = {
+  soundBlend: {
+    active: false,
+    tooltip: "Increases damage of some Troubadour / Trouvere skills",
+    job: "Archer"
+  },
+  oratio: {
+    active: false,
+    tooltip: "Decreases holy property resistance",
+    job: "Acolyte"
+  },
+  oleumSanctum: {
+    active: false,
+    tooltip: "Increases long ranged damage by 50%",
+    job: "Acolyte"
+  },
+  quake: {
+    active: false,
+    tooltip: "Increases YOUR melee and long ranged modifiers by 50% against the target",
+    job: "Merchant"
+  },
   darkClaw: {
     active: false,
     tooltip: "+150%(75% for boss) melee damage inflicted",
@@ -71,21 +93,6 @@ export const emptyATKDebuffs: Debuffs = {
     active: false,
     tooltip: "Takes 50% from water property attacks",
     job: "Mage"
-  },
-  soundBlend: {
-    active: false,
-    tooltip: "Increases damage of some Troubadour / Trouvere skills",
-    job: "Archer"
-  },
-  oratio: {
-    active: false,
-    tooltip: "Decreases holy property resistance",
-    job: "Acolyte"
-  },
-  oleumSanctum: {
-    active: false,
-    tooltip: "Increases long ranged damage by 50%",
-    job: "Acolyte"
   },
   soulCurse: {
     active: false,
@@ -163,6 +170,29 @@ type BuffEffect = (
 ) => { character: Character; monster: Monster };
 
 const DEBUFF_EFFECTS: Record<keyof Debuffs, BuffEffect> = {
+  soundBlend: (character: Character, monster: Monster) => {
+    return {
+      character: { ...character },
+      monster: { ...monster, debuffs: [...monster.debuffs, "soundBlend"] },
+    };
+  },
+  oratio: (character: Character, monster: Monster) => {
+    return {
+      character: { ...character },
+      monster: { ...monster, debuffs: [...monster.debuffs, "oratio"] },
+    };
+  },
+  oleumSanctum: (character: Character, monster: Monster) => {
+    const MODIFIER = 50;
+    return {
+      character: { ...character },
+      monster: {
+        ...monster,
+        rangedModifier: monster.rangedModifier + MODIFIER,
+        debuffs: [...monster.debuffs, "oleumSanctum"],
+      },
+    };
+  },
   raid: (character: Character, monster: Monster) => {
     const MODIFIER = 30;
     return {
@@ -185,6 +215,24 @@ const DEBUFF_EFFECTS: Record<keyof Debuffs, BuffEffect> = {
       },
     };
   },
+  quake: (character: Character, monster: Monster) => {
+    const { modifiers: { melee, ranged} } = character;
+    const MODIFIER_INCREASE = 50;
+    return {
+      character: {
+        ...character,
+        modifiers: {
+          ...character.modifiers,
+          melee: melee + MODIFIER_INCREASE,
+          ranged: ranged + MODIFIER_INCREASE,
+        },
+      },
+      monster: {
+        ...monster,
+        debuffs: [...monster.debuffs, "quake"],
+      },
+    };
+  },
   magicIntoxication: (character: Character, monster: Monster) => {
     const MODIFIER = 50;
     return {
@@ -193,29 +241,6 @@ const DEBUFF_EFFECTS: Record<keyof Debuffs, BuffEffect> = {
         ...monster,
         finalPropertyModifier: monster.finalPropertyModifier + MODIFIER,
         debuffs: [...monster.debuffs, "magicIntoxication"],
-      },
-    };
-  },
-  soundBlend: (character: Character, monster: Monster) => {
-    return {
-      character: { ...character },
-      monster: { ...monster, debuffs: [...monster.debuffs, "soundBlend"] },
-    };
-  },
-  oratio: (character: Character, monster: Monster) => {
-    return {
-      character: { ...character },
-      monster: { ...monster, debuffs: [...monster.debuffs, "oratio"] },
-    };
-  },
-  oleumSanctum: (character: Character, monster: Monster) => {
-    const MODIFIER = 50;
-    return {
-      character: { ...character },
-      monster: {
-        ...monster,
-        rangedModifier: monster.rangedModifier + MODIFIER,
-        debuffs: [...monster.debuffs, "oleumSanctum"],
       },
     };
   },

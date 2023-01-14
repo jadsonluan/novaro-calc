@@ -53,6 +53,8 @@ export interface Buffs {
   overThrust?: Buff;
   maximumOverThrust?: Buff;
   powerMaximize?: Buff;
+  axeStomp?: Buff;
+  rush?: Buff;
   cartBoost?: Buff;
   pyroclastic?: Buff;
   tempering?: Buff;
@@ -302,6 +304,16 @@ export const emptyATKBuffs: Buffs = {
   powerMaximize: {
     active: false,
     tooltip: "Removes Weapon Base ATK variance (over upgrade variance still applies)",
+    job: "Merchant",
+  },
+  axeStomp: {
+    active: false,
+    tooltip: "Increases Axe Tornado damage",
+    job: "Merchant",
+  },
+  rush: {
+    active: false,
+    tooltip: "Increases melee and ranged physical damage",
     job: "Merchant",
   },
   cartBoost: {
@@ -1358,6 +1370,24 @@ const BUFF_EFFECTS: Record<keyof Buffs, BuffEffect> = {
   },
   powerMaximize: (character: Character) => {
     return { ...character, buffs: [...character.buffs, "powerMaximize"] };
+  },
+  axeStomp: (character: Character) => {
+    return { ...character, buffs: [...character.buffs, "axeStomp"] };
+  },
+  rush: (character: Character) => {
+    const {
+      modifiers: { melee, ranged },
+    } = character;
+    const MODIFIER_INCREASE = 50;
+    return {
+      ...character,
+      modifiers: {
+        ...character.modifiers,
+        melee: melee + MODIFIER_INCREASE,
+        ranged: ranged + MODIFIER_INCREASE,
+      },
+      buffs: [...character.buffs, "rush"],
+    };
   },
   cartBoost: (character: Character) => {
     const {
