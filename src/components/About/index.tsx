@@ -34,11 +34,7 @@ const About = () => {
           </ul>
         </p>
         <p>
-          Stuff that is not yet implemented:
-          <ul>
-            <li><b>HP AND SP calculations are using 3rd job formulas, so ignore them for now.</b></li>
-            <li>Meister Skills</li>
-          </ul>
+          Max HP and Max SP are calculated considering a level 250 character, so be aware of that when testing damage of skills that use Max Hp (like Tiger Cannon).
         </p>
         <p>
           This tool is a work in progress. If you have any suggestions or

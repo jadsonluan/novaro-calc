@@ -90,6 +90,27 @@ function getBonusFromSection(
   return bonuses[search] ?? 0;
 }
 
+function getBonusFromHPSection(
+  section: string[],
+  target: string,
+  delim1: string,
+  delim2: string
+) {
+  if (!section) return 0;
+
+  let search = target.toLowerCase();
+
+  const bonuses: Record<string, number> = {};
+  section.forEach((line) => {
+    const [key, values] = line.trim().split(delim1);
+    let bonus = values ? values.split(delim2) : [];
+    bonus = bonus.length > 1 ? bonus[1].split(' = ') : bonus
+    bonuses[key.toLowerCase()] = bonus[0] ? Number(bonus[0].includes('%') ? bonus[0].slice(0, -1) : bonus[0]) : 0;
+  });
+
+  return bonuses[search] ?? 0;
+}
+
 function getElementBonuses(
   sections: Record<string, string[]>,
   element: Element
@@ -196,21 +217,14 @@ function getCriticalDamageBonuses(sections: Record<string, string[]>) {
 function getHPSP(sections: Record<string, string[]>) {
   const section = sections["HP and SP bonuses"];
 
-  const fixedHPLine = section[1];
-  const fixedHP = getValueFromLine(1, fixedHPLine);
-
-  const hpMultLine = section[2];
-  const hpMult = getValueFromLine(1, hpMultLine) - 100;
-
-  const fixedSPLine = section[4];
-  const fixedSP = getValueFromLine(1, fixedSPLine);
-
-  const spMultLine = section[5];
-  const spMult = getValueFromLine(1, spMultLine) - 100;
+  const fixedHP = getBonusFromHPSection(section, "Fixed HP bonuses", ": ", " + ");
+  const percentHP = getBonusFromHPSection(section, "Percentage HP bonuses", ": ", " * ") - 100;
+  const fixedSP = getBonusFromHPSection(section, "Fixed SP bonuses", ": ", " + ");
+  const percentSP = getBonusFromHPSection(section, "Percentage SP bonuses", ": ", " * ") - 100;
 
   return {
-    hp: { flat: fixedHP, percent: hpMult },
-    sp: { flat: fixedSP, percent: spMult },
+    hp: { flat: fixedHP, percent: percentHP },
+    sp: { flat: fixedSP, percent: percentSP },
   };
 }
 

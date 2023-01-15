@@ -9,6 +9,7 @@ export interface BuildDiffItem {
 interface BuildDiffProps {
   label: string;
   items: BuildDiffItem[];
+  info?: string;
 }
 
 const getDiffClass = (value: number) => {
@@ -18,12 +19,15 @@ const getDiffClass = (value: number) => {
 };
 
 const BuildDiff = (props: BuildDiffProps) => {
-  const { label, items } = props;
+  const { label, items, info } = props;
 
   return (
     <div className="build-diff">
       <div className="header">
-        <span>{label}</span>
+        <div style={{ display: 'flex', flexDirection: 'column', columnGap: '10px' }}>
+          <span>{label}</span>
+          {info && <span className="optional-info" title={info}>i</span>}
+        </div>
         <span>Build 1</span>
         <span>Build 2</span>
         <span>Diff</span>

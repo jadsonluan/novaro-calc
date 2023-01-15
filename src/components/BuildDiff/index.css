@@ -25,3 +25,17 @@
 
 .positive-diff { background-color: #3ba55d !important;}
 .negative-diff { background-color: #ed4245 !important;}
+
+.optional-info {
+  display: inline-flex;
+  border: 1px solid #fff;
+  border-radius: 20px;
+  width: 10px;
+  height: 10px;
+  font-size: 12px;
+  margin-left: 10px;
+  padding: 3px;
+  align-items: center;
+  justify-content: center;
+  cursor: default;
+}

@@ -58,11 +58,10 @@ const TRANS_JOBS: Job[] = [
   "Hyper Novice",
 ];
 
-// TODO: Adicionar baseHP/SP de: Doram, SA, Oboro/Kagerou, Shadow Chaser
 export const JOBS: Record<Job, BaseStat & { initialJob: string }> = {
   "Dragon Knight": {
-    baseHP: 27325,
-    baseSP: 1185,
+    baseHP: 46850,
+    baseSP: 1490,
     initialJob: "Swordsman",
   },
   "Imperial Guard": {
@@ -71,23 +70,23 @@ export const JOBS: Record<Job, BaseStat & { initialJob: string }> = {
     initialJob: "Swordsman",
   },
   Meister: {
-    baseHP: 21130,
-    baseSP: 1203,
+    baseHP: 44975,
+    baseSP: 1920,
     initialJob: "Merchant",
   },
   Biolo: {
-    baseHP: 21325,
-    baseSP: 1985,
+    baseHP: 40850,
+    baseSP: 2785,
     initialJob: "Merchant",
   },
   "Shadow Cross": {
-    baseHP: 25175,
-    baseSP: 1140,
+    baseHP: 43450,
+    baseSP: 1495,
     initialJob: "Thief",
   },
   "Abyss Chaser": {
-    baseHP: 22810,
-    baseSP: 985,
+    baseHP: 39670,
+    baseSP: 1340,
     initialJob: "Thief",
   },
   Archmage: {
@@ -96,8 +95,8 @@ export const JOBS: Record<Job, BaseStat & { initialJob: string }> = {
     initialJob: "Mage",
   },
   "Elemental Master": {
-    baseHP: 19660,
-    baseSP: 1985,
+    baseHP: 37185,
+    baseSP: 2590,
     initialJob: "Mage",
   },
   "Wind Hawk": {
@@ -121,33 +120,33 @@ export const JOBS: Record<Job, BaseStat & { initialJob: string }> = {
     initialJob: "Acolyte",
   },
   "Night Watch": {
-    baseHP: 24329,
-    baseSP: 1379,
+    baseHP: 35715,
+    baseSP: 2131,
     initialJob: "Gunslinger",
   },
   "Shinkiro / Shiranui": {
-    baseHP: 22810,
-    baseSP: 985,
+    baseHP: 37340,
+    baseSP: 2031,
     initialJob: "Ninja",
   },
   "Soul Ascetic": {
-    baseHP: 15183,
-    baseSP: 811,
+    baseHP: 37260,
+    baseSP: 3579,
     initialJob: "Taekwon",
   },
   "Sky Emperor": {
-    baseHP: 26355,
-    baseSP: 1422,
+    baseHP: 37746,
+    baseSP: 2001,
     initialJob: "Taekwon",
   },
   "Hyper Novice": {
-    baseHP: 22810,
-    baseSP: 985,
+    baseHP: 31317,
+    baseSP: 1878,
     initialJob: "Novice",
   },
   "Spirit Handler": {
-    baseHP: 22810,
-    baseSP: 985,
+    baseHP: 35944,
+    baseSP: 2382,
     initialJob: "Doram",
   },
 };
