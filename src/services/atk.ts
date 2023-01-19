@@ -378,10 +378,9 @@ export function getFinalATKDamage(range: DmgRange, build: BuildInfo) {
 
   let finalDmg = Math.floor(atk * (formula.percent / 100));
   finalDmg = applyModifier(finalDmg, mods.skill);
-  finalDmg = applyModifier(finalDmg, mods.custom);
   finalDmg = applyModifier(finalDmg, rangeMod);
   finalDmg = applyModifier(finalDmg, mods.dmg);
-
+  
   finalDmg = Math.floor(finalDmg * RES);
   finalDmg = Math.floor(finalDmg * hardDEF) - softDEF;
   
@@ -392,11 +391,13 @@ export function getFinalATKDamage(range: DmgRange, build: BuildInfo) {
     finalDmg,
     skill.isMelee ? monster.meleeModifier : monster.rangedModifier
   );
-
+    
   finalDmg = applyModifier(finalDmg, character.ATK.patk);
 
-  finalDmg = applyModifier(finalDmg,  monster.finalPropertyModifier);
+  finalDmg = applyModifier(finalDmg, monster.finalPropertyModifier);
   finalDmg = applyModifier(finalDmg, monster.finalModifier);
+
+  finalDmg = applyModifier(finalDmg, mods.custom);
 
   return {
     damage: Math.floor(

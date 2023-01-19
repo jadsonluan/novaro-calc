@@ -1,0 +1,11 @@
+.tooltip-label {
+  display: flex; 
+  flex-direction: row; 
+  justify-content: flex-start; 
+  column-gap: 0.5rem;
+}
+
+.optional-info {
+  cursor: default;
+  font-size: 20px;
+}

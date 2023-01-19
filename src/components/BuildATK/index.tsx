@@ -19,6 +19,7 @@ export const BuildATK = () => {
     <BuildContainer isMatk={false}>
       <BuildCharacterInput
         label="Weapon LVL"
+        tooltip="Your weapon level, goes up to 5. Affects damage variation"
         getValue={(character: Character) => character.weapon.level}
         updateValue={(value: number) => (prev: Character) => {
           const { weapon } = prev;
@@ -132,7 +133,7 @@ export const BuildATK = () => {
         max={100}
       />
       <BuildCharacterInput
-        label="Monster Property % Bonus"
+        label="Monster Property %"
         getValue={(character: Character) => character.modifiers.targetProperty}
         updateValue={(value: number) => (prev: Character) => {
           const { modifiers } = prev;
@@ -143,7 +144,7 @@ export const BuildATK = () => {
         }}
       />
       <BuildCharacterInput
-        label="Race % Bonus"
+        label="Race %"
         getValue={(character: Character) => character.modifiers.race}
         updateValue={(value: number) => (prev: Character) => {
           const { modifiers } = prev;
@@ -151,7 +152,7 @@ export const BuildATK = () => {
         }}
       />
       <BuildCharacterInput
-        label="Size % Bonus"
+        label="Size %"
         getValue={(character: Character) => character.modifiers.size}
         updateValue={(value: number) => (prev: Character) => {
           const { modifiers } = prev;
@@ -159,7 +160,7 @@ export const BuildATK = () => {
         }}
       />
       <BuildCharacterInput
-        label="Class % Bonus"
+        label="Class %"
         tooltip="This is ATK% on NovaRO, be careful between Normal/Boss Class bonus"
         getValue={(character: Character) => character.modifiers.class}
         updateValue={(value: number) => (prev: Character) => {
@@ -168,7 +169,7 @@ export const BuildATK = () => {
         }}
       />
       <BuildCharacterInput
-        label="Skill % Bonus"
+        label="Skill %"
         getValue={(character: Character) => character.modifiers.skill}
         updateValue={(value: number) => (prev: Character) => {
           const { modifiers } = prev;
@@ -176,7 +177,7 @@ export const BuildATK = () => {
         }}
       />
       <BuildCharacterInput
-        label="Melee % Bonus"
+        label="Melee %"
         tooltip="Short Attack Rate %"
         getValue={(character: Character) => character.modifiers.melee}
         updateValue={(value: number) => (prev: Character) => {
@@ -185,7 +186,7 @@ export const BuildATK = () => {
         }}
       />
       <BuildCharacterInput
-        label="Ranged % Bonus"
+        label="Ranged %"
         tooltip="Ranged Attack Rate %"
         getValue={(character: Character) => character.modifiers.ranged}
         updateValue={(value: number) => (prev: Character) => {
@@ -194,7 +195,7 @@ export const BuildATK = () => {
         }}
       />
       <BuildCharacterInput
-        label="Critical Damage % Bonus"
+        label="Critical Damage %"
         tooltip="The number after the 'Critical Damage 40%' in the @bs"
         getValue={(character: Character) => character.modifiers.critical}
         updateValue={(value: number) => (prev: Character) => {
@@ -229,7 +230,7 @@ export const BuildATK = () => {
         }}
       />
       <BuildCharacterInput
-        label="Monster Type % Bonus"
+        label="Monster Type %"
         tooltip="Things like 'Damage against Kobold monsters'"
         getValue={(character: Character) => character.modifiers.monster}
         updateValue={(value: number) => (prev: Character) => {
@@ -238,7 +239,7 @@ export const BuildATK = () => {
         }}
       />
       <BuildCharacterInput
-        label="Weapon % Bonus"
+        label="Weapon %"
         tooltip="Advanced Katar Mastery % goes here"
         getValue={(character: Character) =>
           character.modifiers.advancedKatarMastery
@@ -252,7 +253,8 @@ export const BuildATK = () => {
         }}
       />
       <BuildCharacterInput
-        label="Damage % Bonus"
+        label="Damage %"
+        tooltip="Added before DEF/RES calculations"
         getValue={(character: Character) => character.modifiers.dmg}
         updateValue={(value: number) => (prev: Character) => {
           const { modifiers } = prev;
@@ -260,7 +262,8 @@ export const BuildATK = () => {
         }}
       />
       <BuildCharacterInput
-        label="Final Damage % Bonus"
+        label="Final Damage %"
+        tooltip="Added after DEF/RES calculations"
         getValue={(character: Character) => character.modifiers.finalDmg}
         updateValue={(value: number) => (prev: Character) => {
           const { modifiers } = prev;
@@ -268,7 +271,8 @@ export const BuildATK = () => {
         }}
       />
       <BuildCharacterInput
-        label="Custom Damage % Bonus"
+        label="Custom Damage %"
+        tooltip="Custom final damage modifier"
         getValue={(character: Character) => character.modifiers.custom}
         updateValue={(value: number) => (prev: Character) => {
           const { modifiers } = prev;
@@ -284,6 +288,7 @@ export const BuildMATK = () => {
     <BuildContainer isMatk>
       <BuildCharacterInput
         label="Weapon LVL"
+        tooltip="Your weapon level, goes up to 5. Affects damage variation"
         getValue={(character: Character) => character.weapon.level}
         updateValue={(value: number) => (prev: Character) => {
           const { weapon } = prev;
@@ -383,7 +388,7 @@ export const BuildMATK = () => {
         max={100}
       />
       <BuildCharacterInput
-        label="Magic Element % Bonus"
+        label="Magic Element %"
         getValue={(character: Character) => character.modifiers.skillProperty}
         updateValue={(value: number) => (prev: Character) => {
           const { modifiers } = prev;
@@ -394,7 +399,7 @@ export const BuildMATK = () => {
         }}
       />
       <BuildCharacterInput
-        label="Monster Property % Bonus"
+        label="Monster Property %"
         getValue={(character: Character) => character.modifiers.targetProperty}
         updateValue={(value: number) => (prev: Character) => {
           const { modifiers } = prev;
@@ -405,7 +410,7 @@ export const BuildMATK = () => {
         }}
       />
       <BuildCharacterInput
-        label="Race % Bonus"
+        label="Race %"
         getValue={(character: Character) => character.modifiers.race}
         updateValue={(value: number) => (prev: Character) => {
           const { modifiers } = prev;
@@ -413,7 +418,7 @@ export const BuildMATK = () => {
         }}
       />
       <BuildCharacterInput
-        label="Size % Bonus"
+        label="Size %"
         getValue={(character: Character) => character.modifiers.size}
         updateValue={(value: number) => (prev: Character) => {
           const { modifiers } = prev;
@@ -421,7 +426,7 @@ export const BuildMATK = () => {
         }}
       />
       <BuildCharacterInput
-        label="Skill % Bonus"
+        label="Skill %"
         getValue={(character: Character) => character.modifiers.skill}
         updateValue={(value: number) => (prev: Character) => {
           const { modifiers } = prev;
@@ -429,8 +434,8 @@ export const BuildMATK = () => {
         }}
       />
       <BuildCharacterInput
-        label="Monster Type % Bonus"
-        tooltip="Magical Class Bonus % against Normal/Boss monsters"
+        label="Monster Type %"
+        tooltip="Magical Class % against Normal/Boss monsters"
         getValue={(character: Character) => character.modifiers.monster}
         updateValue={(value: number) => (prev: Character) => {
           const { modifiers } = prev;
@@ -438,7 +443,8 @@ export const BuildMATK = () => {
         }}
       />
       <BuildCharacterInput
-        label="Final Damage % Bonus"
+        label="Final Damage %"
+        tooltip="Added after MDEF/RES calculations"
         getValue={(character: Character) => character.modifiers.finalDmg}
         updateValue={(value: number) => (prev: Character) => {
           const { modifiers } = prev;
@@ -446,7 +452,8 @@ export const BuildMATK = () => {
         }}
       />
       <BuildCharacterInput
-        label="Custom Damage % Bonus"
+        label="Custom Damage %"
+        tooltip="Custom final damage modifier"
         getValue={(character: Character) => character.modifiers.custom}
         updateValue={(value: number) => (prev: Character) => {
           const { modifiers } = prev;

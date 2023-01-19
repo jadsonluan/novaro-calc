@@ -1,3 +1,4 @@
+import TooltipLabel from "../TooltipLabel";
 import "./index.css";
 
 export interface BuildDiffItem {
@@ -24,10 +25,7 @@ const BuildDiff = (props: BuildDiffProps) => {
   return (
     <div className="build-diff">
       <div className="header">
-        <div style={{ display: 'flex', flexDirection: 'column', columnGap: '10px' }}>
-          <span>{label}</span>
-          {info && <span className="optional-info" title={info}>i</span>}
-        </div>
+        <TooltipLabel align="center" label={label} tooltip={info} />
         <span>Build 1</span>
         <span>Build 2</span>
         <span>Diff</span>

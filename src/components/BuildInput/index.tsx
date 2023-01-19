@@ -2,6 +2,7 @@ import { evaluate } from "mathjs";
 import { Character } from "../../data/character";
 import { Monster } from "../../data/monster";
 import { Build, useBuild } from "../../hooks/useBuild";
+import TooltipLabel from "../TooltipLabel";
 import "./index.css";
 
 export interface BuildInputProps<T extends Character | Monster> {
@@ -82,7 +83,7 @@ function BuildInput<T extends Character | Monster>(props: BuildInputProps<T>) {
 
   return (
     <div className="build-input">
-      <span title={tooltip}>{label}</span>
+      <TooltipLabel label={label} tooltip={tooltip} />
       <Input build={build1} {...props} />
       <Input build={build2} {...props} />
     </div>
