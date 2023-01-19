@@ -21,18 +21,18 @@ const BuildBuffsAndDebuffs = ({ isMATK }: { isMATK: boolean }) => {
   return (
     <div className="build-buffs-and-debuffs">
       <div className="header">
-        <div
+        <button
           className={`tab ${selectedTab === "buff" ? "active" : "inactive"}`}
           onClick={() => setSelectedTab("buff")}
         >
           Buffs
-        </div>
-        <div
+        </button>
+        <button
           className={`tab ${selectedTab === "debuff" ? "active" : "inactive"}`}
           onClick={() => setSelectedTab("debuff")}
         >
           Debuffs
-        </div>
+        </button>
       </div>
       <div className="build-content">
         {selectedTab === "buff" ? (
