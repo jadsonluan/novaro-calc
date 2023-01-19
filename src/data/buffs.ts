@@ -8,6 +8,7 @@ export interface Buff {
   active: boolean;
   tooltip: string;
   job: string;
+  iconURL?: string;
 }
 
 export interface Buffs {
@@ -142,112 +143,134 @@ export const emptyATKBuffs: Buffs = {
     active: false,
     tooltip: "+15% melee/ranged damage",
     job: "All",
+    iconURL: 'https://static.divine-pride.net/images/items/item/100232.png',
   },
   tyrBlessing: {
     active: false,
     tooltip: "+20 Status ATK. Does not stack with Box Of Resentment, Distilled Fighting Spirit or Cursed Fragment",
     job: "All",
+    iconURL: 'https://static.divine-pride.net/images/items/item/14601.png',
   },
   boxOfResentment: {
     active: false,
     tooltip: "+20 Status ATK. Does not stack with Tyr Blessing, Distilled Fighting Spirit or Cursed Fragment",
     job: "All",
+    iconURL: 'https://static.divine-pride.net/images/items/item/12030.png',
   },
   distilledFightingSpirit: {
     active: false,
     tooltip: "+30 Status ATK. Does not stack with Tyr Blessing, Box Of Resentment or Cursed Fragment",
     job: "All",
+    iconURL: 'https://static.divine-pride.net/images/items/item/682.png',
   },
   cursedFragment: {
     active: false,
     tooltip: "+50 Status ATK. Does not stack with Tyr Blessing, Box Of Resentment or Distilled Fighting Spirit",
     job: "All",
+    iconURL: 'https://static.divine-pride.net/images/items/item/23016.png',
   },
   redBooster: {
     active: false,
     tooltip: "+30 Status ATK",
     job: "All",
+    iconURL: 'https://www.novaragnarok.com/data/items/icons2/22821.png',
   },
   limitedPowerBooster: {
     active: false,
     tooltip: "+30 Status ATK and +1% ATK",
     job: "All",
+    iconURL: 'https://static.divine-pride.net/images/items/item/22822.png',
   },
   infinityDrink: {
     active: false,
     tooltip: "+5% Critical Damage and +5% Ranged Damage",
     job: "All",
+    iconURL: 'https://www.novaragnarok.com/data/items/icons2/22823.png',
   },
   sacredDraught: {
     active: false,
     tooltip: "+3% ATK",
     job: "All",
+    iconURL: 'https://www.novaragnarok.com/data/items/icons2/34585.png',
   },
   runeStrawberryCake: {
     active: false,
     tooltip: "+5% (Weapon Base ATK + Refine ATK) and +5% Status ATK",
     job: "All",
+    iconURL: 'https://static.divine-pride.net/images/items/item/12319.png',
   },
   investigate: {
     active: false,
     tooltip: "Ignores monster Hard DEF and gain this DEF / 2 as PseudoBuffATK",
     job: "All",
+    iconURL: 'https://static.divine-pride.net/images/skill/266.png',
   },
   // Swordsman
   magnumBreak: {
     active: false,
     tooltip: "+20% fire property weaponATK",
     job: "Swordsman",
+    iconURL: 'https://static.divine-pride.net/images/skill/7.png',
   },
   concentration: {
     active: false,
     tooltip: "+15% weaponATK and equipATK",
     job: "Swordsman",
+    iconURL: 'https://static.divine-pride.net/images/skill/357.png',
   },
   asirRune: {
     active: false,
     tooltip: "Pseudo Buff ATK +70",
     job: "Swordsman",
+    iconURL: 'https://static.divine-pride.net/images/items/item/12729.png',
   },
   turisusRune: {
     active: false,
     tooltip: "STR +30 and +15% Melee % Bonus",
     job: "Swordsman",
+    iconURL: 'https://static.divine-pride.net/images/items/item/12731.png',
   },
   luxAnimaRune: {
     active: false,
     tooltip: "+30% for the following modifiers: HP & SP, Melee, Ranged, Critical and Size",
     job: "Swordsman",
+    iconURL: 'https://static.divine-pride.net/images/items/item/22540.png',
   },
   moonSlasher: {
     active: false,
     tooltip: "Increases Overbrand damage",
     job: "Swordsman",
+    iconURL: 'https://static.divine-pride.net/images/skill/2320.png',
   },
   shieldSpell: {
     active: false,
     tooltip: "Pseudo Buff ATK +150",
     job: "Swordsman",
+    iconURL: 'https://static.divine-pride.net/images/skill/2315.png',
   },
   inspiration: {
     active: false,
     tooltip: "Pseudo Buff ATK +200, all stats +30 and +20% HP",
     job: "Swordsman",
+    iconURL: 'https://static.divine-pride.net/images/skill/2325.png',
   },
   attackStance: {
     active: false,
     tooltip: "+15 P.Atk",
     job: "Swordsman",
+    iconURL: 'https://static.divine-pride.net/images/skill/5260.png',
   },
   shieldShooting: {
     active: false,
     tooltip: "Increases Rapid Smithing, Shield Press and Earth Drive damage",
     job: "Swordsman",
+    iconURL: 'https://static.divine-pride.net/images/skill/5265.png',
   },
   grandJudgment: {
     active: false,
     tooltip: "Increases Vanishing Point and Cannon Spear damage",
     job: "Swordsman",
+    iconURL: 'https://static.divine-pride.net/images/skill/5263.png',
   },
   // Thief
   enchantDeadlyPoison: {

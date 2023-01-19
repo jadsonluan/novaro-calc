@@ -1,6 +1,6 @@
 .checkbox-container {
   display: grid;
-  grid-template-columns: 100px 1fr 1fr;
+  grid-template-columns: 7rem 10rem 10rem;
   margin-bottom: 2px;
 }
 

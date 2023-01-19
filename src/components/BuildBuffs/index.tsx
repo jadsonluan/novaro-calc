@@ -28,6 +28,7 @@ const BuildBuffs = ({ emptyBuffs }: { emptyBuffs: Buffs }) => {
                 <BuildBuffCheckBox
                   key={buff}
                   label={emptyBuffs[buff as keyof Buffs]?.label || capitalize(buff)}
+                  iconURL={emptyBuffs[buff as keyof Buffs]?.iconURL}
                   getValue={(buffs: Buffs) => buffs[buff as keyof Buffs]?.active || false}
                   updateValue={(value: boolean) => (prevState: Buffs) => ({
                     ...prevState,

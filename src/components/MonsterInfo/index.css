@@ -14,8 +14,9 @@
 
 .monster-info .header {
   display: grid;
-  grid-template-columns: 100px 150px 150px;
-  padding: 0.4rem 1.5rem;;
+  grid-template-columns: 9rem 8.5rem 8.5rem;
+  justify-content: unset;
+  padding: 0.2rem 1.5rem;
 }
 
 .monster-info .header> :not(:first-child) {
@@ -23,5 +24,5 @@
 }
 
 .monster-info .select, .monster-info .build-input {
-  grid-template-columns: 100px 150px 150px !important;
+  grid-template-columns: 9rem 8.5rem 8.5rem !important;
 }

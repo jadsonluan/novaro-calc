@@ -27,7 +27,8 @@ const BuildDebuffs = ({ emptyDebuffs }: { emptyDebuffs: Debuffs }) => {
               {groupOptions.map((debuff) => (
                 <BuildDebuffCheckBox
                   key={debuff}
-                  label={capitalize(debuff)}
+                  label={emptyDebuffs[debuff as keyof Debuffs]?.label || capitalize(debuff)}
+                  iconURL={emptyDebuffs[debuff as keyof Debuffs]?.iconURL}
                   getValue={(debuffs: Debuffs) => debuffs[debuff as keyof Debuffs]?.active || false}
                   updateValue={(value: boolean) => (prevState: Debuffs) => ({
                     ...prevState,

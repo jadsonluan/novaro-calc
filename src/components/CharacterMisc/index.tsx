@@ -130,6 +130,7 @@ export const CharacterMiscATK = () => {
         />
         <BuildCharacterCheckBox
           label="Critical?"
+          noIcon
           getValue={(character: Character) => character.crit}
           updateValue={(value: boolean) => (prevState: Character) => ({
             ...prevState,
@@ -138,6 +139,8 @@ export const CharacterMiscATK = () => {
         />
         <BuildCharacterCheckBox
           label="No Penalty?"
+          tooltip="No size penalty"
+          noIcon
           getValue={(character: Character) => character.ignorePenalty}
           updateValue={(value: boolean) => (prevState: Character) => ({
             ...prevState,

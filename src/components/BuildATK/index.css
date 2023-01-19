@@ -4,17 +4,18 @@
 }
 
 .build > .build-content {
-  padding: 0.7rem 1.5rem;
+  padding: 0.7rem 1rem;
 }
 
 
 .build > .header {
   display: grid;
-  padding: 0 1.5rem;
+  padding: 0 1rem;
 }
 
 .build > .build-content .build-input, .build > .header {
-  grid-template-columns: 200px 150px 150px;
+  grid-template-columns: 11rem 7rem 7rem;
+  justify-content: unset;
 }
 
 .build > .header > * {

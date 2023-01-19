@@ -19,7 +19,8 @@
 
 .build-debuffs .inside-header {
   display: grid;
-  grid-template-columns: 200px 1fr 1fr;
+  grid-template-columns: 15rem 5rem 5rem;
+  justify-content: unset;
   padding: 0.7rem 1.5rem;
 }
 
@@ -28,7 +29,7 @@
 }
 
 .build-debuffs .checkbox-container {
-  grid-template-columns: 200px 1fr 1fr !important;
+  grid-template-columns: 13rem 5rem 5rem !important;
   border: 2px solid #40444b;
   border-radius: 10px;
   padding: 0px 0.2rem 0px 0.2rem;

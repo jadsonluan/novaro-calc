@@ -11,7 +11,8 @@
 
 .build-diff .header, .build-diff-body > div {
   display: grid;
-  grid-template-columns: 100px 1fr 1fr 0.5fr;
+  grid-template-columns: 5rem 8rem 8rem 1fr;
+  justify-content: unset;
 }
 
 .build-diff-body > :first-child > * {

@@ -6,19 +6,21 @@
 
 .build-stats .header {
   display: grid;
-  grid-template-columns: 150px 1fr 1fr;
+  grid-template-columns: 7rem 10rem 10rem;
+  justify-content: unset;
+  padding: 0 1rem;
 }
 
 .build-stats .header > * {
-  padding: 0.7rem 1.5rem;
+  padding: 0.3rem 1rem;
 }
 
 .build-stats .build-input {
-  grid-template-columns: 100px 1fr 1fr !important;
+  grid-template-columns: 7rem 10rem 10rem !important;
 }
 
 .build-stats .build-content {
-  padding: 1rem 1.5rem;
+  padding: 1rem 1rem;
 }
 
 .build-stats .build-content .build-traits {

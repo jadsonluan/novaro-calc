@@ -18,7 +18,7 @@
   border-radius: 50px;
   color: white;
   background-color: #40444b;
-  width: 140px;
+  min-width: 14ch;
 }
 
 .build-input input:focus {
