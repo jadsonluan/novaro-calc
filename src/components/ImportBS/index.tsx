@@ -219,7 +219,7 @@ const ImportBS = ({ isMATK }: { isMATK: boolean }) => {
   };
 
   return (
-    <div>
+    <>
       <button onClick={openModal}>Import @BS</button>
       <Modal
         isOpen={modalIsOpen}
@@ -524,7 +524,7 @@ const ImportBS = ({ isMATK }: { isMATK: boolean }) => {
           </div>
         </div>
       </Modal>
-    </div>
+    </>
   );
 };
 

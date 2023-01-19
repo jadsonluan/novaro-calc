@@ -8,7 +8,7 @@
   transform: translate(-50%, -50%);
   background-color: hsl(214, 7%, 19%);
   color: white;
-  padding: 10px 25px;
+  padding: 0.7rem 1.5rem;;
   border-radius: 25px;
   max-width: 800px;
 }
@@ -55,29 +55,29 @@
 }
 
 .import-bs-modal .form .inputs .selects optgroup {
-  font-size: 14px;
+  font-size: 0.8rem;
   color: #bfbfbf;
 }
 
 .import-bs-modal .form .inputs .selects option {
-  font-size: 12px;
+  font-size: 0.8rem;
   color: white;
 }
 
 .import-bs-modal .form .inputs .selects > div {
   display: grid;
   grid-template-columns: 150px 200px;
-  margin: 5px 0;
+  margin: 0.3rem 0;
 }
 
 .import-bs-modal .form .inputs .stats > div {
   display: grid;
   grid-template-columns: 60px 200px;
-  margin: 5px 0;
+  margin: 0.3rem 0;
 }
 
 .import-bs-modal .form .inputs .input {
-  margin: 0 5px;
+  margin: 0 0.3rem;
   display: flex;
   flex-direction: row;
 }
@@ -114,21 +114,21 @@
   display: flex;
   flex-direction: row;
   justify-content: flex-end;
-  margin-top: 10px;
+  margin-top: 0.7rem;
 }
 
 .import-bs-modal .buttons button {
   border: none;
   outline: none;
-  padding: 7px;
-  margin: 2px;
+  padding: 0.5rem;
+  margin: 0.1rem;
   border-radius: 25px;
   background-color: #40444b;
   border: 2px solid #40444b;
   color: white;
   cursor: pointer;
   font-weight: bold;
-  margin-left: 10px;
+  margin-left: 0.7rem;
 }
 
 .import-bs-modal .buttons button:hover {

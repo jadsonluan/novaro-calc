@@ -4,13 +4,13 @@
 }
 
 .build > .build-content {
-  padding: 15px 25px;
+  padding: 0.7rem 1.5rem;
 }
 
 
 .build > .header {
   display: grid;
-  padding: 0 25px;
+  padding: 0 1.5rem;
 }
 
 .build > .build-content .build-input, .build > .header {
@@ -18,7 +18,7 @@
 }
 
 .build > .header > * {
-  padding: 5px 0;
+  padding: 0.3rem 0;
 }
 
 .build .header> :not(:first-child) {

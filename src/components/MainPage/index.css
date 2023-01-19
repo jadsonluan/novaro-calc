@@ -2,21 +2,21 @@
 .main {
   display: grid;
   grid-template-columns: min-content min-content min-content;
-  padding: 15px;
+  padding: 1rem;
 }
 
 .second-col {
   display: flex;
   flex-direction: column;
-  margin: 0 15px;
+  margin: 0 1rem;
 }
 
 .first-col > :not(:last-child), .second-col > :not(:last-child), .third-col > :not(:last-child) {
-  margin-bottom: 15px;
+  margin-bottom: 1rem;
 }
 
 .second-col .third-col {
-  padding: 0 20px;
+  padding: 0 1.4rem;
   display: flex;
   flex-direction: row;
 }

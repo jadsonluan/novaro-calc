@@ -5,17 +5,17 @@
 }
 
 .monster-info .build-content {
-  padding: 15px 25px;
+  padding: 1rem 1.5rem;;
 }
 
 .monster-info .build-content > :first-child {
-  margin-bottom: 15px;
+  margin-bottom: 1rem;
 }
 
 .monster-info .header {
   display: grid;
   grid-template-columns: 100px 150px 150px;
-  padding: 5px 25px;
+  padding: 0.4rem 1.5rem;;
 }
 
 .monster-info .header> :not(:first-child) {

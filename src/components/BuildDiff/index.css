@@ -6,7 +6,7 @@
 .build-diff .header {
   color: white;
   font-weight: bold;
-  padding: 4px
+  padding: 0.2rem
 }
 
 .build-diff .header, .build-diff-body > div {
@@ -15,11 +15,11 @@
 }
 
 .build-diff-body > :first-child > * {
-  padding-top: 5px
+  padding-top: 0.3rem
 }
 
 .build-diff-body > :last-child > * {
-  padding-bottom: 5px;
+  padding-bottom: 0.3rem;
   border-bottom-right-radius: 10px;
 }
 

@@ -5,14 +5,14 @@
 }
 
 .build-hpsp .build-content {
-  padding: 15px 25px;
+  padding: 0.7rem 1.5rem;
 }
 
 .build-hpsp .build-header {
   display: grid;
   grid-template-columns: 100px 100px 100px;
-  padding: 5px 25px;
-  margin-bottom: 10px;
+  padding: 0.7rem 1.5rem;
+  margin-bottom: 0.7rem;
   background-color: #7289da;
 }
 

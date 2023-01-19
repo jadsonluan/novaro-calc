@@ -8,7 +8,7 @@
   transform: translate(-50%, -50%);
   background-color: hsl(214, 7%, 19%);
   color: white;
-  padding: 10px 25px;
+  padding: 0.7rem 1.5rem;
   border-radius: 25px;
   min-width: 500px;
 }
@@ -25,13 +25,13 @@
 .build-storage-modal .save-area {
   display: flex;
   flex-direction: column;
-  margin: 15px 0;
+  margin: 1rem 0;
 }
 
 .build-storage-modal .save-area .build-name-input {
   display: flex;
   flex-direction: row;
-  margin-top: 5px;
+  margin-top: 0.3rem;
 }
 
 .build-storage-modal .save-area .build-name-input input {
@@ -48,7 +48,7 @@
 .build-storage-modal .save-area .build-name-input button {
   text-align: center;
   border: none;
-  padding: 5px 10px;
+  padding: 0.3rem 0.7rem;
   border-top-right-radius: 50px;
   border-bottom-right-radius: 50px;
   color: white;
@@ -70,7 +70,7 @@
 }
 
 .build-storage-modal .stored-builds {
-  margin: 10px 0;
+  margin: 0.7rem 0;
 }
 
 .build-storage-modal .stored-builds .builds {
@@ -103,7 +103,7 @@
   display: flex;
   flex-direction: row;
   justify-content: space-between;
-  margin: 2px 0;
+  margin: 0.1rem 0;
 }
 
 .stored-build > div {
@@ -115,11 +115,11 @@
   text-align: center;
   border: none;
   border-radius: 25px;
-  padding: 0 10px;
+  padding: 0 0.7rem;
   color: white;
   cursor: pointer;
   font-weight: bold;
-  margin-right: 10px;
+  margin-right: 0.7rem;
   display: flex;
   align-items: center;
 }

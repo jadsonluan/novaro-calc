@@ -5,13 +5,13 @@
 }
 
 .character-misc .build-content {
-  padding: 15px 25px;
+  padding: 1rem 1.5rem;;
 }
 
 .character-misc .header {
   display: grid;
   grid-template-columns: 100px 1fr 1fr;
-  padding: 5px 25px;
+  padding: 0.3rem 1.5rem;;
 }
 
 .character-misc .header> :not(:first-child) {

@@ -19,7 +19,7 @@ const BuildStorage = ({ isMATK }: { isMATK: boolean }) => {
   };
 
   return (
-    <div>
+    <>
       <button onClick={() => openModal()}>Builds</button>
       <Modal
         isOpen={isOpen}
@@ -79,7 +79,7 @@ const BuildStorage = ({ isMATK }: { isMATK: boolean }) => {
           </div>
         </div>
       </Modal>
-    </div>
+    </>
   );
 };
 

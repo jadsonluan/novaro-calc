@@ -10,7 +10,7 @@
 }
 
 .build-stats .header > * {
-  padding: 5px 25px;
+  padding: 0.7rem 1.5rem;
 }
 
 .build-stats .build-input {
@@ -18,13 +18,13 @@
 }
 
 .build-stats .build-content {
-  padding: 15px 25px;
+  padding: 1rem 1.5rem;
 }
 
 .build-stats .build-content .build-traits {
-  margin-top: 15px;
+  margin-top: 1rem;
 }
 
 .build-stats .build-content .build-hp-sp {
-  margin-top: 15px;
+  margin-top: 1rem;
 }
