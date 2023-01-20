@@ -11,6 +11,10 @@
   padding: 0 1rem;
 }
 
+.build-stats .header> :not(:first-child) {
+  text-align: center;
+}
+
 .build-stats .header > * {
   padding: 0.3rem 1rem;
 }
