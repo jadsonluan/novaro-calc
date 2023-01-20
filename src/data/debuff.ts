@@ -32,135 +32,161 @@ export const emptyATKDebuffs: Debuffs = {
   soundBlend: {
     active: false,
     tooltip: "Increases damage of some Troubadour / Trouvere skills",
-    job: "Archer"
+    job: "Archer",
+    iconURL: 'https://static.divine-pride.net/images/skill/5357.png',
   },
   oratio: {
     active: false,
     tooltip: "Decreases holy property resistance",
-    job: "Acolyte"
+    job: "Acolyte",
+    iconURL: 'https://static.divine-pride.net/images/skill/2046.png',
   },
   oleumSanctum: {
     active: false,
     tooltip: "Increases long ranged damage by 50%",
-    job: "Acolyte"
+    job: "Acolyte",
+    iconURL: 'https://static.divine-pride.net/images/skill/5241.png',
   },
   quake: {
     active: false,
     tooltip: "Increases YOUR melee and long ranged modifiers by 50% against the target",
-    job: "Merchant"
+    job: "Merchant",
+    iconURL: 'https://static.divine-pride.net/images/skill/5296.png',
   },
   darkClaw: {
     active: false,
     tooltip: "+150%(75% for boss) melee damage inflicted",
-    job: "Thief"
+    job: "Thief",
+    iconURL: 'https://static.divine-pride.net/images/skill/5001.png',
   },
   raid: {
     active: false,
     tooltip: "+30% (15% for boss) final damage",
-    job: "Thief"
+    job: "Thief",
+    iconURL: 'https://static.divine-pride.net/images/skill/214.png',
   },
   magicIntoxication: {
     active: false,
     tooltip: "Takes 50% more damage from all properties",
-    job: "Mage"
+    job: "Mage",
+    iconURL: 'https://static.divine-pride.net/images/skill/2213.png',
   },
   allBloom: {
     active: false,
     tooltip: "Takes 100% from fire property attacks",
-    job: "Mage"
+    job: "Mage",
+    iconURL: 'https://static.divine-pride.net/images/skill/5222.png',
   },
   violentQuake: {
     active: false,
     tooltip: "Takes 100% from earth property attacks",
-    job: "Mage"
+    job: "Mage",
+    iconURL: 'https://static.divine-pride.net/images/skill/5218.png',
   },
   earthInsignia: {
     active: false,
     tooltip: "Takes 50% from fire property attacks",
-    job: "Mage"
+    job: "Mage",
+    iconURL: 'https://static.divine-pride.net/images/skill/2468.png',
   },
   waterInsignia: {
     active: false,
     tooltip: "Takes 50% from wind property attacks",
-    job: "Mage"
+    job: "Mage",
+    iconURL: 'https://static.divine-pride.net/images/skill/2466.png',
   },
   windInsignia: {
     active: false,
     tooltip: "Takes 50% from earth property attacks",
-    job: "Mage"
+    job: "Mage",
+    iconURL: 'https://static.divine-pride.net/images/skill/2467.png',
   },
   fireInsignia: {
     active: false,
     tooltip: "Takes 50% from water property attacks",
-    job: "Mage"
+    job: "Mage",
+    iconURL: 'https://static.divine-pride.net/images/skill/2465.png',
   },
   soulCurse: {
     active: false,
     tooltip: "Takes 100% (20% if boss type) more damage from shadow property attacks",
-    job: "Taekwon"
+    job: "Taekwon",
+    iconURL: 'https://static.divine-pride.net/images/skill/2601.png',
   },
 };
 
 export const emptyMATKDebuffs: Debuffs = {
-  raid: {
-    active: false,
-    tooltip: "+30% (15%) final damage",
-    job: "Thief"
-  },
-  magicIntoxication: {
-    active: false,
-    tooltip: "Takes 50% more damage from all properties",
-    job: "Mage"
-  },
-  allBloom: {
-    active: false,
-    tooltip: "Takes 100% more damage from fire property attacks",
-    job: "Mage"
-  },
-  violentQuake: {
-    active: false,
-    tooltip: "Takes 100% more damage from earth property attacks",
-    job: "Mage"
-  },
-  earthInsignia: {
-    active: false,
-    tooltip: "Takes 50% from fire property attacks",
-    job: "Mage"
-  },
-  waterInsignia: {
-    active: false,
-    tooltip: "Takes 50% from wind property attacks",
-    job: "Mage"
-  },
-  windInsignia: {
-    active: false,
-    tooltip: "Takes 50% from earth property attacks",
-    job: "Mage"
-  },
-  fireInsignia: {
-    active: false,
-    tooltip: "Takes 50% from water property attacks",
-    job: "Mage"
-  },
   soundBlend: {
     active: false,
     tooltip: "Increases damage of some Troubadour / Trouvere skills",
-    job: "Archer"
+    job: "Archer",
+    iconURL: 'https://static.divine-pride.net/images/skill/5357.png',
   },
   oratio: {
     active: false,
     tooltip: "Decreases holy property resistance",
-    job: "Priest"
+    job: "Priest",
+    iconURL: 'https://static.divine-pride.net/images/skill/2046.png',
+  },
+  raid: {
+    active: false,
+    tooltip: "+30% (15%) final damage",
+    job: "Thief",
+    iconURL: 'https://static.divine-pride.net/images/skill/214.png',
+  },
+  magicIntoxication: {
+    active: false,
+    tooltip: "Takes 50% more damage from all properties",
+    job: "Mage",
+    iconURL: 'https://static.divine-pride.net/images/skill/2213.png',
+  },
+  allBloom: {
+    active: false,
+    tooltip: "Takes 100% more damage from fire property attacks",
+    job: "Mage",
+    iconURL: 'https://static.divine-pride.net/images/skill/5222.png',
+  },
+  violentQuake: {
+    active: false,
+    tooltip: "Takes 100% more damage from earth property attacks",
+    job: "Mage",
+    iconURL: 'https://static.divine-pride.net/images/skill/5218.png',
+  },
+  earthInsignia: {
+    active: false,
+    tooltip: "Takes 50% from fire property attacks",
+    job: "Mage",
+    iconURL: 'https://static.divine-pride.net/images/skill/2468.png',
+  },
+  waterInsignia: {
+    active: false,
+    tooltip: "Takes 50% from wind property attacks",
+    job: "Mage",
+    iconURL: 'https://static.divine-pride.net/images/skill/2466.png',
+  },
+  windInsignia: {
+    active: false,
+    tooltip: "Takes 50% from earth property attacks",
+    job: "Mage",
+    iconURL: 'https://static.divine-pride.net/images/skill/2467.png',
+  },
+  fireInsignia: {
+    active: false,
+    tooltip: "Takes 50% from water property attacks",
+    job: "Mage",
+    iconURL: 'https://static.divine-pride.net/images/skill/2465.png',
   },
   wateryEvasion: {
     active: false,
     tooltip: "Increases Freezing Spear damage",
-    job: "Ninja"
+    job: "Ninja",
+    iconURL: 'https://static.divine-pride.net/images/skill/538.png',
   },
   soulCurse: {
     active: false,
     tooltip: "Takes 100% (20% if boss type) more damage from shadow property attacks",
-    job: "Taekwon"
+    job: "Taekwon",
+    iconURL: 'https://static.divine-pride.net/images/skill/2601.png',
   },
 };
 

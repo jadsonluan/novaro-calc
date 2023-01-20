@@ -88,6 +88,7 @@ export interface Buffs {
   fearBreeze?: Buff;
   unlimit?: Buff;
   calamityGale?: Buff;
+  unlimitedHumming?: Buff;
   marchOfProntera?: Buff;
   serenadeOfJawaii?: Buff;
   mysticSymphony?: Buff;
@@ -277,320 +278,382 @@ export const emptyATKBuffs: Buffs = {
     active: false,
     tooltip: "WeaponATK x5 and extraATK x4",
     job: "Thief",
+    iconURL: 'https://static.divine-pride.net/images/skill/378.png',
   },
   pyrexia: {
     active: false,
     tooltip: "+5% Melee % Bonus and +15% Critical % Bonus",
     job: "Thief",
+    iconURL: 'https://static.divine-pride.net/images/skill/2027.png',
   },
   cloaking: {
     active: false,
     tooltip: "Increases Savage Impact and Shadow Stab damage",
     job: "Thief",
+    iconURL: 'https://static.divine-pride.net/images/skill/2033.png',
   },
   potentVenom: {
     active: false,
     tooltip: "+30% Res bypass",
     job: "Thief",
+    iconURL: 'https://static.divine-pride.net/images/skill/5290.png',
   },
   shadowExceed: {
     active: false,
     tooltip: "Increases Savage Impact and Eternal Slash damage",
     job: "Thief",
+    iconURL: 'https://static.divine-pride.net/images/skill/5285.png',
   },
   abyssDagger: {
     active: false,
     tooltip: "Increases Fatal Menace damage",
     job: "Thief",
+    iconURL: 'https://static.divine-pride.net/images/skill/5314.png',
   },
   abyssSlayer: {
     active: false,
     tooltip: "P.Atk and S.Matk +30",
     job: "Thief",
+    iconURL: 'https://static.divine-pride.net/images/skill/5318.png',
   },
   // Merchant
   loudExclamation: {
     active: false,
     tooltip: "STR +4 and Pseudo Buff ATK +30",
     job: "Merchant",
+    iconURL: 'https://static.divine-pride.net/images/skill/155.png',
   },
   overThrust: {
     active: false,
     tooltip: "Adds +25% ATK to Meister skills base formula",
     job: "Merchant",
+    iconURL: 'https://static.divine-pride.net/images/skill/113.png',
   },
   maximumOverThrust: {
     active: false,
     tooltip: "Adds +100% ATK to Meister skills base formula",
     job: "Merchant",
+    iconURL: 'https://static.divine-pride.net/images/skill/486.png',
   },
   powerMaximize: {
     active: false,
     tooltip: "Removes Weapon Base ATK variance (over upgrade variance still applies)",
     job: "Merchant",
+    iconURL: 'https://static.divine-pride.net/images/skill/114.png',
   },
   axeStomp: {
     active: false,
     tooltip: "Increases Axe Tornado damage",
     job: "Merchant",
+    iconURL: 'https://static.divine-pride.net/images/skill/5295.png',
   },
   rush: {
     active: false,
     tooltip: "Increases melee and ranged physical damage",
     job: "Merchant",
+    iconURL: 'https://static.divine-pride.net/images/skill/5296.png',
   },
   cartBoost: {
     active: false,
     tooltip: "Mastery ATK +50",
     job: "Merchant",
+    iconURL: 'https://static.divine-pride.net/images/skill/2478.png',
   },
   pyroclastic: {
     active: false,
     tooltip: "Pseudo Buff ATK +450",
     job: "Merchant",
+    iconURL: 'https://static.divine-pride.net/images/skill/8042.png',
   },
   tempering: {
     active: false,
     tooltip: "P.atk +15",
     job: "Merchant",
+    iconURL: 'https://static.divine-pride.net/images/skill/8045.png',
   },
   hellTreePowder: {
     active: false,
     tooltip: "Increases damage against Formless and Plant types and increases Ranged physical damage",
     job: "Merchant",
+    iconURL: 'https://static.divine-pride.net/images/skill/5348.png',
   },
   researchReport: {
     active: false,
     tooltip: "Increases Acified Zone damage and acid skills damage against Formless and Plant monsters",
     job: "Merchant",
+    iconURL: 'https://static.divine-pride.net/images/skill/5347.png',
   },
   // Mage
   deluge: {
     active: false,
     tooltip: "+20% Water property damage",
     job: "Mage",
+    iconURL: 'https://static.divine-pride.net/images/skill/286.png',
   },
   violentGale: {
     active: false,
     tooltip: "+20% Wind property damage",
     job: "Mage",
+    iconURL: 'https://static.divine-pride.net/images/skill/287.png',
   },
   volcano: {
     active: false,
     tooltip: "+20% Fire property damage and +30 ATK",
     job: "Mage",
+    iconURL: 'https://static.divine-pride.net/images/skill/285.png',
   },
   earthInsigniaLv2: {
     active: false,
     tooltip: "Acts as Lv2 insignia buff. +10% ATK",
-    job: "Mage"
+    job: "Mage",
+    iconURL: 'https://static.divine-pride.net/images/skill/2468.png',
   },
   waterInsigniaLv2: {
     active: false,
     tooltip: "Acts as Lv2 insignia buff. +10% ATK",
-    job: "Mage"
+    job: "Mage",
+    iconURL: 'https://static.divine-pride.net/images/skill/2466.png',
   },
   windInsigniaLv2: {
     active: false,
     tooltip: "Acts as Lv2 insignia buff. +10% ATK",
-    job: "Mage"
+    job: "Mage",
+    iconURL: 'https://static.divine-pride.net/images/skill/2467.png',
   },
   fireInsigniaLv2: {
     active: false,
     tooltip: "Acts as Lv2 insignia buff. +10% ATK and +50 ATK",
-    job: "Mage"
+    job: "Mage",
+    iconURL: 'https://static.divine-pride.net/images/skill/2465.png',
   },
   striking: {
     active: false,
     tooltip: "Pseudo Buff ATK +100",
     job: "Mage",
+    iconURL: 'https://static.divine-pride.net/images/skill/2451.png',
   },
   // Archer
   trueSight: {
     active: false,
     tooltip: "All stats +5 and 20% added to archer's skills base damage",
     job: "Archer",
+    iconURL: 'https://static.divine-pride.net/images/skill/380.png',
   },
   fearBreeze: {
     active: false,
     tooltip: "Increases Aimed Bolt and Arrow Storm damage",
     job: "Archer",
+    iconURL: 'https://static.divine-pride.net/images/skill/2234.png',
   },
   unlimit: {
     active: false,
     tooltip: "Final Damage +250%",
     job: "Archer",
+    iconURL: 'https://static.divine-pride.net/images/skill/5002.png',
   },
   calamityGale: {
     active: false,
     tooltip: "Unlimit effect, increases Crescive Bolt damage and increases damage against Brute and Fish monsters",
     job: "Archer",
+    iconURL: 'https://static.divine-pride.net/images/skill/5328.png',
   },
   marchOfProntera: {
     active: false,
     tooltip: "P.Atk +15",
     job: "Archer",
+    iconURL: 'https://static.divine-pride.net/images/skill/5364.png',
   },
   mysticSymphony: {
     active: false,
     tooltip: "Increases damage of Rhythm Shooting, Rose Blossom and Sound Blend. Increases damage against Fish and Demi-Human races",
     job: "Archer",
+    iconURL: 'https://static.divine-pride.net/images/skill/5351.png',
   },
   // Acolyte
   odinsBlessing: {
     active: false,
     tooltip: "Pseudo Buff ATK +100",
     job: "Acolyte",
+    iconURL: 'https://static.divine-pride.net/images/skill/2537.png',
   },
   benedictum: {
     active: false,
     tooltip: "POW / CON / CRT +10",
     job: "Acolyte",
+    iconURL: 'https://static.divine-pride.net/images/skill/5282.png',
   },
   presensAcies: {
     active: false,
     tooltip: "C.Rate +10",
     job: "Acolyte",
+    iconURL: 'https://static.divine-pride.net/images/skill/5275.png',
   },
   competentia: {
     active: false,
     tooltip: "P.Atk and S.Matk +50",
     job: "Acolyte",
+    iconURL: 'https://static.divine-pride.net/images/skill/5278.png',
   },
   risingDragon: {
     active: false,
     tooltip: "Mastery ATK +3 * spheres = +45 and MaxHP/SP +10%",
     job: "Acolyte",
+    iconURL: 'https://static.divine-pride.net/images/skill/2338.png',
   },
   gentleTouchRevitalize: {
     active: false,
     tooltip: "MaxHP + 10% and increases Tiger Cannon damage by 30%",
     job: "Acolyte",
+    iconURL: 'https://static.divine-pride.net/images/skill/2348.png',
   },
   firmFaith: {
     active: false,
     tooltip: "MaxHP +10%",
     job: "Acolyte",
+    iconURL: 'https://static.divine-pride.net/images/skill/5239.png',
   },
   powerfulFaith: {
     active: false,
     tooltip: "ATK +30 and P.Atk +15",
     job: "Acolyte",
+    iconURL: 'https://static.divine-pride.net/images/skill/5238.png',
   },
   // Ninja
   shadowWarrior: {
     active: false,
     tooltip: "Increases Cross Slash damage",
     job: "Ninja",
+    iconURL: 'https://static.divine-pride.net/images/skill/3025.png',
   },
   fireCharm: {
     active: false,
     tooltip: "Increases Race % Bonus +30% against Earth monsters",
     job: "Ninja",
+    iconURL: 'https://static.divine-pride.net/images/skill/3015.png',
   },
   iceCharm: {
     active: false,
     tooltip: "Increases Race % Bonus +30% against Fire monsters",
     job: "Ninja",
+    iconURL: 'https://static.divine-pride.net/images/skill/3016.png',
   },
   windCharm: {
     active: false,
     tooltip: "Increases Race % Bonus +30% against Water monsters",
     job: "Ninja",
+    iconURL: 'https://static.divine-pride.net/images/skill/3017.png',
   },
   earthCharm: {
     active: false,
     tooltip: "WeaponATK +15% per charm = +150% and increases Race % Bonus +30% against Wind monsters",
     job: "Ninja",
+    iconURL: 'https://static.divine-pride.net/images/skill/3018.png',
   },
   // Gunslinger
   platinumAlter: {
     active: false,
     tooltip: "Increases Mastery ATK +100 if have 10 coins",
     job: "Gunslinger",
+    iconURL: 'https://static.divine-pride.net/images/skill/2563.png',
   },
   heatBarrel: {
     active: false,
     tooltip: "160% (10 coins) damage add to Night Watch skills base damage",
     job: "Gunslinger",
+    iconURL: 'https://static.divine-pride.net/images/skill/2568.png',
   },
   intensiveAim: {
     active: false,
     tooltip: "Pseudo Buff ATK +150, acts like you have 10 aiming stacks for Night Watch skills",
     job: "Gunslinger",
+    iconURL: 'https://static.divine-pride.net/images/skill/5403.png',
   },
   hiddenCard: {
     active: false,
     tooltip: "Ranged % Bonus +100, P.Atk +30",
     job: "Gunslinger",
+    iconURL: 'https://static.divine-pride.net/images/skill/5414.png',
   },
   // Taekwon
   opposition: {
     active: false,
     tooltip: "Increase ATK based on [Base Level + DEX + LUK (+ STR if Large)] / 3",
     job: "Taekwon",
+    iconURL: 'https://static.divine-pride.net/images/skill/434.png',
   },
   miracle: {
     active: false,
     tooltip: "Increase ATK based on [Base Level + DEX + LUK + STR] / 3 (Overrides Opposition)",
     job: "Taekwon",
+    iconURL: 'https://static.divine-pride.net/images/skill/437.png',
   },
   lightOfTheSun: {
     active: false,
     tooltip: "Solar Burst damage +25%",
     job: "Taekwon",
+    iconURL: 'https://static.divine-pride.net/images/skill/2590.png',
   },
   falconSoul: {
     active: false,
     tooltip: "Pseudo Buff ATK +50",
     job: "Taekwon",
+    iconURL: 'https://static.divine-pride.net/images/skill/2598.png',
   },
   talismanOfWarrior: {
     active: false,
     tooltip: "P.Atk +10",
     job: "Taekwon",
+    iconURL: 'https://static.divine-pride.net/images/skill/5419.png',
   },
   talismanOfFiveElements: {
     active: false,
     tooltip: "Increase damage against Neutral, Water, Earth, Fire and Wind property monsters by 20%",
     job: "Taekwon",
+    iconURL: 'https://static.divine-pride.net/images/skill/5423.png',
   },
   soulOfHeavenAndEarth: {
     active: false,
     tooltip: "Increases Melee, Ranged and All Elemement Magical by 25%",
     job: "Taekwon",
+    iconURL: 'https://static.divine-pride.net/images/skill/5432.png',
   },
   // Novice
   breakingLimit: {
     active: false,
     tooltip: "Increase Hyper Novice physical skills damage",
     job: "Novice",
+    iconURL: 'https://static.divine-pride.net/images/skill/5461.png',
   },
   // Doram
   bunchOfShrimp: {
     active: false,
     tooltip: "ATK/MATK +10%",
     job: "Doram",
+    iconURL: 'https://static.divine-pride.net/images/skill/5040.png',
   },
   chattering: {
     active: false,
     tooltip: "Pseudo Buff ATK +100",
     job: "Doram",
+    iconURL: 'https://static.divine-pride.net/images/skill/5055.png',
   },
   marineFestivalofKisul: {
     active: false,
     tooltip: "POW / CON / CRT +10",
     job: "Doram",
+    iconURL: 'https://static.divine-pride.net/images/skill/5440.png',
   },
   temporaryCommunion: {
     active: false,
     tooltip: "P.Atk, S.Matk and H.Plus +15",
     job: "Doram",
+    iconURL: 'https://static.divine-pride.net/images/skill/5447.png',
   },
   blessingOfMysticalCreatures: {
     active: false,
     tooltip: "P.Atk and S.Matk + 50",
     job: "Doram",
+    iconURL: 'https://static.divine-pride.net/images/skill/5448.png',
   },
 };
 
@@ -600,73 +663,87 @@ export const emptyMATKBuffs: Buffs = {
     active: false,
     tooltip: "+15% all element magic damage",
     job: "All",
+    iconURL: 'https://static.divine-pride.net/images/items/item/100233.png',
   },
   tyrBlessing: {
     active: false,
     tooltip: "+20 Status MATK. Does not stack with Box Of Drowsiness, Herb of Incantation or Cursed Fragment",
     job: "All",
+    iconURL: 'https://static.divine-pride.net/images/items/item/14601.png',
   },
   boxOfDrowsiness: {
     active: false,
     tooltip: "+20 Status MATK. Does not stack with Tyr Blessing, Herb of Incantation or Cursed Fragment",
     job: "All",
+    iconURL: 'https://static.divine-pride.net/images/items/item/12031.png',
   },
   herbOfIncantation: {
     active: false,
     tooltip: "+30 Status MATK. Does not stack with Tyr Blessing, Box Of Drowsiness or Cursed Fragment",
     job: "All",
+    iconURL: 'https://static.divine-pride.net/images/items/item/683.png',
   },
   cursedFragment: {
     active: false,
     tooltip: "+50 Status MATK. Does not stack with Tyr Blessing, Box Of Drowsiness or Herb of Incantation",
     job: "All",
+    iconURL: 'https://static.divine-pride.net/images/items/item/23016.png',
   },
   redBooster: {
     active: false,
     tooltip: "+30 Status MATK",
     job: "All",
+    iconURL: 'https://www.novaragnarok.com/data/items/icons2/22821.png',
   },
   limitedPowerBooster: {
     active: false,
     tooltip: "+30 Status MATK and +1% MATK",
     job: "All",
+    iconURL: 'https://www.novaragnarok.com/data/items/icons2/22822.png',
   },
   infinityDrink: {
     active: false,
     tooltip: "+5% All Element magical damage",
     job: "All",
+    iconURL: 'https://www.novaragnarok.com/data/items/icons2/22823.png',
   },
   sacredDraught: {
     active: false,
     tooltip: "+3% MATK",
     job: "All",
+    iconURL: 'https://www.novaragnarok.com/data/items/icons2/34585.png',
   },
   runeStrawberryCake: {
     active: false,
     tooltip: "+5% magic damage",
     job: "All",
+    iconURL: 'https://static.divine-pride.net/images/items/item/12319.png',
   },
   // Swordsman
   attackStance: {
     active: false,
     tooltip: "+15 S.Matk",
     job: "Swordsman",
+    iconURL: 'https://static.divine-pride.net/images/skill/5260.png',
   },
   holyShield: {
     active: false,
     tooltip: "Increases Holy Rain damage and +15% Holy Property magical damage",
     job: "Swordsman",
+    iconURL: 'https://static.divine-pride.net/images/skill/5262.png',
   },
   // Thief
   autoShadowSpell: {
     active: false,
     tooltip: "+50 Matk",
     job: "Thief",
+    iconURL: 'https://static.divine-pride.net/images/skill/2286.png',
   },
   abyssSlayer: {
     active: false,
     tooltip: "P.Atk and S.Matk +30",
     job: "Thief",
+    iconURL: 'https://static.divine-pride.net/images/skill/5318.png',
   },
   // Merchant
   // Mage
@@ -674,198 +751,242 @@ export const emptyMATKBuffs: Buffs = {
     active: false,
     tooltip: "MATK +50%",
     job: "Mage",
+    iconURL: 'https://static.divine-pride.net/images/skill/2213.png',
   },
   recognizedSpell: {
     active: false,
     tooltip: "Removes weapon MATK variance (overupgrade MATK variance still applies)",
     job: "Mage",
+    iconURL: 'https://static.divine-pride.net/images/skill/2206.png',
   },
   intenseTelekinesis: {
     active: false,
     tooltip: "+200% Ghost property magic damage",
     job: "Mage",
+    iconURL: 'https://static.divine-pride.net/images/skill/5012.png',
   },
   climax: {
     active: false,
     tooltip: "Climax buff, acts as level 3 Climax for affected skills",
     job: "Mage",
+    iconURL: 'https://static.divine-pride.net/images/skill/5232.png',
   },
   seismicPower: {
     active: false,
     tooltip: "+5% Earth elemental magic damage",
     job: "Mage",
+    iconURL: 'https://static.divine-pride.net/images/skill/283.png',
   },
   frostWeapon: {
     active: false,
     tooltip: "+5% Water elemental magic damage",
     job: "Mage",
+    iconURL: 'https://static.divine-pride.net/images/skill/281.png',
   },
   lightningLoader: {
     active: false,
     tooltip: "+5% Wind elemental magic damage",
     job: "Mage",
+    iconURL: 'https://static.divine-pride.net/images/skill/282.png',
   },
   flameLauncher: {
     active: false,
     tooltip: "+5% Fire elemental magic damage",
     job: "Mage",
+    iconURL: 'https://static.divine-pride.net/images/skill/280.png',
   },
   deluge: {
     active: false,
     tooltip: "+20% Water property damage",
     job: "Mage",
+    iconURL: 'https://static.divine-pride.net/images/skill/286.png',
   },
   violentGale: {
     active: false,
     tooltip: "+20% Wind property damage",
     job: "Mage",
+    iconURL: 'https://static.divine-pride.net/images/skill/287.png',
   },
   volcano: {
     active: false,
     tooltip: "+20% Fire property damage and +30 MATK",
     job: "Mage",
+    iconURL: 'https://static.divine-pride.net/images/skill/285.png',
   },
   earthInsigniaLv3: {
     active: false,
     tooltip: "Acts as Lv3 insignia buff. +25% Earth property damage",
-    job: "Mage"
+    job: "Mage",
+    iconURL: 'https://static.divine-pride.net/images/skill/2468.png',
   },
   waterInsigniaLv3: {
     active: false,
     tooltip: "Acts as Lv3 insignia buff. +25% Water property damage",
-    job: "Mage"
+    job: "Mage",
+    iconURL: 'https://static.divine-pride.net/images/skill/2466.png',
   },
   windInsigniaLv3: {
     active: false,
     tooltip: "Acts as Lv3 insignia buff. +25% Wind property damage",
-    job: "Mage"
+    job: "Mage",
+    iconURL: 'https://static.divine-pride.net/images/skill/2467.png',
   },
   fireInsigniaLv3: {
     active: false,
     tooltip: "Acts as Lv3 insignia buff. +50 MATK and +25% Fire property damage",
-    job: "Mage"
+    job: "Mage",
+    iconURL: 'https://static.divine-pride.net/images/skill/2465.png',
   },
   spellEnchanting: {
     active: false,
     tooltip: "S.Matk +20",
     job: "Mage",
+    iconURL: 'https://static.divine-pride.net/images/skill/5366.png',
   },
   // Archer
+  unlimitedHumming: {
+    active: false,
+    tooltip: "+25% All elemental magic damage",
+    job: "Archer",
+    iconURL: 'https://static.divine-pride.net/images/skill/2434.png',
+  },
   serenadeOfJawaii: {
     active: false,
     tooltip: "S.Matk +15",
     job: "Archer",
+    iconURL: 'https://static.divine-pride.net/images/skill/5362.png',
   },
   mysticSymphony: {
     active: false,
     tooltip: "Increases damage of Rhythm Shooting, Rose Blossom and Sound Blend. Increases damage against Fish and Demi-Human races",
     job: "Archer",
+    iconURL: 'https://static.divine-pride.net/images/skill/5361.png',
   },
   // Acolyte
   odinsBlessing: {
     active: false,
     tooltip: "Buff MATK +100",
     job: "Acolyte",
+    iconURL: 'https://static.divine-pride.net/images/skill/2537.png',
   },
   benedictum: {
     active: false,
     tooltip: "POW / CON / CRT +10",
     job: "Acolyte",
+    iconURL: 'https://static.divine-pride.net/images/skill/5282.png',
   },
   religio: {
     active: false,
     tooltip: "SPL / STA / WIS +10",
     job: "Acolyte",
+    iconURL: 'https://static.divine-pride.net/images/skill/5281.png',
   },
   competentia: {
     active: false,
     tooltip: "P.Atk and S.Matk +50",
     job: "Acolyte",
+    iconURL: 'https://static.divine-pride.net/images/skill/5278.png',
   },
   // Ninja
   fireCharm: {
     active: false,
     tooltip: "Increases Flaming Petals damage",
     job: "Ninja",
+    iconURL: 'https://static.divine-pride.net/images/skill/3015.png',
   },
   iceCharm: {
     active: false,
     tooltip: "Increases Freezing Spear damage",
     job: "Ninja",
+    iconURL: 'https://static.divine-pride.net/images/skill/3016.png',
   },
   windCharm: {
     active: false,
     tooltip: "Increases Wind Blade damage",
     job: "Ninja",
+    iconURL: 'https://static.divine-pride.net/images/skill/3017.png',
   },
   sixteenthNight: {
     label: "16th Night",
     active: false,
     tooltip: "Matk +125",
     job: "Ninja",
+    iconURL: 'https://static.divine-pride.net/images/skill/3022.png',
   },
   distorcedCrescent: {
     active: false,
     tooltip: "Increases MATK based on Base Level",
     job: "Ninja",
+    iconURL: 'https://static.divine-pride.net/images/skill/3026.png',
   },
   // Taekwon
   fairySoul: {
     active: false,
     tooltip: "Pseudo Buff MATK +50",
     job: "Taekwon",
+    iconURL: 'https://static.divine-pride.net/images/skill/2599.png',
   },
   talismanOfMagician: {
     active: false,
     tooltip: "S.Matk +10",
     job: "Taekwon",
+    iconURL: 'https://static.divine-pride.net/images/skill/5420.png',
   },
   talismanOfFiveElements: {
     active: false,
     tooltip: "Increase damage against Neutral, Water, Earth, Fire and Wind property monsters by 20%",
     job: "Taekwon",
+    iconURL: 'https://static.divine-pride.net/images/skill/5423.png',
   },
   soulOfHeavenAndEarth: {
     active: false,
     tooltip: "Increases Melee, Ranged and All Elemement Magical by 25%",
     job: "Taekwon",
+    iconURL: 'https://static.divine-pride.net/images/skill/5432.png',
   },
   circleOfDirectionsAndElementals: {
     active: false,
     tooltip: "S.Matk +25 and activates 'Blessing of the Four Directions and Five Elementals'",
     job: "Taekwon",
+    iconURL: 'https://static.divine-pride.net/images/skill/5431.png',
   },
   // Novice
   ruleBreak: {
     active: false,
     tooltip: "Increase Hyper Novice magic skills damage",
     job: "Novice",
+    iconURL: 'https://static.divine-pride.net/images/skill/5462.png',
   },
   // Doram
   bunchOfShrimp: {
     active: false,
     tooltip: "ATK/MATK +10%",
     job: "Doram",
+    iconURL: 'https://static.divine-pride.net/images/skill/5040.png',
   },
   chattering: {
     active: false,
     tooltip: "Buff MATK +100",
     job: "Doram",
+    iconURL: 'https://static.divine-pride.net/images/skill/5055.png',
   },
   sandFestivalofKisul: {
     active: false,
     tooltip: "SPL / STA / WIS +10",
     job: "Doram",
+    iconURL: 'https://static.divine-pride.net/images/skill/5441.png',
   },
   temporaryCommunion: {
     active: false,
     tooltip: "P.Atk, S.Matk and H.Plus +15",
     job: "Doram",
+    iconURL: 'https://static.divine-pride.net/images/skill/5447.png',
   },
   blessingOfMysticalCreatures: {
     active: false,
     tooltip: "P.Atk and S.Matk + 50",
     job: "Doram",
+    iconURL: 'https://static.divine-pride.net/images/skill/5448.png',
   },
 };
 
@@ -1831,6 +1952,20 @@ const BUFF_EFFECTS: Record<keyof Buffs, BuffEffect> = {
           (!character.buffs.includes("unlimit") ? UNLIMIT_INCREASE : 0),
       },
       buffs: [...character.buffs, "calamityGale"],
+    };
+  },
+  unlimitedHumming: (character: Character, monster: Monster) => {
+    const {
+      modifiers: { skillProperty },
+    } = character;
+    const MODIFIER_INCREASE = 25;
+    return {
+      ...character,
+      modifiers: {
+        ...character.modifiers,
+        skillProperty: skillProperty + MODIFIER_INCREASE,
+      },
+      buffs: [...character.buffs, "unlimitedHumming"],
     };
   },
   marchOfProntera: (character: Character) => {
