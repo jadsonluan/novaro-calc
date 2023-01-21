@@ -329,15 +329,15 @@ function getDEF(character: Character, monster: Monster) {
 
   // Bypass when using specific weapon
   if (['ONLY_ONE_BULLET'].includes(skill.key) && ['Pistol'].includes(weaponType)) {
-    return { RES, hardDEF: 1, softDEF: softDEF + monster.hardDEF };
+    return { RES: 1, hardDEF: 1, softDEF: softDEF + monster.hardDEF };
   }
 
   if (['THE_VIGILANTE_AT_NIGHT'].includes(skill.key) && ['Gatling Gun'].includes(weaponType)) {
-    return { RES, hardDEF: 1, softDEF: softDEF + monster.hardDEF };
+    return { RES: 1, hardDEF: 1, softDEF: softDEF + monster.hardDEF };
   }
 
   if (skill.hardAsSoftDef) {
-    return { RES, hardDEF: 1, softDEF: softDEF + monster.hardDEF };
+    return { RES: 1, hardDEF: 1, softDEF: softDEF + monster.hardDEF };
   }
 
   if (character.buffs.includes('investigate')) {

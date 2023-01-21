@@ -403,7 +403,6 @@ const alchemistSkills: Record<string, Skill> = {
     name: "Acified Zone",
     isMelee: false,
     job: "Biolo",
-    hardAsSoftDef: true,
     formula: (character: Character, monster: Monster, buffs: Buffs) => {
       const baseDamage = 2000;
       return {
@@ -438,6 +437,7 @@ const assassinSkills: Record<string, Skill> = {
     name: "Counter Slash",
     isMelee: true,
     job: "Shadow Cross",
+    hardAsSoftDef: true,
     formula: (character: Character, monster: Monster, buffs: Buffs) => {
       let baseDamage = 1800;
       return {
