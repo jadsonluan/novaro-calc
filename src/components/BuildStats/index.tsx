@@ -10,7 +10,8 @@ const BuildStats = () => (
       <b>Build 2</b>
     </div>
     <div className="build-content">
-      <div className="build-basic-stats">
+      <p className="separator-label">Level & Stats</p>
+      <div className="box">
         <BuildCharacterInput
           label="Base Level"
           getValue={(character: Character) => character.baseLevel}
@@ -70,7 +71,8 @@ const BuildStats = () => (
           }}
         />
       </div>
-      <div className="build-traits">
+      <p className="separator-label">Traits</p>
+      <div className="box">
         <BuildCharacterInput
           label="POW"
           getValue={(character: Character) => character.traits.pow}
@@ -120,7 +122,8 @@ const BuildStats = () => (
           }}
         />
       </div>
-      <div className="build-hp-sp">
+      <p className="separator-label">HP</p>
+      <div className="box">
         <BuildCharacterInput
           label="Base HP"
           tooltip="Default value for a level 250 character. If you're not level 250, please look your current BaseHP using the @bs command and input it here."
@@ -149,6 +152,9 @@ const BuildStats = () => (
           }}
           min={Number.MIN_SAFE_INTEGER}
         />
+      </div>
+      <p className="separator-label">SP</p>
+      <div className="box">
         <BuildCharacterInput
           label="Base SP"
           tooltip="Default value for a level 250 character. If you're not level 250, please look your current BaseSP using the @bs command and input it here."

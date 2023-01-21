@@ -34,7 +34,7 @@ const CharacterMisc = ({ children }: { children: React.ReactChild[] }) => {
   return (
     <div className="character-misc">
       <div className="header">
-        <b>Misc</b>
+        <b>Skill</b>
         <b>Build 1</b>
         <b>Build 2</b>
       </div>
@@ -54,8 +54,10 @@ export const CharacterMiscATK = () => {
 
   return (
     <CharacterMisc>
-      <BuildCharacterSelect
-          label="Weapon"
+      <p className="separator-label">Weapon</p>
+      <div className="box">
+        <BuildCharacterSelect
+          label="Type"
           options={weaponOptions}
           getValue={(character: Character) => character.weapon.type as string}
           updateValue={(value: string) => (prevState: Character) => {
@@ -63,23 +65,6 @@ export const CharacterMiscATK = () => {
             return {
               ...prevState,
               weapon: { ...weapon, type: value as WeaponType },
-            };
-          }}
-        />
-        <BuildCharacterSelect
-          label="Element"
-          options={elementOptions}
-          getValue={(character: Character) =>
-            character.weapon.element as string
-          }
-          updateValue={(value: string) => (prevState: Character) => {
-            const { weapon } = prevState;
-            return {
-              ...prevState,
-              weapon: {
-                ...weapon,
-                element: value as unknown as Element,
-              },
             };
           }}
         />
@@ -100,6 +85,9 @@ export const CharacterMiscATK = () => {
             };
           }}
         />
+      </div>
+      <p className="separator-label">Skill</p>
+      <div className="box">
         <BuildCharacterSelect
           label="Class"
           options={jobOptions}
@@ -128,6 +116,26 @@ export const CharacterMiscATK = () => {
             };
           }}
         />
+        <BuildCharacterSelect
+          label="Element"
+          options={elementOptions}
+          getValue={(character: Character) =>
+            character.weapon.element as string
+          }
+          updateValue={(value: string) => (prevState: Character) => {
+            const { weapon } = prevState;
+            return {
+              ...prevState,
+              weapon: {
+                ...weapon,
+                element: value as unknown as Element,
+              },
+            };
+          }}
+        />
+      </div>
+      <p className="separator-label">Other</p>
+      <div className="box">
         <BuildCharacterCheckBox
           label="Critical?"
           noIcon
@@ -147,6 +155,7 @@ export const CharacterMiscATK = () => {
             ignorePenalty: value,
           })}
         />
+      </div>
     </CharacterMisc>
   );
 };
@@ -160,8 +169,10 @@ export const CharacterMiscMATK = () => {
 
   return (
     <CharacterMisc>
-      <BuildCharacterSelect
-          label="Weapon"
+      <p className="separator-label">Weapon</p>
+      <div className="box">
+        <BuildCharacterSelect
+          label="Type"
           options={weaponOptions}
           getValue={(character: Character) => character.weapon.type as string}
           updateValue={(value: string) => (prevState: Character) => {
@@ -189,23 +200,9 @@ export const CharacterMiscMATK = () => {
             };
           }}
         />
-        <BuildCharacterSelect
-          label="Element"
-          options={elementOptions}
-          getValue={(character: Character) =>
-            character.weapon.element as string
-          }
-          updateValue={(value: string) => (prevState: Character) => {
-            const { weapon } = prevState;
-            return {
-              ...prevState,
-              weapon: {
-                ...weapon,
-                element: value as unknown as Element,
-              },
-            };
-          }}
-        />
+      </div>
+      <p className="separator-label">Skill</p>
+      <div className="box">
         <BuildCharacterSelect
           label="Class"
           options={jobOptions}
@@ -234,6 +231,24 @@ export const CharacterMiscMATK = () => {
             };
           }}
         />
+        <BuildCharacterSelect
+          label="Element"
+          options={elementOptions}
+          getValue={(character: Character) =>
+            character.weapon.element as string
+          }
+          updateValue={(value: string) => (prevState: Character) => {
+            const { weapon } = prevState;
+            return {
+              ...prevState,
+              weapon: {
+                ...weapon,
+                element: value as unknown as Element,
+              },
+            };
+          }}
+        />
+      </div>
     </CharacterMisc>
   );
 };

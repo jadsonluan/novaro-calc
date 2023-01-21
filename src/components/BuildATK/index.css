@@ -25,3 +25,20 @@
 .build .header> :not(:first-child) {
   text-align: center;
 }
+
+.build .build-content .separator-label:first-child {
+  margin-top: 0rem;
+}
+
+.build .build-content .separator-label {
+  margin-top: 0.5rem;
+  margin-bottom: 0.5rem;
+  font-weight: 600;
+}
+
+.build .build-content .box {
+  padding: 0.2rem;
+  border: 2px solid #3f444a;
+  border-radius: 0.7rem;
+  background-color: hsl(232deg 5% 40%);
+}

@@ -5,11 +5,7 @@
 }
 
 .monster-info .build-content {
-  padding: 1rem 1.5rem;;
-}
-
-.monster-info .build-content > :first-child {
-  margin-bottom: 1rem;
+  padding: 0.7rem 1rem;
 }
 
 .monster-info .header {
@@ -25,4 +21,21 @@
 
 .monster-info .select, .monster-info .build-input {
   grid-template-columns: 9rem 8.5rem 8.5rem !important;
+}
+
+.monster-info .build-content .separator-label:first-child {
+  margin-top: 0rem;
+}
+
+.monster-info .build-content .separator-label {
+  margin-top: 0.5rem;
+  margin-bottom: 0.5rem;
+  font-weight: 600;
+}
+
+.monster-info .build-content .box {
+  padding: 0.2rem;
+  border: 2px solid #3f444a;
+  border-radius: 0.7rem;
+  background-color: hsl(232deg 5% 40%);
 }

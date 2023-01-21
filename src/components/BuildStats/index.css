@@ -16,7 +16,7 @@
 }
 
 .build-stats .header > * {
-  padding: 0.3rem 1rem;
+  padding: 0.3rem 0rem;
 }
 
 .build-stats .build-input {
@@ -24,13 +24,22 @@
 }
 
 .build-stats .build-content {
-  padding: 1rem 1rem;
+  padding: 0.7rem 1rem;
 }
 
-.build-stats .build-content .build-traits {
-  margin-top: 1rem;
+.build-stats .build-content .separator-label:first-child {
+  margin-top: 0rem;
 }
 
-.build-stats .build-content .build-hp-sp {
-  margin-top: 1rem;
+.build-stats .build-content .separator-label {
+  margin-top: 0.5rem;
+  margin-bottom: 0.5rem;
+  font-weight: 600;
+}
+
+.build-stats .build-content .box {
+  padding: 0.2rem;
+  border: 2px solid #3f444a;
+  border-radius: 0.7rem;
+  background-color: hsl(232deg 5% 40%);
 }

@@ -7,8 +7,8 @@
 }
 
 .build-debuffs .build-content {
-  padding: 0.3rem 1.5rem;
-  max-height: 450px;
+  padding: 0.3rem 1rem;
+  max-height: 33rem;
   overflow-y: auto;
 }
 
@@ -21,7 +21,7 @@
   display: grid;
   grid-template-columns: 15rem 5rem 5rem;
   justify-content: unset;
-  padding: 0.7rem 1.5rem;
+  padding: 0.7rem 1rem;
 }
 
 .build-debuffs .inside-header> :not(:first-child) {
