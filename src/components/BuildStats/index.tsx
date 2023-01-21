@@ -123,6 +123,7 @@ const BuildStats = () => (
       <div className="build-hp-sp">
         <BuildCharacterInput
           label="Base HP"
+          tooltip="Default value for a level 250 character. If you're not level 250, please look your current BaseHP using the @bs command and input it here."
           getValue={(character: Character) => character.hp.base}
           updateValue={(value: number) => (prev: Character) => {
             const { hp } = prev;
@@ -150,6 +151,7 @@ const BuildStats = () => (
         />
         <BuildCharacterInput
           label="Base SP"
+          tooltip="Default value for a level 250 character. If you're not level 250, please look your current BaseSP using the @bs command and input it here."
           getValue={(character: Character) => character.sp.base}
           updateValue={(value: number) => (prev: Character) => {
             const { sp } = prev;

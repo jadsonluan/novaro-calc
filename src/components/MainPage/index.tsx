@@ -56,7 +56,7 @@ const MainPage = ({ isMATK }: { isMATK: boolean }) => {
       </div>
 
       <div className="second-col">
-        <BuildDiff label="Stat" items={statItems} info='Considering a level 250 character' />
+        <BuildDiff label="Stat" items={statItems} />
         <BuildStats />
         {!isMATK ? <CharacterMiscATK /> : <CharacterMiscMATK />}
       </div>
