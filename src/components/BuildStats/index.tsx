@@ -122,6 +122,15 @@ const BuildStats = () => (
       </div>
       <div className="build-hp-sp">
         <BuildCharacterInput
+          label="Base HP"
+          getValue={(character: Character) => character.hp.base}
+          updateValue={(value: number) => (prev: Character) => {
+            const { hp } = prev;
+            return { ...prev, hp: { ...hp, base: value } };
+          }}
+          min={0}
+        />
+        <BuildCharacterInput
           label="HP %"
           getValue={(character: Character) => character.hp.percent}
           updateValue={(value: number) => (prev: Character) => {
@@ -138,6 +147,15 @@ const BuildStats = () => (
             return { ...prev, hp: { ...hp, flat: value } };
           }}
           min={Number.MIN_SAFE_INTEGER}
+        />
+        <BuildCharacterInput
+          label="Base SP"
+          getValue={(character: Character) => character.sp.base}
+          updateValue={(value: number) => (prev: Character) => {
+            const { sp } = prev;
+            return { ...prev, sp: { ...sp, base: value } };
+          }}
+          min={0}
         />
         <BuildCharacterInput
           label="SP %"

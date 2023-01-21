@@ -377,6 +377,11 @@ export function getFinalATKDamage(range: DmgRange, build: BuildInfo) {
     );
 
   let finalDmg = Math.floor(atk * (formula.percent / 100));
+
+  if (skill.key === 'DRAGON_BREATH') {
+    finalDmg = Math.floor(formula.percent);
+  }
+
   finalDmg = applyModifier(finalDmg, mods.skill);
   finalDmg = applyModifier(finalDmg, rangeMod);
   finalDmg = applyModifier(finalDmg, mods.dmg);

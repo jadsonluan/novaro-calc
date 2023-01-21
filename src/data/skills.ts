@@ -47,6 +47,23 @@ const allSkills: Record<string, Skill> = {
 }
 
 const knightSkills: Record<string, Skill> = {
+  DRAGON_BREATH: {
+    key: "DRAGON_BREATH",
+    label: "Dragon Breath",
+    name: "Dragon Breath",
+    isMelee: false,
+    job: "Dragon Knight",
+    hardAsSoftDef: true,
+    formula: (character: Character, monster: Monster) => {
+      const baseDamage = Math.floor(10 * (getHP(character) / 50 + getSP(character) / 4));
+      return {
+        percent: baseDamage * 
+         ((90 + 50) / 100) *
+         (character.baseLevel / 100),
+        bonus: 0,
+      };
+    },
+  },
   IGNITION_BREAK: {
     key: "IGNITION_BREAK",
     label: "Ignition Break",

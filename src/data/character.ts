@@ -1,4 +1,4 @@
-import { Job } from "./job";
+import { Job, JOBS } from "./job";
 import { Weapon } from "./weapon";
 
 export interface Stats {
@@ -121,12 +121,12 @@ export const emptyCharacter: Character = {
     crt: 0,
   },
   hp: {
-    base: 1,
+    base: JOBS["Dragon Knight"].baseHP,
     flat: 0,
     percent: 0,
   },
   sp: {
-    base: 1,
+    base: JOBS["Dragon Knight"].baseSP,
     flat: 0,
     percent: 0,
   },
