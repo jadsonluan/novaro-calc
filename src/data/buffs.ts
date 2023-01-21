@@ -33,6 +33,7 @@ export interface Buffs {
   asirRune?: Buff;
   turisusRune?: Buff;
   luxAnimaRune?: Buff;
+  dragonicAura?: Buff;
   moonSlasher?: Buff;
   shieldSpell?: Buff;
   inspiration?: Buff;
@@ -236,6 +237,12 @@ export const emptyATKBuffs: Buffs = {
     tooltip: "+30% for the following modifiers: HP & SP, Melee, Ranged, Critical and Size",
     job: "Swordsman",
     iconURL: 'https://static.divine-pride.net/images/items/item/22540.png',
+  },
+  dragonicAura: {
+    active: false,
+    tooltip: "Increases Dragon Breath and Hundred Spears damage",
+    job: "Swordsman",
+    iconURL: 'https://static.divine-pride.net/images/skill/5210.png',
   },
   moonSlasher: {
     active: false,
@@ -1331,6 +1338,9 @@ const BUFF_EFFECTS: Record<keyof Buffs, BuffEffect> = {
       },
       buffs: [...character.buffs, "luxAnima"],
     };
+  },
+  dragonicAura: (character: Character) => {
+    return { ...character, buffs: [...character.buffs, "dragonicAura"] };
   },
   moonSlasher: (character: Character) => {
     return { ...character, buffs: [...character.buffs, "moonSlasher"] };

@@ -54,12 +54,13 @@ const knightSkills: Record<string, Skill> = {
     isMelee: false,
     job: "Dragon Knight",
     hardAsSoftDef: true,
-    formula: (character: Character, monster: Monster) => {
+    formula: (character: Character, monster: Monster, buffs: Buffs) => {
       const baseDamage = Math.floor(10 * (getHP(character) / 50 + getSP(character) / 4));
       return {
         percent: baseDamage * 
          ((90 + 50) / 100) *
-         (character.baseLevel / 100),
+         (buffs.dragonicAura?.active ? 1.5 : 1) *
+         (character.baseLevel / 100) + 50, // Small correction
         bonus: 0,
       };
     },
