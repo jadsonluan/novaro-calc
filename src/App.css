@@ -88,8 +88,8 @@ h1 {
 }
 
 .build-names .input-label input:focus {
-  outline: 1px solid #3ba55d;
-  color: #3ba55d;
+  outline: 1px solid hsl(205 47% 54% / 1);
+  color: hsl(205 47% 54% / 1);
 }
 
 .left-action {
