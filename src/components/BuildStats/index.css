@@ -8,7 +8,7 @@
   display: grid;
   grid-template-columns: 7rem 10rem 10rem;
   justify-content: unset;
-  padding: 0 1rem;
+  padding: 0 1.5rem;
 }
 
 .build-stats .header> :not(:first-child) {

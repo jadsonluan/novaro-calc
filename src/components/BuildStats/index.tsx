@@ -5,7 +5,7 @@ import { Character } from "../../data/character";
 const BuildStats = () => (
   <div className="build-stats">
     <div className="header">
-      <b>Stats</b>
+      <b style={{ marginLeft: '-0.5rem' }}>Stats</b>
       <b>Build 1</b>
       <b>Build 2</b>
     </div>

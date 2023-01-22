@@ -2,6 +2,12 @@
   display: grid;
   grid-template-columns: 100px 150px 150px;
   margin-bottom: 2px;
+  padding: 0 0.2rem;
+}
+
+.select:focus-within {
+  backdrop-filter: brightness(0.8);
+  border-radius: 0.5rem;
 }
 
 .select select {
@@ -9,9 +15,19 @@
   border-radius: 50px;
   background-color: #40444b;
   color: white;
-  margin: 0.1rem 0.3rem;
+  margin: 0.2rem 0.3rem;
   text-align-last: center;
   text-transform: capitalize;
+  min-width: 14ch;
+}
+
+.select select:last-child {
+  margin: 0.2rem 0 0.2rem 0.3rem;
+}
+
+.select select:focus {
+  outline: 1px solid hsl(205 47% 54% / 1);
+  color: hsl(205 47% 54% / 1);
 }
 
 .select select optgroup {

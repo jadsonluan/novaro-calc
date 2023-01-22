@@ -6,7 +6,7 @@ import { Character } from "../../data/character";
 const BuildContainer = ({ isMatk, children }: { isMatk: boolean, children: React.ReactChild[] }) => (
   <div className="build">
     <div className="header">
-      <b>{isMatk ? 'MATK' : 'ATK'} and Modifiers</b>
+      <b style={{ marginLeft: '-0.5rem' }}>{isMatk ? 'MATK' : 'ATK'} and Modifiers</b>
       <b>Build 1</b>
       <b>Build 2</b>
     </div>

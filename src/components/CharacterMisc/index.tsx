@@ -34,7 +34,7 @@ const CharacterMisc = ({ children }: { children: React.ReactChild[] }) => {
   return (
     <div className="character-misc">
       <div className="header">
-        <b>Skill</b>
+        <b style={{ marginLeft: '-0.5rem' }}>Skill</b>
         <b>Build 1</b>
         <b>Build 2</b>
       </div>

@@ -10,7 +10,7 @@
 
 .build > .header {
   display: grid;
-  padding: 0 1rem;
+  padding: 0 1.5rem;
 }
 
 .build > .build-content .build-input, .build > .header {

@@ -12,7 +12,7 @@
   display: grid;
   grid-template-columns: 7rem 10rem 10rem;
   justify-content: unset;
-  padding: 0.3rem 1rem;
+  padding: 0.3rem 1.5rem;
 }
 
 .character-misc .header> :not(:first-child) {

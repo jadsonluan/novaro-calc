@@ -137,7 +137,7 @@ const MonsterInfo = ({ isMATK }: { isMATK: boolean }) => {
   return (
     <div className="monster-info">
       <div className="header">
-        <b>Monster</b>
+        <b style={{ marginLeft: '-0.5rem' }}>Monster</b>
         <b>Build 1</b>
         <b>Build 2</b>
       </div>
