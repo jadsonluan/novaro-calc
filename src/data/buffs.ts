@@ -867,7 +867,7 @@ export const emptyMATKBuffs: Buffs = {
     active: false,
     tooltip: "Increases damage of Rhythm Shooting, Rose Blossom and Sound Blend. Increases damage against Fish and Demi-Human races",
     job: "Archer",
-    iconURL: 'https://static.divine-pride.net/images/skill/5361.png',
+    iconURL: 'https://static.divine-pride.net/images/skill/5351.png',
   },
   // Acolyte
   odinsBlessing: {
