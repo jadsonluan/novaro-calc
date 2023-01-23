@@ -758,7 +758,7 @@ export const emptyMATKBuffs: Buffs = {
     active: false,
     tooltip: "MATK +50%",
     job: "Mage",
-    iconURL: 'https://static.divine-pride.net/images/skill/2213.png',
+    iconURL: 'https://static.divine-pride.net/images/skill/366.png',
   },
   recognizedSpell: {
     active: false,
