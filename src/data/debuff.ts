@@ -236,7 +236,7 @@ const DEBUFF_EFFECTS: Record<keyof Debuffs, BuffEffect> = {
       character: { ...character },
       monster: {
         ...monster,
-        meleeModifier: monster.meleeModifier + MODIFIER,
+        meleeModifier: monster.meleeModifier + (monster.type === 'normal' ? MODIFIER : MODIFIER / 2),
         debuffs: [...monster.debuffs, "darkClaw"],
       },
     };
