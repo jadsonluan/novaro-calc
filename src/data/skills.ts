@@ -65,6 +65,37 @@ const knightSkills: Record<string, Skill> = {
       };
     },
   },
+  WIND_CUTTER_TWO: {
+    key: "WIND_CUTTER_TWO",
+    label: "Wind Cutter (2H Sword)",
+    name: "Wind Cutter (2H Sword)",
+    isMelee: true,
+    hardAsSoftDef: true,
+    job: "Dragon Knight",
+    formula: (character: Character, monster: Monster) => {
+      const baseDamage = 1250;
+
+      return {
+        percent: baseDamage * (character.baseLevel / 100) * 2,
+        bonus: 0,
+      };
+    },
+  },
+  WIND_CUTTER_SPEAR: {
+    key: "WIND_CUTTER_SPEAR",
+    label: "Wind Cutter (Spear)",
+    name: "Wind Cutter (Spear)",
+    isMelee: false,
+    job: "Dragon Knight",
+    formula: (character: Character, monster: Monster) => {
+      const baseDamage = 2000;
+
+      return {
+        percent: baseDamage * (character.baseLevel / 100) * 1,
+        bonus: 0,
+      };
+    },
+  },
   IGNITION_BREAK: {
     key: "IGNITION_BREAK",
     label: "Ignition Break",
