@@ -172,7 +172,7 @@ const MonsterInfo = ({ isMATK }: { isMATK: boolean }) => {
         <b>Build 2</b>
       </div>
       <div className="build-content">
-        <p className="separator-label">Template</p>
+        <p className="separator-label" style={{ marginTop: '0rem' }}>Template</p>
         <div className="box">
           <BuildMonsterSelect
             label="Monster"
