@@ -10,7 +10,7 @@
 
 .monster-info .header {
   display: grid;
-  grid-template-columns: 9rem 8.5rem 8.5rem;
+  grid-template-columns: 7rem 10rem 10rem;
   justify-content: unset;
   padding: 0.2rem 1.5rem;
 }
@@ -20,7 +20,7 @@
 }
 
 .monster-info .select, .monster-info .build-input {
-  grid-template-columns: 9rem 8.5rem 8.5rem !important;
+  grid-template-columns: 7rem 10rem 10rem !important;
 }
 
 .monster-info .build-content .separator-label:first-child {

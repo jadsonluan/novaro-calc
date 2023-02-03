@@ -36,6 +36,7 @@ export const MONSTER_TYPES: MonsterType[] = ["normal", "boss"];
 export type ElementLevel = "1" | "2" | "3" | "4";
 
 export interface Monster {
+  name: string;
   baseLevel: number;
   VIT: number;
   INT: number;
@@ -50,6 +51,7 @@ export interface Monster {
   race: Race;
   size: Size;
   type: MonsterType;
+  damageMultiplier: number;
   finalPropertyModifier: number;
   finalModifier: number;
   meleeModifier: number;
@@ -58,6 +60,7 @@ export interface Monster {
 }
 
 export const emptyMonster: Monster = {
+  name: 'Default Monster',
   baseLevel: 1,
   VIT: 0,
   INT: 0,
@@ -72,6 +75,7 @@ export const emptyMonster: Monster = {
   race: "formless",
   size: "small",
   type: "normal",
+  damageMultiplier: 1,
   finalPropertyModifier: 0,
   finalModifier: 0,
   meleeModifier: 0,

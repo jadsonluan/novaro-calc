@@ -3,6 +3,7 @@ import { BuildMonsterSelect, Option } from "../Select";
 import { ELEMENTS, Element } from "../../data/element";
 import { BuildMonsterInput } from "../BuildInput";
 import { Monster, SIZES, MONSTER_TYPES, MonsterType, Size, ElementLevel, Race, RACES } from "../../data/monster";
+import { MonsterTemplate, monsterTemplates } from "../../data/monstersTemplate";
 
 const MonsterInfoATK = () => {
   return (
@@ -45,6 +46,17 @@ const MonsterInfoATK = () => {
             ...prev,
             res: value,
           })}
+        />
+        <BuildMonsterInput
+          label="Multiplier"
+          tooltip="Damage reduction multiplier applied to the monster. Between 0.01 (1%) and 1 (100%). Example: the damage against a green aura MVP will be multiplied by 0.1 (10%)."
+          getValue={(monster: Monster) => monster.damageMultiplier}
+          updateValue={(value: number) => (prev: Monster) => ({
+            ...prev,
+            damageMultiplier: value,
+          })}
+          min={0.01}
+          max={1}
         />
       </div>
     </>
@@ -101,12 +113,30 @@ const MonsterInfoMATK = () => {
             mres: value,
           })}
         />
+        <BuildMonsterInput
+          label="Multiplier"
+          tooltip="Damage reduction multiplier applied to the monster. Between 0.01 (1%) and 1 (100%). Example: the damage against a green aura MVP will be multiplied by 0.1 (10%)."
+          getValue={(monster: Monster) => monster.damageMultiplier}
+          updateValue={(value: number) => (prev: Monster) => ({
+            ...prev,
+            damageMultiplier: value,
+          })}
+          min={0.01}
+          max={1}
+        />
       </div>
     </>
   );
 };
 
 const MonsterInfo = ({ isMATK }: { isMATK: boolean }) => {
+  const monsterTemplatesOptions: Option[] = monsterTemplates.map(
+    (monster: MonsterTemplate) => ({
+      label: monster.name,
+      value: monster.name,
+    })
+  );
+
   const sizeOptions: Option[] = SIZES.map((item: string) => ({
     label: item,
     value: item,
@@ -142,6 +172,23 @@ const MonsterInfo = ({ isMATK }: { isMATK: boolean }) => {
         <b>Build 2</b>
       </div>
       <div className="build-content">
+        <p className="separator-label">Template</p>
+        <div className="box">
+          <BuildMonsterSelect
+            label="Monster"
+            options={monsterTemplatesOptions}
+            getValue={(monster: Monster) => monster.name as string}
+            updateValue={(value: string) => (prevState: Monster) => {
+              return {
+                ...prevState,
+                ...monsterTemplates.find(
+                  (monster: MonsterTemplate) => monster.name === value
+                ) as unknown as Monster,
+              };
+            }}
+          />
+        </div>
+
         <div>{!isMATK ? <MonsterInfoATK /> : <MonsterInfoMATK />}</div>
 
         <p className="separator-label">Info</p>

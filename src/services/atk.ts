@@ -402,6 +402,7 @@ export function getFinalATKDamage(range: DmgRange, build: BuildInfo) {
   finalDmg = applyModifier(finalDmg, monster.finalPropertyModifier);
   finalDmg = applyModifier(finalDmg, monster.finalModifier);
 
+  finalDmg = Math.floor(finalDmg * monster.damageMultiplier);
   finalDmg = applyModifier(finalDmg, mods.custom);
 
   return {

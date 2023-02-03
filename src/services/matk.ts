@@ -220,6 +220,8 @@ export function getFinalMATKDamage(range: DmgRange, build: BuildInfo) {
     finalDmg = applyModifier(finalDmg, 5)
   }
 
+  finalDmg = Math.floor(finalDmg * monster.damageMultiplier);
+
   return {
     damage: Math.floor(finalDmg) - Math.floor(getModifierIncrease(finalDmg, 0.05)),
     modifiedCharacter: character,
