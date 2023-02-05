@@ -111,7 +111,7 @@ const phantomKimi: MonsterTemplate = {
 
 const midnightFenrir: MonsterTemplate = {
   key: 'midnightFenrir',
-  name: 'Midgniht Fenrir',
+  name: 'Midnight Fenrir',
   baseLevel: 210,
   VIT: 200,
   INT: 200,
