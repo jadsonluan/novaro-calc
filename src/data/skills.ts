@@ -1016,6 +1016,38 @@ const monkSkills: Record<string, Skill> = {
       };
     },
   },
+  GATES_OF_HELL: {
+    key: "GATES_OF_HELL",
+    label: "Gates of Hell",
+    name: "Gate of Hell",
+    isMelee: false,
+    job: "Inquisitor",
+    formula: (character: Character, monster: Monster) => {
+      const baseDamage = 5000;
+      return {
+        percent: baseDamage * (character.baseLevel / 100),
+        bonus:
+          getHP(character) -
+          character.hp.current +
+          Math.max(character.sp.current - 100, character.sp.current) * 3 +
+          character.baseLevel * 10,
+      };
+    },
+  },
+  GATES_OF_HELL_COMBO: {
+    key: "GATES_OF_HELL_COMBO",
+    label: "Gates of Hell (Combo)",
+    name: "Gate of Hell",
+    isMelee: false,
+    job: "Inquisitor",
+    formula: (character: Character, monster: Monster) => {
+      const baseDamage = 8000;
+      return {
+        percent: baseDamage * (character.baseLevel / 100),
+        bonus: (getHP(character) - character.hp.current) + (getSP(character) * 3) + (character.baseLevel * 40),
+      };
+    },
+  },
   EXPLOSION_BLASTER: {
     key: "EXPLOSION_BLASTER",
     label: "Explosion Blaster",

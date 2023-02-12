@@ -23,12 +23,14 @@ export interface HPInfo {
   base: number;
   flat: number;
   percent: number;
+  current: number;
 }
 
 export interface SPInfo {
   base: number;
   flat: number;
   percent: number;
+  current: number;
 }
 
 interface Shield {
@@ -124,11 +126,13 @@ export const emptyCharacter: Character = {
     base: JOBS["Dragon Knight"].baseHP,
     flat: 0,
     percent: 0,
+    current: 0,
   },
   sp: {
     base: JOBS["Dragon Knight"].baseSP,
     flat: 0,
     percent: 0,
+    current: 0,
   },
   weapon: {
     atk: 0,

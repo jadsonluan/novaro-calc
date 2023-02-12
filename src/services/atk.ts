@@ -391,18 +391,18 @@ export function getFinalATKDamage(range: DmgRange, build: BuildInfo) {
   
   finalDmg = applyModifier(finalDmg, mods.finalDmg);
   finalDmg = character.crit ? applyCritical(finalDmg, character) : finalDmg;
+  finalDmg = applyModifier(finalDmg, character.ATK.patk);
+
   finalDmg = Math.max(0, finalDmg) + Math.max(0, applyModifier(formula.bonus, mods.finalDmg))
   finalDmg = applyModifier(
     finalDmg,
     skill.isMelee ? monster.meleeModifier : monster.rangedModifier
   );
-    
-  finalDmg = applyModifier(finalDmg, character.ATK.patk);
-
   finalDmg = applyModifier(finalDmg, monster.finalPropertyModifier);
   finalDmg = applyModifier(finalDmg, monster.finalModifier);
 
   finalDmg = Math.floor(finalDmg * monster.damageMultiplier);
+
   finalDmg = applyModifier(finalDmg, mods.custom);
 
   return {

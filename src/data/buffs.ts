@@ -2145,7 +2145,7 @@ const BUFF_EFFECTS: Record<keyof Buffs, BuffEffect> = {
       },
       modifiers: {
         ...character.modifiers,
-        skill: skill + (['TIGER_CANNON', 'TIGER_CANNON_COMBO'].includes(character.skill) ? SKILL_MODIFIER : 0),
+        skill: skill + (['TIGER_CANNON', 'TIGER_CANNON_COMBO', 'GATES_OF_HELL', 'GATES_OF_HELL_COMBO'].includes(character.skill) ? SKILL_MODIFIER : 0),
       },
       buffs: [...character.buffs, "gentleTouchRevitalize"],
     };

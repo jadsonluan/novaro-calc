@@ -238,6 +238,27 @@ export const BuildATK = () => {
       <p className="separator-label">Class Specific</p>
       <div className="box">
         <BuildCharacterInput
+          label="Current HP"
+          tooltip="Affects the bonus damage of Gates of Hell"
+          getValue={(character: Character) => character.hp.current}
+          updateValue={(value: number) => (prev: Character) => {
+            const { hp } = prev;
+            return { ...prev, hp: { ...hp, current: value } };
+          }}
+          min={0}
+        />
+        
+        <BuildCharacterInput
+          label="Current SP"
+          tooltip="Affects the bonus damage of Gates of Hell"
+          getValue={(character: Character) => character.sp.current}
+          updateValue={(value: number) => (prev: Character) => {
+            const { sp } = prev;
+            return { ...prev, sp: { ...sp, current: value } };
+          }}
+          min={0}
+        />
+        <BuildCharacterInput
           label="Shield Weight"
           tooltip="Affects some Imperial Guard skills"
           getValue={(character: Character) => character.shield.weight}
