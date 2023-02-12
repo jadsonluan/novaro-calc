@@ -509,7 +509,7 @@ export const emptyATKBuffs: Buffs = {
   },
   gentleTouchRevitalize: {
     active: false,
-    tooltip: "MaxHP + 10% and increases Tiger Cannon damage by 30%",
+    tooltip: "MaxHP + 10% and increases Tiger Cannon and Gates of Hell damage by 30%",
     job: "Acolyte",
     iconURL: 'https://static.divine-pride.net/images/skill/2348.png',
   },
