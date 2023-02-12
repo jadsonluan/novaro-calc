@@ -22,6 +22,7 @@ export interface Debuffs {
   waterInsignia?: Buff;
   windInsignia?: Buff;
   fireInsignia?: Buff;
+  cloudPoison?: Buff;
   // Ninja
   wateryEvasion?: Buff;
   // Taekwon
@@ -107,6 +108,12 @@ export const emptyATKDebuffs: Debuffs = {
     job: "Mage",
     iconURL: 'https://static.divine-pride.net/images/skill/2465.png',
   },
+  cloudPoison: {
+    active: false,
+    tooltip: "Decreases poison property resistance",
+    job: "Mage",
+    iconURL: 'https://static.divine-pride.net/images/skill/2448.png',
+  },
   soulCurse: {
     active: false,
     tooltip: "Takes 100% (20% if boss type) more damage from shadow property attacks",
@@ -175,6 +182,12 @@ export const emptyMATKDebuffs: Debuffs = {
     tooltip: "Takes 50% from water property attacks",
     job: "Mage",
     iconURL: 'https://static.divine-pride.net/images/skill/2465.png',
+  },
+  cloudPoison: {
+    active: false,
+    tooltip: "Decreases poison property resistance",
+    job: "Mage",
+    iconURL: 'https://static.divine-pride.net/images/skill/2448.png',
   },
   wateryEvasion: {
     active: false,
@@ -357,6 +370,17 @@ const DEBUFF_EFFECTS: Record<keyof Debuffs, BuffEffect> = {
       monster: {
         ...monster,
         debuffs: [...monster.debuffs, "fireInsignia"],
+      },
+    };
+  },
+  cloudPoison: (character: Character, monster: Monster) => {
+    const MODIFIER = 25;
+    return {
+      character: { ...character },
+      monster: {
+        ...monster,
+        finalPropertyModifier: monster.finalPropertyModifier + (character.weapon.element === 'Poison' ? MODIFIER : 0),
+        debuffs: [...monster.debuffs, "cloudPoison"],
       },
     };
   },

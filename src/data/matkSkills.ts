@@ -517,6 +517,21 @@ const sageSkills: Record<string, Skill> = {
       };
     },
   },
+  POISON_BURST: {
+    key: "POISON_BURST",
+    name: "Poison Burst",
+    label: "Poison Burst",
+    isMelee: false,
+    job: "Elemental Master",
+    formula: (character: Character, monster: Monster, buffs: Buffs) => {
+      const baseDamage = character.stats.int + 2500 + (monster.debuffs.includes('cloudPoison') ? 1000 : 0);
+      return {
+        percent:
+          (baseDamage) * (character.baseLevel / 100),
+        bonus: 0,
+      };
+    },
+  },
   DIAMOND_STORM: {
     key: "DIAMOND_STORM",
     name: "Diamond Storm",
