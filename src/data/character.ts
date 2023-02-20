@@ -39,6 +39,7 @@ interface Shield {
 }
 
 export interface ATKModifiers {
+  atkPercent: number;
   equipATK: number;
   consumableATK: number;
   bonusStatusATK: number;
@@ -165,6 +166,7 @@ export const emptyCharacter: Character = {
   },
   shadowWeaponRefine: 0,
   ATK: {
+    atkPercent: 0,
     equipATK: 0,
     consumableATK: 0,
     bonusStatusATK: 0,

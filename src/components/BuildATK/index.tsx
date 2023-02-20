@@ -144,6 +144,18 @@ export const BuildATK = () => {
       <p className="separator-label">Modifiers</p>
       <div className="box">
         <BuildCharacterInput
+          label="ATK %"
+          tooltip="ATK % from Equipments. This is not in the @battlestats, you have to manually add it."
+          getValue={(character: Character) => character.ATK.atkPercent}
+          updateValue={(value: number) => (prev: Character) => {
+            const { ATK } = prev;
+            return {
+              ...prev,
+              ATK: { ...ATK, atkPercent: value },
+            };
+          }}
+        />
+        <BuildCharacterInput
           label="Monster Property %"
           getValue={(character: Character) => character.modifiers.targetProperty}
           updateValue={(value: number) => (prev: Character) => {
@@ -171,8 +183,8 @@ export const BuildATK = () => {
           }}
         />
         <BuildCharacterInput
-          label="Class %"
-          tooltip="This is ATK% on NovaRO, be careful between Normal/Boss Class bonus"
+          label="Monster Class %"
+          tooltip="Class % bonuses against normal or boss monsters"
           getValue={(character: Character) => character.modifiers.class}
           updateValue={(value: number) => (prev: Character) => {
             const { modifiers } = prev;

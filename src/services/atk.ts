@@ -114,11 +114,7 @@ function getWeaponATK(
     increasedTotalWeaponATK += getModifierIncrease(totalWeaponATK, 15);
   }
 
-  return applyCardModifiers(
-    Math.floor((totalWeaponATK + increasedTotalWeaponATK) * sizePenalty),
-    character,
-    monster
-  );
+  return (totalWeaponATK + increasedTotalWeaponATK) * sizePenalty;
 }
 
 function getExtraATK(character: Character, monster: Monster) {
@@ -162,12 +158,6 @@ function getExtraATK(character: Character, monster: Monster) {
   pseudoBuffATK += increasedPseudoBuffATK;
 
   let extraATK = Math.floor(equipATK + consumableATK + ammoATK + pseudoBuffATK);
-
-  extraATK = applyCardModifiers(
-    extraATK,
-    character,
-    monster
-    );
 
   return extraATK;
 }
@@ -294,10 +284,13 @@ function getATK(range: DmgRange, character: Character, monster: Monster) {
     statusATK += getModifierIncrease(statusATK, 5);
   }
 
+  const atkPercentATK = (wATK + extraATK) * (character.ATK.atkPercent / 100);
+
   return (
     statusATK * 2 +
-    wATK +
-    extraATK +
+    atkPercentATK +
+    applyCardModifiers(wATK, character, monster) +
+    applyCardModifiers(extraATK, character, monster) +
     masteryATK +
     buffATK
   );
