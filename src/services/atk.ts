@@ -284,7 +284,7 @@ function getATK(range: DmgRange, character: Character, monster: Monster) {
     statusATK += getModifierIncrease(statusATK, 5);
   }
 
-  const atkPercentATK = (wATK + extraATK) * (character.ATK.atkPercent / 100);
+  const atkPercentATK = Math.floor((wATK + extraATK) * (character.ATK.atkPercent / 105));
 
   return (
     statusATK * 2 +
@@ -369,7 +369,7 @@ export function getFinalATKDamage(range: DmgRange, build: BuildInfo) {
     monster
     );
 
-  let finalDmg = Math.floor(atk * (formula.percent / 100));
+  let finalDmg = Math.floor(atk * (Math.floor(formula.percent) / 100));
 
   if (skill.key === 'DRAGON_BREATH') {
     finalDmg = Math.floor(formula.percent);
