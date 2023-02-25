@@ -1172,6 +1172,7 @@ const doramSkills: Record<string, Skill> = {
       return {
         percent:
           (baseDamage + character.stats.int) *
+          (buffs.colorsOfHyunrok?.active ? 1.5 : 1) *
           (character.baseLevel / 100),
         bonus: 0,
       };
@@ -1200,7 +1201,7 @@ const doramSkills: Record<string, Skill> = {
     isMelee: false,
     job: "Spirit Handler",
     formula: (character: Character, monster: Monster, buffs: Buffs) => {
-      const baseDamage = 5150;
+      const baseDamage = 4400 + 750;
       return {
         percent:
           (baseDamage + character.traits.spl * 5) *

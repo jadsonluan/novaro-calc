@@ -133,6 +133,7 @@ export interface Buffs {
   // Doram
   bunchOfShrimp?: Buff;
   chattering?: Buff;
+  colorsOfHyunrok?: Buff;
   marineFestivalofKisul?: Buff;
   sandFestivalofKisul?: Buff;
   temporaryCommunion?: Buff;
@@ -976,6 +977,12 @@ export const emptyMATKBuffs: Buffs = {
     tooltip: "Buff MATK +100",
     job: "Doram",
     iconURL: 'https://static.divine-pride.net/images/skill/5055.png',
+  },
+  colorsOfHyunrok: {
+    active: false,
+    tooltip: "Catnip Meteor damage +50%",
+    job: "Doram",
+    iconURL: 'https://static.divine-pride.net/images/skill/5444.png',
   },
   sandFestivalofKisul: {
     active: false,
@@ -2476,6 +2483,9 @@ const BUFF_EFFECTS: Record<keyof Buffs, BuffEffect> = {
       },
       buffs: [...character.buffs, "chattering"],
     };
+  },
+  colorsOfHyunrok: (character: Character) => {
+    return { ...character, buffs: [...character.buffs, "colorsOfHyunrok"] };
   },
   marineFestivalofKisul: (character: Character) => {
     const {

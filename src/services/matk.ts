@@ -33,14 +33,16 @@ function getStatusMATK(character: Character) {
 
 
   let baseStatusMATK = Math.floor(
-    Math.floor(baseLevel / 4) +
+    Math.floor(
+      Math.floor(baseLevel / 4) +
       int +
       Math.floor(int / 2) +
       Math.floor(dex / 5) +
       Math.floor(luk / 3) +
-      bonusStatusMATK +
       spl * 5
+    ) + bonusStatusMATK
   );
+  baseStatusMATK = applyModifier(baseStatusMATK, character.MATK.smatk);
 
   return baseStatusMATK;
 }
@@ -72,7 +74,7 @@ function getWeaponMATK(
 
   const refineMATK = getRefineBonus(weapon) + shadowWeaponRefine;
 
-  let variance = (0.1 * weapon.level) * (weapon.matk + refineMATK);
+  let variance = Math.floor((0.1 * weapon.level) * (weapon.matk + refineMATK));
   let overUpgradeMATK;
 
   if (range === "MIN") {
@@ -90,6 +92,8 @@ function getWeaponMATK(
 
   totalWeaponMATK += increasedTotalWeaponMATK;
 
+  totalWeaponMATK = applyModifier(totalWeaponMATK, character.MATK.smatk);
+
   return Math.floor(totalWeaponMATK);
 }
 
@@ -102,11 +106,13 @@ function getExtraMATK(character: Character, monster: Monster) {
 
   let extraMATK = equipMATK + consumableMATK + pseudoBuffMATK;
 
+  extraMATK = applyModifier(extraMATK, character.MATK.smatk);
+
   return Math.floor(extraMATK);
 }
 
-function applyCardModifiers(
-  atk: number,
+function applyModifiers(
+  matk: number,
   character: Character,
   monster: Monster
 ) {
@@ -125,18 +131,20 @@ function applyCardModifiers(
     monster.debuffs
   );
 
-  let finalModifiers = 1000;
-  finalModifiers *= 1 + race / 100;
-  finalModifiers *= 1 + size / 100;
-  finalModifiers *= 1 + targetProperty / 100;
-  finalModifiers *= 1 + (character.MATK.matkPercent - 100) / 100;
-  finalModifiers *= 1 + skillProperty / 100;
-  finalModifiers *= 1 + monsterType / 100;
-  finalModifiers *= property;
+  let result = matk;
+  result = applyModifier(result, race);
+  result = applyModifier(result, size);
+  result = applyModifier(result, targetProperty);
+  result = applyModifier(result, character.MATK.matkPercent - 100);
+  result = applyModifier(result, skillProperty);
+  result = applyModifier(result, monsterType);
+  result = Math.floor(result * property);
 
-  finalModifiers /= 1000;
+  if (character.buffs.includes('runeStrawberryCake')) {
+    result = applyModifier(result, 5)
+  }
 
-  return Math.floor(atk * finalModifiers);
+  return result;
 }
 
 function applyModifier(damage: number, mod: number) {
@@ -193,7 +201,7 @@ export function getFinalMATKDamage(range: DmgRange, build: BuildInfo) {
   const formula = skill.formula(character, monster, build.buffs);
 
   let matk = getMATK(range, character, monster);
-  matk = applyCardModifiers(matk, character, monster);
+  matk = applyModifiers(matk, character, monster);
 
   const { MRES, hardMDEF, softMDEF } = getMDEF(
     monster,
@@ -201,7 +209,7 @@ export function getFinalMATKDamage(range: DmgRange, build: BuildInfo) {
     character.traitBypass,
   );
 
-  let finalDmg = Math.floor(matk * (formula.percent / 100));
+  let finalDmg = Math.floor((matk * formula.percent) / 100);
   finalDmg = applyModifier(finalDmg, mods.skill);
 
   finalDmg = Math.floor(finalDmg * MRES);
@@ -211,19 +219,13 @@ export function getFinalMATKDamage(range: DmgRange, build: BuildInfo) {
   finalDmg = applyModifier(finalDmg, mods.finalDmg);
   finalDmg = applyModifier(finalDmg, mods.custom);
 
-  finalDmg = applyModifier(finalDmg, character.MATK.smatk);
-
   finalDmg = applyModifier(finalDmg, monster.finalPropertyModifier);
   finalDmg = applyModifier(finalDmg, monster.finalModifier);
-
-  if (character.buffs.includes('runeStrawberryCake')) {
-    finalDmg = applyModifier(finalDmg, 5)
-  }
 
   finalDmg = Math.floor(finalDmg * monster.damageMultiplier);
 
   return {
-    damage: Math.floor(finalDmg) - Math.floor(getModifierIncrease(finalDmg, 0.05)),
+    damage: Math.floor(finalDmg) + (range === "MIN" ? Math.floor(getModifierIncrease(finalDmg, 0.2)) : Math.floor(getModifierIncrease(finalDmg, -0.2))),
     modifiedCharacter: character,
   };
 }
