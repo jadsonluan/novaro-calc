@@ -29,15 +29,15 @@ function getStatusATK(character: Character) {
   const propertyModifier = 1;
 
   const mainStatBonus = isDexWeapon(weapon.type)
-    ? dex + str / 5
-    : str + dex / 5;
+    ? dex + Math.floor(str / 5)
+    : str + Math.floor(dex / 5);
 
-  const baseStatusATK = Math.floor(
-    (baseLevel / 4 + mainStatBonus + luk / 3 + bonusStatusATK + pow * 5) *
+  const statusATK = Math.floor(
+    (Math.floor(baseLevel / 4) + mainStatBonus + Math.floor(luk / 3) + bonusStatusATK + pow * 5) *
       propertyModifier
   );
 
-  return baseStatusATK;
+  return statusATK;
 }
 
 function getRefineBonus(weapon: Weapon) {
@@ -78,7 +78,7 @@ function getWeaponATK(
   const statBonus = getStatBonus(weapon, stats);
   const refineATK = getRefineBonus(weapon) + shadowWeaponRefine;
 
-  let variance = 0.05 * weapon.level * weapon.atk;
+  let variance = Math.floor(0.05 * weapon.level * weapon.atk);
   let overUpgradeATK;
 
   if (range === "MIN") {
@@ -193,17 +193,16 @@ function applyCardModifiers(
     monster.debuffs
   );
 
-  let finalModifiers = 1000;
-  finalModifiers *= 1 + race / 100;
-  finalModifiers *= 1 + size / 100;
-  finalModifiers *= 1 + targetProperty / 100;
-  finalModifiers *= 1 + monsterType / 100;
-  finalModifiers *= 1 + targetClass / 100;
-  finalModifiers *= 1 + advancedKatarMastery / 100;
-  finalModifiers *= property;
-  finalModifiers /= 1000;
+  let result = atk;
+  result = applyModifier(result, race);
+  result = applyModifier(result, size);
+  result = applyModifier(result, targetProperty);
+  result = applyModifier(result, monsterType);
+  result = applyModifier(result, targetClass);
+  result = applyModifier(result, advancedKatarMastery);
+  result = Math.floor(result * property);
 
-  return Math.floor(atk * finalModifiers);
+  return result;
 }
 
 function applyModifier(damage: number, mod: number) {
@@ -402,8 +401,8 @@ export function getFinalATKDamage(range: DmgRange, build: BuildInfo) {
     damage: Math.floor(
       Math.floor(finalDmg) -
         (character.job === "Imperial Guard"
-          ? getModifierIncrease(finalDmg, 0.20)
-          : getModifierIncrease(finalDmg, 0.05))
+          ? getModifierIncrease(finalDmg, 0.2)
+          : getModifierIncrease(finalDmg, 0.1))
     ),
     modifiedCharacter: character,
   };
