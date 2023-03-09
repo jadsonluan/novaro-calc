@@ -1554,7 +1554,7 @@ const BUFF_EFFECTS: Record<keyof Buffs, BuffEffect> = {
     const {
       ATK: { masteryATK },
     } = character;
-    const ATK_INCREASE = 30;
+    const ATK_INCREASE = 50;
     return {
       ...character,
       ATK: {
@@ -2125,7 +2125,7 @@ const BUFF_EFFECTS: Record<keyof Buffs, BuffEffect> = {
       ...character,
       ATK: {
         ...character.ATK,
-        masteryATK: masteryATK + ATK_PER_SPHERE * 10,
+        masteryATK: masteryATK + ATK_PER_SPHERE * 15,
       },
       hp: {
         ...character.hp,
@@ -2285,7 +2285,7 @@ const BUFF_EFFECTS: Record<keyof Buffs, BuffEffect> = {
     const {
       ATK: { masteryATK },
     } = character;
-    const ATK_PER_COIN = 8;
+    const ATK_PER_COIN = 10;
     return {
       ...character,
       ATK: {

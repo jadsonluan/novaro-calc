@@ -79,7 +79,7 @@ function getWeaponMATK(
 
   if (range === "MIN") {
     overUpgradeMATK = 0;
-    variance *= character.buffs.includes('recognizedSpell') ? 1 :-1;
+    variance *= character.buffs.includes('recognizedSpell') ? 1 : -1;
   } else {
     overUpgradeMATK = Math.max(1, getMaxOverUpgradeBonus(weapon));
   }

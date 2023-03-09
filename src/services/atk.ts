@@ -32,7 +32,7 @@ function getStatusATK(character: Character) {
     ? dex + Math.floor(str / 5)
     : str + Math.floor(dex / 5);
 
-  const statusATK = Math.floor(
+  let statusATK = Math.floor(
     (Math.floor(baseLevel / 4) + mainStatBonus + Math.floor(luk / 3) + bonusStatusATK + pow * 5) *
       propertyModifier
   );
@@ -114,7 +114,9 @@ function getWeaponATK(
     increasedTotalWeaponATK += getModifierIncrease(totalWeaponATK, 15);
   }
 
-  return (totalWeaponATK + increasedTotalWeaponATK) * sizePenalty;
+  totalWeaponATK += increasedTotalWeaponATK;
+
+  return totalWeaponATK * sizePenalty;
 }
 
 function getExtraATK(character: Character, monster: Monster) {
@@ -160,6 +162,22 @@ function getExtraATK(character: Character, monster: Monster) {
   let extraATK = Math.floor(equipATK + consumableATK + ammoATK + pseudoBuffATK);
 
   return extraATK;
+}
+
+function getType2ATK (character: Character, monster: Monster, wATK: number, extraATK: number) {
+  const { ATK: { atkPercent } } = character;
+
+  const property = getPropertyModifier(
+    character.weapon.element,
+    monster.element,
+    Number(monster.elementLevel),
+    monster.debuffs
+  );
+
+  let type2ATK = Math.floor((wATK + extraATK) * property);
+  type2ATK = Math.floor(type2ATK * (atkPercent / 100));
+
+  return type2ATK;
 }
 
 function getSizePenalty(weaponType: WeaponType, monsterSize: Size) {
@@ -283,16 +301,16 @@ function getATK(range: DmgRange, character: Character, monster: Monster) {
     statusATK += getModifierIncrease(statusATK, 5);
   }
 
-  const atkPercentATK = Math.floor((wATK + extraATK) * (character.ATK.atkPercent / 105));
+  const atkPercentATK = getType2ATK(character, monster, wATK, extraATK);
 
-  return (
+  let mainATK =
     statusATK * 2 +
     atkPercentATK +
     applyCardModifiers(wATK, character, monster) +
-    applyCardModifiers(extraATK, character, monster) +
-    masteryATK +
-    buffATK
-  );
+    applyCardModifiers(extraATK, character, monster);
+  mainATK = applyModifier(mainATK, character.ATK.patk);
+
+  return Math.floor(mainATK + masteryATK + buffATK);
 }
 
 function getSoftDEF(monster: Monster) {
@@ -383,7 +401,6 @@ export function getFinalATKDamage(range: DmgRange, build: BuildInfo) {
   
   finalDmg = applyModifier(finalDmg, mods.finalDmg);
   finalDmg = character.crit ? applyCritical(finalDmg, character) : finalDmg;
-  finalDmg = applyModifier(finalDmg, character.ATK.patk);
 
   finalDmg = Math.max(0, finalDmg) + Math.max(0, applyModifier(formula.bonus, mods.finalDmg))
   finalDmg = applyModifier(
@@ -398,12 +415,7 @@ export function getFinalATKDamage(range: DmgRange, build: BuildInfo) {
   finalDmg = applyModifier(finalDmg, mods.custom);
 
   return {
-    damage: Math.floor(
-      Math.floor(finalDmg) -
-        (character.job === "Imperial Guard"
-          ? getModifierIncrease(finalDmg, 0.2)
-          : getModifierIncrease(finalDmg, 0.1))
-    ),
+    damage: Math.floor(finalDmg),
     modifiedCharacter: character,
   };
 }
