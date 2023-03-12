@@ -380,7 +380,6 @@ export const BuildMATK = () => {
           updateValue={(value: number) => (prev: Character) => {
             const { weapon } = prev;
             let newSmatk = 0;
-            console.log('refine and value', prev.weapon.refine, value);
 
             if (prev.weapon.level === 5 && value !== 5) {
               newSmatk = getRefinePatkSmatk(prev.MATK.smatk, prev.weapon.refine, 0);
