@@ -3,6 +3,18 @@ import "./index.css";
 import { BuildCharacterInput } from "../BuildInput";
 import { Character } from "../../data/character";
 
+function getRefinePatkSmatk(
+  previousTrait: number,
+  previousRefine: number,
+  newRefine: number
+) {
+  const refineDifference = newRefine - previousRefine;
+  const patkDifference = refineDifference * 2;
+  const newValue = previousTrait + patkDifference;
+
+  return newValue;
+}
+
 const BuildContainer = ({ isMatk, children }: { isMatk: boolean, children: React.ReactChild[] }) => (
   <div className="build">
     <div className="header">
@@ -25,7 +37,15 @@ export const BuildATK = () => {
           getValue={(character: Character) => character.weapon.level}
           updateValue={(value: number) => (prev: Character) => {
             const { weapon } = prev;
-            return { ...prev, weapon: { ...weapon, level: value } };
+            let newPatk = 0;
+
+            if (prev.weapon.level === 5 && value !== 5) {
+              newPatk = getRefinePatkSmatk(prev.ATK.patk, prev.weapon.refine, 0);
+            } else if (prev.weapon.level !== 5 && value === 5) {
+              newPatk = getRefinePatkSmatk(prev.ATK.patk, 0, prev.weapon.refine);
+            }
+
+            return { ...prev, weapon: { ...weapon, level: value }, ATK: { ...prev.ATK, patk: newPatk } };
           }}
           defaultValue={1}
           min={1}
@@ -44,8 +64,18 @@ export const BuildATK = () => {
           getValue={(character: Character) => character.weapon.refine}
           updateValue={(value: number) => (prev: Character) => {
             const { weapon } = prev;
-            return { ...prev, weapon: { ...weapon, refine: value } };
+            const newPatk = getRefinePatkSmatk(prev.ATK.patk, prev.weapon.refine, value);
+
+            return {
+              ...prev,
+              weapon: { ...weapon, refine: value },
+              ATK: {
+                ...prev.ATK,
+                patk: weapon.level === 5 ? newPatk : prev.ATK.patk,
+              },
+            };
           }}
+          min={0}
           max={20}
         />
         <BuildCharacterInput
@@ -348,7 +378,16 @@ export const BuildMATK = () => {
           getValue={(character: Character) => character.weapon.level}
           updateValue={(value: number) => (prev: Character) => {
             const { weapon } = prev;
-            return { ...prev, weapon: { ...weapon, level: value } };
+            let newSmatk = 0;
+            console.log('refine and value', prev.weapon.refine, value);
+
+            if (prev.weapon.level === 5 && value !== 5) {
+              newSmatk = getRefinePatkSmatk(prev.MATK.smatk, prev.weapon.refine, 0);
+            } else if (prev.weapon.level !== 5 && value === 5) {
+              newSmatk = getRefinePatkSmatk(prev.MATK.smatk, 0, prev.weapon.refine);
+            }
+
+            return { ...prev, weapon: { ...weapon, level: value }, MATK: { ...prev.MATK, smatk: newSmatk } };
           }}
           defaultValue={1}
           min={1}
@@ -367,8 +406,18 @@ export const BuildMATK = () => {
           getValue={(character: Character) => character.weapon.refine}
           updateValue={(value: number) => (prev: Character) => {
             const { weapon } = prev;
-            return { ...prev, weapon: { ...weapon, refine: value } };
+            const newSmatk = getRefinePatkSmatk(prev.MATK.smatk, prev.weapon.refine, value);
+
+            return {
+              ...prev,
+              weapon: { ...weapon, refine: value },
+              MATK: {
+                ...prev.MATK,
+                smatk: weapon.level === 5 ? newSmatk : prev.MATK.smatk,
+              },
+            };
           }}
+          min={0}
           max={20}
         />
         <BuildCharacterInput
