@@ -33,7 +33,7 @@ export const BuildATK = () => {
       <div className="box">
         <BuildCharacterInput
           label="Weapon LVL"
-          tooltip="Your weapon level, goes up to 5. Affects damage variation"
+          tooltip="Your weapon level, goes up to 5. Your P.Atk will be automatically increased if using a level 5 weapon"
           getValue={(character: Character) => character.weapon.level}
           updateValue={(value: number) => (prev: Character) => {
             const { weapon } = prev;
@@ -61,6 +61,7 @@ export const BuildATK = () => {
         />
         <BuildCharacterInput
           label="Weapon Refine"
+          tooltip="Your weapon refine, goes up to 20. When using a level 5 weapon your P.Atk will be increased/decreased by your weapon refine"
           getValue={(character: Character) => character.weapon.refine}
           updateValue={(value: number) => (prev: Character) => {
             const { weapon } = prev;
@@ -374,7 +375,7 @@ export const BuildMATK = () => {
       <div className="box">
         <BuildCharacterInput
           label="Weapon LVL"
-          tooltip="Your weapon level, goes up to 5. Affects damage variation"
+          tooltip="Your weapon level, goes up to 5. Your S.Matk will be automatically increased if using a level 5 weapon"
           getValue={(character: Character) => character.weapon.level}
           updateValue={(value: number) => (prev: Character) => {
             const { weapon } = prev;
@@ -403,6 +404,7 @@ export const BuildMATK = () => {
         />
         <BuildCharacterInput
           label="Weapon Refine"
+          tooltip="Your weapon refine, goes up to 20. When using a level 5 weapon your S.Matk will be increased/decreased by your weapon refine"
           getValue={(character: Character) => character.weapon.refine}
           updateValue={(value: number) => (prev: Character) => {
             const { weapon } = prev;
