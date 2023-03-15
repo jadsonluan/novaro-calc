@@ -207,6 +207,13 @@ function getRangeBonuses(sections: Record<string, string[]>) {
   return { melee: melee ?? 0, ranged: ranged ?? 0 };
 }
 
+function getType2ATK(sections: Record<string, string[]>) {
+  const section = sections["Others"];
+  if (!section) return 0;
+
+  return getBonusFromSection(section, "Atk2", " +");
+}
+
 function getCriticalDamageBonuses(sections: Record<string, string[]>) {
   const section = sections["Critical Stats"];
   if (!section) return 0;
@@ -265,6 +272,7 @@ export function formatBattleStats(
   const bypass = getBypass(sections, monsterInfo.race, monsterInfo.monsterType, isMATK);
   const skillBonus = getSkillBonus(sections, skill, isMATK);
   const { melee, ranged } = getRangeBonuses(sections);
+  const type2ATK = getType2ATK(sections);
   const critical = getCriticalDamageBonuses(sections);
   const { hp, sp } = getHPSP(sections);
 
@@ -285,6 +293,7 @@ export function formatBattleStats(
     skillBonus,
     melee,
     ranged,
+    type2ATK,
     critical,
     hp,
     sp,

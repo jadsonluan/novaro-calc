@@ -130,7 +130,8 @@ const ImportBS = ({ isMATK }: { isMATK: boolean }) => {
         equipATK: response.equipATK,
         patk: getTraitBonuses("pow", 0, Number(traits.pow)) + getTraitBonuses("con", 0, Number(traits.con)) +
          (response.weaponLVL === 5 ? Number(weaponRefine) * 2 : 0),
-        crate: getTraitBonuses("crt", 0, Number(traits.crt))
+        crate: getTraitBonuses("crt", 0, Number(traits.crt)),
+        atkPercent: response.type2ATK,
       },
       MATK: {
         ...prevState.MATK,
