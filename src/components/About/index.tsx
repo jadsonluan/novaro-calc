@@ -37,8 +37,7 @@ const About = () => {
           Max HP and Max SP are calculated considering a level 250 character, so be aware of that when testing damage of skills that use Max Hp (like Tiger Cannon).
         </p>
         <p>
-          This tool is a work in progress. If you have any suggestions or
-          feedback, please contact me at my{" "}
+          If you have any suggestions or feedback, please contact me at my{" "}
           <a style={{color: 'white'}} href="mailto:gabmla19@gmail.com">Gmail</a>, <b>Gabriel M.#6838</b> on Discord or my main character ingame <b>Amalfabeta</b> (Biolo, I usually stay in Brasilis).
         </p>
         <div className="buttons">

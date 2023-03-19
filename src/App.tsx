@@ -8,6 +8,9 @@ import MainPage from "./components/MainPage";
 import { INITIAL_ATK_BUILD, INITIAL_MATK_BUILD } from "./data/input";
 import { Build, useBuild } from "./hooks/useBuild";
 import useStorage from "./hooks/useStorage";
+import Simulator from "./simulator";
+import SimulatorFooter from "./simulator/footer";
+import SimulatorNavbar from "./simulator/navbar";
 
 const copy = (
   from: Omit<Build, "setName" | "setCharacter" | "setMonster" | "setBuffs" | "setDebuffs">,
@@ -56,67 +59,9 @@ function App() {
 
   return (
     <div className="app">
-      <div className="navbar">
-        <header className="header build-names">
-          <div className="input-label">
-            <span>Build 1:</span>
-            <input
-              value={build1.name}
-              onChange={(e: ChangeEvent<HTMLInputElement>) =>
-                build1.setName(e.target.value)
-              }
-            />
-          </div>
-          <div className="input-label">
-            <span>Build 2:</span>
-            <input
-              value={build2.name}
-              onChange={(e: ChangeEvent<HTMLInputElement>) =>
-                build2.setName(e.target.value)
-              }
-            />
-          </div>
-        </header>
-        <header className="header container">
-          <div className="left-action">
-            <div className="logo">
-              <p>NovaRO Calc: {isMATK ? "MATK" : "ATK"}</p>
-              <h6>Created by: Luan and Gabriel</h6>
-            </div>
-            <div className="actions">
-              <ImportBS isMATK={isMATK} />
-              <button onClick={() => copy(build1, build2)}>
-                Build 1 {">"} Build 2
-              </button>
-              <button onClick={() => copy(build2, build1)}>
-                Build 1 {"<"} Build 2
-              </button>
-              <BuildStorage isMATK={isMATK} />
-              <button
-                onClick={() => {
-                  copy(INITIAL_BUILD, build1);
-                  copy(INITIAL_BUILD, build2);
-                }}
-              >
-                Clear
-              </button>
-              <About />
-            </div>
-          </div>
-          <div className="links">
-            <Link to={!isMATK ? "/matk" : "/"} reloadDocument style={{ textDecoration: 'none' }}>
-              <button className="calc-button">
-                {!isMATK ? <span className="material-symbols-outlined">magic_button</span> : <span className="material-symbols-outlined">swords</span>}
-                {!isMATK ? "MATK" : "ATK"}
-              </button>
-            </Link>
-          </div>
-        </header>
-      </div>
-      <Routes>
-        <Route path="/" element={<MainPage isMATK={isMATK} />} />
-        <Route path="/matk" element={<MainPage isMATK={isMATK} />} />
-      </Routes>
+      <SimulatorNavbar />
+      <Simulator />
+      <SimulatorFooter />
     </div>
   );
 }
