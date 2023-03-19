@@ -20,7 +20,6 @@ import { getJobsName } from "../../data/job";
 import { evaluate } from "mathjs";
 import WeaponType, { Grade, GRADES, WEAPONS } from "../../data/weapon";
 import { getEquipMATK } from "../../services/matk";
-import { getTraitBonuses } from "../../utils/helperFunctions";
 
 const ImportBS = ({ isMATK }: { isMATK: boolean }) => {
   const skills = isMATK ? MATK_SKILLS : SKILLS;
@@ -47,8 +46,6 @@ const ImportBS = ({ isMATK }: { isMATK: boolean }) => {
   const [traits, setTraits] = useState({
     pow: '0',
     spl: '0',
-    con: '0',
-    crt: '0',
   });
   const [battleStats, setBattleStats] = useState("");
 
@@ -85,8 +82,6 @@ const ImportBS = ({ isMATK }: { isMATK: boolean }) => {
           ...emptyCharacter.traits,
           pow: Number(traits.pow),
           spl: Number(traits.spl),
-          con: Number(traits.con),
-          crt: Number(traits.crt),
         },
         shadowWeaponRefine: Number(shadowWeaponRefine),
         weapon: {
@@ -122,23 +117,18 @@ const ImportBS = ({ isMATK }: { isMATK: boolean }) => {
         ...prevState.traits,
         pow: Number(traits.pow),
         spl: Number(traits.spl),
-        con: Number(traits.con),
-        crt: Number(traits.crt),
       },
       ATK: {
         ...prevState.ATK,
         equipATK: response.equipATK,
-        patk: getTraitBonuses("pow", 0, Number(traits.pow)) + getTraitBonuses("con", 0, Number(traits.con)) +
-         (response.weaponLVL === 5 ? Number(weaponRefine) * 2 : 0),
-        crate: getTraitBonuses("crt", 0, Number(traits.crt)),
+        patk: (response.weaponLVL === 5 ? Number(weaponRefine) * 2 : 0),
         atkPercent: response.type2ATK,
       },
       MATK: {
         ...prevState.MATK,
         equipMATK: equipMATK,
         matkPercent: response.MATKpercent,
-        smatk: getTraitBonuses("spl", 0, Number(traits.spl)) + getTraitBonuses("con", 0, Number(traits.con)) +
-          (response.weaponLVL === 5 ? Number(weaponRefine) * 2 : 0),
+        smatk: (response.weaponLVL === 5 ? Number(weaponRefine) * 2 : 0),
       },
       bypass: response.bypass,
       hp: {
@@ -239,13 +229,12 @@ const ImportBS = ({ isMATK }: { isMATK: boolean }) => {
           <li>
             {!isMATK ? (
               <b>
-                You need to fill 'POW', 'CON' and 'CRT' so your P.Atk and C.Rate are
-                calculated correctly.
+                You need to fill 'POW' so your StatusATK is calculated correctly.
               </b>
             ) : (
               <b>
-                You need to fill 'Level', 'INT', 'DEX', 'LUK', 'SPL', 'CON' and Weapon fields 
-                so your Equip MATK and S.Matk are calculated correctly.
+                You need to fill 'Level', 'INT', 'DEX', 'LUK' and 'SPL' and Weapon fields 
+                so your Equip MATK is calculated correctly.
               </b>
             )}
           </li>
@@ -259,7 +248,7 @@ const ImportBS = ({ isMATK }: { isMATK: boolean }) => {
             information (end of battle stats)
           </li>
           <li>Fill the remaining fields and press submit.</li>
-          <li><b>Don't forget to add passives and other adjustmens after importing your @bs.</b></li>
+          <li><b>Don't forget to add passives (that gives atk/matk, p.atk/s.matk, for example) and other adjustmens after importing your @bs.</b></li>
         </ol>
         <div className="form">
           <div className="inputs">

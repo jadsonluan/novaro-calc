@@ -141,6 +141,7 @@ export const BuildATK = () => {
         />
         <BuildCharacterInput
           label="P.Atk"
+          tooltip="This can't be calculated using @bs and stats only, you need to manually input it (look the value at your status window ingame)"
           getValue={(character: Character) => character.ATK.patk}
           updateValue={(value: number) => (prev: Character) => ({
             ...prev,
@@ -457,6 +458,7 @@ export const BuildMATK = () => {
         />
         <BuildCharacterInput
           label="S.Matk"
+          tooltip="This can't be calculated using @bs and stats only, you need to manually input it (look the value at your status window ingame)"
           getValue={(character: Character) => character.MATK.smatk}
           updateValue={(value: number) => (prev: Character) => ({
             ...prev,
