@@ -1,9 +1,15 @@
-import React from 'react';
-import styled from 'styled-components';
+import React, { useEffect, useState } from 'react';
+import styled, { ThemeProvider } from 'styled-components';
+
+const theme = {
+  primaryDark: 'var(--dark)',
+  primaryGray: 'var(--gray)',
+  primaryWhite: 'var(--white)',
+};
 
 const Container = styled.div`
   display: flex;
-  flex-direction: row;
+  flex-direction: column;
   align-items: center;
   justify-content: center;
   flex-wrap: wrap;
@@ -11,73 +17,101 @@ const Container = styled.div`
   border-radius: 0.5rem;
   margin-bottom: 1rem;
   margin-top: 1rem;
+  padding: 0.5rem 1rem 1rem 1rem;
+  background-color: ${props => props.theme.primaryDark};
+  color: ${props => props.theme.primaryWhite};
+
+  @media only screen and (min-width: 768px) {
+    width: 100%;
+    max-width: 492px;
+  }
+`;
+
+const Row = styled.div`
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
   width: 100%;
-  max-width: 700px;
-  background-color: #222;
-  color: #fff;
-  column-gap: 0.5rem;
+  column-gap: 1rem;
 `;
 
 const NameInputContainer = styled.div`
   display: flex;
   flex-direction: column;
-  align-items: flex-start;
+  align-items: center;
   justify-content: center;
-  row-gap: 0.5rem;
-  flex-grow: 1;
+  margin-bottom: 0.5rem;
   font-size: 1rem;
-  padding: 0.5rem 0rem 0.7rem 0.7rem;
+  width: 100%;
+  padding: 0.5rem;
+  box-sizing: border-box;
 `;
 
 const NameInput = styled.input`
   border: none;
   border-radius: 0.5rem;
   padding: 0.5rem;
-  width: 95%;
-  background-color: hsl(0 0% 35% / 1);
-  color: #fff;
+  width: 100%;
+  max-width: 480px;
+  background-color: ${props => props.theme.primaryGray};
+  color: ${props => props.theme.primaryWhite};
   font-weight: 600;
-`;
 
-const DamageContainer = styled.div`
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  flex-grow: 0;
+  ::placeholder {
+    color: ${props => props.theme.primaryWhite};
+    opacity: 0.5;
+  }
 `;
 
 const Damage = styled.div`
   display: flex;
   flex-direction: row;
-  align-items: center;
   column-gap: 0.5rem;
+  align-items: center;
   justify-content: space-between;
   padding: 0.5rem;
   border-radius: 0.5rem;
-  width: 210px;
-  background-color: hsl(0 0% 35% / 1);
-  border-bottom: 4px ${(props) => props.color} #222;
+  max-width: 400px;
+  background-color: ${props => props.theme.primaryGray};
 `;
 
 function BuildHeader() {
+  const [width, setWidth] = useState(window.innerWidth);
+
+  useEffect(() => {
+    const handleResize = () => setWidth(window.innerWidth);
+    window.addEventListener("resize", handleResize);
+    return () => window.removeEventListener("resize", handleResize);
+  }, []);
+  
   return (
-    <Container>
-      <NameInputContainer>
-        <label htmlFor="build-name">Build Name</label>
-        <NameInput type="text" id="build-name" />
-      </NameInputContainer>
-      <DamageContainer>
-        <Damage color='solid'>
-          <b>Min Damage</b>
-          <span>2.001.222.310</span>
-        </Damage>
-        <Damage color='unset'>
-          <b>Max Damage</b>
-          <span>2.147.010.817</span>
-        </Damage>
-      </DamageContainer>
-    </Container>
+    <ThemeProvider theme={theme}>
+      <Container>
+        <Row>
+          <NameInputContainer>
+            <NameInput type="text" id="build-name" placeholder='Build Name' />
+          </NameInputContainer>
+        </Row>
+        <Row>
+          <Damage color='solid'>
+            <b>Min</b>
+            <span>2.001.222.310</span>
+          </Damage>
+          {width > 767 && (
+            <Damage color='solid'>
+              <b>Avg</b>
+              <span>2.001.222.310</span>
+            </Damage>
+          )}
+          <Damage color='unset'>
+            <b>Max</b>
+            <span>2.147.010.817</span>
+          </Damage>
+        </Row>
+      </Container>
+    </ThemeProvider>
   )
 }
 

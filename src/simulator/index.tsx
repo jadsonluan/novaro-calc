@@ -1,15 +1,22 @@
 import React from 'react';
 import BuildHeader from './components/BuildHeader';
-import './index.css';
+import styled from 'styled-components';
+
+const SimulatorContainer = styled.div`
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+  width: 100vw;
+`;
 
 function Simulator() {
   return (
-    <div className='simulator-container'>
+    <SimulatorContainer>
       <BuildHeader />
       <div>BuildEquipments</div>
       <div>BuildStats</div>
       <div>BuildBuffs</div>
-    </div>
+    </SimulatorContainer>
   )
 }
 
