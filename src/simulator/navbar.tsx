@@ -14,13 +14,14 @@ const Navbar = styled.nav`
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  padding: 10px;
+  padding: 0.8rem;
   position: relative;
+  height: 90px;
 
   @media only screen and (min-width: 768px) {
     flex-direction: row;
     justify-content: space-between;
-    padding: 0 10px;
+    padding: 0 0.8rem;
     height: 60px;
   }
 `;

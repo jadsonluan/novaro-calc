@@ -8,6 +8,7 @@ import "./index.css";
 export interface BuildInputProps<T extends Character | Monster> {
   label: string;
   tooltip?: string;
+  oneBuild?: boolean;
   getValue: (target: T) => number;
   updateValue: (value: number) => (prevState: T) => T;
   target: (build: Build) => T;
@@ -78,14 +79,14 @@ function Input<T extends Character | Monster>({
 }
 
 function BuildInput<T extends Character | Monster>(props: BuildInputProps<T>) {
-  const { label, tooltip } = props;
+  const { label, tooltip, oneBuild } = props;
   const { build1, build2 } = useBuild();
 
   return (
     <div className="build-input">
       <TooltipLabel label={label} tooltip={tooltip} />
       <Input build={build1} {...props} />
-      <Input build={build2} {...props} />
+      {!oneBuild && <Input build={build2} {...props} />}
     </div>
   );
 }

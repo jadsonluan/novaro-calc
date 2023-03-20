@@ -39,8 +39,9 @@ function Select<T extends Character | Monster>(props: SelectProps<T>) {
 
   const SelectOptions = (opts: Option[]) =>
     opts.map((option: Option, i: number) => {
+      const isPlaceholder = option.value === "" && i === 0;
       return (
-        <option key={i} value={option.value} disabled={option.disabled}>
+        <option key={i} value={option.value} disabled={option.disabled || isPlaceholder} selected={isPlaceholder} hidden={isPlaceholder}>
           {capitalize(option.label)}
         </option>
       );
@@ -85,6 +86,20 @@ function BuildSelect<T extends Character | Monster>(
   );
 }
 
+function SimulatorSelect<T extends Character | Monster>(
+  props: BuildSelectProps<T>
+) {
+  const { build1 } = useBuild();
+
+  const newOptions = [{ value: "", label: props.label }, ...props.options];
+
+  return (
+    <div className="simulator-select">
+      <Select {...props} options={newOptions} build={build1} />
+    </div>
+  );
+}
+
 export function BuildMonsterSelect(props: BuildMonsterSelectProps<Monster>) {
   return (
     <BuildSelect<Monster>
@@ -100,6 +115,28 @@ export function BuildCharacterSelect(
 ) {
   return (
     <BuildSelect<Character>
+      {...props}
+      target={(build: Build) => build.character}
+      setTarget={(build: Build) => build.setCharacter}
+    />
+  );
+}
+
+export function SimulatorMonsterSelect(props: BuildMonsterSelectProps<Monster>) {
+  return (
+    <SimulatorSelect<Monster>
+      {...props}
+      target={(build: Build) => build.monster}
+      setTarget={(build: Build) => build.setMonster}
+    />
+  );
+}
+
+export function SimulatorCharacterSelect(
+  props: BuildSelectCharacterProps<Character>
+) {
+  return (
+    <SimulatorSelect<Character>
       {...props}
       target={(build: Build) => build.character}
       setTarget={(build: Build) => build.setCharacter}

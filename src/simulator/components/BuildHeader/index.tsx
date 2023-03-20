@@ -15,14 +15,12 @@ const Container = styled.div`
   flex-wrap: wrap;
   align-self: center;
   border-radius: 0.5rem;
-  margin-bottom: 1rem;
-  margin-top: 1rem;
-  padding: 0.5rem 1rem 1rem 1rem;
+  padding: 0.5rem;
   background-color: ${props => props.theme.primaryDark};
   color: ${props => props.theme.primaryWhite};
+  width: 100%;
 
   @media only screen and (min-width: 768px) {
-    width: 100%;
     max-width: 492px;
   }
 `;
@@ -102,7 +100,7 @@ function BuildHeader() {
           {width > 767 && (
             <Damage color='solid'>
               <b>Avg</b>
-              <span>2.001.222.310</span>
+              <span>2.074.116.563</span>
             </Damage>
           )}
           <Damage color='unset'>

@@ -9,6 +9,7 @@ export interface BuildCheckBoxProps<T extends Character | Monster | Buffs | Debu
   label: string;
   iconURL?: string;
   noIcon?: boolean;
+  oneBuild?: boolean;
   getValue: (target: T) => boolean;
   updateValue: (value: boolean) => (prevState: T) => T;
   target: (build: Build) => T;
@@ -54,7 +55,7 @@ function CheckBox<T extends Character | Monster | Buffs | Debuffs>(
 function BuildCheckBox<T extends Character | Monster | Buffs | Debuffs>(
   props: BuildCheckBoxProps<T>
 ) {
-  const { label, iconURL, noIcon } = props;
+  const { label, iconURL, noIcon, oneBuild } = props;
 
   const { build1, build2 } = useBuild();
 
@@ -65,7 +66,7 @@ function BuildCheckBox<T extends Character | Monster | Buffs | Debuffs>(
       ) : noIcon ? null : <span className="material-symbols-outlined">close</span>}
       <label title={props.tooltip}>{label}</label>
       <CheckBox {...props} build={build1} />
-      <CheckBox {...props} build={build2} />
+      {!oneBuild && <CheckBox {...props} build={build2} />}
     </div>
   );
 }
