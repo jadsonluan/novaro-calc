@@ -937,6 +937,20 @@ const hunterSkills: Record<string, Skill> = {
       };
     }
   },
+  WIND_HAWK_TRAPS: {
+    key: "WIND_HAWK_TRAPS",
+    label: "Wind Hawk Traps",
+    name: "Wind Hawk Traps",
+    isMelee: true,
+    job: "Wind Hawk",
+    formula: (character: Character, monster: Monster, buffs: Buffs) => {
+      let baseDamage = 4250 + (buffs.trueSight?.active ? 20 : 0);
+      return {
+        percent: (baseDamage + character.traits.con * 5) * (character.baseLevel / 100),
+        bonus: 0,
+      };
+    }
+  },
   CRESCIVE_BOLT: {
     key: "CRESCIVE_BOLT",
     label: "Crescive Bolt",
@@ -960,7 +974,7 @@ const hunterSkills: Record<string, Skill> = {
     isMelee: false,
     job: "Wind Hawk",
     formula: (character: Character, monster: Monster, buffs: Buffs) => {
-      let baseDamage = 3000 + (buffs.trueSight?.active ? 20 : 0);
+      let baseDamage = 9400 + (buffs.trueSight?.active ? 20 : 0);
       return {
         percent: (baseDamage + character.traits.con * 5) * (character.baseLevel / 100) * 
         1.3 * // 3 stacks of 20% damage increase each
@@ -977,9 +991,9 @@ const hunterSkills: Record<string, Skill> = {
     isMelee: false,
     job: "Wind Hawk",
     formula: (character: Character, monster: Monster, buffs: Buffs) => {
-      let baseDamage = 2500 + (buffs.trueSight?.active ? 20 : 0);
+      let baseDamage = 10000 + (buffs.trueSight?.active ? 20 : 0);
       return {
-        percent: (baseDamage + character.traits.con * 5) * (character.baseLevel / 100) *
+        percent: (baseDamage + character.traits.con * 10) * (character.baseLevel / 100) *
           (buffs.calamityGale?.active && ['brute', 'fish'].includes(monster.race) ? 1.5 : 1),
         bonus: 0,
       };
