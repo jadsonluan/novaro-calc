@@ -697,7 +697,7 @@ const priestSkills: Record<string, Skill> = {
     isMelee: false,
     job: "Cardinal",
     formula: (character: Character, monster: Monster, buffs: Buffs) => {
-      const baseDamage = 2500 + 250 + (['demon', 'undead'].includes(monster.race) ? 750 : 0);
+      const baseDamage = 4500 + 250 + (['demon', 'undead'].includes(monster.race) ? 500 : 0);
       return {
         percent: (baseDamage + character.traits.spl * 5) * (character.baseLevel / 100),
         bonus: 0,
@@ -711,7 +711,7 @@ const priestSkills: Record<string, Skill> = {
     isMelee: false,
     job: "Cardinal",
     formula: (character: Character, monster: Monster, buffs: Buffs) => {
-      const baseDamage = 4000 + 1000;
+      const baseDamage = 10000 + 1000;
       return {
         percent: (baseDamage + character.traits.spl * 5) * (character.baseLevel / 100),
         bonus: 0,
@@ -725,7 +725,7 @@ const priestSkills: Record<string, Skill> = {
     isMelee: false,
     job: "Cardinal",
     formula: (character: Character, monster: Monster, buffs: Buffs) => {
-      const baseDamage = 5500 + 1000;
+      const baseDamage = 17500 + 5000;
       return {
         percent: (baseDamage + character.traits.spl * 5) * (character.baseLevel / 100),
         bonus: 0,
@@ -739,7 +739,7 @@ const priestSkills: Record<string, Skill> = {
     isMelee: false,
     job: "Cardinal",
     formula: (character: Character, monster: Monster, buffs: Buffs) => {
-      const baseDamage = 2000 + 500 + (['demon', 'undead'].includes(monster.race) ? 1000 : 0);
+      const baseDamage = 21180 + (['demon', 'undead'].includes(monster.race) ? 1570 : 0);
       return {
         percent: (baseDamage + character.traits.spl * 10) * (character.baseLevel / 100),
         bonus: 0,
