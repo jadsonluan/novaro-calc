@@ -428,10 +428,58 @@ const whiteSmithSkills: Record<string, Skill> = {
     isMelee: true,
     job: "Meister",
     formula: (character: Character, monster: Monster, buffs: Buffs) => {
-      const baseDamage = 2000 + getWhitesmithATKBonus(character, buffs);
+      const baseDamage = 5150 + getWhitesmithATKBonus(character, buffs);
       return {
         percent:
           (baseDamage + character.traits.pow * 5) * (character.baseLevel / 100),
+        bonus: 0,
+      };
+    },
+  },
+  MIGHTY_SMASH: {
+    key: "MIGHTY_SMASH",
+    label: "Mighty Smash",
+    name: "Mighty Smash",
+    isMelee: true,
+    job: "Meister",
+    formula: (character: Character, monster: Monster, buffs: Buffs) => {
+      const baseDamage = 1825 + (buffs.axeStomp?.active ? 25 : 0) + getWhitesmithATKBonus(character, buffs);
+      return {
+        percent:
+          (baseDamage + character.traits.pow * 10) *
+          (character.baseLevel / 100) *
+          (buffs.axeStomp?.active ? 7 : 5),
+        bonus: 0,
+      };
+    },
+  },
+  SPARK_BLASTER: {
+    key: "SPARK_BLASTER",
+    label: "Spark Blaster",
+    name: "Spark Blaster",
+    isMelee: false,
+    job: "Meister",
+    hardAsSoftDef: true,
+    formula: (character: Character, monster: Monster, buffs: Buffs) => {
+      const baseDamage = 9250 + getWhitesmithATKBonus(character, buffs);
+      return {
+        percent:
+          (baseDamage + character.traits.pow * 10) * (character.baseLevel / 100) * 2,
+        bonus: 0,
+      };
+    },
+  },
+  TRIPLE_LASER: {
+    key: "TRIPLE_LASER",
+    label: "Triple Laser",
+    name: "Triple Laser",
+    isMelee: false,
+    job: "Meister",
+    formula: (character: Character, monster: Monster, buffs: Buffs) => {
+      const baseDamage = 5050 + getWhitesmithATKBonus(character, buffs);
+      return {
+        percent:
+          (baseDamage + character.traits.pow * 12) * (character.baseLevel / 100) * 3,
         bonus: 0,
       };
     },
@@ -443,10 +491,10 @@ const whiteSmithSkills: Record<string, Skill> = {
     isMelee: true,
     job: "Meister",
     formula: (character: Character, monster: Monster, buffs: Buffs) => {
-      const baseDamage = 7500 + (['formless', 'insect'].includes(monster.race) ? 3500 : 0) + getWhitesmithATKBonus(character, buffs);
+      const baseDamage = 36000 + (['formless', 'insect'].includes(monster.race) ? 1500 : 0) + getWhitesmithATKBonus(character, buffs);
       return {
         percent:
-          (baseDamage) * (character.baseLevel / 100),
+          (baseDamage + character.traits.pow * 10) * (character.baseLevel / 100),
         bonus: 0,
       };
     },
