@@ -665,7 +665,9 @@ const archerSkills: Record<string, Skill> = {
     isMelee: false,
     job: "Troubadour / Trouvere",
     formula: (character: Character, monster: Monster, buffs: Buffs) => {
-      let baseDamage = 4500 + character.traits.spl * 5;
+      let baseDamage = 13000 + 
+      (monster.debuffs.includes('soundBlend') ? 5000 : 0) + 
+      (monster.debuffs.includes('soundBlend') ? character.traits.spl * 10 : character.traits.spl * 5);
       return {
         percent: baseDamage *
          (character.baseLevel / 100),

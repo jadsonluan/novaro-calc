@@ -1023,7 +1023,9 @@ const bardSkills: Record<string, Skill> = {
     isMelee: false,
     job: "Troubadour / Trouvere",
     formula: (character: Character, monster: Monster, buffs: Buffs) => {
-      let baseDamage = 600 + character.traits.con * 5;
+      let baseDamage = 3700 + 
+      (monster.debuffs.includes('soundBlend') ? 850 : 0) + 
+      (monster.debuffs.includes('soundBlend') ? character.traits.con * 7 : character.traits.con * 5);
       return {
         percent: (baseDamage) * 3 *
          (character.baseLevel / 100) *
@@ -1040,7 +1042,7 @@ const bardSkills: Record<string, Skill> = {
     isMelee: false,
     job: "Troubadour / Trouvere",
     formula: (character: Character, monster: Monster, buffs: Buffs) => {
-      let baseDamage = 3750 + character.traits.con * 5;
+      let baseDamage = 11200 + character.traits.con * 3;
       return {
         percent: baseDamage *
          (character.baseLevel / 100) *
@@ -1057,7 +1059,7 @@ const bardSkills: Record<string, Skill> = {
     isMelee: false,
     job: "Troubadour / Trouvere",
     formula: (character: Character, monster: Monster, buffs: Buffs) => {
-      let baseDamage = 1750 + character.traits.con * 5;
+      let baseDamage = 15250 + character.traits.con * 3;
       return {
         percent: baseDamage *
          (character.baseLevel / 100) *
