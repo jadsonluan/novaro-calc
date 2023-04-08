@@ -1172,6 +1172,21 @@ const monkSkills: Record<string, Skill> = {
       };
     },
   },
+  OLEUM_SANCTUM: {
+    key: "OLEUM_SANCTUM",
+    label: "Oleum Sanctum",
+    name: "Oleum Sanctum",
+    isMelee: false,
+    job: "Inquisitor",
+    formula: (character: Character, monster: Monster) => {
+      const baseDamage = 10500;
+      return {
+        percent: (baseDamage + character.traits.pow * 5) * 
+          (character.baseLevel / 100),
+        bonus: 0,
+      };
+    },
+  },
   EXPLOSION_BLASTER: {
     key: "EXPLOSION_BLASTER",
     label: "Explosion Blaster",
@@ -1179,9 +1194,11 @@ const monkSkills: Record<string, Skill> = {
     isMelee: false,
     job: "Inquisitor",
     formula: (character: Character, monster: Monster) => {
-      const baseDamage = 3250 + (monster.debuffs.includes('oleumSanctum') ? 1000 : 0);
+      const baseDamage = 12000 + (monster.debuffs.includes('oleumSanctum') ? 5600 : 0);
       return {
-        percent: (baseDamage + character.traits.pow * 5) * (character.baseLevel / 100),
+        percent: (baseDamage + character.traits.pow * 
+          (monster.debuffs.includes('oleumSanctum') ? 15 : 10)) * 
+          (character.baseLevel / 100),
         bonus: 0,
       };
     },
@@ -1193,9 +1210,9 @@ const monkSkills: Record<string, Skill> = {
     isMelee: false,
     job: "Inquisitor",
     formula: (character: Character, monster: Monster) => {
-      const baseDamage = 8000 + (['demon', 'brute'].includes(monster.race) ? 3000 : 0);
+      const baseDamage = 23000 + (['demon', 'brute'].includes(monster.race) ? 1500 : 0);
       return {
-        percent: (baseDamage + character.traits.pow * 10) * (character.baseLevel / 100),
+        percent: (baseDamage + character.traits.pow * 15) * (character.baseLevel / 100),
         bonus: 0,
       };
     },
@@ -1207,7 +1224,7 @@ const monkSkills: Record<string, Skill> = {
     isMelee: true,
     job: "Inquisitor",
     formula: (character: Character, monster: Monster) => {
-      const baseDamage = 2250;
+      const baseDamage = 6000;
       return {
         percent: (baseDamage + character.traits.pow * 5) * (character.baseLevel / 100),
         bonus: 0,
@@ -1221,7 +1238,7 @@ const monkSkills: Record<string, Skill> = {
     isMelee: true,
     job: "Inquisitor",
     formula: (character: Character, monster: Monster) => {
-      const baseDamage = 2500;
+      const baseDamage = 11600;
       return {
         percent: (baseDamage + character.traits.pow * 5) * (character.baseLevel / 100),
         bonus: 0,
@@ -1235,9 +1252,9 @@ const monkSkills: Record<string, Skill> = {
     isMelee: true,
     job: "Inquisitor",
     formula: (character: Character, monster: Monster) => {
-      const baseDamage = 3250;
+      const baseDamage = 7850;
       return {
-        percent: (baseDamage + character.traits.pow * 5) * (character.baseLevel / 100) * 2,
+        percent: (baseDamage + character.traits.pow * 10) * (character.baseLevel / 100) * 2,
         bonus: 0,
       };
     },
@@ -1249,9 +1266,9 @@ const monkSkills: Record<string, Skill> = {
     isMelee: true,
     job: "Inquisitor",
     formula: (character: Character, monster: Monster) => {
-      const baseDamage = 2500;
+      const baseDamage = 13150;
       return {
-        percent: (baseDamage + character.traits.pow * 5) * (character.baseLevel / 100),
+        percent: (baseDamage + character.traits.pow * 7) * (character.baseLevel / 100),
         bonus: 0,
       };
     },
@@ -1263,9 +1280,9 @@ const monkSkills: Record<string, Skill> = {
     isMelee: true,
     job: "Inquisitor",
     formula: (character: Character, monster: Monster) => {
-      const baseDamage = 3350;
+      const baseDamage = 3500;
       return {
-        percent: (baseDamage + character.traits.pow * 5) * (character.baseLevel / 100) * 5,
+        percent: (baseDamage + character.traits.pow * 10) * (character.baseLevel / 100) * 5,
         bonus: 0,
       };
     },
@@ -1277,9 +1294,9 @@ const monkSkills: Record<string, Skill> = {
     isMelee: true,
     job: "Inquisitor",
     formula: (character: Character, monster: Monster) => {
-      const baseDamage = 2750;
+      const baseDamage = 14700;
       return {
-        percent: (baseDamage + character.traits.pow * 5) * (character.baseLevel / 100),
+        percent: (baseDamage + character.traits.pow * 9) * (character.baseLevel / 100),
         bonus: 0,
       };
     },
