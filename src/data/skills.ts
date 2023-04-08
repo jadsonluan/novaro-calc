@@ -627,10 +627,10 @@ const assassinSkills: Record<string, Skill> = {
     isMelee: true,
     job: "Shadow Cross",
     formula: (character: Character, monster: Monster, buffs: Buffs) => {
-      const baseDamage = 600;
+      const baseDamage = 900;
       return {
         percent:
-          (baseDamage + (buffs.shadowExceed?.active ? 380 + character.traits.pow * 5 : 0) + character.traits.pow * 5) *
+          (baseDamage + (buffs.shadowExceed?.active ? 200 + character.traits.pow * 5 : 0) + character.traits.pow * 5) *
           (character.baseLevel / 100) *
           (buffs.cloaking?.active ? 5 : 3),
         bonus: 0,
@@ -644,7 +644,7 @@ const assassinSkills: Record<string, Skill> = {
     isMelee: true,
     job: "Shadow Cross",
     formula: (character: Character, monster: Monster) => {
-      const baseDamage = 325;
+      const baseDamage = 400;
       return {
         percent:
           (baseDamage + character.traits.pow * 5) * (character.baseLevel / 100),
@@ -659,7 +659,7 @@ const assassinSkills: Record<string, Skill> = {
     isMelee: true,
     job: "Shadow Cross",
     formula: (character: Character, monster: Monster) => {
-      const baseDamage = 325;
+      const baseDamage = 400;
       return {
         percent:
           (baseDamage + character.traits.pow * 5) *
@@ -691,12 +691,12 @@ const assassinSkills: Record<string, Skill> = {
     isMelee: true,
     job: "Shadow Cross",
     formula: (character: Character, monster: Monster, buffs: Buffs) => {
-      const baseDamage = 1750;
+      const baseDamage = 1325;
       return {
         percent:
           (baseDamage +
-            (buffs.shadowExceed?.active ? 700 + character.traits.pow * 2 : 0) +
-            character.traits.pow * 5) *
+            (buffs.shadowExceed?.active ? 500 + character.traits.pow * 1 : 0) +
+            character.traits.pow * 2) *
           (character.baseLevel / 100),
         bonus: 0,
       };
@@ -709,12 +709,12 @@ const assassinSkills: Record<string, Skill> = {
     isMelee: true,
     job: "Shadow Cross",
     formula: (character: Character, monster: Monster, buffs: Buffs) => {
-      const baseDamage = 1750;
+      const baseDamage = 1325;
       return {
         percent:
           (baseDamage +
-            (buffs.shadowExceed?.active ? 700 + character.traits.pow * 2 : 0) +
-            character.traits.pow * 5) *
+            (buffs.shadowExceed?.active ? 500 + character.traits.pow * 1 : 0) +
+            character.traits.pow * 2) *
           (character.baseLevel / 100) * 5,
         bonus: 0,
       };
@@ -728,12 +728,12 @@ const assassinSkills: Record<string, Skill> = {
     job: "Shadow Cross",
     hardAsSoftDef: true,
     formula: (character: Character, monster: Monster, buffs: Buffs) => {
-      const baseDamage = 3760;
+      const baseDamage = 1750 + (buffs.cloaking?.active ? 250 : 0);
       return {
         percent:
-          (baseDamage + character.traits.pow * 5) *
+          (baseDamage + character.traits.pow * (buffs.cloaking?.active ? 7 : 5)) *
           (character.baseLevel / 100) *
-          (buffs.cloaking?.active ? 2 : 1),
+          (buffs.cloaking?.active ? 3 : 2),
         bonus: 0,
       };
     },
@@ -746,7 +746,7 @@ const assassinSkills: Record<string, Skill> = {
     job: "Shadow Cross",
     formula: (character: Character, monster: Monster) => {
       const baseDamage =
-        6500 + (["demihuman", "dragon"].includes(monster.race) ? 3000 : 0);
+        13000 + (["demihuman", "dragon"].includes(monster.race) ? 1500 : 0);
       return {
         percent:
           (baseDamage + character.traits.pow * 10) *

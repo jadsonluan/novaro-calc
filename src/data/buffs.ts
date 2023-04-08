@@ -309,7 +309,7 @@ export const emptyATKBuffs: Buffs = {
   },
   potentVenom: {
     active: false,
-    tooltip: "+30% Res bypass",
+    tooltip: "+20% Res bypass",
     job: "Thief",
     iconURL: 'https://static.divine-pride.net/images/skill/5290.png',
   },
@@ -1477,7 +1477,7 @@ const BUFF_EFFECTS: Record<keyof Buffs, BuffEffect> = {
   },
   potentVenom: (character: Character) => {
     const { traitBypass } = character;
-    const MODIFIER_INCREASE = 30;
+    const MODIFIER_INCREASE = 20;
     return {
       ...character,
       traitBypass: traitBypass +  MODIFIER_INCREASE,
