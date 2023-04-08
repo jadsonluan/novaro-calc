@@ -75,7 +75,7 @@ const rogueSkills: Record<string, Skill> = {
     isMelee: false,
     job: "Abyss Chaser",
     formula: (character: Character, monster: Monster) => {
-      const baseDamage = 500;
+      const baseDamage = 2600;
       return {
         percent:
           (baseDamage + character.traits.spl * 5) * (character.baseLevel / 100),
@@ -90,7 +90,7 @@ const rogueSkills: Record<string, Skill> = {
     isMelee: false,
     job: "Abyss Chaser",
     formula: (character: Character, monster: Monster) => {
-      const baseDamage = 1800 + 200;
+      const baseDamage = 2850 + 1000;
       return {
         percent:
           (baseDamage + character.traits.spl * 5) * (character.baseLevel / 100),
@@ -105,7 +105,7 @@ const rogueSkills: Record<string, Skill> = {
     isMelee: false,
     job: "Abyss Chaser",
     formula: (character: Character, monster: Monster) => {
-      const baseDamage = 6000 + (['angel', 'demon'].includes(monster.race) ? 5500 : 0);
+      const baseDamage = 22000 + (['angel', 'demon'].includes(monster.race) ? 1500 : 0);
       return {
         percent:
           (baseDamage + character.traits.spl * 10) * (character.baseLevel / 100),

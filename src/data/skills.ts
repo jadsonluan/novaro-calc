@@ -794,7 +794,7 @@ const rogueSkills: Record<string, Skill> = {
     isMelee: true,
     job: "Abyss Chaser",
     formula: (character: Character, monster: Monster) => {
-      const baseDamage = 1750;
+      const baseDamage = 4600;
       return {
         percent:
           (baseDamage + character.traits.pow * 5) * (character.baseLevel / 100) * 2,
@@ -824,10 +824,10 @@ const rogueSkills: Record<string, Skill> = {
     isMelee: true,
     job: "Abyss Chaser",
     formula: (character: Character, monster: Monster) => {
-      const baseDamage = 3600;
+      const baseDamage = 3750;
       return {
         percent:
-          (baseDamage + character.traits.pow * 5) * (character.baseLevel / 100),
+          (baseDamage + character.traits.pow * 5) * (character.baseLevel / 100) * 5,
         bonus: 0,
       };
     },
@@ -839,10 +839,10 @@ const rogueSkills: Record<string, Skill> = {
     isMelee: false,
     job: "Abyss Chaser",
     formula: (character: Character, monster: Monster) => {
-      const baseDamage = 3000;
+      const baseDamage = 4250;
       return {
         percent:
-          (baseDamage + character.traits.con * 5) * (character.baseLevel / 100),
+          (baseDamage + character.traits.con * 10) * (character.baseLevel / 100),
         bonus: 0,
       };
     },
@@ -854,10 +854,10 @@ const rogueSkills: Record<string, Skill> = {
     isMelee: false,
     job: "Abyss Chaser",
     formula: (character: Character, monster: Monster) => {
-      const baseDamage = 4750;
+      const baseDamage = 12350;
       return {
         percent:
-          (baseDamage + character.traits.con * 3) * (character.baseLevel / 100),
+          (baseDamage + character.traits.con * 5) * (character.baseLevel / 100),
         bonus: 0,
       };
     },
@@ -869,25 +869,25 @@ const rogueSkills: Record<string, Skill> = {
     isMelee: false,
     job: "Abyss Chaser",
     formula: (character: Character, monster: Monster) => {
-      const baseDamage = 3500;
+      const baseDamage = 6150;
       return {
         percent:
-          (baseDamage + character.traits.con * 5) * (character.baseLevel / 100),
+          (baseDamage + character.traits.con * 15) * (character.baseLevel / 100) * 2,
         bonus: 0,
       };
     },
   },
   FRENZY_SHOT_MAX: {
     key: "FRENZY_SHOT_MAX",
-    label: "Frenzy Shot (Max Hits)",
-    name: "Frenzy Shot (Max Hits)",
+    label: "Frenzy Shot (3 Hits)",
+    name: "Frenzy Shot (3 Hits)",
     isMelee: false,
     job: "Abyss Chaser",
     formula: (character: Character, monster: Monster) => {
-      const baseDamage = 3500;
+      const baseDamage = 6150;
       return {
         percent:
-          (baseDamage + character.traits.con * 5) * (character.baseLevel / 100) * 3,
+          (baseDamage + character.traits.con * 15) * (character.baseLevel / 100) * 3,
         bonus: 0,
       };
     },
