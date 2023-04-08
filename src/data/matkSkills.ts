@@ -40,10 +40,12 @@ const crusaderSkills: Record<string, Skill> = {
     isMelee: false,
     job: "Imperial Guard",
     formula: (character: Character, monster: Monster, buffs: Buffs) => {
-      const baseDamage = 1500 + (buffs.holyShield?.active ? 1000 : 500) + (buffs.holyShield?.active ? 1000 : 0);
+      const baseDamage = 3200 + 
+      (buffs.holyShield?.active ? 1300 : 0) + // Base Damage with holy shield is higher
+      (buffs.holyShield?.active ? 1500 : 1000);// Passive 1500 if holy shield is active, 1000 if not
       return {
         percent:
-          (baseDamage + character.traits.spl * 5) * (character.baseLevel / 100),
+          (baseDamage + character.traits.spl * 7) * (character.baseLevel / 100),
         bonus: 0,
       };
     },
@@ -55,7 +57,7 @@ const crusaderSkills: Record<string, Skill> = {
     isMelee: false,
     job: "Imperial Guard",
     formula: (character: Character, monster: Monster) => {
-      const baseDamage = 7500 + (['plant', 'insect'].includes(monster.race) ? 3500 : 0);
+      const baseDamage = 19500 + (['plant', 'insect'].includes(monster.race) ? 1500 : 0);
       return {
         percent:
           (baseDamage + character.traits.spl * 15) * (character.baseLevel / 100),

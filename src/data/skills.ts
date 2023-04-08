@@ -310,10 +310,10 @@ const crusaderSkills: Record<string, Skill> = {
     isMelee: true,
     job: "Imperial Guard",
     formula: (character: Character, monster: Monster) => {
-      const baseDamage = 800 + 1100;
+      const baseDamage = 1600 + 2500;
       return {
         percent:
-          (baseDamage + character.traits.pow * 5) *
+          (baseDamage + character.traits.pow * 7) *
           (character.baseLevel / 100) *
           3,
         bonus: 0,
@@ -327,10 +327,10 @@ const crusaderSkills: Record<string, Skill> = {
     isMelee: true,
     job: "Imperial Guard",
     formula: (character: Character, monster: Monster) => {
-      const baseDamage = 800 + 1100;
+      const baseDamage = 1600 + 2500;
       return {
         percent:
-          (baseDamage + character.traits.pow * 5) *
+          (baseDamage + character.traits.pow * 7) *
           (character.baseLevel / 100) *
           7,
         bonus: 0,
@@ -345,12 +345,12 @@ const crusaderSkills: Record<string, Skill> = {
     job: "Imperial Guard",
     formula: (character: Character, monster: Monster) => {
       const baseDamage =
-        3000 +
-        1250 +
-        (character.shield.weight / 10) * (character.shield.refine * 5);
+        14900 +
+        2500 +
+        (character.shield.weight / 10) * (character.shield.refine * 25);
       return {
         percent:
-          (baseDamage + character.traits.pow * 5) * (character.baseLevel / 100),
+          (baseDamage + character.traits.pow * 7) * (character.baseLevel / 100),
         bonus: 0,
       };
     },
@@ -363,7 +363,7 @@ const crusaderSkills: Record<string, Skill> = {
     job: "Imperial Guard",
     formula: (character: Character, monster: Monster) => {
       const baseDamage =
-        7500 + (["plant", "insect"].includes(monster.race) ? 3500 : 0);
+        15250 + (["plant", "insect"].includes(monster.race) ? 1600 : 0);
       return {
         percent:
           (baseDamage + character.traits.pow * 10) *
