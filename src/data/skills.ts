@@ -131,7 +131,7 @@ const knightSkills: Record<string, Skill> = {
     isMelee: true,
     job: "Dragon Knight",
     formula: (character: Character, monster: Monster) => {
-      const baseDamage = 1500 + character.traits.pow * 7;
+      const baseDamage = 7700 + character.traits.pow * 7;
       return {
         percent: baseDamage * (character.baseLevel / 100) * 2,
         bonus: 0,
@@ -145,7 +145,7 @@ const knightSkills: Record<string, Skill> = {
     isMelee: false,
     job: "Dragon Knight",
     formula: (character: Character, monster: Monster) => {
-      const baseDamage = 1500 + character.traits.pow * 7;
+      const baseDamage = 7700 + character.traits.pow * 7;
       return {
         percent: baseDamage * (character.baseLevel / 100) * 2,
         bonus: 0,
@@ -159,7 +159,49 @@ const knightSkills: Record<string, Skill> = {
     isMelee: true,
     job: "Dragon Knight",
     formula: (character: Character, monster: Monster) => {
-      const baseDamage = 600 + character.traits.pow * 5;
+      const baseDamage = 2200 + character.traits.pow * 5;
+      return {
+        percent: baseDamage * (character.baseLevel / 100) * 5,
+        bonus: 0,
+      };
+    },
+  },
+  SERVANT_W_ATK: {
+    key: "SERVANT_W_ATK",
+    label: "Servant Weapon",
+    name: "Servant Weapon",
+    isMelee: true,
+    job: "Dragon Knight",
+    formula: (character: Character, monster: Monster) => {
+      const baseDamage = 2500 + character.traits.pow * 5;
+      return {
+        percent: baseDamage * (character.baseLevel / 100) * 2,
+        bonus: 0,
+      };
+    },
+  },
+  SERVANT_W_PHANTOM: {
+    key: "SERVANT_W_PHANTOM",
+    label: "Servant Weapon - Phantom (5 hits)",
+    name: "Servant Weapon - Phantom",
+    isMelee: true,
+    job: "Dragon Knight",
+    formula: (character: Character, monster: Monster) => {
+      const baseDamage = 1700 + character.traits.pow * 5;
+      return {
+        percent: baseDamage * (character.baseLevel / 100) * 5,
+        bonus: 0,
+      };
+    },
+  },
+  SERVANT_W_DEMOLITION: {
+    key: "SERVANT_W_DEMOLITION",
+    label: "Servant Weapon - Demoliton (5 hits)",
+    name: "Servant Weapon - Demolition",
+    isMelee: true,
+    job: "Dragon Knight",
+    formula: (character: Character, monster: Monster) => {
+      const baseDamage = 2500 + character.traits.pow * 5;
       return {
         percent: baseDamage * (character.baseLevel / 100) * 5,
         bonus: 0,

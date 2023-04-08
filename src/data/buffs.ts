@@ -33,6 +33,7 @@ export interface Buffs {
   asirRune?: Buff;
   turisusRune?: Buff;
   luxAnimaRune?: Buff;
+  vigor?: Buff;
   dragonicAura?: Buff;
   moonSlasher?: Buff;
   shieldSpell?: Buff;
@@ -238,6 +239,12 @@ export const emptyATKBuffs: Buffs = {
     tooltip: "+30% for the following modifiers: HP & SP, Melee, Ranged, Critical and Size",
     job: "Swordsman",
     iconURL: 'https://static.divine-pride.net/images/items/item/22540.png',
+  },
+  vigor: {
+    active: false,
+    tooltip: "+100% Race modifier against Demi-Human and Angel",
+    job: "Swordsman",
+    iconURL: 'https://static.divine-pride.net/images/skill/5212.png',
   },
   dragonicAura: {
     active: false,
@@ -1344,6 +1351,18 @@ const BUFF_EFFECTS: Record<keyof Buffs, BuffEffect> = {
         critical: modifiers.critical + PERCENT_INCREASE,
       },
       buffs: [...character.buffs, "luxAnima"],
+    };
+  },
+  vigor: (character: Character) => {
+    const { modifiers } = character;
+    const MOD_INCREASE = 100;
+    return {
+      ...character,
+      modifiers: {
+        ...character.modifiers,
+        race: modifiers.race + MOD_INCREASE,
+      },
+      buffs: [...character.buffs, "vigor"],
     };
   },
   dragonicAura: (character: Character) => {
