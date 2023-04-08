@@ -530,7 +530,41 @@ const alchemistSkills: Record<string, Skill> = {
         percent:
           (baseDamage + 5 * character.traits.pow) * (character.baseLevel / 100) *
           (1 + (buffs.researchReport?.active ? 0.7 : 0) + (buffs.researchReport?.active && ['formless', 'plant'].includes(monster.race) ? 0.3 : 0)) *
-          5,
+          7,
+        bonus: 0,
+      };
+    },
+  },
+  MAYHEMIC_THORNS: {
+    key: "MAYHEMIC_THORNS",
+    label: "Mayhemic Thorns",
+    name: "Mayhemic Thorns",
+    isMelee: false,
+    job: "Biolo",
+    formula: (character: Character, monster: Monster, buffs: Buffs) => {
+      const baseDamage = 3200 + (buffs.researchReport?.active ? 150 : 0);
+      return {
+        percent:
+          (baseDamage + character.traits.pow * 10) * 
+          (character.baseLevel / 100) * 
+          (buffs.researchReport?.active ? 4 : 3),
+        bonus: 0,
+      };
+    },
+  },
+  EXPLOSIVE_POWDER: {
+    key: "EXPLOSIVE_POWDER",
+    label: "Explosive Powser",
+    name: "Explosive Powser",
+    isMelee: true,
+    job: "Biolo",
+    formula: (character: Character, monster: Monster, buffs: Buffs) => {
+      const baseDamage = 3150 + (buffs.researchReport?.active ? 500 : 0);
+      return {
+        percent:
+          (baseDamage + character.traits.pow * 10) * 
+          (character.baseLevel / 100) * 
+          (buffs.researchReport?.active ? 5 : 3),
         bonus: 0,
       };
     },
