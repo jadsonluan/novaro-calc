@@ -1971,7 +1971,7 @@ const doramSkills: Record<string, Skill> = {
     isMelee: false,
     job: "Spirit Handler",
     formula: (character: Character, monster: Monster, buffs: Buffs) => {
-      const baseDamage = 3150 + 500;
+      const baseDamage = 15200 + 1000;
       return {
         percent:
           (baseDamage + character.traits.pow * 5) *
@@ -1987,7 +1987,7 @@ const doramSkills: Record<string, Skill> = {
     isMelee: false,
     job: "Spirit Handler",
     formula: (character: Character, monster: Monster, buffs: Buffs) => {
-      const baseDamage = 7250 + 500;
+      const baseDamage = 8750 + 1000;
       return {
         percent:
           (baseDamage + character.traits.pow * 5) *
@@ -2003,11 +2003,12 @@ const doramSkills: Record<string, Skill> = {
     isMelee: false,
     job: "Spirit Handler",
     formula: (character: Character, monster: Monster, buffs: Buffs) => {
-      const baseDamage = 1500 + 200;
+      const baseDamage = 2700 + 200;
       return {
         percent:
           (baseDamage + character.traits.pow * 5) *
-          (character.baseLevel / 100),
+          (character.baseLevel / 100) * 
+          3,
         bonus: 0,
       };
     },
