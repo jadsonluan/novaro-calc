@@ -200,7 +200,7 @@ export const emptyATKBuffs: Buffs = {
   },
   runeStrawberryCake: {
     active: false,
-    tooltip: "+5% (Weapon Base ATK + Refine ATK) and +5% Status ATK",
+    tooltip: "+5 Status ATK",
     job: "All",
     iconURL: 'https://static.divine-pride.net/images/items/item/12319.png',
   },
@@ -731,7 +731,7 @@ export const emptyMATKBuffs: Buffs = {
   },
   runeStrawberryCake: {
     active: false,
-    tooltip: "+5% magic damage",
+    tooltip: "+5 Status MATK",
     job: "All",
     iconURL: 'https://static.divine-pride.net/images/items/item/12319.png',
   },
@@ -1306,7 +1306,23 @@ const BUFF_EFFECTS: Record<keyof Buffs, BuffEffect> = {
     };
   },
   runeStrawberryCake: (character: Character) => {
-    return { ...character, buffs: [...character.buffs, "runeStrawberryCake"] };
+    const {
+      ATK: { bonusStatusATK },
+      MATK: { bonusStatusMATK }
+    } = character;
+    const ATK_INCREASE = 5;
+    return {
+      ...character,
+      ATK: {
+        ...character.ATK,
+        bonusStatusATK: bonusStatusATK + ATK_INCREASE,
+      },
+      MATK: {
+        ...character.MATK,
+        bonusStatusMATK: bonusStatusMATK + ATK_INCREASE,
+      },
+      buffs: [...character.buffs, "runeStrawberryCake"],
+    };
   },
   investigate: (character: Character) => {
     return { ...character, buffs: [...character.buffs, "investigate"] };

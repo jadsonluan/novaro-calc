@@ -140,10 +140,6 @@ function applyModifiers(
   result = applyModifier(result, monsterType);
   result = Math.floor(result * property);
 
-  if (character.buffs.includes('runeStrawberryCake')) {
-    result = applyModifier(result, 5)
-  }
-
   return result;
 }
 

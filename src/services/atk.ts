@@ -95,10 +95,6 @@ function getWeaponATK(
 
   let increasedWeaponATK = 0;
 
-  if (character.buffs.includes('runeStrawberryCake')) {
-    increasedWeaponATK += getModifierIncrease(weaponATK, 5);
-  }
-
   let totalWeaponATK = (weaponATK + increasedWeaponATK) + statBonus + variance + overUpgradeATK + weaponBuffATK;
 
   let increasedTotalWeaponATK = 0;
@@ -307,10 +303,6 @@ function getATK(range: DmgRange, character: Character, monster: Monster) {
   }
 
   const extraATK = getExtraATK(character, monster);
-
-  if (character.buffs.includes('runeStrawberryCake')) {
-    statusATK += getModifierIncrease(statusATK, 5);
-  }
 
   const atkPercentATK = getType2ATK(character, monster, wATK, extraATK);
 
