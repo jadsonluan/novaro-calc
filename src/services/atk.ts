@@ -14,7 +14,8 @@ const DEX_WEAPONS: WeaponType[] = ["Whip", "Instrument", "Bow", "Pistol", "Rifle
 
 const BASE_CRITICAL_DAMAGE = 40;
 const RES_REDUCTION_CAP = 625;
-const KIHOP_BONUS = 85;
+const KIHOP_BONUS = 100;
+const OPPOSITION_BONUS_CAP = 85;
 
 function isDexWeapon(weaponType: WeaponType) {
   return DEX_WEAPONS.includes(weaponType);
@@ -135,12 +136,17 @@ function getExtraATK(character: Character, monster: Monster) {
     increasedEquipATK += getModifierIncrease(equipATK, KIHOP_BONUS);
 
     let OPPOSITION_BONUS = character.buffs.includes("opposition")
-    ? (character.baseLevel +
-        stats.dex +
-        stats.luk +
-        (monster.size === "large" || character.buffs.includes('miracle') ? stats.str : 0)) /
-      3
-    : 0;
+      ? Math.min(
+          (character.baseLevel +
+            stats.dex +
+            stats.luk +
+            (monster.size === "large" || character.buffs.includes("miracle")
+              ? stats.str
+              : 0)) /
+            3,
+          OPPOSITION_BONUS_CAP
+        )
+      : 0;
     increasedEquipATK += getModifierIncrease(equipATK + increasedEquipATK, OPPOSITION_BONUS);
   }
 
@@ -256,11 +262,16 @@ function getATK(range: DmgRange, character: Character, monster: Monster) {
   let statusATK = getStatusATK(character);
 
   let OPPOSITION_BONUS = character.buffs.includes("opposition")
-    ? (character.baseLevel +
-        stats.dex +
-        stats.luk +
-        (monster.size === "large" || character.buffs.includes('miracle') ? stats.str : 0)) /
-      3
+    ? Math.min(
+        (character.baseLevel +
+          stats.dex +
+          stats.luk +
+          (monster.size === "large" || character.buffs.includes("miracle")
+            ? stats.str
+            : 0)) /
+          3,
+        OPPOSITION_BONUS_CAP
+      )
     : 0;
 
   if (character.job === "Sky Emperor") {

@@ -1356,7 +1356,7 @@ const starGladiatorSkills: Record<string, Skill> = {
     isMelee: true,
     job: "Sky Emperor",
     formula: (character: Character, monster: Monster) => {
-      const baseDamage = 6000 + 250;
+      const baseDamage = 7850 + 250;
       return {
         percent: (baseDamage + character.traits.pow * 5) * (character.baseLevel / 100),
         bonus: 0,
@@ -1370,7 +1370,7 @@ const starGladiatorSkills: Record<string, Skill> = {
     isMelee: true,
     job: "Sky Emperor",
     formula: (character: Character, monster: Monster) => {
-      const baseDamage = 2400 + 250;
+      const baseDamage = 2950 + 250;
       return {
         percent: (baseDamage + character.traits.pow * 5) * (character.baseLevel / 100),
         bonus: 0,
@@ -1384,7 +1384,7 @@ const starGladiatorSkills: Record<string, Skill> = {
     isMelee: true,
     job: "Sky Emperor",
     formula: (character: Character, monster: Monster) => {
-      const baseDamage = 7500 + 250;
+      const baseDamage = 8800 + 250;
       return {
         percent: (baseDamage + character.traits.pow * 5) * (character.baseLevel / 100),
         bonus: 0,
@@ -1398,7 +1398,7 @@ const starGladiatorSkills: Record<string, Skill> = {
     isMelee: true,
     job: "Sky Emperor",
     formula: (character: Character, monster: Monster) => {
-      const baseDamage = 3300 + 250;
+      const baseDamage = 3400 + 250;
       return {
         percent: (baseDamage + character.traits.pow * 5) * (character.baseLevel / 100),
         bonus: 0,
@@ -1412,7 +1412,7 @@ const starGladiatorSkills: Record<string, Skill> = {
     isMelee: true,
     job: "Sky Emperor",
     formula: (character: Character, monster: Monster) => {
-      const baseDamage = 2200 + 150;
+      const baseDamage = 2800 + 150;
       return {
         percent: (baseDamage + character.traits.pow * 5) * (character.baseLevel / 100),
         bonus: 0,
@@ -1440,7 +1440,7 @@ const starGladiatorSkills: Record<string, Skill> = {
     isMelee: true,
     job: "Sky Emperor",
     formula: (character: Character, monster: Monster) => {
-      const baseDamage = 2700 + 250;
+      const baseDamage = 3000 + 250;
       return {
         percent: (baseDamage + character.traits.pow * 5) * (character.baseLevel / 100),
         bonus: 0,
@@ -1454,7 +1454,7 @@ const starGladiatorSkills: Record<string, Skill> = {
     isMelee: true,
     job: "Sky Emperor",
     formula: (character: Character, monster: Monster) => {
-      const baseDamage = 20000;
+      const baseDamage = 12250;
       return {
         percent: (baseDamage + character.traits.pow * 5) * (character.baseLevel / 100) *
          (['demon', 'demihuman'].includes(monster.race) ? 3 : 1),
