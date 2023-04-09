@@ -85,6 +85,7 @@ export interface Buffs {
   fireInsigniaLv3?: Buff;
   striking?: Buff;
   spellEnchanting?: Buff;
+  elementalSummon?: Buff;
   // Archer
   trueSight?: Buff;
   fearBreeze?: Buff;
@@ -857,6 +858,12 @@ export const emptyMATKBuffs: Buffs = {
     tooltip: "S.Matk +20",
     job: "Mage",
     iconURL: 'https://static.divine-pride.net/images/skill/5366.png',
+  },
+  elementalSummon: {
+    active: false,
+    tooltip: "Increases Water, Wind, Fire, Earth and Poison elemental magic damage by 10%. Increases damage of some Elemental Master skills.",
+    job: "Mage",
+    iconURL: 'https://static.divine-pride.net/images/skill/5380.png',
   },
   // Archer
   unlimitedHumming: {
@@ -1942,6 +1949,22 @@ const BUFF_EFFECTS: Record<keyof Buffs, BuffEffect> = {
         smatk: smatk + MATK_INCREASE,
       },
       buffs: [...character.buffs, "spellEnchanting"],
+    };
+  },
+  elementalSummon: (character: Character) => {
+    const { modifiers } = character;
+    const MOD_INCREASE = 10;
+    return {
+      ...character,
+      modifiers: {
+        ...modifiers,
+        skillProperty:
+          modifiers.skillProperty +
+          (["Earth", "Water", "Wind", "Fire", "Poison"].includes(character.weapon.element)
+            ? MOD_INCREASE
+            : 0),
+      },
+      buffs: [...character.buffs, "elementalSummon"],
     };
   },
   // Archer

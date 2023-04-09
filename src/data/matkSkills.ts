@@ -555,7 +555,7 @@ const sageSkills: Record<string, Skill> = {
     isMelee: false,
     job: "Elemental Master",
     formula: (character: Character, monster: Monster, buffs: Buffs) => {
-      const baseDamage = 6250;
+      const baseDamage = 8150 + (buffs.elementalSummon?.active ? 6250 : 0);
       return {
         percent:
           (baseDamage + character.traits.spl * 5) * (character.baseLevel / 100),
@@ -570,7 +570,7 @@ const sageSkills: Record<string, Skill> = {
     isMelee: false,
     job: "Elemental Master",
     formula: (character: Character, monster: Monster, buffs: Buffs) => {
-      const baseDamage = 2000;
+      const baseDamage = 3750 + (buffs.elementalSummon?.active ? 2000 : 0);
       return {
         percent:
           (baseDamage + character.traits.spl * 5) * (character.baseLevel / 100),
@@ -585,7 +585,7 @@ const sageSkills: Record<string, Skill> = {
     isMelee: false,
     job: "Elemental Master",
     formula: (character: Character, monster: Monster, buffs: Buffs) => {
-      const baseDamage = 2000;
+      const baseDamage = 3750 + (buffs.elementalSummon?.active ? 2000 : 0);
       return {
         percent:
           (baseDamage + character.traits.spl * 5) * (character.baseLevel / 100),
@@ -600,7 +600,7 @@ const sageSkills: Record<string, Skill> = {
     isMelee: false,
     job: "Elemental Master",
     formula: (character: Character, monster: Monster, buffs: Buffs) => {
-      const baseDamage = 6250;
+      const baseDamage = 8150 + (buffs.elementalSummon?.active ? 6250 : 0);
       return {
         percent:
           (baseDamage + character.traits.spl * 5) * (character.baseLevel / 100),
@@ -615,10 +615,25 @@ const sageSkills: Record<string, Skill> = {
     isMelee: false,
     job: "Elemental Master",
     formula: (character: Character, monster: Monster, buffs: Buffs) => {
-      const baseDamage = 2000;
+      const baseDamage = 3750 + (buffs.elementalSummon?.active ? 2000 : 0);
       return {
         percent:
           (baseDamage + character.traits.spl * 5) * (character.baseLevel / 100),
+        bonus: 0,
+      };
+    },
+  },
+  ELEMENTAL_BUSTER: {
+    key: "ELEMENTAL_BUSTER",
+    name: "Elemental Buster",
+    label: "Elemental Buster",
+    isMelee: false,
+    job: "Elemental Master",
+    formula: (character: Character, monster: Monster, buffs: Buffs) => {
+      const baseDamage = 22500 + (["dragon", "formless"].includes(monster.race) ? 1500 : 0);
+      return {
+        percent:
+          (baseDamage + character.traits.spl * 10) * (character.baseLevel / 100),
         bonus: 0,
       };
     },
