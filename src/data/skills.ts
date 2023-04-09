@@ -1672,8 +1672,8 @@ const gunslingerSkills: Record<string, Skill> = {
     job: "Night Watch",
     formula: (character: Character, monster: Monster, buffs: Buffs) => {
       const damageFactor: Record<string, number> = {
-        'Shotgun': 8000 + (buffs.intensiveAim?.active ? 25000 : 0),
-        'Grenade Launcher': 7000 + (buffs.intensiveAim?.active ? 25000 : 0),
+        'Shotgun': 17500 + (buffs.intensiveAim?.active ? 25000 : 0),
+        'Grenade Launcher': 16500 + (buffs.intensiveAim?.active ? 25000 : 0),
         default: 0,
       }
       const baseDamage = damageFactor[character.weapon.type] ? damageFactor[character.weapon.type] : damageFactor.default;
@@ -1692,8 +1692,8 @@ const gunslingerSkills: Record<string, Skill> = {
     job: "Night Watch",
     formula: (character: Character, monster: Monster, buffs: Buffs) => {
       const damageFactor: Record<string, number> = {
-        'Pistol': 2100 + (buffs.intensiveAim?.active ? 2500 : 0),
-        'Gatling Gun': 1700 + (buffs.intensiveAim?.active ? 2500 : 0),
+        'Pistol': 4300 + (buffs.intensiveAim?.active ? 5000 : 0),
+        'Gatling Gun': 2750 + (buffs.intensiveAim?.active ? 5000 : 0),
         default: 0,
       }
       const baseDamage = damageFactor[character.weapon.type] ? damageFactor[character.weapon.type] : damageFactor.default;
@@ -1719,8 +1719,8 @@ const gunslingerSkills: Record<string, Skill> = {
     job: "Night Watch",
     formula: (character: Character, monster: Monster, buffs: Buffs) => {
       const damageFactor: Record<string, number> = {
-        'Rifle': 4900 + (buffs.intensiveAim?.active ? 7500 : 0),
-        'Grenade Launcher': 6000 + (buffs.intensiveAim?.active ? 7500 : 0),
+        'Rifle': 15400 + (buffs.intensiveAim?.active ? 7500 : 0),
+        'Grenade Launcher': 9700 + (buffs.intensiveAim?.active ? 7500 : 0),
         default: 0,
       }
       const baseDamage = damageFactor[character.weapon.type] ? damageFactor[character.weapon.type] : damageFactor.default;
@@ -1747,8 +1747,8 @@ const gunslingerSkills: Record<string, Skill> = {
     hardAsSoftDef: true,
     formula: (character: Character, monster: Monster, buffs: Buffs) => {
       const damageFactor: Record<string, number> = {
-        'Pistol': 6500 + (buffs.intensiveAim?.active ? 12500 : 0),
-        'Rifle': 4750 + (buffs.intensiveAim?.active ? 12500 : 0),
+        'Pistol': 18200 + (buffs.intensiveAim?.active ? 17500 : 0),
+        'Rifle': 16200 + (buffs.intensiveAim?.active ? 17500 : 0),
         default: 0,
       }
       const baseDamage = damageFactor[character.weapon.type] ? damageFactor[character.weapon.type] : damageFactor.default;
@@ -1794,7 +1794,7 @@ const gunslingerSkills: Record<string, Skill> = {
     isMelee: false,
     job: "Night Watch",
     formula: (character: Character, monster: Monster, buffs: Buffs) => {
-      const baseDamage = 5500 + 400 + (buffs.heatBarrel?.active ? 200 : 0);
+      const baseDamage = 12000 + 500 + (buffs.heatBarrel?.active ? 200 : 0);
       return {
         percent: (baseDamage + character.traits.con * 5) * (character.baseLevel / 100),
         bonus: 0,
@@ -1808,7 +1808,7 @@ const gunslingerSkills: Record<string, Skill> = {
     isMelee: false,
     job: "Night Watch",
     formula: (character: Character, monster: Monster, buffs: Buffs) => {
-      const baseDamage = 6000 + 100 + (buffs.heatBarrel?.active ? 200 : 0);
+      const baseDamage = 9000 + 200 + (buffs.heatBarrel?.active ? 200 : 0);
       return {
         percent: (baseDamage + character.traits.con * 5) * (character.baseLevel / 100),
         bonus: 0,
@@ -1822,7 +1822,7 @@ const gunslingerSkills: Record<string, Skill> = {
     isMelee: false,
     job: "Night Watch",
     formula: (character: Character, monster: Monster, buffs: Buffs) => {
-      const baseDamage = 2750 + 250 + (buffs.heatBarrel?.active ? 200 : 0);
+      const baseDamage = 4800 + 300 + (buffs.heatBarrel?.active ? 200 : 0);
       return {
         percent: (baseDamage + character.traits.con * 5) * (character.baseLevel / 100),
         bonus: 0,
@@ -1836,7 +1836,7 @@ const gunslingerSkills: Record<string, Skill> = {
     isMelee: false,
     job: "Night Watch",
     formula: (character: Character, monster: Monster, buffs: Buffs) => {
-      const baseDamage = 15000 + 800 + (buffs.heatBarrel?.active ? 200 : 0);
+      const baseDamage = 23000 + 1000 + (buffs.heatBarrel?.active ? 200 : 0);
       return {
         percent: (baseDamage + character.traits.con * 5) * (character.baseLevel / 100),
         bonus: 0,
@@ -1850,7 +1850,7 @@ const gunslingerSkills: Record<string, Skill> = {
     isMelee: false,
     job: "Night Watch",
     formula: (character: Character, monster: Monster, buffs: Buffs) => {
-      const baseDamage = 2800 + 250 + (buffs.heatBarrel?.active ? 200 : 0);
+      const baseDamage = 2800 + 300 + (buffs.heatBarrel?.active ? 200 : 0);
       return {
         percent: (baseDamage + character.traits.con * 5) * (character.baseLevel / 100),
         bonus: 0,
