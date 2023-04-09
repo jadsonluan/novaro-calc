@@ -180,7 +180,7 @@ const wizardSkills: Record<string, Skill> = {
     isMelee: false,
     job: "Archmage",
     formula: (character: Character, monster: Monster) => {
-      const baseDamage = 900;
+      const baseDamage = 1250;
       return {
         percent:
           (baseDamage + character.traits.spl * 4) *
@@ -197,7 +197,7 @@ const wizardSkills: Record<string, Skill> = {
     isMelee: false,
     job: "Archmage",
     formula: (character: Character, monster: Monster) => {
-      const baseDamage = 2500;
+      const baseDamage = 4750;
       return {
         percent:
           (baseDamage + character.traits.spl * 5) * (character.baseLevel / 100),
@@ -212,7 +212,7 @@ const wizardSkills: Record<string, Skill> = {
     isMelee: false,
     job: "Archmage",
     formula: (character: Character, monster: Monster, buffs: Buffs) => {
-      const baseDamage = 3000;
+      const baseDamage = 14000;
       return {
         percent:
           (baseDamage + character.traits.spl * 5) * (character.baseLevel / 100),
@@ -228,7 +228,7 @@ const wizardSkills: Record<string, Skill> = {
     job: "Archmage",
     formula: (character: Character, monster: Monster, buffs: Buffs) => {
       const baseDamage =
-        5000 + (["undead", "dragon"].includes(monster.race) ? 6000 : 0);
+        18000 + (["undead", "dragon"].includes(monster.race) ? 3400 : 0);
       return {
         percent:
           (baseDamage + character.traits.spl * 15) *
@@ -244,12 +244,26 @@ const wizardSkills: Record<string, Skill> = {
     isMelee: false,
     job: "Archmage",
     formula: (character: Character, monster: Monster, buffs: Buffs) => {
-      const baseDamage =
-        2000 + (["undead", "dragon"].includes(monster.race) ? 2000 : 0);
+      const baseDamage = 6500;
       return {
         percent:
           (baseDamage + character.traits.spl * 15) *
           (character.baseLevel / 100),
+        bonus: 0,
+      };
+    },
+  },
+  FLORAL_FLARE_ROAD: {
+    key: "FLORAL_FLARE_ROAD",
+    name: "Floral Flare Road",
+    label: "Floral Flare Road",
+    isMelee: false,
+    job: "Archmage",
+    formula: (character: Character, monster: Monster, buffs: Buffs) => {
+      const baseDamage = 3750;
+      return {
+        percent:
+          (baseDamage + character.traits.spl * 5) * (character.baseLevel / 100),
         bonus: 0,
       };
     },
@@ -261,7 +275,7 @@ const wizardSkills: Record<string, Skill> = {
     isMelee: false,
     job: "Archmage",
     formula: (character: Character, monster: Monster, buffs: Buffs) => {
-      const baseDamage = 1500;
+      const baseDamage = 1750;
       return {
         percent:
           (baseDamage + character.traits.spl * 5) * (character.baseLevel / 100),
@@ -276,7 +290,7 @@ const wizardSkills: Record<string, Skill> = {
     isMelee: false,
     job: "Archmage",
     formula: (character: Character, monster: Monster, buffs: Buffs) => {
-      const baseDamage = 1500;
+      const baseDamage = 3500;
       return {
         percent:
           (baseDamage +
@@ -295,12 +309,12 @@ const wizardSkills: Record<string, Skill> = {
     isMelee: false,
     job: "Archmage",
     formula: (character: Character, monster: Monster, buffs: Buffs) => {
-      const baseDamage = 500;
+      const baseDamage = 6200;
       return {
         percent:
           (baseDamage + character.traits.spl * 5) *
           (character.baseLevel / 100) *
-          (buffs.climax?.active ? 2 : 1),
+          (buffs.climax?.active ? 4 : 1),
         bonus: 0,
       };
     },
@@ -312,7 +326,7 @@ const wizardSkills: Record<string, Skill> = {
     isMelee: false,
     job: "Archmage",
     formula: (character: Character, monster: Monster) => {
-      const baseDamage = 750;
+      const baseDamage = 3980;
       return {
         percent:
           (baseDamage + character.traits.spl * 5) * (character.baseLevel / 100),
@@ -327,11 +341,11 @@ const wizardSkills: Record<string, Skill> = {
     isMelee: false,
     job: "Archmage",
     formula: (character: Character, monster: Monster, buffs: Buffs) => {
-      const baseDamage = 3000;
+      const baseDamage = 4900;
       return {
         percent:
           (baseDamage +
-            (buffs.climax?.active ? 1250 : 0) +
+            (buffs.climax?.active ? 1900 : 0) +
             character.traits.spl * 5) *
           (character.baseLevel / 100),
         bonus: 0,
@@ -345,7 +359,7 @@ const wizardSkills: Record<string, Skill> = {
     isMelee: false,
     job: "Archmage",
     formula: (character: Character, monster: Monster, buffs: Buffs) => {
-      const baseDamage = 4000;
+      const baseDamage = 6750;
       return {
         percent:
           (baseDamage + character.traits.spl * 5) *
@@ -362,7 +376,7 @@ const wizardSkills: Record<string, Skill> = {
     isMelee: false,
     job: "Archmage",
     formula: (character: Character, monster: Monster) => {
-      const baseDamage = 450;
+      const baseDamage = 3900;
       return {
         percent:
           (baseDamage + character.traits.spl * 5) * (character.baseLevel / 100),
@@ -377,11 +391,11 @@ const wizardSkills: Record<string, Skill> = {
     isMelee: false,
     job: "Archmage",
     formula: (character: Character, monster: Monster, buffs: Buffs) => {
-      const baseDamage = 3000;
+      const baseDamage = 6000;
       return {
         percent:
           (baseDamage +
-            (buffs.climax?.active ? 1250 : 0) +
+            (buffs.climax?.active ? 1500 : 0) +
             character.traits.spl * 5) *
           (character.baseLevel / 100),
         bonus: 0,
@@ -395,12 +409,12 @@ const wizardSkills: Record<string, Skill> = {
     isMelee: false,
     job: "Archmage",
     formula: (character: Character, monster: Monster, buffs: Buffs) => {
-      const baseDamage = 8000;
+      const baseDamage = 14850;
       return {
         percent:
           (baseDamage + character.traits.spl * 5) *
           (character.baseLevel / 100) *
-          (buffs.climax?.active ? 2 : 1),
+          (buffs.climax?.active ? 2.5 : 1),
         bonus: 0,
       };
     },
@@ -412,7 +426,7 @@ const wizardSkills: Record<string, Skill> = {
     isMelee: false,
     job: "Archmage",
     formula: (character: Character, monster: Monster) => {
-      const baseDamage = 1250;
+      const baseDamage = 3750;
       return {
         percent:
           (baseDamage + character.traits.spl * 5) * (character.baseLevel / 100),
@@ -427,11 +441,11 @@ const wizardSkills: Record<string, Skill> = {
     isMelee: false,
     job: "Archmage",
     formula: (character: Character, monster: Monster, buffs: Buffs) => {
-      const baseDamage = 3000;
+      const baseDamage = 6000;
       return {
         percent:
           (baseDamage +
-            (buffs.climax?.active ? 1250 : 0) +
+            (buffs.climax?.active ? 1500 : 0) +
             character.traits.spl * 5) *
           (character.baseLevel / 100),
         bonus: 0,
@@ -445,12 +459,12 @@ const wizardSkills: Record<string, Skill> = {
     isMelee: false,
     job: "Archmage",
     formula: (character: Character, monster: Monster, buffs: Buffs) => {
-      const baseDamage = 600;
+      const baseDamage = 6200;
       return {
         percent:
           (baseDamage + character.traits.spl * 5) *
           (character.baseLevel / 100) *
-          (buffs.climax?.active ? 2 : 1),
+          (buffs.climax?.active ? 3 : 1),
         bonus: 0,
       };
     },
