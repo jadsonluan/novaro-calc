@@ -1044,7 +1044,7 @@ const noviceSkills: Record<string, Skill> = {
     isMelee: false,
     job: "Hyper Novice",
     formula: (character: Character, monster: Monster, buffs: Buffs) => {
-      const baseDamage = 3800;
+      const baseDamage = 3500 + 500;
       return {
         percent:
           (baseDamage + 5 * character.traits.spl) *
@@ -1061,7 +1061,7 @@ const noviceSkills: Record<string, Skill> = {
     isMelee: false,
     job: "Hyper Novice",
     formula: (character: Character, monster: Monster, buffs: Buffs) => {
-      const baseDamage = 2450;
+      const baseDamage = 2050 + 500;
       return {
         percent:
           (baseDamage + character.traits.spl * 5) *
@@ -1095,7 +1095,7 @@ const noviceSkills: Record<string, Skill> = {
     isMelee: false,
     job: "Hyper Novice",
     formula: (character: Character, monster: Monster, buffs: Buffs) => {
-      const baseDamage = 2500;
+      const baseDamage = 5400 + 300;
       return {
         percent:
           (baseDamage + character.traits.spl * 5) *
@@ -1114,7 +1114,7 @@ const noviceSkills: Record<string, Skill> = {
     isMelee: false,
     job: "Hyper Novice",
     formula: (character: Character, monster: Monster, buffs: Buffs) => {
-      const baseDamage = 6900;
+      const baseDamage = 8500 + 400;
       return {
         percent:
           (baseDamage + character.traits.spl * 5) *
@@ -1148,7 +1148,7 @@ const noviceSkills: Record<string, Skill> = {
     isMelee: false,
     job: "Hyper Novice",
     formula: (character: Character, monster: Monster, buffs: Buffs) => {
-      const baseDamage = 3300;
+      const baseDamage = 7800 + 200;
       return {
         // Increase damage by 15% when inside the field (doesn't work on boss monsters)
         percent:
@@ -1167,12 +1167,12 @@ const noviceSkills: Record<string, Skill> = {
     isMelee: false,
     job: "Hyper Novice",
     formula: (character: Character, monster: Monster, buffs: Buffs) => {
-      const baseDamage = 3150;
+      const baseDamage = 6850 + 400;
       return {
         percent:
           (baseDamage + character.traits.spl * 5) *
           (character.baseLevel / 100) *
-          (buffs.ruleBreak?.active ? 2 : 1),
+          (buffs.ruleBreak?.active ? 1.4 : 1),
         bonus: 0,
       };
     },

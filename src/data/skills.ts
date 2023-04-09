@@ -1862,16 +1862,32 @@ const gunslingerSkills: Record<string, Skill> = {
 const noviceSkills: Record<string, Skill> = {
   DOUBLE_BOWLING_BASH: {
     key: "DOUBLE_BOWLING_BASH",
-    name: "Double Bowling Bash (Per hit)",
-    label: "Double Bowling Bash (Per hit)",
+    name: "Double Bowling Bash (3 hits)",
+    label: "Double Bowling Bash (3 hits)",
     isMelee: true,
     job: "Hyper Novice",
     formula: (character: Character, monster: Monster, buffs: Buffs) => {
-      const baseDamage = 2400;
+      const baseDamage = 3200 + 300;
       return {
         percent:
           (baseDamage + 5 * character.traits.pow) * (character.baseLevel / 100) *
-          (buffs.breakingLimit?.active ? 1.5 : 1),
+          (buffs.breakingLimit?.active ? 1.7 : 1) * 3,
+        bonus: 0,
+      };
+    },
+  },
+  DOUBLE_BOWLING_BASH_MAX: {
+    key: "DOUBLE_BOWLING_BASH_MAX",
+    name: "Double Bowling Bash (Max Hits)",
+    label: "Double Bowling Bash (Max Hits)",
+    isMelee: true,
+    job: "Hyper Novice",
+    formula: (character: Character, monster: Monster, buffs: Buffs) => {
+      const baseDamage = 3200 + 300;
+      return {
+        percent:
+          (baseDamage + 5 * character.traits.pow) * (character.baseLevel / 100) *
+          (buffs.breakingLimit?.active ? 1.7 : 1) * 5,
         bonus: 0,
       };
     },
@@ -1883,11 +1899,11 @@ const noviceSkills: Record<string, Skill> = {
     isMelee: false,
     job: "Hyper Novice",
     formula: (character: Character, monster: Monster, buffs: Buffs) => {
-      const baseDamage = 3700;
+      const baseDamage = 5700 + 300;
       return {
         percent:
           (baseDamage + character.traits.pow * 5) * (character.baseLevel / 100) *
-          (buffs.breakingLimit?.active ? 1.5 : 1),
+          (buffs.breakingLimit?.active ? 1.7 : 1),
         bonus: 0,
       };
     },
@@ -1899,7 +1915,7 @@ const noviceSkills: Record<string, Skill> = {
     isMelee: false,
     job: "Hyper Novice",
     formula: (character: Character, monster: Monster, buffs: Buffs) => {
-      const baseDamage = 3300;
+      const baseDamage = 8700 + 300;
       const bonusFactor = {
         [SIZES[0]]: 2.5, // Small
         [SIZES[1]]: 2.3, // Medium
@@ -1921,7 +1937,7 @@ const noviceSkills: Record<string, Skill> = {
     isMelee: true,
     job: "Hyper Novice",
     formula: (character: Character, monster: Monster, buffs: Buffs) => {
-      const baseDamage = 2800;
+      const baseDamage = 8400 + 500;
       return {
         percent:
           (baseDamage + character.traits.pow * 5) *
