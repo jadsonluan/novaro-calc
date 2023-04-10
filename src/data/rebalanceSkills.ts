@@ -545,7 +545,7 @@ const alchemistSkills: Record<string, Skill> = {
       const baseDamage = 3200 + (buffs.researchReport?.active ? 150 : 0);
       return {
         percent:
-          (baseDamage + character.traits.pow * 10) * 
+          (baseDamage + character.traits.pow * 5) * 
           (character.baseLevel / 100) * 
           (buffs.researchReport?.active ? 4 : 3),
         bonus: 0,
@@ -562,9 +562,9 @@ const alchemistSkills: Record<string, Skill> = {
       const baseDamage = 3150 + (buffs.researchReport?.active ? 500 : 0);
       return {
         percent:
-          (baseDamage + character.traits.pow * 10) * 
+          (baseDamage + character.traits.pow * 5) * 
           (character.baseLevel / 100) * 
-          (buffs.researchReport?.active ? 5 : 3),
+          (buffs.researchReport?.active ? 4 : 3),
         bonus: 0,
       };
     },
