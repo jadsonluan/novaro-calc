@@ -131,7 +131,7 @@ const knightSkills: Record<string, Skill> = {
     isMelee: true,
     job: "Dragon Knight",
     formula: (character: Character, monster: Monster) => {
-      const baseDamage = 1500 + character.traits.pow * 7;
+      const baseDamage = 7700 + character.traits.pow * 7;
       return {
         percent: baseDamage * (character.baseLevel / 100) * 2,
         bonus: 0,
@@ -145,7 +145,7 @@ const knightSkills: Record<string, Skill> = {
     isMelee: false,
     job: "Dragon Knight",
     formula: (character: Character, monster: Monster) => {
-      const baseDamage = 1500 + character.traits.pow * 7;
+      const baseDamage = 7700 + character.traits.pow * 7;
       return {
         percent: baseDamage * (character.baseLevel / 100) * 2,
         bonus: 0,
@@ -159,7 +159,49 @@ const knightSkills: Record<string, Skill> = {
     isMelee: true,
     job: "Dragon Knight",
     formula: (character: Character, monster: Monster) => {
-      const baseDamage = 600 + character.traits.pow * 5;
+      const baseDamage = 2200 + character.traits.pow * 5;
+      return {
+        percent: baseDamage * (character.baseLevel / 100) * 5,
+        bonus: 0,
+      };
+    },
+  },
+  SERVANT_W_ATK: {
+    key: "SERVANT_W_ATK",
+    label: "Servant Weapon",
+    name: "Servant Weapon",
+    isMelee: true,
+    job: "Dragon Knight",
+    formula: (character: Character, monster: Monster) => {
+      const baseDamage = 2500 + character.traits.pow * 5;
+      return {
+        percent: baseDamage * (character.baseLevel / 100) * 2,
+        bonus: 0,
+      };
+    },
+  },
+  SERVANT_W_PHANTOM: {
+    key: "SERVANT_W_PHANTOM",
+    label: "Servant Weapon - Phantom (5 hits)",
+    name: "Servant Weapon - Phantom",
+    isMelee: true,
+    job: "Dragon Knight",
+    formula: (character: Character, monster: Monster) => {
+      const baseDamage = 1700 + character.traits.pow * 5;
+      return {
+        percent: baseDamage * (character.baseLevel / 100) * 5,
+        bonus: 0,
+      };
+    },
+  },
+  SERVANT_W_DEMOLITION: {
+    key: "SERVANT_W_DEMOLITION",
+    label: "Servant Weapon - Demoliton (5 hits)",
+    name: "Servant Weapon - Demolition",
+    isMelee: true,
+    job: "Dragon Knight",
+    formula: (character: Character, monster: Monster) => {
+      const baseDamage = 2500 + character.traits.pow * 5;
       return {
         percent: baseDamage * (character.baseLevel / 100) * 5,
         bonus: 0,
@@ -268,10 +310,10 @@ const crusaderSkills: Record<string, Skill> = {
     isMelee: true,
     job: "Imperial Guard",
     formula: (character: Character, monster: Monster) => {
-      const baseDamage = 800 + 1100;
+      const baseDamage = 1600 + 2500;
       return {
         percent:
-          (baseDamage + character.traits.pow * 5) *
+          (baseDamage + character.traits.pow * 7) *
           (character.baseLevel / 100) *
           3,
         bonus: 0,
@@ -285,10 +327,10 @@ const crusaderSkills: Record<string, Skill> = {
     isMelee: true,
     job: "Imperial Guard",
     formula: (character: Character, monster: Monster) => {
-      const baseDamage = 800 + 1100;
+      const baseDamage = 1600 + 2500;
       return {
         percent:
-          (baseDamage + character.traits.pow * 5) *
+          (baseDamage + character.traits.pow * 7) *
           (character.baseLevel / 100) *
           7,
         bonus: 0,
@@ -303,12 +345,12 @@ const crusaderSkills: Record<string, Skill> = {
     job: "Imperial Guard",
     formula: (character: Character, monster: Monster) => {
       const baseDamage =
-        3000 +
-        1250 +
-        (character.shield.weight / 10) * (character.shield.refine * 5);
+        14900 +
+        2500 +
+        (character.shield.weight / 10) * (character.shield.refine * 25);
       return {
         percent:
-          (baseDamage + character.traits.pow * 5) * (character.baseLevel / 100),
+          (baseDamage + character.traits.pow * 7) * (character.baseLevel / 100),
         bonus: 0,
       };
     },
@@ -321,7 +363,7 @@ const crusaderSkills: Record<string, Skill> = {
     job: "Imperial Guard",
     formula: (character: Character, monster: Monster) => {
       const baseDamage =
-        7500 + (["plant", "insect"].includes(monster.race) ? 3500 : 0);
+        15250 + (["plant", "insect"].includes(monster.race) ? 1600 : 0);
       return {
         percent:
           (baseDamage + character.traits.pow * 10) *
@@ -386,10 +428,58 @@ const whiteSmithSkills: Record<string, Skill> = {
     isMelee: true,
     job: "Meister",
     formula: (character: Character, monster: Monster, buffs: Buffs) => {
-      const baseDamage = 2000 + getWhitesmithATKBonus(character, buffs);
+      const baseDamage = 5150 + getWhitesmithATKBonus(character, buffs);
       return {
         percent:
           (baseDamage + character.traits.pow * 5) * (character.baseLevel / 100),
+        bonus: 0,
+      };
+    },
+  },
+  MIGHTY_SMASH: {
+    key: "MIGHTY_SMASH",
+    label: "Mighty Smash",
+    name: "Mighty Smash",
+    isMelee: true,
+    job: "Meister",
+    formula: (character: Character, monster: Monster, buffs: Buffs) => {
+      const baseDamage = 1825 + (buffs.axeStomp?.active ? 25 : 0) + getWhitesmithATKBonus(character, buffs);
+      return {
+        percent:
+          (baseDamage + character.traits.pow * 10) *
+          (character.baseLevel / 100) *
+          (buffs.axeStomp?.active ? 7 : 5),
+        bonus: 0,
+      };
+    },
+  },
+  SPARK_BLASTER: {
+    key: "SPARK_BLASTER",
+    label: "Spark Blaster",
+    name: "Spark Blaster",
+    isMelee: false,
+    job: "Meister",
+    hardAsSoftDef: true,
+    formula: (character: Character, monster: Monster, buffs: Buffs) => {
+      const baseDamage = 9250 + getWhitesmithATKBonus(character, buffs);
+      return {
+        percent:
+          (baseDamage + character.traits.pow * 10) * (character.baseLevel / 100) * 2,
+        bonus: 0,
+      };
+    },
+  },
+  TRIPLE_LASER: {
+    key: "TRIPLE_LASER",
+    label: "Triple Laser",
+    name: "Triple Laser",
+    isMelee: false,
+    job: "Meister",
+    formula: (character: Character, monster: Monster, buffs: Buffs) => {
+      const baseDamage = 5050 + getWhitesmithATKBonus(character, buffs);
+      return {
+        percent:
+          (baseDamage + character.traits.pow * 12) * (character.baseLevel / 100) * 3,
         bonus: 0,
       };
     },
@@ -401,10 +491,10 @@ const whiteSmithSkills: Record<string, Skill> = {
     isMelee: true,
     job: "Meister",
     formula: (character: Character, monster: Monster, buffs: Buffs) => {
-      const baseDamage = 7500 + (['formless', 'insect'].includes(monster.race) ? 3500 : 0) + getWhitesmithATKBonus(character, buffs);
+      const baseDamage = 36000 + (['formless', 'insect'].includes(monster.race) ? 1500 : 0) + getWhitesmithATKBonus(character, buffs);
       return {
         percent:
-          (baseDamage) * (character.baseLevel / 100),
+          (baseDamage + character.traits.pow * 10) * (character.baseLevel / 100),
         bonus: 0,
       };
     },
@@ -440,7 +530,41 @@ const alchemistSkills: Record<string, Skill> = {
         percent:
           (baseDamage + 5 * character.traits.pow) * (character.baseLevel / 100) *
           (1 + (buffs.researchReport?.active ? 0.7 : 0) + (buffs.researchReport?.active && ['formless', 'plant'].includes(monster.race) ? 0.3 : 0)) *
-          5,
+          7,
+        bonus: 0,
+      };
+    },
+  },
+  MAYHEMIC_THORNS: {
+    key: "MAYHEMIC_THORNS",
+    label: "Mayhemic Thorns",
+    name: "Mayhemic Thorns",
+    isMelee: false,
+    job: "Biolo",
+    formula: (character: Character, monster: Monster, buffs: Buffs) => {
+      const baseDamage = 3200 + (buffs.researchReport?.active ? 150 : 0);
+      return {
+        percent:
+          (baseDamage + character.traits.pow * 10) * 
+          (character.baseLevel / 100) * 
+          (buffs.researchReport?.active ? 4 : 3),
+        bonus: 0,
+      };
+    },
+  },
+  EXPLOSIVE_POWDER: {
+    key: "EXPLOSIVE_POWDER",
+    label: "Explosive Powser",
+    name: "Explosive Powser",
+    isMelee: true,
+    job: "Biolo",
+    formula: (character: Character, monster: Monster, buffs: Buffs) => {
+      const baseDamage = 3150 + (buffs.researchReport?.active ? 500 : 0);
+      return {
+        percent:
+          (baseDamage + character.traits.pow * 10) * 
+          (character.baseLevel / 100) * 
+          (buffs.researchReport?.active ? 5 : 3),
         bonus: 0,
       };
     },
@@ -503,10 +627,10 @@ const assassinSkills: Record<string, Skill> = {
     isMelee: true,
     job: "Shadow Cross",
     formula: (character: Character, monster: Monster, buffs: Buffs) => {
-      const baseDamage = 600;
+      const baseDamage = 900;
       return {
         percent:
-          (baseDamage + (buffs.shadowExceed?.active ? 380 + character.traits.pow * 5 : 0) + character.traits.pow * 5) *
+          (baseDamage + (buffs.shadowExceed?.active ? 200 + character.traits.pow * 5 : 0) + character.traits.pow * 5) *
           (character.baseLevel / 100) *
           (buffs.cloaking?.active ? 5 : 3),
         bonus: 0,
@@ -520,7 +644,7 @@ const assassinSkills: Record<string, Skill> = {
     isMelee: true,
     job: "Shadow Cross",
     formula: (character: Character, monster: Monster) => {
-      const baseDamage = 325;
+      const baseDamage = 400;
       return {
         percent:
           (baseDamage + character.traits.pow * 5) * (character.baseLevel / 100),
@@ -535,7 +659,7 @@ const assassinSkills: Record<string, Skill> = {
     isMelee: true,
     job: "Shadow Cross",
     formula: (character: Character, monster: Monster) => {
-      const baseDamage = 325;
+      const baseDamage = 400;
       return {
         percent:
           (baseDamage + character.traits.pow * 5) *
@@ -567,12 +691,12 @@ const assassinSkills: Record<string, Skill> = {
     isMelee: true,
     job: "Shadow Cross",
     formula: (character: Character, monster: Monster, buffs: Buffs) => {
-      const baseDamage = 1750;
+      const baseDamage = 1325;
       return {
         percent:
           (baseDamage +
-            (buffs.shadowExceed?.active ? 700 + character.traits.pow * 2 : 0) +
-            character.traits.pow * 5) *
+            (buffs.shadowExceed?.active ? 500 + character.traits.pow * 1 : 0) +
+            character.traits.pow * 2) *
           (character.baseLevel / 100),
         bonus: 0,
       };
@@ -585,12 +709,12 @@ const assassinSkills: Record<string, Skill> = {
     isMelee: true,
     job: "Shadow Cross",
     formula: (character: Character, monster: Monster, buffs: Buffs) => {
-      const baseDamage = 1750;
+      const baseDamage = 1325;
       return {
         percent:
           (baseDamage +
-            (buffs.shadowExceed?.active ? 700 + character.traits.pow * 2 : 0) +
-            character.traits.pow * 5) *
+            (buffs.shadowExceed?.active ? 500 + character.traits.pow * 1 : 0) +
+            character.traits.pow * 2) *
           (character.baseLevel / 100) * 5,
         bonus: 0,
       };
@@ -604,12 +728,12 @@ const assassinSkills: Record<string, Skill> = {
     job: "Shadow Cross",
     hardAsSoftDef: true,
     formula: (character: Character, monster: Monster, buffs: Buffs) => {
-      const baseDamage = 3760;
+      const baseDamage = 1750 + (buffs.cloaking?.active ? 250 : 0);
       return {
         percent:
-          (baseDamage + character.traits.pow * 5) *
+          (baseDamage + character.traits.pow * (buffs.cloaking?.active ? 7 : 5)) *
           (character.baseLevel / 100) *
-          (buffs.cloaking?.active ? 2 : 1),
+          (buffs.cloaking?.active ? 3 : 2),
         bonus: 0,
       };
     },
@@ -622,7 +746,7 @@ const assassinSkills: Record<string, Skill> = {
     job: "Shadow Cross",
     formula: (character: Character, monster: Monster) => {
       const baseDamage =
-        6500 + (["demihuman", "dragon"].includes(monster.race) ? 3000 : 0);
+        13000 + (["demihuman", "dragon"].includes(monster.race) ? 1500 : 0);
       return {
         percent:
           (baseDamage + character.traits.pow * 10) *
@@ -670,7 +794,7 @@ const rogueSkills: Record<string, Skill> = {
     isMelee: true,
     job: "Abyss Chaser",
     formula: (character: Character, monster: Monster) => {
-      const baseDamage = 1750;
+      const baseDamage = 4600;
       return {
         percent:
           (baseDamage + character.traits.pow * 5) * (character.baseLevel / 100) * 2,
@@ -700,10 +824,10 @@ const rogueSkills: Record<string, Skill> = {
     isMelee: true,
     job: "Abyss Chaser",
     formula: (character: Character, monster: Monster) => {
-      const baseDamage = 3600;
+      const baseDamage = 3750;
       return {
         percent:
-          (baseDamage + character.traits.pow * 5) * (character.baseLevel / 100),
+          (baseDamage + character.traits.pow * 5) * (character.baseLevel / 100) * 5,
         bonus: 0,
       };
     },
@@ -715,10 +839,10 @@ const rogueSkills: Record<string, Skill> = {
     isMelee: false,
     job: "Abyss Chaser",
     formula: (character: Character, monster: Monster) => {
-      const baseDamage = 3000;
+      const baseDamage = 4250;
       return {
         percent:
-          (baseDamage + character.traits.con * 5) * (character.baseLevel / 100),
+          (baseDamage + character.traits.con * 10) * (character.baseLevel / 100),
         bonus: 0,
       };
     },
@@ -730,10 +854,10 @@ const rogueSkills: Record<string, Skill> = {
     isMelee: false,
     job: "Abyss Chaser",
     formula: (character: Character, monster: Monster) => {
-      const baseDamage = 4750;
+      const baseDamage = 12350;
       return {
         percent:
-          (baseDamage + character.traits.con * 3) * (character.baseLevel / 100),
+          (baseDamage + character.traits.con * 5) * (character.baseLevel / 100),
         bonus: 0,
       };
     },
@@ -745,25 +869,25 @@ const rogueSkills: Record<string, Skill> = {
     isMelee: false,
     job: "Abyss Chaser",
     formula: (character: Character, monster: Monster) => {
-      const baseDamage = 3500;
+      const baseDamage = 6150;
       return {
         percent:
-          (baseDamage + character.traits.con * 5) * (character.baseLevel / 100),
+          (baseDamage + character.traits.con * 15) * (character.baseLevel / 100) * 2,
         bonus: 0,
       };
     },
   },
   FRENZY_SHOT_MAX: {
     key: "FRENZY_SHOT_MAX",
-    label: "Frenzy Shot (Max Hits)",
-    name: "Frenzy Shot (Max Hits)",
+    label: "Frenzy Shot (3 Hits)",
+    name: "Frenzy Shot (3 Hits)",
     isMelee: false,
     job: "Abyss Chaser",
     formula: (character: Character, monster: Monster) => {
-      const baseDamage = 3500;
+      const baseDamage = 6150;
       return {
         percent:
-          (baseDamage + character.traits.con * 5) * (character.baseLevel / 100) * 3,
+          (baseDamage + character.traits.con * 15) * (character.baseLevel / 100) * 3,
         bonus: 0,
       };
     },
@@ -813,6 +937,20 @@ const hunterSkills: Record<string, Skill> = {
       };
     }
   },
+  WIND_HAWK_TRAPS: {
+    key: "WIND_HAWK_TRAPS",
+    label: "Wind Hawk Traps",
+    name: "Wind Hawk Traps",
+    isMelee: true,
+    job: "Wind Hawk",
+    formula: (character: Character, monster: Monster, buffs: Buffs) => {
+      let baseDamage = 4250 + (buffs.trueSight?.active ? 20 : 0);
+      return {
+        percent: (baseDamage + character.traits.con * 5) * (character.baseLevel / 100),
+        bonus: 0,
+      };
+    }
+  },
   CRESCIVE_BOLT: {
     key: "CRESCIVE_BOLT",
     label: "Crescive Bolt",
@@ -820,7 +958,7 @@ const hunterSkills: Record<string, Skill> = {
     isMelee: false,
     job: "Wind Hawk",
     formula: (character: Character, monster: Monster, buffs: Buffs) => {
-      let baseDamage = 3000 + (buffs.trueSight?.active ? 20 : 0);
+      let baseDamage = 9400 + (buffs.trueSight?.active ? 20 : 0);
       return {
         percent: (baseDamage + character.traits.con * 5) * (character.baseLevel / 100) *
         (buffs.calamityGale?.active ? 1.2 : 1) *
@@ -836,7 +974,7 @@ const hunterSkills: Record<string, Skill> = {
     isMelee: false,
     job: "Wind Hawk",
     formula: (character: Character, monster: Monster, buffs: Buffs) => {
-      let baseDamage = 3000 + (buffs.trueSight?.active ? 20 : 0);
+      let baseDamage = 9400 + (buffs.trueSight?.active ? 20 : 0);
       return {
         percent: (baseDamage + character.traits.con * 5) * (character.baseLevel / 100) * 
         1.3 * // 3 stacks of 20% damage increase each
@@ -853,9 +991,9 @@ const hunterSkills: Record<string, Skill> = {
     isMelee: false,
     job: "Wind Hawk",
     formula: (character: Character, monster: Monster, buffs: Buffs) => {
-      let baseDamage = 2500 + (buffs.trueSight?.active ? 20 : 0);
+      let baseDamage = 10000 + (buffs.trueSight?.active ? 20 : 0);
       return {
-        percent: (baseDamage + character.traits.con * 5) * (character.baseLevel / 100) *
+        percent: (baseDamage + character.traits.con * 10) * (character.baseLevel / 100) *
           (buffs.calamityGale?.active && ['brute', 'fish'].includes(monster.race) ? 1.5 : 1),
         bonus: 0,
       };
@@ -885,7 +1023,9 @@ const bardSkills: Record<string, Skill> = {
     isMelee: false,
     job: "Troubadour / Trouvere",
     formula: (character: Character, monster: Monster, buffs: Buffs) => {
-      let baseDamage = 600 + character.traits.con * 5;
+      let baseDamage = 3700 + 
+      (monster.debuffs.includes('soundBlend') ? 850 : 0) + 
+      (monster.debuffs.includes('soundBlend') ? character.traits.con * 7 : character.traits.con * 5);
       return {
         percent: (baseDamage) * 3 *
          (character.baseLevel / 100) *
@@ -902,7 +1042,7 @@ const bardSkills: Record<string, Skill> = {
     isMelee: false,
     job: "Troubadour / Trouvere",
     formula: (character: Character, monster: Monster, buffs: Buffs) => {
-      let baseDamage = 3750 + character.traits.con * 5;
+      let baseDamage = 11200 + character.traits.con * 3;
       return {
         percent: baseDamage *
          (character.baseLevel / 100) *
@@ -919,7 +1059,7 @@ const bardSkills: Record<string, Skill> = {
     isMelee: false,
     job: "Troubadour / Trouvere",
     formula: (character: Character, monster: Monster, buffs: Buffs) => {
-      let baseDamage = 1750 + character.traits.con * 5;
+      let baseDamage = 15250 + character.traits.con * 3;
       return {
         percent: baseDamage *
          (character.baseLevel / 100) *
@@ -939,7 +1079,7 @@ const priestSkills: Record<string, Skill> = {
     isMelee: false,
     job: "Cardinal",
     formula: (character: Character, monster: Monster) => {
-      const baseDamage = 2700 + character.traits.pow * 5;
+      const baseDamage = 10500 + 5000 + character.traits.pow * 5;
       return {
         percent: baseDamage * (character.baseLevel / 100),
         bonus: 0,
@@ -953,7 +1093,7 @@ const priestSkills: Record<string, Skill> = {
     isMelee: true,
     job: "Cardinal",
     formula: (character: Character, monster: Monster) => {
-      const baseDamage = 2700 + character.traits.pow * 5;
+      const baseDamage = 10500 + 5000 + character.traits.pow * 5;
       return {
         percent: baseDamage * (character.baseLevel / 100),
         bonus: 0,
@@ -967,9 +1107,9 @@ const priestSkills: Record<string, Skill> = {
     isMelee: true,
     job: "Cardinal",
     formula: (character: Character, monster: Monster) => {
-      const baseDamage = 8000 + (['demon', 'undead'].includes(monster.race) ? 4000 : 0);
+      const baseDamage = 16580 + (['demon', 'undead'].includes(monster.race) ? 1570 : 0);
       return {
-        percent: (baseDamage + character.traits.pow * 5) * (character.baseLevel / 100),
+        percent: (baseDamage + character.traits.pow * 7) * (character.baseLevel / 100),
         bonus: 0,
       };
     },
@@ -1048,6 +1188,21 @@ const monkSkills: Record<string, Skill> = {
       };
     },
   },
+  OLEUM_SANCTUM: {
+    key: "OLEUM_SANCTUM",
+    label: "Oleum Sanctum",
+    name: "Oleum Sanctum",
+    isMelee: false,
+    job: "Inquisitor",
+    formula: (character: Character, monster: Monster) => {
+      const baseDamage = 10500;
+      return {
+        percent: (baseDamage + character.traits.pow * 5) * 
+          (character.baseLevel / 100),
+        bonus: 0,
+      };
+    },
+  },
   EXPLOSION_BLASTER: {
     key: "EXPLOSION_BLASTER",
     label: "Explosion Blaster",
@@ -1055,9 +1210,11 @@ const monkSkills: Record<string, Skill> = {
     isMelee: false,
     job: "Inquisitor",
     formula: (character: Character, monster: Monster) => {
-      const baseDamage = 3250 + (monster.debuffs.includes('oleumSanctum') ? 1000 : 0);
+      const baseDamage = 12000 + (monster.debuffs.includes('oleumSanctum') ? 5600 : 0);
       return {
-        percent: (baseDamage + character.traits.pow * 5) * (character.baseLevel / 100),
+        percent: (baseDamage + character.traits.pow * 
+          (monster.debuffs.includes('oleumSanctum') ? 15 : 10)) * 
+          (character.baseLevel / 100),
         bonus: 0,
       };
     },
@@ -1069,9 +1226,9 @@ const monkSkills: Record<string, Skill> = {
     isMelee: false,
     job: "Inquisitor",
     formula: (character: Character, monster: Monster) => {
-      const baseDamage = 8000 + (['demon', 'brute'].includes(monster.race) ? 3000 : 0);
+      const baseDamage = 23000 + (['demon', 'brute'].includes(monster.race) ? 1500 : 0);
       return {
-        percent: (baseDamage + character.traits.pow * 10) * (character.baseLevel / 100),
+        percent: (baseDamage + character.traits.pow * 15) * (character.baseLevel / 100),
         bonus: 0,
       };
     },
@@ -1083,7 +1240,7 @@ const monkSkills: Record<string, Skill> = {
     isMelee: true,
     job: "Inquisitor",
     formula: (character: Character, monster: Monster) => {
-      const baseDamage = 2250;
+      const baseDamage = 6000;
       return {
         percent: (baseDamage + character.traits.pow * 5) * (character.baseLevel / 100),
         bonus: 0,
@@ -1097,7 +1254,7 @@ const monkSkills: Record<string, Skill> = {
     isMelee: true,
     job: "Inquisitor",
     formula: (character: Character, monster: Monster) => {
-      const baseDamage = 2500;
+      const baseDamage = 11600;
       return {
         percent: (baseDamage + character.traits.pow * 5) * (character.baseLevel / 100),
         bonus: 0,
@@ -1111,9 +1268,9 @@ const monkSkills: Record<string, Skill> = {
     isMelee: true,
     job: "Inquisitor",
     formula: (character: Character, monster: Monster) => {
-      const baseDamage = 3250;
+      const baseDamage = 7850;
       return {
-        percent: (baseDamage + character.traits.pow * 5) * (character.baseLevel / 100) * 2,
+        percent: (baseDamage + character.traits.pow * 10) * (character.baseLevel / 100) * 2,
         bonus: 0,
       };
     },
@@ -1125,9 +1282,9 @@ const monkSkills: Record<string, Skill> = {
     isMelee: true,
     job: "Inquisitor",
     formula: (character: Character, monster: Monster) => {
-      const baseDamage = 2500;
+      const baseDamage = 13150;
       return {
-        percent: (baseDamage + character.traits.pow * 5) * (character.baseLevel / 100),
+        percent: (baseDamage + character.traits.pow * 7) * (character.baseLevel / 100),
         bonus: 0,
       };
     },
@@ -1139,9 +1296,9 @@ const monkSkills: Record<string, Skill> = {
     isMelee: true,
     job: "Inquisitor",
     formula: (character: Character, monster: Monster) => {
-      const baseDamage = 3350;
+      const baseDamage = 3500;
       return {
-        percent: (baseDamage + character.traits.pow * 5) * (character.baseLevel / 100) * 5,
+        percent: (baseDamage + character.traits.pow * 10) * (character.baseLevel / 100) * 5,
         bonus: 0,
       };
     },
@@ -1153,9 +1310,9 @@ const monkSkills: Record<string, Skill> = {
     isMelee: true,
     job: "Inquisitor",
     formula: (character: Character, monster: Monster) => {
-      const baseDamage = 2750;
+      const baseDamage = 14700;
       return {
-        percent: (baseDamage + character.traits.pow * 5) * (character.baseLevel / 100),
+        percent: (baseDamage + character.traits.pow * 9) * (character.baseLevel / 100),
         bonus: 0,
       };
     },
@@ -1199,7 +1356,7 @@ const starGladiatorSkills: Record<string, Skill> = {
     isMelee: true,
     job: "Sky Emperor",
     formula: (character: Character, monster: Monster) => {
-      const baseDamage = 6000 + 250;
+      const baseDamage = 7850 + 250;
       return {
         percent: (baseDamage + character.traits.pow * 5) * (character.baseLevel / 100),
         bonus: 0,
@@ -1213,7 +1370,7 @@ const starGladiatorSkills: Record<string, Skill> = {
     isMelee: true,
     job: "Sky Emperor",
     formula: (character: Character, monster: Monster) => {
-      const baseDamage = 2400 + 250;
+      const baseDamage = 2950 + 250;
       return {
         percent: (baseDamage + character.traits.pow * 5) * (character.baseLevel / 100),
         bonus: 0,
@@ -1227,7 +1384,7 @@ const starGladiatorSkills: Record<string, Skill> = {
     isMelee: true,
     job: "Sky Emperor",
     formula: (character: Character, monster: Monster) => {
-      const baseDamage = 7500 + 250;
+      const baseDamage = 8800 + 250;
       return {
         percent: (baseDamage + character.traits.pow * 5) * (character.baseLevel / 100),
         bonus: 0,
@@ -1241,7 +1398,7 @@ const starGladiatorSkills: Record<string, Skill> = {
     isMelee: true,
     job: "Sky Emperor",
     formula: (character: Character, monster: Monster) => {
-      const baseDamage = 3300 + 250;
+      const baseDamage = 3400 + 250;
       return {
         percent: (baseDamage + character.traits.pow * 5) * (character.baseLevel / 100),
         bonus: 0,
@@ -1255,7 +1412,7 @@ const starGladiatorSkills: Record<string, Skill> = {
     isMelee: true,
     job: "Sky Emperor",
     formula: (character: Character, monster: Monster) => {
-      const baseDamage = 2200 + 150;
+      const baseDamage = 2800 + 150;
       return {
         percent: (baseDamage + character.traits.pow * 5) * (character.baseLevel / 100),
         bonus: 0,
@@ -1283,7 +1440,7 @@ const starGladiatorSkills: Record<string, Skill> = {
     isMelee: true,
     job: "Sky Emperor",
     formula: (character: Character, monster: Monster) => {
-      const baseDamage = 2700 + 250;
+      const baseDamage = 3000 + 250;
       return {
         percent: (baseDamage + character.traits.pow * 5) * (character.baseLevel / 100),
         bonus: 0,
@@ -1297,7 +1454,7 @@ const starGladiatorSkills: Record<string, Skill> = {
     isMelee: true,
     job: "Sky Emperor",
     formula: (character: Character, monster: Monster) => {
-      const baseDamage = 20000;
+      const baseDamage = 12250;
       return {
         percent: (baseDamage + character.traits.pow * 5) * (character.baseLevel / 100) *
          (['demon', 'demihuman'].includes(monster.race) ? 3 : 1),
@@ -1329,7 +1486,7 @@ const ninjaSkills: Record<string, Skill> = {
     isMelee: false,
     job: "Shinkiro / Shiranui",
     formula: (character: Character, monster: Monster, buffs: Buffs) => {
-      const baseDamage = 4000 + 700;
+      const baseDamage = 6300 + 1000;
       return {
         percent: (baseDamage + character.traits.pow * 5) * (character.baseLevel / 100),
         bonus: 0,
@@ -1343,7 +1500,7 @@ const ninjaSkills: Record<string, Skill> = {
     isMelee: false,
     job: "Shinkiro / Shiranui",
     formula: (character: Character, monster: Monster, buffs: Buffs) => {
-      const baseDamage = 3300 + 2500;
+      const baseDamage = 4300 + 3500;
       return {
         percent: (baseDamage + character.traits.pow * 5) * (character.baseLevel / 100),
         bonus: 0,
@@ -1357,7 +1514,7 @@ const ninjaSkills: Record<string, Skill> = {
     isMelee: false,
     job: "Shinkiro / Shiranui",
     formula: (character: Character, monster: Monster, buffs: Buffs) => {
-      const baseDamage = 3800 + 350;
+      const baseDamage = 3800 + 500;
       return {
         percent: (baseDamage + character.traits.pow * 5) * (character.baseLevel / 100),
         bonus: 0,
@@ -1371,7 +1528,7 @@ const ninjaSkills: Record<string, Skill> = {
     isMelee: false,
     job: "Shinkiro / Shiranui",
     formula: (character: Character, monster: Monster, buffs: Buffs) => {
-      const baseDamage = 15000;
+      const baseDamage = 18000;
       return {
         percent: (baseDamage + character.traits.pow * 5) * (character.baseLevel / 100),
         bonus: 0,
@@ -1385,7 +1542,7 @@ const ninjaSkills: Record<string, Skill> = {
     isMelee: false,
     job: "Shinkiro / Shiranui",
     formula: (character: Character, monster: Monster, buffs: Buffs) => {
-      const baseDamage = 2700 + 500;
+      const baseDamage = 4350 + 500;
       return {
         percent: (baseDamage + character.traits.pow * 5) * (character.baseLevel / 100),
         bonus: 0,
@@ -1399,7 +1556,7 @@ const ninjaSkills: Record<string, Skill> = {
     isMelee: false,
     job: "Shinkiro / Shiranui",
     formula: (character: Character, monster: Monster, buffs: Buffs) => {
-      const baseDamage = 4600 + 3000;
+      const baseDamage = 12600 + 3000;
       return {
         percent: (baseDamage + character.traits.pow * 5) * (character.baseLevel / 100),
         bonus: 0,
@@ -1413,7 +1570,7 @@ const ninjaSkills: Record<string, Skill> = {
     isMelee: false,
     job: "Shinkiro / Shiranui",
     formula: (character: Character, monster: Monster, buffs: Buffs) => {
-      const baseDamage = 6800 + 3000;
+      const baseDamage = 15600 + 3000;
       return {
         percent: (baseDamage + character.traits.pow * 5) * (character.baseLevel / 100),
         bonus: 0,
@@ -1427,7 +1584,7 @@ const ninjaSkills: Record<string, Skill> = {
     isMelee: true,
     job: "Shinkiro / Shiranui",
     formula: (character: Character, monster: Monster, buffs: Buffs) => {
-      const baseDamage = 4500 + 500;
+      const baseDamage = 9600 + 500;
       return {
         percent: (baseDamage + character.traits.pow * 5) * (character.baseLevel / 100),
         bonus: 0,
@@ -1441,7 +1598,7 @@ const ninjaSkills: Record<string, Skill> = {
     isMelee: true,
     job: "Shinkiro / Shiranui",
     formula: (character: Character, monster: Monster, buffs: Buffs) => {
-      const baseDamage = 6500 + 5000;
+      const baseDamage = 8050 + 5000;
       return {
         percent: (baseDamage + character.traits.pow * 5) * (character.baseLevel / 100),
         bonus: 0,
@@ -1455,7 +1612,7 @@ const ninjaSkills: Record<string, Skill> = {
     isMelee: true,
     job: "Shinkiro / Shiranui",
     formula: (character: Character, monster: Monster, buffs: Buffs) => {
-      const baseDamage = 9700 + 10000;
+      const baseDamage = 9000 + 5000;
       return {
         percent: (baseDamage + character.traits.pow * 5) * (character.baseLevel / 100),
         bonus: 0,
@@ -1469,7 +1626,7 @@ const ninjaSkills: Record<string, Skill> = {
     isMelee: true,
     job: "Shinkiro / Shiranui",
     formula: (character: Character, monster: Monster, buffs: Buffs) => {
-      const baseDamage = 15000;
+      const baseDamage = 18000;
       return {
         percent: (baseDamage + character.traits.pow * 5) * (character.baseLevel / 100),
         bonus: 0,
@@ -1515,8 +1672,8 @@ const gunslingerSkills: Record<string, Skill> = {
     job: "Night Watch",
     formula: (character: Character, monster: Monster, buffs: Buffs) => {
       const damageFactor: Record<string, number> = {
-        'Shotgun': 8000 + (buffs.intensiveAim?.active ? 25000 : 0),
-        'Grenade Launcher': 7000 + (buffs.intensiveAim?.active ? 25000 : 0),
+        'Shotgun': 17500 + (buffs.intensiveAim?.active ? 25000 : 0),
+        'Grenade Launcher': 16500 + (buffs.intensiveAim?.active ? 25000 : 0),
         default: 0,
       }
       const baseDamage = damageFactor[character.weapon.type] ? damageFactor[character.weapon.type] : damageFactor.default;
@@ -1535,8 +1692,8 @@ const gunslingerSkills: Record<string, Skill> = {
     job: "Night Watch",
     formula: (character: Character, monster: Monster, buffs: Buffs) => {
       const damageFactor: Record<string, number> = {
-        'Pistol': 2100 + (buffs.intensiveAim?.active ? 2500 : 0),
-        'Gatling Gun': 1700 + (buffs.intensiveAim?.active ? 2500 : 0),
+        'Pistol': 4300 + (buffs.intensiveAim?.active ? 5000 : 0),
+        'Gatling Gun': 2750 + (buffs.intensiveAim?.active ? 5000 : 0),
         default: 0,
       }
       const baseDamage = damageFactor[character.weapon.type] ? damageFactor[character.weapon.type] : damageFactor.default;
@@ -1562,8 +1719,8 @@ const gunslingerSkills: Record<string, Skill> = {
     job: "Night Watch",
     formula: (character: Character, monster: Monster, buffs: Buffs) => {
       const damageFactor: Record<string, number> = {
-        'Rifle': 4900 + (buffs.intensiveAim?.active ? 7500 : 0),
-        'Grenade Launcher': 6000 + (buffs.intensiveAim?.active ? 7500 : 0),
+        'Rifle': 15400 + (buffs.intensiveAim?.active ? 7500 : 0),
+        'Grenade Launcher': 9700 + (buffs.intensiveAim?.active ? 7500 : 0),
         default: 0,
       }
       const baseDamage = damageFactor[character.weapon.type] ? damageFactor[character.weapon.type] : damageFactor.default;
@@ -1590,8 +1747,8 @@ const gunslingerSkills: Record<string, Skill> = {
     hardAsSoftDef: true,
     formula: (character: Character, monster: Monster, buffs: Buffs) => {
       const damageFactor: Record<string, number> = {
-        'Pistol': 6500 + (buffs.intensiveAim?.active ? 12500 : 0),
-        'Rifle': 4750 + (buffs.intensiveAim?.active ? 12500 : 0),
+        'Pistol': 18200 + (buffs.intensiveAim?.active ? 17500 : 0),
+        'Rifle': 16200 + (buffs.intensiveAim?.active ? 17500 : 0),
         default: 0,
       }
       const baseDamage = damageFactor[character.weapon.type] ? damageFactor[character.weapon.type] : damageFactor.default;
@@ -1637,7 +1794,7 @@ const gunslingerSkills: Record<string, Skill> = {
     isMelee: false,
     job: "Night Watch",
     formula: (character: Character, monster: Monster, buffs: Buffs) => {
-      const baseDamage = 5500 + 400 + (buffs.heatBarrel?.active ? 200 : 0);
+      const baseDamage = 12000 + 500 + (buffs.heatBarrel?.active ? 200 : 0);
       return {
         percent: (baseDamage + character.traits.con * 5) * (character.baseLevel / 100),
         bonus: 0,
@@ -1651,7 +1808,7 @@ const gunslingerSkills: Record<string, Skill> = {
     isMelee: false,
     job: "Night Watch",
     formula: (character: Character, monster: Monster, buffs: Buffs) => {
-      const baseDamage = 6000 + 100 + (buffs.heatBarrel?.active ? 200 : 0);
+      const baseDamage = 9000 + 200 + (buffs.heatBarrel?.active ? 200 : 0);
       return {
         percent: (baseDamage + character.traits.con * 5) * (character.baseLevel / 100),
         bonus: 0,
@@ -1665,7 +1822,7 @@ const gunslingerSkills: Record<string, Skill> = {
     isMelee: false,
     job: "Night Watch",
     formula: (character: Character, monster: Monster, buffs: Buffs) => {
-      const baseDamage = 2750 + 250 + (buffs.heatBarrel?.active ? 200 : 0);
+      const baseDamage = 4800 + 300 + (buffs.heatBarrel?.active ? 200 : 0);
       return {
         percent: (baseDamage + character.traits.con * 5) * (character.baseLevel / 100),
         bonus: 0,
@@ -1679,7 +1836,7 @@ const gunslingerSkills: Record<string, Skill> = {
     isMelee: false,
     job: "Night Watch",
     formula: (character: Character, monster: Monster, buffs: Buffs) => {
-      const baseDamage = 15000 + 800 + (buffs.heatBarrel?.active ? 200 : 0);
+      const baseDamage = 23000 + 1000 + (buffs.heatBarrel?.active ? 200 : 0);
       return {
         percent: (baseDamage + character.traits.con * 5) * (character.baseLevel / 100),
         bonus: 0,
@@ -1693,7 +1850,7 @@ const gunslingerSkills: Record<string, Skill> = {
     isMelee: false,
     job: "Night Watch",
     formula: (character: Character, monster: Monster, buffs: Buffs) => {
-      const baseDamage = 2800 + 250 + (buffs.heatBarrel?.active ? 200 : 0);
+      const baseDamage = 2800 + 300 + (buffs.heatBarrel?.active ? 200 : 0);
       return {
         percent: (baseDamage + character.traits.con * 5) * (character.baseLevel / 100),
         bonus: 0,
@@ -1705,16 +1862,32 @@ const gunslingerSkills: Record<string, Skill> = {
 const noviceSkills: Record<string, Skill> = {
   DOUBLE_BOWLING_BASH: {
     key: "DOUBLE_BOWLING_BASH",
-    name: "Double Bowling Bash (Per hit)",
-    label: "Double Bowling Bash (Per hit)",
+    name: "Double Bowling Bash (3 hits)",
+    label: "Double Bowling Bash (3 hits)",
     isMelee: true,
     job: "Hyper Novice",
     formula: (character: Character, monster: Monster, buffs: Buffs) => {
-      const baseDamage = 2400;
+      const baseDamage = 3200 + 300;
       return {
         percent:
           (baseDamage + 5 * character.traits.pow) * (character.baseLevel / 100) *
-          (buffs.breakingLimit?.active ? 1.5 : 1),
+          (buffs.breakingLimit?.active ? 1.7 : 1) * 3,
+        bonus: 0,
+      };
+    },
+  },
+  DOUBLE_BOWLING_BASH_MAX: {
+    key: "DOUBLE_BOWLING_BASH_MAX",
+    name: "Double Bowling Bash (Max Hits)",
+    label: "Double Bowling Bash (Max Hits)",
+    isMelee: true,
+    job: "Hyper Novice",
+    formula: (character: Character, monster: Monster, buffs: Buffs) => {
+      const baseDamage = 3200 + 300;
+      return {
+        percent:
+          (baseDamage + 5 * character.traits.pow) * (character.baseLevel / 100) *
+          (buffs.breakingLimit?.active ? 1.7 : 1) * 5,
         bonus: 0,
       };
     },
@@ -1726,11 +1899,11 @@ const noviceSkills: Record<string, Skill> = {
     isMelee: false,
     job: "Hyper Novice",
     formula: (character: Character, monster: Monster, buffs: Buffs) => {
-      const baseDamage = 3700;
+      const baseDamage = 5700 + 300;
       return {
         percent:
           (baseDamage + character.traits.pow * 5) * (character.baseLevel / 100) *
-          (buffs.breakingLimit?.active ? 1.5 : 1),
+          (buffs.breakingLimit?.active ? 1.7 : 1),
         bonus: 0,
       };
     },
@@ -1742,7 +1915,7 @@ const noviceSkills: Record<string, Skill> = {
     isMelee: false,
     job: "Hyper Novice",
     formula: (character: Character, monster: Monster, buffs: Buffs) => {
-      const baseDamage = 3300;
+      const baseDamage = 8700 + 300;
       const bonusFactor = {
         [SIZES[0]]: 2.5, // Small
         [SIZES[1]]: 2.3, // Medium
@@ -1764,7 +1937,7 @@ const noviceSkills: Record<string, Skill> = {
     isMelee: true,
     job: "Hyper Novice",
     formula: (character: Character, monster: Monster, buffs: Buffs) => {
-      const baseDamage = 2800;
+      const baseDamage = 8400 + 500;
       return {
         percent:
           (baseDamage + character.traits.pow * 5) *
@@ -1814,7 +1987,7 @@ const doramSkills: Record<string, Skill> = {
     isMelee: false,
     job: "Spirit Handler",
     formula: (character: Character, monster: Monster, buffs: Buffs) => {
-      const baseDamage = 3150 + 500;
+      const baseDamage = 15200 + 1000;
       return {
         percent:
           (baseDamage + character.traits.pow * 5) *
@@ -1830,7 +2003,7 @@ const doramSkills: Record<string, Skill> = {
     isMelee: false,
     job: "Spirit Handler",
     formula: (character: Character, monster: Monster, buffs: Buffs) => {
-      const baseDamage = 7250 + 500;
+      const baseDamage = 8750 + 1000;
       return {
         percent:
           (baseDamage + character.traits.pow * 5) *
@@ -1846,11 +2019,12 @@ const doramSkills: Record<string, Skill> = {
     isMelee: false,
     job: "Spirit Handler",
     formula: (character: Character, monster: Monster, buffs: Buffs) => {
-      const baseDamage = 1500 + 200;
+      const baseDamage = 2700 + 200;
       return {
         percent:
           (baseDamage + character.traits.pow * 5) *
-          (character.baseLevel / 100),
+          (character.baseLevel / 100) * 
+          3,
         bonus: 0,
       };
     },

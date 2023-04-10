@@ -85,6 +85,7 @@ export interface Character {
   skill: string;
   crit: boolean;
   ignorePenalty: boolean;
+  rebalance: boolean;
   stats: Stats;
   traits: Traits;
   hp: HPInfo;
@@ -107,6 +108,7 @@ export const emptyCharacter: Character = {
   skill: "basic_attack",
   crit: false,
   ignorePenalty: false,
+  rebalance: false,
   stats: {
     str: 0,
     agi: 0,

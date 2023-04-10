@@ -3,6 +3,7 @@ import {
 } from "../data/input";
 import { getPropertyModifier } from "../data/element";
 import { getSkill } from "../data/matkSkills";
+import { getSkill as getRebalanceSkill } from "../data/rebalanceMatkSkills";
 import { applyBuffs } from "../data/buffs";
 import { applyDebuff } from "../data/debuff";
 import { Character } from "../data/character";
@@ -192,7 +193,7 @@ export function getFinalMATKDamage(range: DmgRange, build: BuildInfo) {
   const buffedCharacter = applyBuffs(rawCharacter, rawMonster, buffs, true);
   const { character, monster } = applyDebuff(buffedCharacter, rawMonster, debuffs);
 
-  const skill = getSkill(character.skill);
+  const skill = character.rebalance ? getRebalanceSkill(character.skill) : getSkill(character.skill);;
   const { modifiers: mods } = character;
   const formula = skill.formula(character, monster, build.buffs);
 

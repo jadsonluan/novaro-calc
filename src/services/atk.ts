@@ -4,6 +4,7 @@ import {
 import WeaponType, { GRADES, Weapon, WEAPON_PENALTIES } from "../data/weapon";
 import { ELEMENTS, getPropertyModifier } from "../data/element";
 import { getSkill } from "../data/skills";
+import { getSkill as getRebalanceSkill } from "../data/rebalanceSkills";
 import { applyBuffs } from "../data/buffs";
 import { applyDebuff } from "../data/debuff";
 import { Character, Stats } from "../data/character";
@@ -15,7 +16,7 @@ const DEX_WEAPONS: WeaponType[] = ["Whip", "Instrument", "Bow", "Pistol", "Rifle
 const BASE_CRITICAL_DAMAGE = 40;
 const RES_REDUCTION_CAP = 625;
 const KIHOP_BONUS = 100;
-const OPPOSITION_BONUS_CAP = 85;
+const OPPOSITION_BONUS_CAP = 75;
 
 function isDexWeapon(weaponType: WeaponType) {
   return DEX_WEAPONS.includes(weaponType);
@@ -129,7 +130,7 @@ function getExtraATK(character: Character, monster: Monster) {
   }
 
   if (character.job === "Sky Emperor") {
-    increasedEquipATK += getModifierIncrease(equipATK, KIHOP_BONUS);
+    increasedEquipATK += getModifierIncrease(equipATK, character.rebalance ? KIHOP_BONUS : 85);
 
     let OPPOSITION_BONUS = character.buffs.includes("opposition")
       ? Math.min(
@@ -140,7 +141,7 @@ function getExtraATK(character: Character, monster: Monster) {
               ? stats.str
               : 0)) /
             3,
-          OPPOSITION_BONUS_CAP
+            character.rebalance ? OPPOSITION_BONUS_CAP : 9999
         )
       : 0;
     increasedEquipATK += getModifierIncrease(equipATK + increasedEquipATK, OPPOSITION_BONUS);
@@ -266,14 +267,14 @@ function getATK(range: DmgRange, character: Character, monster: Monster) {
             ? stats.str
             : 0)) /
           3,
-        OPPOSITION_BONUS_CAP
+        character.rebalance ? OPPOSITION_BONUS_CAP : 9999
       )
     : 0;
 
   if (character.job === "Sky Emperor") {
     statusATK = applyModifier(
       statusATK,
-      KIHOP_BONUS // Kihop lv 5
+      character.rebalance ? KIHOP_BONUS : 85 // Kihop lv 5
     );
   
     statusATK = applyModifier(
@@ -283,7 +284,7 @@ function getATK(range: DmgRange, character: Character, monster: Monster) {
   
     wATK = applyModifier(
       wATK,
-      KIHOP_BONUS // Kihop lv 5
+      character.rebalance ? KIHOP_BONUS : 85 // Kihop lv 5
     );
   
     wATK = applyModifier(
@@ -293,7 +294,7 @@ function getATK(range: DmgRange, character: Character, monster: Monster) {
   
     masteryATK = applyModifier(
       masteryATK,
-      KIHOP_BONUS // Kihop lv 5
+      character.rebalance ? KIHOP_BONUS : 85 // Kihop lv 5
     );
   
     masteryATK = applyModifier(
@@ -378,7 +379,7 @@ export function getFinalATKDamage(range: DmgRange, build: BuildInfo) {
   const { character: rawCharacter, monster: rawMonster, buffs, debuffs } = build;
   const buffedCharacter = applyBuffs(rawCharacter, rawMonster, buffs, false);
   const { character, monster } = applyDebuff(buffedCharacter, rawMonster, debuffs);
-  const skill = getSkill(character.skill);
+  const skill = character.rebalance ? getRebalanceSkill(character.skill) : getSkill(character.skill);
   const { modifiers: mods } = character;
   const formula = skill.formula(character, monster, build.buffs);
 

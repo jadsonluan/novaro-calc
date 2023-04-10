@@ -4,7 +4,9 @@ import WeaponType, { GRADES, Grade, WEAPONS } from "../../data/weapon";
 import { getJobsName, INITIAL_JOBS, Job, JOBS } from "../../data/job";
 import { ELEMENTS, Element } from "../../data/element";
 import { Skill, SKILLS } from "../../data/skills";
+import { SKILLS as REBALANCE_SKILLS } from "../../data/rebalanceSkills";
 import { MATK_SKILLS } from "../../data/matkSkills";
+import { MATK_SKILLS as REBALANCE_MATK_SKILLS } from "../../data/rebalanceMatkSkills";
 import { BuildCharacterCheckBox } from "../BuildCheckBox";
 import React from "react";
 import { Character } from "../../data/character";
@@ -46,7 +48,7 @@ const CharacterMisc = ({ children }: { children: React.ReactChild[] }) => {
 }
 
 export const CharacterMiscATK = () => {
-  const skillOptions: Option[] = Object.values(SKILLS).map((skill: Skill) => ({
+  const skillOptions: Option[] = Object.values({ ...REBALANCE_SKILLS, ...SKILLS }).map((skill: Skill) => ({
     label: skill.label,
     value: skill.key,
     group: skill.job
@@ -155,13 +157,23 @@ export const CharacterMiscATK = () => {
             ignorePenalty: value,
           })}
         />
+        <BuildCharacterCheckBox
+          label="Rebalance?"
+          tooltip="Updates skill formulas to the latest 'Level 260 Skills Rebalance' from kRO"
+          noIcon
+          getValue={(character: Character) => character.rebalance}
+          updateValue={(value: boolean) => (prevState: Character) => ({
+            ...prevState,
+            rebalance: value,
+          })}
+        />
       </div>
     </CharacterMisc>
   );
 };
 
 export const CharacterMiscMATK = () => {
-  const skillOptions: Option[] = Object.values(MATK_SKILLS).map((skill: Skill) => ({
+  const skillOptions: Option[] = Object.values({ ...REBALANCE_MATK_SKILLS, ...MATK_SKILLS }).map((skill: Skill) => ({
     label: skill.label,
     value: skill.key,
     group: skill.job
@@ -247,6 +259,19 @@ export const CharacterMiscMATK = () => {
               },
             };
           }}
+        />
+      </div>
+      <p className="separator-label">Other</p>
+      <div className="box">
+        <BuildCharacterCheckBox
+          label="Rebalance?"
+          tooltip="Updates skill formulas to the latest 'Level 260 Skills Rebalance' from kRO"
+          noIcon
+          getValue={(character: Character) => character.rebalance}
+          updateValue={(value: boolean) => (prevState: Character) => ({
+            ...prevState,
+            rebalance: value,
+          })}
         />
       </div>
     </CharacterMisc>
