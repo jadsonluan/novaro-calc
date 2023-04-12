@@ -520,8 +520,8 @@ const alchemistSkills: Record<string, Skill> = {
   },
   ACIFIED_ZONE: {
     key: "ACIFIED_ZONE",
-    label: "Acified Zone",
-    name: "Acified Zone",
+    label: "Acidified Zone",
+    name: "Acidified Zone",
     isMelee: false,
     job: "Biolo",
     formula: (character: Character, monster: Monster, buffs: Buffs) => {
@@ -564,7 +564,7 @@ const alchemistSkills: Record<string, Skill> = {
         percent:
           (baseDamage + character.traits.pow * 5) * 
           (character.baseLevel / 100) * 
-          (buffs.researchReport?.active ? 4 : 3),
+          (buffs.researchReport?.active ? 5 : 3),
         bonus: 0,
       };
     },

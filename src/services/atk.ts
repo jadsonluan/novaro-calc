@@ -394,6 +394,7 @@ export function getFinalATKDamage(range: DmgRange, build: BuildInfo) {
 
   if (skill.key === 'DRAGON_BREATH') {
     finalDmg = Math.floor(formula.percent);
+    finalDmg = applyModifier(finalDmg, character.ATK.patk);
   }
 
   finalDmg = applyModifier(finalDmg, mods.skill);
