@@ -41,7 +41,13 @@ function Select<T extends Character | Monster>(props: SelectProps<T>) {
     opts.map((option: Option, i: number) => {
       const isPlaceholder = option.value === "" && i === 0;
       return (
-        <option key={i} value={option.value} disabled={option.disabled || isPlaceholder} selected={isPlaceholder} hidden={isPlaceholder}>
+        <option
+          key={i}
+          className={isPlaceholder ? "placeholder" : ""}
+          value={option.value}
+          disabled={option.disabled || isPlaceholder}
+          selected={isPlaceholder}
+        >
           {capitalize(option.label)}
         </option>
       );

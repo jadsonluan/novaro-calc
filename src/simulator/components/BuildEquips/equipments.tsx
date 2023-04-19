@@ -110,7 +110,7 @@ function Equipments() {
         </ImgContainer>
         <div>
           <SimulatorCharacterSelect
-            label="Headgear"
+            label="Middle"
             options={weaponOptions}
             getValue={(character: Character) => character.weapon.type as string}
             updateValue={(value: string) => (prevState: Character) => {
@@ -122,7 +122,7 @@ function Equipments() {
             }}
           />
           <SimulatorCharacterSelect
-            label="Lower"
+            label="Armor"
             options={weaponOptions}
             getValue={(character: Character) => character.weapon.type as string}
             updateValue={(value: string) => (prevState: Character) => {
@@ -134,7 +134,7 @@ function Equipments() {
             }}
           />
           <SimulatorCharacterSelect
-            label="Weapon"
+            label="Shield"
             options={weaponOptions}
             getValue={(character: Character) => character.weapon.type as string}
             updateValue={(value: string) => (prevState: Character) => {
@@ -146,7 +146,7 @@ function Equipments() {
             }}
           />
           <SimulatorCharacterSelect
-            label="Garment"
+            label="Shoes"
             options={weaponOptions}
             getValue={(character: Character) => character.weapon.type as string}
             updateValue={(value: string) => (prevState: Character) => {
@@ -158,7 +158,7 @@ function Equipments() {
             }}
           />
           <SimulatorCharacterSelect
-            label="Accessory R"
+            label="Accessory L"
             options={weaponOptions}
             getValue={(character: Character) => character.weapon.type as string}
             updateValue={(value: string) => (prevState: Character) => {
