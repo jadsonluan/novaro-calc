@@ -60,7 +60,7 @@ const ImportBS = ({ isMATK }: { isMATK: boolean }) => {
       skill,
       {
         race,
-        element,
+        element: monsterElement,
         size,
         monsterType,
       },
