@@ -1169,7 +1169,7 @@ const monkSkills: Record<string, Skill> = {
     formula: (character: Character, monster: Monster) => {
       const baseDamage = 3250 + 0.2 * getHP(character);
       return {
-        percent: (baseDamage + character.traits.pow * 10) * (character.baseLevel / 100) * 3,
+        percent: (baseDamage + character.traits.pow * 5) * (character.baseLevel / 100) * 3,
         bonus: 0,
       };
     },
