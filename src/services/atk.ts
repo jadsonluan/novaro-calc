@@ -130,7 +130,7 @@ function getExtraATK(character: Character, monster: Monster) {
   }
 
   if (character.job === "Sky Emperor") {
-    increasedEquipATK += getModifierIncrease(equipATK, character.rebalance ? KIHOP_BONUS : 85);
+    increasedEquipATK += getModifierIncrease(equipATK, KIHOP_BONUS);
 
     let OPPOSITION_BONUS = character.buffs.includes("opposition")
       ? Math.min(
@@ -141,7 +141,7 @@ function getExtraATK(character: Character, monster: Monster) {
               ? stats.str
               : 0)) /
             3,
-            character.rebalance ? OPPOSITION_BONUS_CAP : 9999
+            OPPOSITION_BONUS_CAP
         )
       : 0;
     increasedEquipATK += getModifierIncrease(equipATK + increasedEquipATK, OPPOSITION_BONUS);
@@ -267,14 +267,14 @@ function getATK(range: DmgRange, character: Character, monster: Monster) {
             ? stats.str
             : 0)) /
           3,
-        character.rebalance ? OPPOSITION_BONUS_CAP : 9999
+        OPPOSITION_BONUS_CAP
       )
     : 0;
 
   if (character.job === "Sky Emperor") {
     statusATK = applyModifier(
       statusATK,
-      character.rebalance ? KIHOP_BONUS : 85 // Kihop lv 5
+      KIHOP_BONUS // Kihop lv 5
     );
   
     statusATK = applyModifier(
@@ -284,7 +284,7 @@ function getATK(range: DmgRange, character: Character, monster: Monster) {
   
     wATK = applyModifier(
       wATK,
-      character.rebalance ? KIHOP_BONUS : 85 // Kihop lv 5
+      KIHOP_BONUS // Kihop lv 5
     );
   
     wATK = applyModifier(
@@ -294,7 +294,7 @@ function getATK(range: DmgRange, character: Character, monster: Monster) {
   
     masteryATK = applyModifier(
       masteryATK,
-      character.rebalance ? KIHOP_BONUS : 85 // Kihop lv 5
+      KIHOP_BONUS // Kihop lv 5
     );
   
     masteryATK = applyModifier(

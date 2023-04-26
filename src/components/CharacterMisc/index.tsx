@@ -157,7 +157,7 @@ export const CharacterMiscATK = () => {
             ignorePenalty: value,
           })}
         />
-        <BuildCharacterCheckBox
+        {/* <BuildCharacterCheckBox
           label="Rebalance?"
           tooltip="Updates skill formulas to the latest 'Level 260 Skills Rebalance' from kRO"
           noIcon
@@ -166,7 +166,7 @@ export const CharacterMiscATK = () => {
             ...prevState,
             rebalance: value,
           })}
-        />
+        /> */}
       </div>
     </CharacterMisc>
   );
@@ -261,7 +261,7 @@ export const CharacterMiscMATK = () => {
           }}
         />
       </div>
-      <p className="separator-label">Other</p>
+      {/* <p className="separator-label">Other</p>
       <div className="box">
         <BuildCharacterCheckBox
           label="Rebalance?"
@@ -273,7 +273,7 @@ export const CharacterMiscMATK = () => {
             rebalance: value,
           })}
         />
-      </div>
+      </div> */}
     </CharacterMisc>
   );
 };
