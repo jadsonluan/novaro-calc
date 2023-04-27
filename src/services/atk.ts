@@ -101,7 +101,7 @@ function getWeaponATK(
   let increasedTotalWeaponATK = 0;
 
   if (character.buffs.includes('enchantDeadlyPoison')) {
-    increasedTotalWeaponATK += getModifierIncrease(totalWeaponATK, 400);
+    increasedTotalWeaponATK += getModifierIncrease(totalWeaponATK, 297);
   }
 
   if (character.buffs.includes('earthCharm')) {
@@ -147,7 +147,7 @@ function getExtraATK(character: Character, monster: Monster) {
     increasedEquipATK += getModifierIncrease(equipATK + increasedEquipATK, OPPOSITION_BONUS);
   }
 
-  increasedEquipATK += getModifierIncrease(equipATK, character.buffs.includes('enchantDeadlyPoison') ? 300 : 0);
+  increasedEquipATK += getModifierIncrease(equipATK, character.buffs.includes('enchantDeadlyPoison') ? 295 : 0);
   equipATK += increasedEquipATK
 
   increasedConsumableATK += getModifierIncrease(consumableATK, character.buffs.includes('enchantDeadlyPoison') ? 300 : 0);

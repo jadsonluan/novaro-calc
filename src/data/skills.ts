@@ -347,7 +347,7 @@ const crusaderSkills: Record<string, Skill> = {
       const baseDamage =
         14900 +
         2500 +
-        (character.shield.weight / 10) * (character.shield.refine * 25);
+        (character.shield.refine * 25);
       return {
         percent:
           (baseDamage + character.traits.pow * 7) * (character.baseLevel / 100),
@@ -630,7 +630,7 @@ const assassinSkills: Record<string, Skill> = {
       const baseDamage = 900;
       return {
         percent:
-          (baseDamage + (buffs.shadowExceed?.active ? 200 + character.traits.pow * 5 : 0) + character.traits.pow * 5) *
+          (baseDamage + (buffs.shadowExceed?.active ? 200 : 0) + character.traits.pow * 5) *
           (character.baseLevel / 100) *
           (buffs.cloaking?.active ? 5 : 3),
         bonus: 0,
