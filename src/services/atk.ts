@@ -147,7 +147,7 @@ function getExtraATK(character: Character, monster: Monster) {
     increasedEquipATK += getModifierIncrease(equipATK + increasedEquipATK, OPPOSITION_BONUS);
   }
 
-  increasedEquipATK += getModifierIncrease(equipATK, character.buffs.includes('enchantDeadlyPoison') ? 295 : 0);
+  increasedEquipATK += getModifierIncrease(equipATK, character.buffs.includes('enchantDeadlyPoison') ? 300 : 0);
   equipATK += increasedEquipATK
 
   increasedConsumableATK += getModifierIncrease(consumableATK, character.buffs.includes('enchantDeadlyPoison') ? 300 : 0);
