@@ -98,22 +98,6 @@ function getWeaponATK(
 
   let totalWeaponATK = (weaponATK + increasedWeaponATK) + statBonus + variance + overUpgradeATK + weaponBuffATK;
 
-  let increasedTotalWeaponATK = 0;
-
-  if (character.buffs.includes('enchantDeadlyPoison')) {
-    increasedTotalWeaponATK += getModifierIncrease(totalWeaponATK, 297);
-  }
-
-  if (character.buffs.includes('earthCharm')) {
-    increasedTotalWeaponATK += getModifierIncrease(totalWeaponATK, 150);
-  }
-
-  if (character.buffs.includes('concentration')) {
-    increasedTotalWeaponATK += getModifierIncrease(totalWeaponATK, 15);
-  }
-
-  totalWeaponATK += increasedTotalWeaponATK;
-
   return totalWeaponATK * sizePenalty;
 }
 
@@ -147,16 +131,12 @@ function getExtraATK(character: Character, monster: Monster) {
     increasedEquipATK += getModifierIncrease(equipATK + increasedEquipATK, OPPOSITION_BONUS);
   }
 
-  increasedEquipATK += getModifierIncrease(equipATK, character.buffs.includes('enchantDeadlyPoison') ? 300 : 0);
   equipATK += increasedEquipATK
 
-  increasedConsumableATK += getModifierIncrease(consumableATK, character.buffs.includes('enchantDeadlyPoison') ? 300 : 0);
   consumableATK += increasedConsumableATK;
 
-  increasedAmmoATK += getModifierIncrease(ammoATK, character.buffs.includes('enchantDeadlyPoison') ? 300 : 0);
   ammoATK += increasedAmmoATK;
 
-  increasedPseudoBuffATK += getModifierIncrease(pseudoBuffATK, character.buffs.includes('enchantDeadlyPoison') ? 300 : 0);
   increasedPseudoBuffATK += character.buffs.includes("investigate")
     ? Math.floor(Math.floor(((monster.hardDEF - monster.hardDEFDebuff) * (1 - character.bypass / 100))) / 2)
     : 0;
@@ -242,21 +222,11 @@ function getATK(range: DmgRange, character: Character, monster: Monster) {
     : 1;
   let wATK = Math.max(0, getWeaponATK(range, character, sizePenalty, monster));
 
-  let extraElementalATK = 0;
-  if (character.buffs.includes("magnumBreak")) {
-    // Fire property extra dmg
-    extraElementalATK =
-      getModifierIncrease(wATK, 20) *
-      getPropertyModifier(
-        ELEMENTS[3],
-        monster.element,
-        Number(monster.elementLevel),
-        monster.debuffs
-      );
-  }
-  wATK += extraElementalATK;
-
   let statusATK = getStatusATK(character);
+
+  let extraATK = getExtraATK(character, monster);
+
+  const atkPercentATK = getType2ATK(character, monster, wATK, extraATK);
 
   let OPPOSITION_BONUS = character.buffs.includes("opposition")
     ? Math.min(
@@ -303,9 +273,37 @@ function getATK(range: DmgRange, character: Character, monster: Monster) {
     );
   }
 
-  const extraATK = getExtraATK(character, monster);
+  let increasedTotalWeaponATK = 0;
 
-  const atkPercentATK = getType2ATK(character, monster, wATK, extraATK);
+  if (character.buffs.includes('enchantDeadlyPoison')) {
+    increasedTotalWeaponATK += getModifierIncrease(wATK, 400);
+  }
+
+  if (character.buffs.includes('earthCharm')) {
+    increasedTotalWeaponATK += getModifierIncrease(wATK, 150);
+  }
+
+  if (character.buffs.includes('concentration')) {
+    increasedTotalWeaponATK += getModifierIncrease(wATK, 15);
+  }
+
+  wATK += increasedTotalWeaponATK;
+
+  let extraElementalATK = 0;
+  if (character.buffs.includes("magnumBreak")) {
+    // Fire property extra dmg
+    extraElementalATK =
+      getModifierIncrease(wATK, 20) *
+      getPropertyModifier(
+        ELEMENTS[3],
+        monster.element,
+        Number(monster.elementLevel),
+        monster.debuffs
+      );
+  }
+  wATK += extraElementalATK;
+
+  extraATK += character.buffs.includes('enchantDeadlyPoison') ? getModifierIncrease(extraATK, 300) : 0;
 
   let mainATK =
     statusATK * 2 +
