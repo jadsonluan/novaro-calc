@@ -2451,16 +2451,17 @@ const BUFF_EFFECTS: Record<keyof Buffs, BuffEffect> = {
       buffs: [...character.buffs, "talismanOfMagician"],
     };
   },
-  talismanOfFiveElements: (character: Character) => {
+  talismanOfFiveElements: (character: Character, monster: Monster) => {
     const {
       modifiers: { targetProperty },
     } = character;
     const MODIFIER_INCREASE = 20;
+    const AFFECTED_ELEMENTS = ["Fire", "Water", "Earth", "Wind", "Neutral"];
     return {
       ...character,
       modifiers: {
         ...character.modifiers,
-        targetProperty: targetProperty + MODIFIER_INCREASE,
+        targetProperty: targetProperty + (AFFECTED_ELEMENTS.includes(monster.element) ? MODIFIER_INCREASE : 0),
       },
       buffs: [...character.buffs, "talismanOfFiveElements"],
     };
